@@ -172,6 +172,10 @@ def export_json(all_words, filename, html_dir):
     with open(os.path.join(html_dir, filename), "w") as fh:
         json.dump(all_words, fh)
 
+def export_words_html_pages(html_dir, dictionary):
+    print("---")
+    print(dictionary)
+
 
 def export_words_html_page(course, all_words, language, path, html_file):
     logging.info("Export words html page")
@@ -224,7 +228,7 @@ def export_word_html_pages(course, all_words, language, words_dir):
             fh.write(html)
 
 
-def export_to_html(course, target, source, count, html_dir):
+def export_to_html(course, target, source, dictionary, count, html_dir):
     logging.info("Export to HTML")
     if not os.path.exists(html_dir):
         os.mkdir(html_dir)
@@ -254,6 +258,10 @@ def export_to_html(course, target, source, count, html_dir):
         collect_words(target, "target-to-source"), "target-to-source.json", html_dir
     )
 
+    export_json(
+        dictionary, "dictionary.json", html_dir
+    )
+
     export_main_html_page(course, count, html_dir)
     export_skill_html_pages(course, html_dir)
     export_words_html_page(
@@ -270,6 +278,7 @@ def export_to_html(course, target, source, count, html_dir):
         "source",
         os.path.join(html_dir, "source.html"),
     )
+    export_words_html_pages(html_dir, dictionary)
     export_word_html_pages(
         course, all_target_words, target, os.path.join(html_dir, "target")
     )
@@ -436,7 +445,7 @@ def main():
     if args.html:
         target, source, dictionary, count = collect_data(course, dictionary_source)
         logging.info(count)
-        export_to_html(course, target, source, count, args.html)
+        export_to_html(course, target, source, dictionary, count, args.html)
 
     if lili.warnings:
         print("------------------ WARNINGS ---------------------")

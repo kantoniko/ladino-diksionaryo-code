@@ -15,6 +15,7 @@
 $(document).ready(function(){
     var source_to_target = null;
     var target_to_source = null;
+    var dictionary = null;
     var course_data = null;
     var loaded = 0;
     var direction = 'target-to-source';
@@ -26,7 +27,7 @@ $(document).ready(function(){
     };
 
     var try_translate = function() {
-        if (loaded == 3) {
+        if (loaded == 4) {
             update_direction_selector();
             translate();
         }
@@ -37,13 +38,23 @@ $(document).ready(function(){
         //const cleaned = original.replace(/[^a-zA-Z-]/g, " ");
         const cleaned = original.replace(/[<>,.:!?"'\n*()=\[\]]/g, " ");
         const words = cleaned.split(" ");
+        let languages = Object.keys(dictionary).filter(function(name) { return name != 'ladino'}) ;
+        languages.sort();
+        // console.log(languages);
         var html = `<table class="table">`;
         html += '<thead>';
+        html += `<tr><th colspan="2" style="text-align:center">old dictionary</th><th style="width: 100px"></th><th colspan="${languages.length+1}" style="text-align:center">new dictionary</th></tr>`;
         html += '<tr>';
         if (direction == 'target-to-source') {
             html += `<th>${course_data['target_language_name']}</th><th>${course_data['source_language_name']}</th>`;
         } else {
             html += `<th>${course_data['source_language_name']}</th><th>${course_data['target_language_name']}</th>`;
+        }
+
+        html += `<th></th>`;
+        html += `<th>ladino</th>`;
+        for (var ix=0; ix < languages.length; ix++) {
+            html += `<th>${languages[ix]}</th>`;
         }
         html += '</tr>';
         html += '</thead>';
@@ -71,6 +82,24 @@ $(document).ready(function(){
                 }
             }
 
+            html += "<td></td>";
+
+            const dict_word = dictionary['ladino'][word];
+            if (dict_word) {
+                console.log(dict_word);
+                html += `<td>${word}</td>`;
+            } else {
+                html += `<td class="has-background-danger-light">${word}</td>`;
+            }
+            for (var jx=0; jx < languages.length; jx++) {
+                html += `<td>`;
+                if (dict_word) {
+                    html += dict_word['translations'][languages[jx]];
+                }
+                html += `</td>`;
+            }
+
+
             html += '</tr>';
         }
         html += '</tbody>';
@@ -85,6 +114,15 @@ $(document).ready(function(){
     }).fail(function(){
         console.log("An error has occurred.");
     });
+
+    $.getJSON("dictionary.json", function(data){
+        dictionary = data;
+        loaded++;
+        try_translate();
+    }).fail(function(){
+        console.log("An error has occurred while loading dictionary.json");
+    });
+
 
     $.getJSON("source-to-target.json", function(data){
         source_to_target = data;
