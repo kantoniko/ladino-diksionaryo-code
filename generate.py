@@ -64,7 +64,7 @@ def render(template_file, **args):
     return html
 
 
-def export_main_html_page(course, count, reldir, html_dir):
+def export_main_html_page(course, count, html_dir):
     logging.info("Export main html page")
     branch = "main"  # how can we know which is the default branch of a repository?
     #'count', 'dictionary', 'index', 'license', 'modules', 'repository_url',
@@ -99,7 +99,6 @@ def export_main_html_page(course, count, reldir, html_dir):
         title=f"{course.target_language.name} for {course.source_language.name} speakers",
         page="modules",
         rel="",
-        rel_dir=reldir,
         branch=branch,
         course=course,
         repository_url=get_repository_url(course),
@@ -208,7 +207,7 @@ def get_repository_url(course):
     return course.repository_url
 
 
-def export_word_html_pages(course, all_words, language, reldir, words_dir):
+def export_word_html_pages(course, all_words, language, words_dir):
     logging.info("Export word html page")
     branch = "main"
 
@@ -217,7 +216,6 @@ def export_word_html_pages(course, all_words, language, reldir, words_dir):
             "word.html",
             title=f"{target_word} in {course.target_language.name}",
             rel="../",
-            rel_dir=reldir,
             target_word=target_word,
             word_translations=language["words"][target_word],
             dictionary_words=language["dictionary"][target_word],
@@ -260,7 +258,7 @@ def export_to_html(course, target, source, count, reldir, html_dir):
         collect_words(target, "target-to-source"), "target-to-source.json", html_dir
     )
 
-    export_main_html_page(course, count, reldir, html_dir)
+    export_main_html_page(course, count, html_dir)
     export_skill_html_pages(course, html_dir)
     export_words_html_page(
         course,
@@ -279,10 +277,10 @@ def export_to_html(course, target, source, count, reldir, html_dir):
         os.path.join(html_dir, "source.html"),
     )
     export_word_html_pages(
-        course, all_target_words, target, reldir, os.path.join(html_dir, "target")
+        course, all_target_words, target, os.path.join(html_dir, "target")
     )
     export_word_html_pages(
-        course, all_source_words, source, reldir, os.path.join(html_dir, "source")
+        course, all_source_words, source, os.path.join(html_dir, "source")
     )
     with open(os.path.join(html_dir, "course.json"), "w") as fh:
         json.dump(count, fh)

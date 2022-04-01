@@ -9,7 +9,7 @@
             {% for skill in module.skills %}
               <li>
                  <a href="course/{{ module.filename }}/skills/{{ skill.filename | skillfile }}.html">{{ skill.name }}</a>
-                 (<a href="{{ repository_url }}/blob/{{ branch }}/{{ rel_dir }}/{{ skill.filename }}"><span class="icon fa-github"></span></a>)
+                 (<a href="{{ repository_url }}/blob/{{ branch }}/course/{{ skill.filename }}"><span class="icon fa-github"></span></a>)
               </li>
             {% endfor %}
           </ul>

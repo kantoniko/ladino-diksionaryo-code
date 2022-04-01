@@ -10,7 +10,7 @@
     {% for word in translation['word'].in_source_language %}
           <li>{{ word }}
              <a href="{{ rel }}course/{{ translation["skill"].filename | yaml2html }}">{{ translation["skill"].name }}</a>
-             <a href="{{ repository_url }}/blob/{{ branch }}/{{ rel_dir }}/{{ translation["skill"].filename }}"><span class="icon fa-github"></span></a>
+             <a href="{{ repository_url }}/blob/{{ branch }}/course/{{ translation["skill"].filename }}"><span class="icon fa-github"></span></a>
           </li>
     {% endfor %}
   {% endfor %}
@@ -22,7 +22,7 @@
     {% for word in translation['word'] %}
       <li>{{ word }}
          <a href="{{ rel }}course/{{ translation["skill"].filename | yaml2html }}">{{ translation["skill"].name }}</a>
-         <a href="{{ repository_url }}/blob/{{ branch }}/{{ rel_dir }}/{{ translation["skill"].filename }}"><span class="icon fa-github"></span></a></li>
+         <a href="{{ repository_url }}/blob/{{ branch }}/course/{{ translation["skill"].filename }}"><span class="icon fa-github"></span></a></li>
     {% endfor %}
   {% endfor %}
   </ul>
@@ -32,7 +32,7 @@
   {% for phrase in phrases %}
     <li>{{ phrase["sentence"] }}
         <a href="{{ rel }}course/{{ phrase["skill"].filename | yaml2html }}">{{ phrase["skill"].name }}</a>
-        <a href="{{ repository_url }}/blob/{{ branch }}/{{ rel_dir }}/{{ phrase["skill"].filename }}"><span class="icon fa-github"></span></a>
+        <a href="{{ repository_url }}/blob/{{ branch }}/course/{{ phrase["skill"].filename }}"><span class="icon fa-github"></span></a>
     </li>
 
   {% endfor %}
