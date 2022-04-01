@@ -11,14 +11,6 @@ import markdown
 from jinja2 import Environment, FileSystemLoader
 from librelingo_yaml_loader.yaml_loader import load_course
 
-Settings = collections.namedtuple(
-    "Settings",
-    [
-        "dry_run",
-    ],
-)
-
-
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -27,7 +19,6 @@ def get_args():
     parser.add_argument(
         "--reldir", help="relative path of the course in the repository"
     )
-    parser.add_argument("--images", help="path to directory of images")
     parser.add_argument(
         "--html", help="path to directory where to generate html report"
     )
@@ -378,49 +369,7 @@ def collect_data(course):
 class Lili:
     def __init__(self):
         self.warnings = []
-        self.images: dict = {
-            "tiny": set(),
-            "tinier": set(),
-            "regular": set(),
-        }
-        self.unused_images = {}
-
-    def load_images(self, images_dir):
-        for img in os.listdir(images_dir):
-            if not img.endswith(".jpg"):
-                continue
-            match = re.search(r"(.*)_tiny\.jpg$", img)
-            if match:
-                self.images["tiny"].add(match.group(1))
-                continue
-            match = re.search(r"(.*)_tinier\.jpg$", img)
-            if match:
-                self.images["tinier"].add(match.group(1))
-                continue
-            match = re.search(r"(.*)\.jpg$", img)
-            if match:
-                self.images["regular"].add(match.group(1))
-                continue
-            sys.exit(f"Unhandled image: {img}")
-        self.unused_images["regular"] = set(self.images["regular"])
-
-    def check_images(self, module, skill):
-        # print(skill.image_set) # The values from the thumbnails
-        for word in skill.words:
-            for picture in word.pictures:
-                if picture not in self.images["regular"]:
-                    self.warnings.append(
-                        f"Image {picture} used in {module.title}/{skill.name} does not exist"
-                    )
-                if picture in self.unused_images["regular"]:
-                    self.unused_images["regular"].remove(picture)
-            # print(word.pictures)
-        # Word(
-        #   in_target_language=['la mujer'],
-        #   in_source_language=['the woman'],
-        #   pictures=['woman1', 'woman2', 'woman3']
-        # )
-
+        self.errors = []
 
 def main():
     args = get_args()
@@ -436,17 +385,9 @@ def main():
     #    sys.exit(f"Could not load course {err}")
 
     lili = Lili()
-    if args.images:
-        lili.load_images(args.images)
-
     if args.html:
         target, source, count = collect_data(course)
         export_to_html(course, target, source, count, args.reldir, args.html)
-
-    if args.images:
-        print("----------------- Unused images ---------------------")
-        for img in sorted(lili.unused_images["regular"]):
-            print(img)
 
     if lili.warnings:
         print("------------------ WARNINGS ---------------------")
