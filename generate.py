@@ -27,7 +27,6 @@ def get_args():
     parser.add_argument(
         "--reldir", help="relative path of the course in the repository"
     )
-    parser.add_argument("--ids", action="store_true", help="show ids of skills")
     parser.add_argument("--images", help="path to directory of images")
     parser.add_argument(
         "--html", help="path to directory where to generate html report"
@@ -35,12 +34,6 @@ def get_args():
     parser.add_argument("--log", action="store_true", help="Additional logging")
     args = parser.parse_args()
     return args
-
-
-def print_ids(ids):
-    for idnum in sorted(ids.keys()):
-        print(f"{idnum:6}  {ids[idnum]['module'].title}/{ids[idnum]['skill'].name}")
-
 
 
 def guess_path_to_course(path_to_course):
@@ -384,9 +377,6 @@ def collect_data(course):
 
 class Lili:
     def __init__(self):
-        self.skill_ids = {}
-        self.skill_names = {}
-        self.errors = []
         self.warnings = []
         self.images: dict = {
             "tiny": set(),
@@ -431,32 +421,6 @@ class Lili:
         #   pictures=['woman1', 'woman2', 'woman3']
         # )
 
-    def collect_ids_and_names(self, images, course):
-        for module in course.modules:
-            for skill in module.skills:
-                if images:
-                    self.check_images(module, skill)
-                if skill.id in self.skill_ids:
-                    self.errors.append(
-                        f"Duplicate id: {skill.id} in {module.title}/{skill.name}"
-                        f"and in {self.skill_ids[skill.id]['module'].title}"
-                        f"/{self.skill_ids[skill.id]['skill'].name}"
-                    )
-                if skill.name in self.skill_names:
-                    self.errors.append(
-                        f"Duplicate name: {skill.name} in {module.title}/{skill.name} "
-                        f"and in {self.skill_names[skill.name]['module'].title}/"
-                        f"{self.skill_names[skill.name]['skill'].name}"
-                    )
-                self.skill_ids[skill.id] = {
-                    "module": module,
-                    "skill": skill,
-                }
-                self.skill_names[skill.name] = {
-                    "module": module,
-                    "skill": skill,
-                }
-
 
 def main():
     args = get_args()
@@ -475,14 +439,9 @@ def main():
     if args.images:
         lili.load_images(args.images)
 
-    lili.collect_ids_and_names(args.images, course)
-
     if args.html:
         target, source, count = collect_data(course)
         export_to_html(course, target, source, count, args.reldir, args.html)
-
-    if args.ids:
-        print_ids(lili.skill_ids)
 
     if args.images:
         print("----------------- Unused images ---------------------")
