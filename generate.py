@@ -13,7 +13,7 @@ import markdown
 from jinja2 import Environment, FileSystemLoader
 from librelingo_yaml_loader.yaml_loader import load_course
 
-languages = ['ladino', 'english', 'spanish']
+languages = ['english', 'french', 'hebrew', 'spanish', 'turkish']
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -378,14 +378,17 @@ class Lili:
 def collect_more_data(count, dictionary):
     logging.info("Collect more data")
     count['dictionary'] = {}
-    for language in languages:
+    for language in ['ladino'] + languages:
         count['dictionary'][language] = {
             'words': 0,
             'phrases': 0,
         }
     for entry in dictionary:
+        count['dictionary']['ladino']['words'] += 1
+        if 'alternative-spelling' in entry:
+            count['dictionary']['ladino']['words'] += len(entry['alternative-spelling'])
         for language in languages:
-            word = entry.get(language)
+            word = entry['translations'].get(language)
             if word is not None and word != '':
                 if word.__class__.__name__ == 'str':
                     count['dictionary'][language]['words'] += 1

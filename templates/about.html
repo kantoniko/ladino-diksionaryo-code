@@ -29,6 +29,7 @@
       <table class="table">
         <thead>
           <tr><th></th>
+            <th>ladino</th>
             {% for language in languages %}
                  <th>{{ language }}</th>
             {% endfor %}
@@ -36,11 +37,13 @@
         </thead>
         <tbody>
           <tr><th>Words</th>
+                <td>{{ count.dictionary['ladino'].words }}</td>
             {% for language in languages %}
                 <td>{{ count.dictionary[language].words }}</td>
             {% endfor %}
           </tr>
           <tr><th>Phrases</th>
+                <td>{{ count.dictionary['ladino'].phrases }}</td>
             {% for language in languages %}
                 <td>{{ count.dictionary[language].phrases }}</td>
             {% endfor %}
