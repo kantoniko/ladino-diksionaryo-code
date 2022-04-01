@@ -1,9 +1,17 @@
 {% include 'incl/header.html' %}
 
     <h1 class="title">{{ title }}</h1>
-    <div><a href="{{ course.repository_url }}">Repository</a></div>
+    <div>
+       This site is based on the dictionary provided by Güler Orgun, Ricardo Portal i Antonio Ruiz Tinoco and more specifically
+       the Excel file from the <a href="https://ladinokomunita.groups.io/">Ladinokomunita</a>. (currently we are in the process of
+       integrating the data from that file into the site.)
+       In addition the site includes lots of words and expressions from the course created for <a href="https://librelingo.app/">LibreLingo</a>.
+       The source code of the LibreLingo data can be found in <div><a href="https://github.com/szabgab/LibreLingo-Judeo-Spanish-from-English">this repository</a>.
+       The files from the Ladinokomunita dictionary can be found in <a href="https://github.com/szabgab/ladino-diksionaryo-data">this repository</a>.
+       This site was created and is being maintained by Gabor Szabo.
+    </div>
     <div class="content">
-       License: {{ course.license.name }}: <a href="{{ course.license.link }}">{{ course.license.full_name }}</a>
+       The license of the content is <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0: Attribution-ShareAlike 4.0 International</a>
     </div>
     <div class="content">
       <h2>LibreLingo course</h2>
@@ -48,15 +56,30 @@
                 <td>{{ count.dictionary[language].phrases }}</td>
             {% endfor %}
           </tr>
-
         </tbody>
       </table>
+
+      <table class="table">
+        <thead>
+          <tr>
+            {% for grammar in count['grammar'].keys() %}
+                 <th>{{ grammar }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% for grammar in count['grammar'].keys() %}
+                <td>{{ count.grammar[grammar] }}</td>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+
+
     </div>
     <div class="content">
       <ul>
-        <li>
-             Sources: <a href="https://librelingo.app/">LibreLingo courses</a>
-        </li>
         <li>On the <a href="/">home page</a> you will be able to see the translation of each word you type in.
             We don't try to understand the context or the full expression. It is still your job to decide which meaning of a word is relevant in the specific context.
         </li>

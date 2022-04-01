@@ -77,7 +77,7 @@ def export_main_html_page(course, count, html_dir):
 
     html = render(
         "about.html",
-        title=f"{course.target_language.name} for {course.source_language.name} speakers",
+        title=f"Ladino dictionary - about",
         page="index",
         course=course,
         count=count,
@@ -378,15 +378,33 @@ class Lili:
 def collect_more_data(count, dictionary):
     logging.info("Collect more data")
     count['dictionary'] = {}
+    words = {}
+    count['grammar'] = {
+        'noun': 0,
+        'verb': 0,
+        'conjugated-verb': 0,
+    }
     for language in ['ladino'] + languages:
         count['dictionary'][language] = {
             'words': 0,
             'phrases': 0,
         }
+        words[language] = {}
+
     for entry in dictionary:
+        grammar = entry['grammar']
+        count['grammar'][grammar] += 1
+        words['ladino'][ entry['ladino'] ] = entry
+        # it is both ok if we overwrite the ladino entry or if we create a new entry
+        words['ladino'][ entry['accented'] ] = entry
+
         count['dictionary']['ladino']['words'] += 1
         if 'alternative-spelling' in entry:
             count['dictionary']['ladino']['words'] += len(entry['alternative-spelling'])
+            for alt_entry in entry['alternative-spelling']:
+                words['ladino'][ alt_entry['ladino'] ] = entry
+                words['ladino'][ alt_entry['accented'] ] = entry
+
         for language in languages:
             word = entry['translations'].get(language)
             if word is not None and word != '':
