@@ -18,7 +18,8 @@ def get_args():
         "--course", help="path to course directory that contains the course.yaml"
     )
     parser.add_argument(
-        "--reldir", help="relative path of the course in the repository"
+        "--reldir", help="relative path of the course in the repository",
+        default="course",
     )
     parser.add_argument(
         "--html", help="path to directory where to generate html report"
@@ -64,6 +65,7 @@ def render(template_file, **args):
 
 
 def export_main_html_page(course, count, reldir, html_dir):
+    logging.info("Export main html page")
     branch = "main"  # how can we know which is the default branch of a repository?
     #'count', 'dictionary', 'index', 'license', 'modules', 'repository_url',
     #'settings', 'source_language', 'special_characters', 'target_language'
@@ -106,6 +108,7 @@ def export_main_html_page(course, count, reldir, html_dir):
         fh.write(html)
 
 def export_skill_html_pages(course, html_dir):
+    logging.info("Export skill html pages")
     branch = "main"  # how can we know which is the default branch of a repository?
     for module in course.modules:
         for skill in module.skills:
@@ -173,6 +176,7 @@ def export_json(all_words, filename, html_dir):
 
 
 def export_words_html_page(course, all_words, language, path, reldir, html_file):
+    logging.info("Export words html page")
     html = render(
         "words.html",
         title=f"{course.target_language.name} for {course.source_language.name} speakers",
@@ -205,6 +209,7 @@ def get_repository_url(course):
 
 
 def export_word_html_pages(course, all_words, language, reldir, words_dir):
+    logging.info("Export word html page")
     branch = "main"
 
     for target_word in all_words:
@@ -226,6 +231,7 @@ def export_word_html_pages(course, all_words, language, reldir, words_dir):
 
 
 def export_to_html(course, target, source, count, reldir, html_dir):
+    logging.info("Export to HTML")
     if not os.path.exists(html_dir):
         os.mkdir(html_dir)
     for path in ["target", "source"]:
@@ -246,6 +252,7 @@ def export_to_html(course, target, source, count, reldir, html_dir):
     )
     count["source_words"] = len(all_source_words)
 
+    logging.info("Export JSON files")
     export_json(
         collect_words(source, "source-to-target"), "source-to-target.json", html_dir
     )
@@ -363,6 +370,7 @@ def main():
     path_to_course = guess_path_to_course(args.course)
     logging.info("Path to course: '%s'", path_to_course)
     course = load_course(path_to_course)
+    logging.info("Course loaded")
 
     lili = Lili()
     if args.html:
