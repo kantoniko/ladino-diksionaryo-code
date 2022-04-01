@@ -301,6 +301,14 @@ def _collect_phrases(skill, count, target, source):
 
 
 def collect_data(course):
+    count = {
+        "target_phrases": 0,
+        "source_phrases": 0,
+        "target_language_name": course.target_language.name,
+        "source_language_name": course.source_language.name,
+        "target_language_code": course.target_language.code,
+        "source_language_code": course.source_language.code,
+    }
     target = {
         "words": collections.defaultdict(list),
         "dictionary": collections.defaultdict(list),
@@ -312,15 +320,11 @@ def collect_data(course):
         "phrases": collections.defaultdict(list),
     }
 
-    count = {
-        "target_phrases": 0,
-        "source_phrases": 0,
-        "target_language_name": course.target_language.name,
-        "source_language_name": course.source_language.name,
-        "target_language_code": course.target_language.code,
-        "source_language_code": course.source_language.code,
-    }
+    collect_data_from_course(course, target, source, count)
 
+    return target, source, count
+
+def collect_data_from_course(course, target, source, count):
     for module in course.modules:
         for skill in module.skills:
             for word in skill.words:
@@ -344,7 +348,6 @@ def collect_data(course):
                     )
 
             _collect_phrases(skill, count, target, source)
-    return target, source, count
 
 def check_word(filename, data):
     if 'grammar' not in data:
