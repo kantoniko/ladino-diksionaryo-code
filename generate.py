@@ -300,7 +300,7 @@ def _collect_phrases(skill, count, target, source):
                 )
 
 
-def collect_data(course, dictionary):
+def collect_data(course, dictionary_source):
     count = {
         "target_phrases": 0,
         "source_phrases": 0,
@@ -319,13 +319,14 @@ def collect_data(course, dictionary):
         "dictionary": collections.defaultdict(list),
         "phrases": collections.defaultdict(list),
     }
+    dictionary = {}
 
-    collect_data_from_dictionary(dictionary, count)
-    collect_data_from_course(course, target, source, count)
+    collect_data_from_dictionary(dictionary_source, dictionary, count)
+    collect_data_from_course(course, target, source, dictionary, count)
 
-    return target, source, count
+    return target, source, dictionary, count
 
-def collect_data_from_course(course, target, source, count):
+def collect_data_from_course(course, target, source, dictionary, count):
     for module in course.modules:
         for skill in module.skills:
             for word in skill.words:
@@ -379,10 +380,9 @@ class Lili:
         self.warnings = []
         self.errors = []
 
-def collect_data_from_dictionary(dictionary, count):
+def collect_data_from_dictionary(dictionary_source, dictionary, count):
     logging.info("Collect more data")
     count['dictionary'] = {}
-    words = {}
     count['grammar'] = {
         'noun': 0,
         'verb': 0,
@@ -393,21 +393,21 @@ def collect_data_from_dictionary(dictionary, count):
             'words': 0,
             'phrases': 0,
         }
-        words[language] = {}
+        dictionary[language] = {}
 
-    for entry in dictionary:
+    for entry in dictionary_source:
         grammar = entry['grammar']
         count['grammar'][grammar] += 1
-        words['ladino'][ entry['ladino'] ] = entry
+        dictionary['ladino'][ entry['ladino'] ] = entry
         # it is both ok if we overwrite the ladino entry or if we create a new entry
-        words['ladino'][ entry['accented'] ] = entry
+        dictionary['ladino'][ entry['accented'] ] = entry
 
         count['dictionary']['ladino']['words'] += 1
         if 'alternative-spelling' in entry:
             count['dictionary']['ladino']['words'] += len(entry['alternative-spelling'])
             for alt_entry in entry['alternative-spelling']:
-                words['ladino'][ alt_entry['ladino'] ] = entry
-                words['ladino'][ alt_entry['accented'] ] = entry
+                dictionary['ladino'][ alt_entry['ladino'] ] = entry
+                dictionary['ladino'][ alt_entry['accented'] ] = entry
 
         for language in languages:
             word = entry['translations'].get(language)
@@ -430,11 +430,11 @@ def main():
     logging.info("Path to course: '%s'", path_to_course)
     course = load_course(path_to_course)
     logging.info("Course loaded")
-    dictionary = load_dictionary(args.dictionary)
+    dictionary_source = load_dictionary(args.dictionary)
 
     lili = Lili()
     if args.html:
-        target, source, count = collect_data(course, dictionary)
+        target, source, dictionary, count = collect_data(course, dictionary_source)
         logging.info(count)
         export_to_html(course, target, source, count, args.html)
 
