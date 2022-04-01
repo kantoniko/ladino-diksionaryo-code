@@ -9,7 +9,6 @@ import sys
 
 import markdown
 from jinja2 import Environment, FileSystemLoader
-from librelingo_json_export.export import export_course
 from librelingo_yaml_loader.yaml_loader import load_course
 
 Settings = collections.namedtuple(
@@ -29,11 +28,6 @@ def get_args():
         "--reldir", help="relative path of the course in the repository"
     )
     parser.add_argument("--ids", action="store_true", help="show ids of skills")
-    parser.add_argument(
-        "--export",
-        action="store_true",
-        help="Check if we can export the course to JSON",
-    )
     parser.add_argument("--images", help="path to directory of images")
     parser.add_argument(
         "--html", help="path to directory where to generate html report"
@@ -47,18 +41,6 @@ def print_ids(ids):
     for idnum in sorted(ids.keys()):
         print(f"{idnum:6}  {ids[idnum]['module'].title}/{ids[idnum]['skill'].name}")
 
-
-def check_export(course):
-    settings = Settings(
-        dry_run=False,
-    )
-    output_path = "output"
-    if not os.path.exists(output_path):
-        os.mkdir(output_path)
-    export_course(output_path, course, settings)
-    # try:
-    # except Exception as err:
-    #    self.errors.append(f"Exception while exporting to JSON {err}")
 
 
 def guess_path_to_course(path_to_course):
@@ -494,9 +476,6 @@ def main():
         lili.load_images(args.images)
 
     lili.collect_ids_and_names(args.images, course)
-
-    if args.export:
-        check_export(course)
 
     if args.html:
         target, source, count = collect_data(course)
