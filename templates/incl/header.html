@@ -13,11 +13,11 @@
       <div class="container">
     <div class="tabs">
       <ul>
-        <li {% if page == "index" %}class="is-active"{% endif %}><a href="{{ rel }}index.html">home</a></li>
-        <li {% if page == "converter" %}class="is-active"{% endif %}><a href="{{ rel }}converter.html">converter</a></li>
-        <li {% if page == "modules" %}class="is-active"{% endif %}><a href="{{ rel }}modules.html">modules</a></li>
-        <li {% if page == "target" %}class="is-active"{% endif %}><a href="{{ rel }}target.html">{{ course.target_language.name }}</a></li>
-        <li {% if page == "source" %}class="is-active"{% endif %}><a href="{{ rel }}source.html">{{ course.source_language.name }}</a></li>
+        <li {% if page == "index" %}class="is-active"{% endif %}><a href="/index.html">home</a></li>
+        <li {% if page == "converter" %}class="is-active"{% endif %}><a href="/converter.html">converter</a></li>
+        <li {% if page == "modules" %}class="is-active"{% endif %}><a href="/modules.html">modules</a></li>
+        <li {% if page == "target" %}class="is-active"{% endif %}><a href="/target.html">{{ course.target_language.name }}</a></li>
+        <li {% if page == "source" %}class="is-active"{% endif %}><a href="/source.html">{{ course.source_language.name }}</a></li>
       </ul>
     </div>
 

@@ -73,7 +73,6 @@ def export_main_html_page(course, count, html_dir):
         "index.html",
         title=f"{course.target_language.name} for {course.source_language.name} speakers",
         page="index",
-        rel="",
         course=course,
         count=count,
     )
@@ -84,7 +83,6 @@ def export_main_html_page(course, count, html_dir):
         "converter.html",
         title=f"{course.target_language.name} for {course.source_language.name} speakers",
         page="converter",
-        rel="",
         course=course,
     )
     with open(os.path.join(html_dir, "converter.html"), "w") as fh:
@@ -94,7 +92,6 @@ def export_main_html_page(course, count, html_dir):
         "modules.html",
         title=f"{course.target_language.name} for {course.source_language.name} speakers",
         page="modules",
-        rel="",
         branch=branch,
         course=course,
         repository_url=get_repository_url(course),
@@ -110,7 +107,6 @@ def export_skill_html_pages(course, html_dir):
             html = render(
                 "skill.html",
                 title=f"{course.target_language.name} for {course.source_language.name} speakers",
-                rel="../../../",
                 branch=branch,
                 course=course,
                 skill=skill,
@@ -176,7 +172,6 @@ def export_words_html_page(course, all_words, language, path, html_file):
         "words.html",
         title=f"{course.target_language.name} for {course.source_language.name} speakers",
         page=path,
-        rel="",
         path=path,
         course=course,
         all_words=all_words,
@@ -210,7 +205,6 @@ def export_word_html_pages(course, all_words, language, words_dir):
         html = render(
             "word.html",
             title=f"{target_word} in {course.target_language.name}",
-            rel="../",
             target_word=target_word,
             word_translations=language["words"][target_word],
             dictionary_words=language["dictionary"][target_word],

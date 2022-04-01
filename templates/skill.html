@@ -31,8 +31,8 @@ missing) file.
         <tbody>
           {% for words in skill.words %}
             <tr>
-              <td>{% for word in words.in_target_language %}<a href="{{ rel }}/target/{{ word }}.html">{{ word }}</a>{%- if not loop.last %},{%- endif %}{% endfor %}</td>
-              <td>{% for word in words.in_source_language %}<a href="{{ rel }}/source/{{ word }}.html">{{ word }}</a>{%- if not loop.last %},{%- endif %}{% endfor %}</td>
+              <td>{% for word in words.in_target_language %}<a href="/target/{{ word }}.html">{{ word }}</a>{%- if not loop.last %},{%- endif %}{% endfor %}</td>
+              <td>{% for word in words.in_source_language %}<a href="/source/{{ word }}.html">{{ word }}</a>{%- if not loop.last %},{%- endif %}{% endfor %}</td>
               <td>{{words.pictures}}</td>
             </tr>
           {% endfor %}
@@ -71,7 +71,7 @@ missing) file.
         {% for pair in skill.dictionary %}
           {% if not pair[2] %}
             <tr>
-              <td><a href="{{ rel }}/source/{{ pair[0] }}.html">{{ pair[0] }}</a></td>
+              <td><a href="/source/{{ pair[0] }}.html">{{ pair[0] }}</a></td>
               <td>{{pair[1]}}</td>
           </tr>
           {% endif %}
@@ -83,7 +83,7 @@ missing) file.
         {% for pair in skill.dictionary %}
           {% if pair[2] %}
             <tr>
-                <td><a href="{{ rel }}/target/{{ pair[0] }}.html">{{ pair[0] }}</a></td>
+                <td><a href="/target/{{ pair[0] }}.html">{{ pair[0] }}</a></td>
                 <td>{{pair[1]}}</td>
             </tr>
           {% endif %}
