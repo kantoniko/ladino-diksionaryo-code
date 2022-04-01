@@ -17,6 +17,30 @@
       </table>
     </div>
     <div class="content">
+      <table class="table">
+        <thead>
+          <tr><th></th>
+            {% for language in languages %}
+                 <th>{{ language }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th>Words</th>
+            {% for language in languages %}
+                <td>{{ count.dictionary[language].words }}</td>
+            {% endfor %}
+          </tr>
+          <tr><th>Phrases</th>
+            {% for language in languages %}
+                <td>{{ count.dictionary[language].phrases }}</td>
+            {% endfor %}
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="content">
       <ul>
         <li>In the <a href="converter.html">converter</a> you will be able to see the translation of each word you type in.
             We don't try to understand the context or the full expression. It is still your job to decide which meaning of a word is relevant in the specific context.

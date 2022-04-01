@@ -7,18 +7,24 @@ import os
 import re
 import sys
 import time
+from yaml import safe_load
 
 import markdown
 from jinja2 import Environment, FileSystemLoader
 from librelingo_yaml_loader.yaml_loader import load_course
 
+languages = ['ladino', 'english', 'spanish']
+
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--course", help="path to course directory that contains the course.yaml"
+        "--course", help="path to course directory that contains the course.yaml",
     )
     parser.add_argument(
-        "--html", help="path to directory where to generate html report"
+        "--dictionary", help="path to directory where we find the dictionary files",
+    )
+    parser.add_argument(
+        "--html", help="path to directory where to generate html files",
     )
     parser.add_argument("--log", action="store_true", help="Additional logging")
     args = parser.parse_args()
@@ -75,6 +81,7 @@ def export_main_html_page(course, count, html_dir):
         page="index",
         course=course,
         count=count,
+        languages=languages,
     )
     with open(os.path.join(html_dir, "index.html"), "w") as fh:
         fh.write(html)
@@ -339,11 +346,51 @@ def collect_data(course):
             _collect_phrases(skill, count, target, source)
     return target, source, count
 
+def check_word(filename, data):
+    if 'grammar' not in data:
+        logging.error("Grammar is missing from file %s", filename)
+        return
+    if data['grammar'] == 'noun':
+        if 'ladino' not in data:
+            logging.error('Ladino is missing from file %s', filename)
+
+
+def load_dictionary(path_to_dictionary):
+    logging.info("Path to dictionary: '%s'", path_to_dictionary)
+    files = os.listdir(path_to_dictionary)
+    words = []
+    for filename in files:
+        path = os.path.join(path_to_dictionary, filename)
+        logging.info(path)
+        with open(path) as fh:
+            data = safe_load(fh)
+        check_word(filename, data)
+        words.append(data)
+    return words
 
 class Lili:
     def __init__(self):
         self.warnings = []
         self.errors = []
+
+def collect_more_data(count, dictionary):
+    logging.info("Collect more data")
+    count['dictionary'] = {}
+    for language in languages:
+        count['dictionary'][language] = {
+            'words': 0,
+            'phrases': 0,
+        }
+    for entry in dictionary:
+        for language in languages:
+            word = entry.get(language)
+            if word is not None and word != '':
+                if word.__class__.__name__ == 'str':
+                    count['dictionary'][language]['words'] += 1
+                elif word.__class__.__name__ == 'list':
+                    count['dictionary'][language]['words'] += len(word)
+                else:
+                    raise Exception(f"Invalid type {word.__class__.__name__}")
 
 def main():
     start = time.time()
@@ -356,10 +403,14 @@ def main():
     logging.info("Path to course: '%s'", path_to_course)
     course = load_course(path_to_course)
     logging.info("Course loaded")
+    dictionary = load_dictionary(args.dictionary)
 
     lili = Lili()
     if args.html:
         target, source, count = collect_data(course)
+        logging.info(count)
+        collect_more_data(count, dictionary)
+        logging.info(count)
         export_to_html(course, target, source, count, args.html)
 
     if lili.warnings:
