@@ -6,6 +6,7 @@ import logging
 import os
 import re
 import sys
+import time
 
 import markdown
 from jinja2 import Environment, FileSystemLoader
@@ -104,17 +105,6 @@ def export_main_html_page(course, count, reldir, html_dir):
     with open(os.path.join(html_dir, "modules.html"), "w") as fh:
         fh.write(html)
 
-    html = render(
-        "missing_words.html",
-        title=f"Missing {course.source_language.name} words",
-        page="words",
-        rel="",
-        course=course,
-    )
-    with open(os.path.join(html_dir, "words.html"), "w") as fh:
-        fh.write(html)
-
-
 def export_skill_html_pages(course, html_dir):
     branch = "main"  # how can we know which is the default branch of a repository?
     for module in course.modules:
@@ -211,15 +201,7 @@ def export_words_html_page(course, all_words, language, path, reldir, html_file)
 
 
 def get_repository_url(course):
-    repository_url = course.repository_url
-    if "https://github.com/LibreLingo/LibreLingo/tree/main/courses/" in repository_url:
-        repository_url = "https://github.com/LibreLingo/LibreLingo"
-    if (
-        "https://github.com/LibreLingo/LibreLingo/tree/main/temporarily_inactive_courses/"
-        in repository_url
-    ):
-        repository_url = "https://github.com/LibreLingo/LibreLingo"
-    return repository_url
+    return course.repository_url
 
 
 def export_word_html_pages(course, all_words, language, reldir, words_dir):
@@ -372,17 +354,15 @@ class Lili:
         self.errors = []
 
 def main():
+    start = time.time()
     args = get_args()
     if args.log:
         logging.basicConfig(level=logging.INFO)
-    logging.info("Start Lili")
+    logging.info("Start generating Ladino dictionary website")
 
     path_to_course = guess_path_to_course(args.course)
     logging.info("Path to course: '%s'", path_to_course)
     course = load_course(path_to_course)
-    # try:
-    # except Exception as err:
-    #    sys.exit(f"Could not load course {err}")
 
     lili = Lili()
     if args.html:
@@ -399,6 +379,8 @@ def main():
         for err in lili.errors:
             print(err)
         sys.exit(1)
+    end = time.time()
+    logging.info(f"Elapsed time: {int(end-start)} sec")
 
 
 if __name__ == "__main__":

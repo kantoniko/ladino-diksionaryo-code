@@ -15,7 +15,6 @@
       <ul>
         <li {% if page == "index" %}class="is-active"{% endif %}><a href="{{ rel }}index.html">home</a></li>
         <li {% if page == "converter" %}class="is-active"{% endif %}><a href="{{ rel }}converter.html">converter</a></li>
-        <li {% if page == "words" %}class="is-active"{% endif %}><a href="{{ rel }}words.html">words</a></li>
         <li {% if page == "modules" %}class="is-active"{% endif %}><a href="{{ rel }}modules.html">modules</a></li>
         <li {% if page == "target" %}class="is-active"{% endif %}><a href="{{ rel }}target.html">{{ course.target_language.name }}</a></li>
         <li {% if page == "source" %}class="is-active"{% endif %}><a href="{{ rel }}source.html">{{ course.source_language.name }}</a></li>
