@@ -300,7 +300,7 @@ def _collect_phrases(skill, count, target, source):
                 )
 
 
-def collect_data(course):
+def collect_data(course, dictionary):
     count = {
         "target_phrases": 0,
         "source_phrases": 0,
@@ -320,6 +320,7 @@ def collect_data(course):
         "phrases": collections.defaultdict(list),
     }
 
+    collect_data_from_dictionary(dictionary, count)
     collect_data_from_course(course, target, source, count)
 
     return target, source, count
@@ -378,7 +379,7 @@ class Lili:
         self.warnings = []
         self.errors = []
 
-def collect_more_data(count, dictionary):
+def collect_data_from_dictionary(dictionary, count):
     logging.info("Collect more data")
     count['dictionary'] = {}
     words = {}
@@ -433,9 +434,7 @@ def main():
 
     lili = Lili()
     if args.html:
-        target, source, count = collect_data(course)
-        logging.info(count)
-        collect_more_data(count, dictionary)
+        target, source, count = collect_data(course, dictionary)
         logging.info(count)
         export_to_html(course, target, source, count, args.html)
 
