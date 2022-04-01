@@ -76,23 +76,23 @@ def export_main_html_page(course, count, html_dir):
     # embed(globals(), locals())
 
     html = render(
-        "index.html",
+        "about.html",
         title=f"{course.target_language.name} for {course.source_language.name} speakers",
         page="index",
         course=course,
         count=count,
         languages=languages,
     )
-    with open(os.path.join(html_dir, "index.html"), "w") as fh:
+    with open(os.path.join(html_dir, "about.html"), "w") as fh:
         fh.write(html)
 
     html = render(
         "converter.html",
-        title=f"{course.target_language.name} for {course.source_language.name} speakers",
+        title=f"Ladino dictionary",
         page="converter",
         course=course,
     )
-    with open(os.path.join(html_dir, "converter.html"), "w") as fh:
+    with open(os.path.join(html_dir, "index.html"), "w") as fh:
         fh.write(html)
 
     html = render(
@@ -357,6 +357,8 @@ def check_word(filename, data):
 
 def load_dictionary(path_to_dictionary):
     logging.info("Path to dictionary: '%s'", path_to_dictionary)
+    if path_to_dictionary is None:
+        return
     files = os.listdir(path_to_dictionary)
     words = []
     for filename in files:
