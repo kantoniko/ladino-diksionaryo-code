@@ -18,10 +18,6 @@ def get_args():
         "--course", help="path to course directory that contains the course.yaml"
     )
     parser.add_argument(
-        "--reldir", help="relative path of the course in the repository",
-        default="course",
-    )
-    parser.add_argument(
         "--html", help="path to directory where to generate html report"
     )
     parser.add_argument("--log", action="store_true", help="Additional logging")
@@ -174,14 +170,13 @@ def export_json(all_words, filename, html_dir):
         json.dump(all_words, fh)
 
 
-def export_words_html_page(course, all_words, language, path, reldir, html_file):
+def export_words_html_page(course, all_words, language, path, html_file):
     logging.info("Export words html page")
     html = render(
         "words.html",
         title=f"{course.target_language.name} for {course.source_language.name} speakers",
         page=path,
         rel="",
-        rel_dir=reldir,
         path=path,
         course=course,
         all_words=all_words,
@@ -228,7 +223,7 @@ def export_word_html_pages(course, all_words, language, words_dir):
             fh.write(html)
 
 
-def export_to_html(course, target, source, count, reldir, html_dir):
+def export_to_html(course, target, source, count, html_dir):
     logging.info("Export to HTML")
     if not os.path.exists(html_dir):
         os.mkdir(html_dir)
@@ -265,7 +260,6 @@ def export_to_html(course, target, source, count, reldir, html_dir):
         all_target_words,
         target,
         "target",
-        reldir,
         os.path.join(html_dir, "target.html"),
     )
     export_words_html_page(
@@ -273,7 +267,6 @@ def export_to_html(course, target, source, count, reldir, html_dir):
         all_source_words,
         source,
         "source",
-        reldir,
         os.path.join(html_dir, "source.html"),
     )
     export_word_html_pages(
@@ -373,7 +366,7 @@ def main():
     lili = Lili()
     if args.html:
         target, source, count = collect_data(course)
-        export_to_html(course, target, source, count, args.reldir, args.html)
+        export_to_html(course, target, source, count, args.html)
 
     if lili.warnings:
         print("------------------ WARNINGS ---------------------")

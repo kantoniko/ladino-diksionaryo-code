@@ -6,7 +6,7 @@
   </div>
 
   <div class="content">
-    <a href="{{ repository_url }}/blob/{{ branch }}/course/{{ rel_dir }}/{{ skill.filename }}">source</a>
+    <a href="{{ repository_url }}/blob/{{ branch }}/course/{{ skill.filename }}">source</a>
 
     <h2>Introduction</h2>
 
@@ -15,9 +15,9 @@
     {% if skill.introduction %}
         {{ skill.introduction | md2html | safe }}
 
-        <div><a href="{{ repository_url }}/blob/{{ branch }}/course/{{ rel_dir }}/{{ skill.filename | yaml2md }}">source</a></div>
+        <div><a href="{{ repository_url }}/blob/{{ branch }}/course/{{ skill.filename | yaml2md }}">source</a></div>
     {% else %}
-      Each skill can have an introduction in Markdown file. This skill does not have one yet, but it can be added as <a href="{{ repository_url }}/blob/{{ branch }}/course/{{ rel_dir }}/{{ skill.filename | yaml2md }}">this</a> (currently
+      Each skill can have an introduction in Markdown file. This skill does not have one yet, but it can be added as <a href="{{ repository_url }}/blob/{{ branch }}/course/{{ skill.filename | yaml2md }}">this</a> (currently
 missing) file.
     {% endif %}
     </div>
