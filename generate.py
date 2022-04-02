@@ -365,8 +365,12 @@ def check_word(filename, data):
         logging.error("Grammar is missing from file %s", filename)
         return
     if data['grammar'] == 'noun':
-        if 'ladino' not in data:
-            logging.error('Ladino is missing from file %s', filename)
+        if 'versions' not in data:
+            logging.error('versions are missing from file %s', filename)
+        else:
+            for version in data['versions']:
+                if 'ladino' not in version:
+                    logging.error('Ladino is missing from file %s', filename)
 
 
 def load_dictionary(path_to_dictionary):
@@ -381,7 +385,8 @@ def load_dictionary(path_to_dictionary):
         with open(path) as fh:
             data = safe_load(fh)
         check_word(filename, data)
-        words.append(data)
+        for version in data['versions']:
+            words.append(version)
     return words
 
 class Lili:
@@ -405,8 +410,8 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
         dictionary[language] = {}
 
     for entry in dictionary_source:
-        grammar = entry['grammar']
-        count['grammar'][grammar] += 1
+        #grammar = entry['grammar']
+        #count['grammar'][grammar] += 1
         dictionary['ladino'][ entry['ladino'] ] = entry
         # it is both ok if we overwrite the ladino entry or if we create a new entry
         dictionary['ladino'][ entry['accented'] ] = entry
