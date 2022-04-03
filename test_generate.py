@@ -17,27 +17,20 @@ def test_one_file(tmpdir, name):
     course = load_course(path_to_course)
     dictionary_source = load_dictionary(tmpdir)
     #print(dictionary_source)
-    #assert dictionary_source == [{
-    #    'ladino': 'andjinara',
-    #    'accented': 'andjinára',
-    #    'gender': 'feminine',
-    #    'number': 'singular',
-    #    'alternative-spelling': [{'ladino': 'endjinara', 'accented': 'endjinára'}],
-    #    'translations': {
-    #        'english': 'artichoke',
-    #        'french': 'artichaut',
-    #        'hebrew': 'ארטישוק',
-    #        'spanish': ['alcaucil', 'alcachofa'],
-    #        'turkish': 'enginar'
-    #    }
-    #}]
     target, source, dictionary, count = collect_data(course, dictionary_source)
+    export_json(
+        dictionary_source, "dictionary_source.json", tmpdir
+    )
     export_json(
         dictionary, "dictionary.json", tmpdir
     )
     export_json(
         count, "count.json", tmpdir
     )
+
+    with open (os.path.join('tests', name, 'dictionary_source.json')) as fh:
+        expected = json.load(fh)
+    assert dictionary_source == expected
 
     #print(target)
     #print(source)
