@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Test code
     steps:
-    - name: Generate HTML
-
     - name: Checkout this repo
       uses: actions/checkout@v2
 
