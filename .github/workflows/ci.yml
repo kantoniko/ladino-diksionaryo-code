@@ -7,8 +7,38 @@ on:
   workflow_dispatch:
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test code
+    steps:
+    - name: Generate HTML
+
+    - name: Checkout this repo
+      uses: actions/checkout@v2
+
+    - name: Checkout the ladino-diksionaryo-data
+      uses: actions/checkout@v2
+      with:
+        repository: 'szabgab/ladino-diksionaryo-data'
+        path: ladino-diksionaryo-data
+
+    - name: Checkout the  LibreLingo-Judeo-Spanish-from-English repo
+      uses: actions/checkout@v2
+      with:
+        repository: 'szabgab/LibreLingo-Judeo-Spanish-from-English'
+        path: LibreLingo-Judeo-Spanish-from-English
+
+    - name: Install dependencies
+      run: |
+          python -V
+          pip install -r requirements.txt
+          pip install pytest
+
+    - name: Run tests
+      run: |
+          pytest -sv test_generate.py
+
   generate:
-    #environment: ci
     runs-on: ubuntu-latest
     name: Generate HTML
 
