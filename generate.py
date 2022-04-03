@@ -364,13 +364,13 @@ def check_word(filename, data):
     if 'grammar' not in data:
         logging.error("Grammar is missing from file %s", filename)
         return
-    if data['grammar'] == 'noun':
-        if 'versions' not in data:
-            logging.error('versions are missing from file %s', filename)
-        else:
-            for version in data['versions']:
-                if 'ladino' not in version:
-                    logging.error('Ladino is missing from file %s', filename)
+    #if data['grammar'] == 'noun':
+    if 'versions' not in data:
+        logging.error('versions are missing from file %s', filename)
+    else:
+        for version in data['versions']:
+            if 'ladino' not in version:
+                logging.error('Ladino is missing from file %s', filename)
 
 
 def load_dictionary(path_to_dictionary):
