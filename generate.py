@@ -171,7 +171,7 @@ def collect_words(language, direction):
 def export_json(all_words, filename, pretty=False):
     with open(filename, "w") as fh:
         if pretty:
-            json.dump(all_words, fh, indent=4, ensure_ascii=False)
+            json.dump(all_words, fh, indent=4, ensure_ascii=False, sort_keys=True)
         else:
             json.dump(all_words, fh)
 

@@ -1,16 +1,19 @@
 {
+    "english": {},
+    "french": {},
+    "hebrew": {},
     "ladino": {
         "andjinara": {
-            "ladino": "andjinara",
             "accented": "andjinára",
-            "gender": "feminine",
-            "number": "singular",
             "alternative-spelling": [
                 {
-                    "ladino": "endjinara",
-                    "accented": "endjinára"
+                    "accented": "endjinára",
+                    "ladino": "endjinara"
                 }
             ],
+            "gender": "feminine",
+            "ladino": "andjinara",
+            "number": "singular",
             "translations": {
                 "english": "artichoke",
                 "french": "artichaut",
@@ -23,16 +26,16 @@
             }
         },
         "andjinára": {
-            "ladino": "andjinara",
             "accented": "andjinára",
-            "gender": "feminine",
-            "number": "singular",
             "alternative-spelling": [
                 {
-                    "ladino": "endjinara",
-                    "accented": "endjinára"
+                    "accented": "endjinára",
+                    "ladino": "endjinara"
                 }
             ],
+            "gender": "feminine",
+            "ladino": "andjinara",
+            "number": "singular",
             "translations": {
                 "english": "artichoke",
                 "french": "artichaut",
@@ -45,16 +48,16 @@
             }
         },
         "endjinara": {
-            "ladino": "andjinara",
             "accented": "andjinára",
-            "gender": "feminine",
-            "number": "singular",
             "alternative-spelling": [
                 {
-                    "ladino": "endjinara",
-                    "accented": "endjinára"
+                    "accented": "endjinára",
+                    "ladino": "endjinara"
                 }
             ],
+            "gender": "feminine",
+            "ladino": "andjinara",
+            "number": "singular",
             "translations": {
                 "english": "artichoke",
                 "french": "artichaut",
@@ -67,16 +70,16 @@
             }
         },
         "endjinára": {
-            "ladino": "andjinara",
             "accented": "andjinára",
-            "gender": "feminine",
-            "number": "singular",
             "alternative-spelling": [
                 {
-                    "ladino": "endjinara",
-                    "accented": "endjinára"
+                    "accented": "endjinára",
+                    "ladino": "endjinara"
                 }
             ],
+            "gender": "feminine",
+            "ladino": "andjinara",
+            "number": "singular",
             "translations": {
                 "english": "artichoke",
                 "french": "artichaut",
@@ -89,9 +92,6 @@
             }
         }
     },
-    "english": {},
-    "french": {},
-    "hebrew": {},
     "spanish": {},
     "turkish": {}
 }

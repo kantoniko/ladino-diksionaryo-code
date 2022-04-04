@@ -1,39 +1,39 @@
 {
-    "target_phrases": 453,
-    "source_phrases": 450,
-    "target_language_name": "Ladino",
-    "source_language_name": "English",
-    "target_language_code": "lad",
-    "source_language_code": "en",
     "dictionary": {
-        "ladino": {
-            "words": 2,
-            "phrases": 0
-        },
         "english": {
-            "words": 1,
-            "phrases": 0
+            "phrases": 0,
+            "words": 1
         },
         "french": {
-            "words": 1,
-            "phrases": 0
+            "phrases": 0,
+            "words": 1
         },
         "hebrew": {
-            "words": 1,
-            "phrases": 0
+            "phrases": 0,
+            "words": 1
+        },
+        "ladino": {
+            "phrases": 0,
+            "words": 2
         },
         "spanish": {
-            "words": 2,
-            "phrases": 0
+            "phrases": 0,
+            "words": 2
         },
         "turkish": {
-            "words": 1,
-            "phrases": 0
+            "phrases": 0,
+            "words": 1
         }
     },
     "grammar": {
+        "conjugated-verb": 0,
         "noun": 0,
-        "verb": 0,
-        "conjugated-verb": 0
-    }
+        "verb": 0
+    },
+    "source_language_code": "en",
+    "source_language_name": "English",
+    "source_phrases": 450,
+    "target_language_code": "lad",
+    "target_language_name": "Ladino",
+    "target_phrases": 453
 }

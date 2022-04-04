@@ -1,15 +1,15 @@
 [
     {
-        "ladino": "andjinara",
         "accented": "andjinára",
-        "gender": "feminine",
-        "number": "singular",
         "alternative-spelling": [
             {
-                "ladino": "endjinara",
-                "accented": "endjinára"
+                "accented": "endjinára",
+                "ladino": "endjinara"
             }
         ],
+        "gender": "feminine",
+        "ladino": "andjinara",
+        "number": "singular",
         "translations": {
             "english": "artichoke",
             "french": "artichaut",
