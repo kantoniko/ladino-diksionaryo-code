@@ -13,7 +13,7 @@ import markdown
 from jinja2 import Environment, FileSystemLoader
 from librelingo_yaml_loader.yaml_loader import load_course
 
-languages = ['english', 'french', 'hebrew', 'spanish', 'turkish']
+languages = ['english', 'french', 'hebrew', 'spanish', 'turkish', 'portuguese']
 
 def get_args():
     parser = argparse.ArgumentParser()
