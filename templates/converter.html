@@ -94,7 +94,7 @@ $(document).ready(function(){
             for (var jx=0; jx < languages.length; jx++) {
                 html += `<td>`;
                 if (dict_word) {
-                    html += dict_word['translations'][languages[jx]];
+                    html += dict_word['translations'][languages[jx]] || '';
                 }
                 html += `</td>`;
             }
