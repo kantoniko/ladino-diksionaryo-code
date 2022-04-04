@@ -98,7 +98,7 @@ $(document).ready(function(){
         loaded++;
         try_translate();
     }).fail(function(){
-        console.log("An error has occurred.");
+        console.log("An error has occurred while loading course.json");
     });
 
     $.getJSON("dictionary.json", function(data){
@@ -115,7 +115,7 @@ $(document).ready(function(){
         loaded++;
         try_translate();
     }).fail(function(){
-        console.log("An error has occurred.");
+        console.log("An error has occurred while loading source-to-target.json.");
     });
 
     $.getJSON("target-to-source.json", function(data){
@@ -123,7 +123,7 @@ $(document).ready(function(){
         loaded++;
         try_translate();
     }).fail(function(){
-        console.log("An error has occurred.");
+        console.log("An error has occurred while loading target-to-source.json.");
     });
 
     $('#input-text').bind('input propertychange', translate);
