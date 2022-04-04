@@ -444,6 +444,7 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
             word = entry['translations'].get(language)
             if word is not None and word != '':
                 if word.__class__.__name__ == 'str':
+                    dictionary[language][word] = entry['ladino']
                     count['dictionary'][language]['words'] += 1
                 elif word.__class__.__name__ == 'list':
                     count['dictionary'][language]['words'] += len(word)

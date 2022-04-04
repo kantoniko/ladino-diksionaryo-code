@@ -1,6 +1,11 @@
 {
-    "english": {},
-    "french": {},
+    "english": {
+        "eat": "komen",
+        "eats": "kome"
+    },
+    "french": {
+        "manger": "komer"
+    },
     "hebrew": {},
     "ladino": {
         "kome": {
@@ -69,6 +74,16 @@
         }
     },
     "portuguese": {},
-    "spanish": {},
-    "turkish": {}
+    "spanish": {
+        "come": "kome",
+        "comeis": "komesh",
+        "comemos": "komemos",
+        "comen": "komen",
+        "comer": "komer",
+        "comes": "komes",
+        "como": "komo"
+    },
+    "turkish": {
+        "yemek yemek": "komer"
+    }
 }

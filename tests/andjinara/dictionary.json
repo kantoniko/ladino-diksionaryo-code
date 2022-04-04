@@ -1,7 +1,13 @@
 {
-    "english": {},
-    "french": {},
-    "hebrew": {},
+    "english": {
+        "artichoke": "andjinara"
+    },
+    "french": {
+        "artichaut": "andjinara"
+    },
+    "hebrew": {
+        "ארטישוק": "andjinara"
+    },
     "ladino": {
         "andjinara": {
             "accented": "andjinára",
@@ -94,5 +100,7 @@
     },
     "portuguese": {},
     "spanish": {},
-    "turkish": {}
+    "turkish": {
+        "enginar": "andjinara"
+    }
 }
