@@ -1,0 +1,39 @@
+{
+    "dictionary": {
+        "english": {
+            "phrases": 0,
+            "words": 7
+        },
+        "french": {
+            "phrases": 0,
+            "words": 1
+        },
+        "hebrew": {
+            "phrases": 0,
+            "words": 0
+        },
+        "ladino": {
+            "phrases": 0,
+            "words": 7
+        },
+        "spanish": {
+            "phrases": 0,
+            "words": 7
+        },
+        "turkish": {
+            "phrases": 0,
+            "words": 1
+        }
+    },
+    "grammar": {
+        "conjugated-verb": 0,
+        "noun": 0,
+        "verb": 0
+    },
+    "source_language_code": "en",
+    "source_language_name": "English",
+    "source_phrases": 450,
+    "target_language_code": "lad",
+    "target_language_name": "Ladino",
+    "target_phrases": 453
+}

@@ -383,6 +383,12 @@ def load_dictionary(path_to_dictionary):
         check_word(filename, data)
         for version in data['versions']:
             words.append(version)
+        if 'conjugations' in data:
+            for verb_time, conjugation in data['conjugations'].items():
+                print(verb_time)
+                print(conjugation)
+                for pronoun, version in conjugation.items():
+                    words.append(version)
     return words
 
 class Lili:
@@ -410,7 +416,8 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
         #count['grammar'][grammar] += 1
         dictionary['ladino'][ entry['ladino'] ] = entry
         # it is both ok if we overwrite the ladino entry or if we create a new entry
-        dictionary['ladino'][ entry['accented'] ] = entry
+        if 'accented' in entry:
+            dictionary['ladino'][ entry['accented'] ] = entry
 
         count['dictionary']['ladino']['words'] += 1
         if 'alternative-spelling' in entry:
