@@ -98,17 +98,6 @@ def export_main_html_page(course, count, html_dir):
     with open(os.path.join(html_dir, "index.html"), "w") as fh:
         fh.write(html)
 
-    html = render(
-        "modules.html",
-        title=f"{course.target_language.name} for {course.source_language.name} speakers",
-        page="modules",
-        branch=branch,
-        course=course,
-        repository_url=get_repository_url(course),
-    )
-    with open(os.path.join(html_dir, "modules.html"), "w") as fh:
-        fh.write(html)
-
 def export_skill_html_pages(course, html_dir):
     logging.info("Export skill html pages")
     branch = "main"  # how can we know which is the default branch of a repository?
