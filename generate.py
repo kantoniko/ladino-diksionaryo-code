@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import argparse
 import collections
+import glob
 import json
 import logging
 import os
@@ -231,13 +232,21 @@ def export_word_html_pages(course, all_words, language, words_dir):
         with open(os.path.join(words_dir, target_word.lower() + ".html"), "w") as fh:
             fh.write(html)
 
+def remove_previous_content_of(html_dir):
+    for thing in glob.glob(os.path.join(html_dir, '*')):
+        if os.path.isdir(thing):
+            shutil.rmtree(thing) # TODO remove all the old content from html_dir
+        else:
+            os.remove(thing)
 
 def export_to_html(course, target, source, dictionary, count, html_dir):
     logging.info("Export to HTML")
     if not os.path.exists(html_dir):
         os.mkdir(html_dir)
-    # TODO remove all the old content from html_dir
+    remove_previous_content_of(html_dir)
+
     shutil.copytree("js", os.path.join(html_dir, "js"))
+
     for path in ["target", "source"]:
         words_dir = os.path.join(html_dir, path)
         if not os.path.exists(words_dir):
