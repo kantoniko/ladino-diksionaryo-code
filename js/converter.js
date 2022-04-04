@@ -5,7 +5,6 @@ $(document).ready(function(){
     var course_data = null;
     var loaded = 0;
     var direction = 'ladino-to-english';
-    var source_language = 'ladino';
 
     // const update_direction_selector = function() {
     //     $('#ladino-to-english').removeClass('is-warning');
@@ -42,22 +41,37 @@ $(document).ready(function(){
             if (words[ix] == "") {
                 continue;
             }
-            var word = words[ix].toLowerCase()
+            let word = words[ix].toLowerCase()
             const english_from_ladino = ladino_to_english[word];
             const ladino_from_english = english_to_ladino[word];
 
-
             html += '<tr>';
-            const dict_word = dictionary['ladino'][word];
+            let source_language = 'ladino';
+            let dict_word = dictionary['ladino'][word];
+            if (! dict_word) {
+                for (var jx=0; jx < languages.length; jx++) {
+                    source_language = languages[jx];
+                    ladino_from_source_language = dictionary[source_language][word];
+                    //console.log(ladino_from_source_language);
+                    if (ladino_from_source_language) {
+                        dict_word = dictionary['ladino'][ladino_from_source_language];
+                        break;
+                    }
+                }
+            }
 
-            if (dict_word || english_from_ladino) {
+            if ((source_language == 'ladino' && dict_word) || english_from_ladino) {
                 html += `<td class="has-background-success-light">${word}</td>`;
             } else {
                 html += `<td class="has-background-danger-light">${word}</td>`;
             }
             if (dict_word) {
                 // console.log(dict_word);
-                html += `<td>${word}</td>`;
+                if (source_language == 'ladino') {
+                    html += `<td>${word}</td>`;
+                } else {
+                    html += `<td>${ladino_from_source_language}</td>`;
+                }
             } else if (english_from_ladino) {
                 html += `<td><a href="target/${word}.html">${word}</a></td>`;
             } else if (ladino_from_english) {
@@ -68,7 +82,11 @@ $(document).ready(function(){
                 //html += `<td><a href="target/${word}.html">${word}</a></td>`;
             for (var jx=0; jx < languages.length; jx++) {
                 if (dict_word) {
-                    html += '<td>' + (dict_word['translations'][languages[jx]] || '') + '</td>';
+                    if (source_language == languages[jx]) {
+                        html += '<td class="has-background-success-light">' + (dict_word['translations'][languages[jx]] || '') + '</td>';
+                    } else {
+                        html += '<td>' + (dict_word['translations'][languages[jx]] || '') + '</td>';
+                    }
                 } else if (languages[jx] == 'english') {
                     if (english_from_ladino) {
                         html += `<td>${english_from_ladino}</td>`;
@@ -86,7 +104,7 @@ $(document).ready(function(){
         }
         html += '</tbody>';
         html += "</table>";
-        console.log(html);
+        //console.log(html);
 
         $("#output").html(html);
     };
