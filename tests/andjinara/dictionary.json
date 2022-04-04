@@ -99,7 +99,10 @@
         }
     },
     "portuguese": {},
-    "spanish": {},
+    "spanish": {
+        "alcachofa": "andjinara",
+        "alcaucil": "andjinara"
+    },
     "turkish": {
         "enginar": "andjinara"
     }
