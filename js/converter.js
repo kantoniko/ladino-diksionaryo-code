@@ -30,16 +30,16 @@ $(document).ready(function(){
         // console.log(languages);
         var html = `<table class="table">`;
         html += '<thead>';
-        html += `<tr><th colspan="2" style="text-align:center">old dictionary</th><th style="width: 100px"></th><th colspan="${languages.length+1}" style="text-align:center">new dictionary</th></tr>`;
+        //html += `<tr><th colspan="2" style="text-align:center">old dictionary</th><th style="width: 100px"></th><th colspan="${languages.length+1}" style="text-align:center">new dictionary</th></tr>`;
         html += '<tr>';
-        if (direction == 'ladino-to-english') {
-            html += `<th>${course_data['target_language_name']}</th><th>${course_data['source_language_name']}</th>`;
-        } else {
-            html += `<th>${course_data['source_language_name']}</th><th>${course_data['target_language_name']}</th>`;
-        }
+        // if (direction == 'ladino-to-english') {
+        //     html += `<th>${course_data['target_language_name']}</th><th>${course_data['source_language_name']}</th>`;
+        // } else {
+        //     html += `<th>${course_data['source_language_name']}</th><th>${course_data['target_language_name']}</th>`;
+        // }
 
-        html += `<th></th>`;
-        html += `<th>ladino</th>`;
+        // html += `<th></th>`;
+        html += `<th>?</th><th>ladino</th>`;
         for (var ix=0; ix < languages.length; ix++) {
             html += `<th>${languages[ix]}</th>`;
         }
@@ -51,37 +51,48 @@ $(document).ready(function(){
                 continue;
             }
             var word = words[ix].toLowerCase()
+            const english = ladino_to_english[word];
 
             html += '<tr>';
-            if (direction == 'ladino-to-english') {
-                const translation = ladino_to_english[word];
-                if (translation) {
-                    html += `<td><a href="target/${word}.html">${words[ix]}</a></td><td>${translation}</td>`;
-                } else {
-                    html += `<td class="has-background-danger-light">${words[ix]}</td><td class="has-background-danger-light"></td>`;
-                }
-            } else {
-                const translation = english_to_ladino[word];
-                if (translation) {
-                    html += `<td><a href="source/${word}.html">${words[ix]}</a></td><td>${translation}</td>`;
-                } else {
-                    html += `<td class="has-background-danger-light">${words[ix]}</td><td class="has-background-danger-light"></td>`;
-                }
-            }
+            // if (direction == 'ladino-to-english') {
+            //     const translation = ladino_to_english[word];
+            //     if (translation) {
+            //         html += `<td><a href="target/${word}.html">${words[ix]}</a></td><td>${translation}</td>`;
+            //     } else {
+            //         html += `<td class="has-background-danger-light">${words[ix]}</td><td class="has-background-danger-light"></td>`;
+            //     }
+            // } else {
+            //     const translation = english_to_ladino[word];
+            //     if (translation) {
+            //         html += `<td><a href="source/${word}.html">${words[ix]}</a></td><td>${translation}</td>`;
+            //     } else {
+            //         html += `<td class="has-background-danger-light">${words[ix]}</td><td class="has-background-danger-light"></td>`;
+            //     }
+            // }
 
             //html += "<td></td>";
-
             const dict_word = dictionary['ladino'][word];
-            if (dict_word) {
-                console.log(dict_word);
-                html += `<td>${word}</td>`;
+
+            if (dict_word || english) {
+                html += `<td class="has-background-success-light">${word}</td>`;
             } else {
                 html += `<td class="has-background-danger-light">${word}</td>`;
+            }
+            if (dict_word) {
+                // console.log(dict_word);
+                html += `<td>${word}</td>`;
+            } else if (english) {
+                html += `<td><a href="target/${word}.html">${word}</a></td>`;
+            } else {
+                html += "<td></td>";
+                //html += `<td class="has-background-danger-light">${word}</td>`;
             }
             for (var jx=0; jx < languages.length; jx++) {
                 html += `<td>`;
                 if (dict_word) {
                     html += dict_word['translations'][languages[jx]] || '';
+                } else if (languages[jx] == 'english') {
+                    html += english || '';
                 }
                 html += `</td>`;
             }
