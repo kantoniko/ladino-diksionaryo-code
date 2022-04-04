@@ -4,25 +4,27 @@
 <textarea class="textarea" id="input-text">
 </textarea>
 </div>
+<!--
 <div>
-<button class="button" id="target-to-source">{{ course.target_language.name }} to {{ course.source_language.name }}</button>
-<button class="button" id="source-to-target">{{ course.source_language.name }} to {{ course.target_language.name }}</button>
+<button class="button" id="ladino-to-english">Ladino to English</button>
+<button class="button" id="english-to-ladino">English to Ladino</button>
 </div>
+-->
 <div id="output">
 <div>
 
 <script>
 $(document).ready(function(){
-    var source_to_target = null;
-    var target_to_source = null;
+    var english_to_ladino = null;
+    var ladino_to_english = null;
     var dictionary = null;
     var course_data = null;
     var loaded = 0;
-    var direction = 'target-to-source';
+    var direction = 'ladino-to-english';
 
     const update_direction_selector = function() {
-        $('#target-to-source').removeClass('is-warning');
-        $('#source-to-target').removeClass('is-warning');
+        $('#ladino-to-english').removeClass('is-warning');
+        $('#english-to-ladino').removeClass('is-warning');
         $('#' + direction).addClass('is-warning');
     };
 
@@ -45,7 +47,7 @@ $(document).ready(function(){
         html += '<thead>';
         html += `<tr><th colspan="2" style="text-align:center">old dictionary</th><th style="width: 100px"></th><th colspan="${languages.length+1}" style="text-align:center">new dictionary</th></tr>`;
         html += '<tr>';
-        if (direction == 'target-to-source') {
+        if (direction == 'ladino-to-english') {
             html += `<th>${course_data['target_language_name']}</th><th>${course_data['source_language_name']}</th>`;
         } else {
             html += `<th>${course_data['source_language_name']}</th><th>${course_data['target_language_name']}</th>`;
@@ -66,15 +68,15 @@ $(document).ready(function(){
             var word = words[ix].toLowerCase()
 
             html += '<tr>';
-            if (direction == 'target-to-source') {
-                const translation = target_to_source[word];
+            if (direction == 'ladino-to-english') {
+                const translation = ladino_to_english[word];
                 if (translation) {
                     html += `<td><a href="target/${word}.html">${words[ix]}</a></td><td>${translation}</td>`;
                 } else {
                     html += `<td class="has-background-danger-light">${words[ix]}</td><td class="has-background-danger-light"></td>`;
                 }
             } else {
-                const translation = source_to_target[word];
+                const translation = english_to_ladino[word];
                 if (translation) {
                     html += `<td><a href="source/${word}.html">${words[ix]}</a></td><td>${translation}</td>`;
                 } else {
@@ -125,7 +127,7 @@ $(document).ready(function(){
 
 
     $.getJSON("source-to-target.json", function(data){
-        source_to_target = data;
+        english_to_ladino = data;
         loaded++;
         try_translate();
     }).fail(function(){
@@ -133,7 +135,7 @@ $(document).ready(function(){
     });
 
     $.getJSON("target-to-source.json", function(data){
-        target_to_source = data;
+        ladino_to_english = data;
         loaded++;
         try_translate();
     }).fail(function(){
@@ -141,13 +143,13 @@ $(document).ready(function(){
     });
 
     $('#input-text').bind('input propertychange', translate);
-    $("#target-to-source").click(function() {
-        direction = 'target-to-source';
+    $("#ladino-to-english").click(function() {
+        direction = 'ladino-to-english';
         update_direction_selector();
         translate();
     });
-    $("#source-to-target").click(function() {
-        direction = 'source-to-target';
+    $("#english-to-ladino").click(function() {
+        direction = 'english-to-ladino';
         update_direction_selector();
         translate();
     });
