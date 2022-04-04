@@ -168,8 +168,8 @@ def collect_words(language, direction):
     return all_words
 
 
-def export_json(all_words, filename, html_dir):
-    with open(os.path.join(html_dir, filename), "w") as fh:
+def export_json(all_words, filename):
+    with open(filename, "w") as fh:
         json.dump(all_words, fh)
 
 def export_words_html_pages(html_dir, dictionary):
@@ -251,16 +251,9 @@ def export_to_html(course, target, source, dictionary, count, html_dir):
     count["source_words"] = len(all_source_words)
 
     logging.info("Export JSON files")
-    export_json(
-        collect_words(source, "source-to-target"), "source-to-target.json", html_dir
-    )
-    export_json(
-        collect_words(target, "target-to-source"), "target-to-source.json", html_dir
-    )
-
-    export_json(
-        dictionary, "dictionary.json", html_dir
-    )
+    export_json(collect_words(source, "source-to-target"), os.path.join(html_dir, "source-to-target.json"))
+    export_json(collect_words(target, "target-to-source"), os.path.join(html_dir, "target-to-source.json"))
+    export_json(dictionary, os.path.join(html_dir, "dictionary.json"))
 
     export_main_html_page(course, count, html_dir)
     export_skill_html_pages(course, html_dir)

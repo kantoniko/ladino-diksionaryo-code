@@ -18,15 +18,9 @@ def test_one_file(tmpdir, name):
     dictionary_source = load_dictionary(tmpdir)
     #print(dictionary_source)
     target, source, dictionary, count = collect_data(course, dictionary_source)
-    export_json(
-        dictionary_source, "dictionary_source.json", tmpdir
-    )
-    export_json(
-        dictionary, "dictionary.json", tmpdir
-    )
-    export_json(
-        count, "count.json", tmpdir
-    )
+    export_json(dictionary_source, os.path.join(tmpdir, "dictionary_source.json"))
+    export_json(dictionary, os.path.join(tmpdir, "dictionary.json"))
+    export_json(count, os.path.join(tmpdir, "count.json"))
 
     with open (os.path.join('tests', name, 'dictionary_source.json')) as fh:
         expected = json.load(fh)
