@@ -168,9 +168,12 @@ def collect_words(language, direction):
     return all_words
 
 
-def export_json(all_words, filename):
+def export_json(all_words, filename, pretty=False):
     with open(filename, "w") as fh:
-        json.dump(all_words, fh)
+        if pretty:
+            json.dump(all_words, fh, indent=4, ensure_ascii=False)
+        else:
+            json.dump(all_words, fh)
 
 def export_words_html_pages(html_dir, dictionary):
     print("---")
