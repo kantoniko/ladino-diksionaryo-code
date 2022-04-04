@@ -15,6 +15,7 @@ import markdown
 from jinja2 import Environment, FileSystemLoader
 from librelingo_yaml_loader.yaml_loader import load_course
 
+
 languages = ['english', 'french', 'hebrew', 'spanish', 'turkish', 'portuguese']
 
 def get_args():
@@ -241,11 +242,12 @@ def remove_previous_content_of(html_dir):
 
 def export_to_html(course, target, source, dictionary, count, html_dir):
     logging.info("Export to HTML")
+    root = os.path.dirname(os.path.abspath(__file__))
     if not os.path.exists(html_dir):
         os.mkdir(html_dir)
     remove_previous_content_of(html_dir)
 
-    shutil.copytree("js", os.path.join(html_dir, "js"))
+    shutil.copytree(os.path.join(root, "js"), os.path.join(html_dir, "js"))
 
     for path in ["target", "source"]:
         words_dir = os.path.join(html_dir, path)
