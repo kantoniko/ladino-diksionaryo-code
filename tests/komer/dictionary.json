@@ -1,10 +1,21 @@
 {
     "english": {
-        "eat": "komen",
-        "eats": "kome"
+        "eat": [
+            "komer",
+            "komo",
+            "komes",
+            "komemos",
+            "komesh",
+            "komen"
+        ],
+        "eats": [
+            "kome"
+        ]
     },
     "french": {
-        "manger": "komer"
+        "manger": [
+            "komer"
+        ]
     },
     "hebrew": {},
     "ladino": {
@@ -79,15 +90,31 @@
     },
     "portuguese": {},
     "spanish": {
-        "come": "kome",
-        "comeis": "komesh",
-        "comemos": "komemos",
-        "comen": "komen",
-        "comer": "komer",
-        "comes": "komes",
-        "como": "komo"
+        "come": [
+            "kome"
+        ],
+        "comeis": [
+            "komesh"
+        ],
+        "comemos": [
+            "komemos"
+        ],
+        "comen": [
+            "komen"
+        ],
+        "comer": [
+            "komer"
+        ],
+        "comes": [
+            "komes"
+        ],
+        "como": [
+            "komo"
+        ]
     },
     "turkish": {
-        "yemek yemek": "komer"
+        "yemek yemek": [
+            "komer"
+        ]
     }
 }

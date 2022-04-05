@@ -367,19 +367,22 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
                 _add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), dictionary, entry)
 
         for language in languages:
-            word = entry['translations'].get(language)
-            if word is None or word == '':
+            translations = entry['translations'].get(language)
+            if translations is None or translations == '':
                 continue
 
-            if word.__class__.__name__ == 'str':
-                dictionary[language][word] = entry['ladino']
-                count['dictionary'][language]['words'] += 1
-            elif word.__class__.__name__ == 'list':
-                for wrd in word:
-                    dictionary[language][wrd] = entry['ladino']
-                count['dictionary'][language]['words'] += len(word)
+            if translations.__class__.__name__ == 'str':
+                words = [translations]
+            elif translations.__class__.__name__ == 'list':
+                words = translations
             else:
-                raise Exception(f"Invalid type {word.__class__.__name__}")
+                raise Exception(f"Invalid type {translations.__class__.__name__}")
+
+            for word in words:
+                if word not in dictionary[language]:
+                    dictionary[language][word] = []
+                dictionary[language][word].append(entry['ladino'])
+                count['dictionary'][language]['words'] += 1
 
 def get_args():
     parser = argparse.ArgumentParser()

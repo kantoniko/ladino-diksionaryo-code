@@ -1,17 +1,38 @@
 {
     "english": {
-        "artichoke": "andjinara",
-        "eat": "komen",
-        "eats": "kome",
-        "how": "komo"
+        "artichoke": [
+            "andjinara"
+        ],
+        "eat": [
+            "komer",
+            "komo",
+            "komes",
+            "komemos",
+            "komesh",
+            "komen"
+        ],
+        "eats": [
+            "kome"
+        ],
+        "how": [
+            "komo"
+        ]
     },
     "french": {
-        "artichaut": "andjinara",
-        "manger": "komer"
+        "artichaut": [
+            "andjinara"
+        ],
+        "manger": [
+            "komer"
+        ]
     },
     "hebrew": {
-        "איך": "komo",
-        "ארטישוק": "andjinara"
+        "איך": [
+            "komo"
+        ],
+        "ארטישוק": [
+            "andjinara"
+        ]
     },
     "ladino": {
         "andjinara": {
@@ -144,19 +165,44 @@
     },
     "portuguese": {},
     "spanish": {
-        "alcachofa": "andjinara",
-        "alcaucil": "andjinara",
-        "come": "kome",
-        "comeis": "komesh",
-        "comemos": "komemos",
-        "comen": "komen",
-        "comer": "komer",
-        "comes": "komes",
-        "como": "komo"
+        "alcachofa": [
+            "andjinara"
+        ],
+        "alcaucil": [
+            "andjinara"
+        ],
+        "come": [
+            "kome"
+        ],
+        "comeis": [
+            "komesh"
+        ],
+        "comemos": [
+            "komemos"
+        ],
+        "comen": [
+            "komen"
+        ],
+        "comer": [
+            "komer"
+        ],
+        "comes": [
+            "komes"
+        ],
+        "como": [
+            "komo",
+            "komo"
+        ]
     },
     "turkish": {
-        "enginar": "andjinara",
-        "nasıl": "komo",
-        "yemek yemek": "komer"
+        "enginar": [
+            "andjinara"
+        ],
+        "nasıl": [
+            "komo"
+        ],
+        "yemek yemek": [
+            "komer"
+        ]
     }
 }

@@ -1,12 +1,18 @@
 {
     "english": {
-        "artichoke": "andjinara"
+        "artichoke": [
+            "andjinara"
+        ]
     },
     "french": {
-        "artichaut": "andjinara"
+        "artichaut": [
+            "andjinara"
+        ]
     },
     "hebrew": {
-        "ארטישוק": "andjinara"
+        "ארטישוק": [
+            "andjinara"
+        ]
     },
     "ladino": {
         "andjinara": {
@@ -54,10 +60,16 @@
     },
     "portuguese": {},
     "spanish": {
-        "alcachofa": "andjinara",
-        "alcaucil": "andjinara"
+        "alcachofa": [
+            "andjinara"
+        ],
+        "alcaucil": [
+            "andjinara"
+        ]
     },
     "turkish": {
-        "enginar": "andjinara"
+        "enginar": [
+            "andjinara"
+        ]
     }
 }

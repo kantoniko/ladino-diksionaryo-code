@@ -1,10 +1,14 @@
 {
     "english": {
-        "how": "komo"
+        "how": [
+            "komo"
+        ]
     },
     "french": {},
     "hebrew": {
-        "איך": "komo"
+        "איך": [
+            "komo"
+        ]
     },
     "ladino": {
         "komo": {
@@ -33,9 +37,13 @@
     },
     "portuguese": {},
     "spanish": {
-        "como": "komo"
+        "como": [
+            "komo"
+        ]
     },
     "turkish": {
-        "nasıl": "komo"
+        "nasıl": [
+            "komo"
+        ]
     }
 }
