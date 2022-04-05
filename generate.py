@@ -383,16 +383,18 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
 
         for language in languages:
             word = entry['translations'].get(language)
-            if word is not None and word != '':
-                if word.__class__.__name__ == 'str':
-                    dictionary[language][word] = entry['ladino']
-                    count['dictionary'][language]['words'] += 1
-                elif word.__class__.__name__ == 'list':
-                    for wrd in word:
-                        dictionary[language][wrd] = entry['ladino']
-                    count['dictionary'][language]['words'] += len(word)
-                else:
-                    raise Exception(f"Invalid type {word.__class__.__name__}")
+            if word is None or word == '':
+                continue
+
+            if word.__class__.__name__ == 'str':
+                dictionary[language][word] = entry['ladino']
+                count['dictionary'][language]['words'] += 1
+            elif word.__class__.__name__ == 'list':
+                for wrd in word:
+                    dictionary[language][wrd] = entry['ladino']
+                count['dictionary'][language]['words'] += len(word)
+            else:
+                raise Exception(f"Invalid type {word.__class__.__name__}")
 
 def main():
     start = time.time()
