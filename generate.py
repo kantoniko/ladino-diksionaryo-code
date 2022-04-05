@@ -362,8 +362,8 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
         count['dictionary']['ladino']['words'] += 1
 
         if 'alternative-spelling' in entry:
-            count['dictionary']['ladino']['words'] += len(entry['alternative-spelling'])
             for alt_entry in entry['alternative-spelling']:
+                count['dictionary']['ladino']['words'] += 1
                 _add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), dictionary, entry)
 
         for language in languages:
