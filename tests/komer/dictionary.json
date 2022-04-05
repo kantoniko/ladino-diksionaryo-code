@@ -33,6 +33,9 @@
             ]
         },
         "komer": {
+            "accented": [
+                "komér"
+            ],
             "english": [
                 "eat"
             ],
@@ -72,17 +75,6 @@
             "spanish": [
                 "como"
             ]
-        },
-        "komér": {
-            "accented": "komér",
-            "ladino": "komer",
-            "translations": {
-                "english": "eat",
-                "french": "manger",
-                "portuguese": "",
-                "spanish": "comer",
-                "turkish": "yemek yemek"
-            }
         }
     },
     "portuguese": {},

@@ -335,7 +335,17 @@ def _add_ladino_word(dictionary, entry):
             dictionary['ladino'][ladino_word][language].extend(words)
         else:
             raise Exception("bad")
-
+    if 'accented' in entry:
+        language = 'accented'
+        words = entry['accented']
+        if language not in dictionary['ladino'][ladino_word]:
+            dictionary['ladino'][ladino_word][language] = []
+        if words.__class__.__name__ == 'str':
+            dictionary['ladino'][ladino_word][language].append(words)
+        elif words.__class__.__name__ == 'list':
+            dictionary['ladino'][ladino_word][language].extend(words)
+        else:
+            raise Exception("bad")
 
 def collect_data_from_dictionary(dictionary_source, dictionary, count):
     logging.info("Collect more data")
@@ -350,8 +360,6 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
     for entry in dictionary_source:
         _add_ladino_word(dictionary, entry)
 
-        if 'accented' in entry:
-            dictionary['ladino'][ entry['accented'] ] = entry
 
         count['dictionary']['ladino']['words'] += 1
         if 'alternative-spelling' in entry:

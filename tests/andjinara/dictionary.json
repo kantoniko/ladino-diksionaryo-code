@@ -10,6 +10,9 @@
     },
     "ladino": {
         "andjinara": {
+            "accented": [
+                "andjinára"
+            ],
             "english": [
                 "artichoke"
             ],
@@ -26,28 +29,6 @@
             "turkish": [
                 "enginar"
             ]
-        },
-        "andjinára": {
-            "accented": "andjinára",
-            "alternative-spelling": [
-                {
-                    "accented": "endjinára",
-                    "ladino": "endjinara"
-                }
-            ],
-            "gender": "feminine",
-            "ladino": "andjinara",
-            "number": "singular",
-            "translations": {
-                "english": "artichoke",
-                "french": "artichaut",
-                "hebrew": "ארטישוק",
-                "spanish": [
-                    "alcaucil",
-                    "alcachofa"
-                ],
-                "turkish": "enginar"
-            }
         },
         "endjinara": {
             "accented": "andjinára",

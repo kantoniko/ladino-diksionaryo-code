@@ -15,6 +15,9 @@
     },
     "ladino": {
         "andjinara": {
+            "accented": [
+                "andjinára"
+            ],
             "english": [
                 "artichoke"
             ],
@@ -31,28 +34,6 @@
             "turkish": [
                 "enginar"
             ]
-        },
-        "andjinára": {
-            "accented": "andjinára",
-            "alternative-spelling": [
-                {
-                    "accented": "endjinára",
-                    "ladino": "endjinara"
-                }
-            ],
-            "gender": "feminine",
-            "ladino": "andjinara",
-            "number": "singular",
-            "translations": {
-                "english": "artichoke",
-                "french": "artichaut",
-                "hebrew": "ארטישוק",
-                "spanish": [
-                    "alcaucil",
-                    "alcachofa"
-                ],
-                "turkish": "enginar"
-            }
         },
         "endjinara": {
             "accented": "andjinára",
@@ -123,6 +104,9 @@
             ]
         },
         "komer": {
+            "accented": [
+                "komér"
+            ],
             "english": [
                 "eat"
             ],
@@ -156,27 +140,29 @@
             ]
         },
         "komo": {
-            "accented": "komo",
-            "ladino": "komo",
-            "translations": {
-                "english": "how",
-                "french": "",
-                "hebrew": "איך",
-                "portuguese": "",
-                "spanish": "como",
-                "turkish": "nasıl"
-            }
-        },
-        "komér": {
-            "accented": "komér",
-            "ladino": "komer",
-            "translations": {
-                "english": "eat",
-                "french": "manger",
-                "portuguese": "",
-                "spanish": "comer",
-                "turkish": "yemek yemek"
-            }
+            "accented": [
+                "komo"
+            ],
+            "english": [
+                "eat",
+                "how"
+            ],
+            "french": [
+                ""
+            ],
+            "hebrew": [
+                "איך"
+            ],
+            "portuguese": [
+                ""
+            ],
+            "spanish": [
+                "como",
+                "como"
+            ],
+            "turkish": [
+                "nasıl"
+            ]
         }
     },
     "portuguese": {},

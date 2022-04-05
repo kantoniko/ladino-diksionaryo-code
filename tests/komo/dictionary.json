@@ -8,16 +8,27 @@
     },
     "ladino": {
         "komo": {
-            "accented": "komo",
-            "ladino": "komo",
-            "translations": {
-                "english": "how",
-                "french": "",
-                "hebrew": "איך",
-                "portuguese": "",
-                "spanish": "como",
-                "turkish": "nasıl"
-            }
+            "accented": [
+                "komo"
+            ],
+            "english": [
+                "how"
+            ],
+            "french": [
+                ""
+            ],
+            "hebrew": [
+                "איך"
+            ],
+            "portuguese": [
+                ""
+            ],
+            "spanish": [
+                "como"
+            ],
+            "turkish": [
+                "nasıl"
+            ]
         }
     },
     "portuguese": {},
