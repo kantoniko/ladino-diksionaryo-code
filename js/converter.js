@@ -5,6 +5,15 @@ $(document).ready(function(){
     var course_data = null;
     var loaded = 0;
     var direction = 'ladino-to-english';
+    const languages = ['english', 'french', 'hebrew', 'portuguese', 'spanish', 'turkish'];
+    const language_names = {
+        'english'    : 'Inglez',
+        'french'     : 'Fransez',
+        'hebrew'     : 'Ebreo',
+        'portuguese' : 'Portugez',
+        'spanish'    : 'Kasteyano',
+        'turkish'    : 'Turko'
+    };
 
     // const update_direction_selector = function() {
     //     $('#ladino-to-english').removeClass('is-warning');
@@ -24,15 +33,12 @@ $(document).ready(function(){
         //const cleaned = original.replace(/[^a-zA-Z-]/g, " ");
         const cleaned = original.replace(/[<>,.:!?"'\n*()=\[\]]/g, " ");
         const words = cleaned.split(" ");
-        let languages = Object.keys(dictionary).filter(function(name) { return name != 'ladino'}) ;
-        languages.sort();
-        // console.log(languages);
         var html = `<table class="table">`;
         html += '<thead>';
         html += '<tr>';
-        html += `<th>?</th><th>ladino</th>`;
+        html += `<th>biervo</th><th>Ladino</th>`;
         for (var ix=0; ix < languages.length; ix++) {
-            html += `<th>${languages[ix]}</th>`;
+            html += `<th>${language_names[languages[ix]]}</th>`;
         }
         html += '</tr>';
         html += '</thead>';
