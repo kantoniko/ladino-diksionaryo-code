@@ -15,6 +15,8 @@ import markdown
 from jinja2 import Environment, FileSystemLoader
 from librelingo_yaml_loader.yaml_loader import load_course
 
+lili_repository_url = 'https://github.com/szabgab/LibreLingo-Judeo-Spanish-from-English'
+
 
 languages = ['english', 'french', 'hebrew', 'spanish', 'turkish', 'portuguese']
 
@@ -91,7 +93,7 @@ def export_skill_html_pages(course, html_dir):
                 title=f"Ladino for English speakers",
                 branch=branch,
                 skill=skill,
-                repository_url=get_repository_url(course),
+                repository_url=lili_repository_url,
             )
             match = parse_skill_path(skill.filename)
             module_name = match.group(1)
@@ -180,10 +182,6 @@ def export_words_html_page(course, all_words, language, path, html_file):
     #        dictionary_class = 'warning'
 
 
-def get_repository_url(course):
-    return course.repository_url
-
-
 def export_word_html_pages(course, all_words, language, words_dir):
     logging.info("Export word html page")
     branch = "main"
@@ -196,7 +194,7 @@ def export_word_html_pages(course, all_words, language, words_dir):
             word_translations=language["words"][target_word],
             dictionary_words=language["dictionary"][target_word],
             phrases=language["phrases"][target_word],
-            repository_url=get_repository_url(course),
+            repository_url=lili_repository_url,
             branch=branch,
         )
         with open(os.path.join(words_dir, target_word.lower() + ".html"), "w") as fh:
