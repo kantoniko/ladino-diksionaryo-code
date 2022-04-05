@@ -322,8 +322,7 @@ def load_dictionary(path_to_dictionary):
                     words.append(version)
     return words
 
-def _add_ladino_word(dictionary, entry):
-    ladino_word = entry['ladino']
+def _add_ladino_word(ladino_word, accented_word, dictionary, entry):
     if ladino_word not in dictionary['ladino']:
         dictionary['ladino'][ladino_word] = {}
     for language, words in entry['translations'].items():
@@ -335,9 +334,10 @@ def _add_ladino_word(dictionary, entry):
             dictionary['ladino'][ladino_word][language].extend(words)
         else:
             raise Exception("bad")
-    if 'accented' in entry:
+
+    if accented_word:
         language = 'accented'
-        words = entry['accented']
+        words = accented_word
         if language not in dictionary['ladino'][ladino_word]:
             dictionary['ladino'][ladino_word][language] = []
         if words.__class__.__name__ == 'str':
@@ -358,15 +358,13 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
         dictionary[language] = {}
 
     for entry in dictionary_source:
-        _add_ladino_word(dictionary, entry)
-
-
+        _add_ladino_word(entry['ladino'], entry.get('accented'), dictionary, entry)
         count['dictionary']['ladino']['words'] += 1
+
         if 'alternative-spelling' in entry:
             count['dictionary']['ladino']['words'] += len(entry['alternative-spelling'])
             for alt_entry in entry['alternative-spelling']:
-                dictionary['ladino'][ alt_entry['ladino'] ] = entry
-                dictionary['ladino'][ alt_entry['accented'] ] = entry
+                _add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), dictionary, entry)
 
         for language in languages:
             word = entry['translations'].get(language)
