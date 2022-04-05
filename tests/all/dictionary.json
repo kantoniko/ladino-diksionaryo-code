@@ -2,13 +2,15 @@
     "english": {
         "artichoke": "andjinara",
         "eat": "komen",
-        "eats": "kome"
+        "eats": "kome",
+        "how": "komo"
     },
     "french": {
         "artichaut": "andjinara",
         "manger": "komer"
     },
     "hebrew": {
+        "איך": "komo",
         "ארטישוק": "andjinara"
     },
     "ladino": {
@@ -147,10 +149,15 @@
             }
         },
         "komo": {
+            "accented": "komo",
             "ladino": "komo",
             "translations": {
-                "english": "eat",
-                "spanish": "como"
+                "english": "how",
+                "french": "",
+                "hebrew": "איך",
+                "portuguese": "",
+                "spanish": "como",
+                "turkish": "nasıl"
             }
         },
         "komér": {
@@ -179,6 +186,7 @@
     },
     "turkish": {
         "enginar": "andjinara",
+        "nasıl": "komo",
         "yemek yemek": "komer"
     }
 }

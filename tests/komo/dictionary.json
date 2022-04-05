@@ -1,0 +1,30 @@
+{
+    "english": {
+        "how": "komo"
+    },
+    "french": {},
+    "hebrew": {
+        "איך": "komo"
+    },
+    "ladino": {
+        "komo": {
+            "accented": "komo",
+            "ladino": "komo",
+            "translations": {
+                "english": "how",
+                "french": "",
+                "hebrew": "איך",
+                "portuguese": "",
+                "spanish": "como",
+                "turkish": "nasıl"
+            }
+        }
+    },
+    "portuguese": {},
+    "spanish": {
+        "como": "komo"
+    },
+    "turkish": {
+        "nasıl": "komo"
+    }
+}

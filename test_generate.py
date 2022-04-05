@@ -10,11 +10,11 @@ from generate import load_dictionary, collect_data, export_json
 data_path = 'ladino-diksionaryo-data/words'
 path_to_course = 'LibreLingo-Judeo-Spanish-from-English/course'
 
-@pytest.mark.parametrize("name", ['andjinara', 'komer', 'all'])
+@pytest.mark.parametrize("name", ['andjinara', 'komer', 'komo', 'all'])
 def test_one_file(tmpdir, request, name):
     print(tmpdir)
     if name == 'all':
-        for word in ['andjinara', 'komer']:
+        for word in ['andjinara', 'komer', 'komo']:
             shutil.copy(os.path.join(data_path, f'{word}.yaml'), os.path.join(tmpdir, f'{word}.yaml'))
     else:
         shutil.copy(os.path.join(data_path, f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
@@ -25,6 +25,7 @@ def test_one_file(tmpdir, request, name):
     # export in case we would like to update the files in the tests/ directory
     if request.config.getoption("--save"):
         path = os.path.join('tests', name)
+        os.makedirs(path, exist_ok=True)
     else:
         path = tmpdir
     #export_json(dictionary_source, os.path.join(path, "dictionary_source.json"), pretty=True)
