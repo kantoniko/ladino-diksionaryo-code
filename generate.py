@@ -56,14 +56,9 @@ def render(template_file, **args):
     return html
 
 
-def export_main_html_page(course, count, html_dir):
+def export_main_html_page(count, html_dir):
     logging.info("Export main html page")
-    branch = "main"  # how can we know which is the default branch of a repository?
-    #'count', 'dictionary', 'index', 'license', 'modules', 'repository_url',
-    #'settings', 'source_language', 'special_characters', 'target_language'
-    # course.modules[0].skills[0].phrases
-    # from ptpython.repl import embed
-    # embed(globals(), locals())
+    branch = "main"
 
     html = render(
         "about.html",
@@ -156,7 +151,7 @@ def export_words_html_pages(html_dir, dictionary):
     print(dictionary)
 
 
-def export_words_html_page(course, all_words, language, path, html_file):
+def export_words_html_page(all_words, language, path, html_file):
     logging.info("Export words html page")
     html = render(
         "words.html",
@@ -171,25 +166,15 @@ def export_words_html_page(course, all_words, language, path, html_file):
     with open(html_file, "w") as fh:
         fh.write(html)
 
-    #    word_class = ""
-    #    if len(words[word]) > 1:
-    #        word_class = 'warning'
-    #    dictionary_class = ""
-    #    if len(dictionary[word]) > 1:
-    #        dictionary_class = 'warning'
-    #    if len(words[word]) == 0 and len(dictionary[word]) == 0:
-    #        word_class = 'warning'
-    #        dictionary_class = 'warning'
 
-
-def export_word_html_pages(course, all_words, language, words_dir):
+def export_word_html_pages(all_words, language, words_dir):
     logging.info("Export word html page")
     branch = "main"
 
     for target_word in all_words:
         html = render(
             "word.html",
-            title=f"{target_word} in {course.target_language.name}",
+            title=f"{target_word} in Ladino",
             target_word=target_word,
             word_translations=language["words"][target_word],
             dictionary_words=language["dictionary"][target_word],
@@ -239,17 +224,15 @@ def export_to_html(course, target, source, dictionary, count, html_dir):
     export_json(collect_words(target, "target-to-source"), os.path.join(html_dir, "target-to-source.json"))
     export_json(dictionary, os.path.join(html_dir, "dictionary.json"))
 
-    export_main_html_page(course, count, html_dir)
+    export_main_html_page(count, html_dir)
     export_skill_html_pages(course, html_dir)
     export_words_html_page(
-        course,
         all_target_words,
         target,
         "target",
         os.path.join(html_dir, "target.html"),
     )
     export_words_html_page(
-        course,
         all_source_words,
         source,
         "source",
@@ -257,10 +240,10 @@ def export_to_html(course, target, source, dictionary, count, html_dir):
     )
     export_words_html_pages(html_dir, dictionary)
     export_word_html_pages(
-        course, all_target_words, target, os.path.join(html_dir, "target")
+        all_target_words, target, os.path.join(html_dir, "target")
     )
     export_word_html_pages(
-        course, all_source_words, source, os.path.join(html_dir, "source")
+        all_source_words, source, os.path.join(html_dir, "source")
     )
     with open(os.path.join(html_dir, "course.json"), "w") as fh:
         json.dump(count, fh)
@@ -290,10 +273,6 @@ def collect_data(course, dictionary_source):
     count = {
         "target_phrases": 0,
         "source_phrases": 0,
-        "target_language_name": course.target_language.name,
-        "source_language_name": course.source_language.name,
-        "target_language_code": course.target_language.code,
-        "source_language_code": course.source_language.code,
     }
     target = {
         "words": collections.defaultdict(list),
