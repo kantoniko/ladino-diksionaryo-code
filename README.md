@@ -29,3 +29,24 @@ git python generate.py --course LibreLingo-Judeo-Spanish-from-English/course/ --
 This will generate the static files in the `html` subdrirectory.
 
 Launch a static web server in the `html` subdirectory.
+
+
+## Language considerations
+
+* Verbs in Ladino have a lot of conjugations. (are there are many as in modern Spanish?)
+
+* Several forms of the same verb translate to the same form in English:
+  yo komo     I eat
+  to komes    you eat
+
+* On the other hand they translate to both feminine and masculine in Hebrew
+  yo komo     אני אוכל / אני אוכלת
+
+* "komo" has other meanings as well, for exampl "like"
+
+* Some nouns, such as "meza" = "table" have a single gender but they have both singular (meza) and plural form ("mezas").
+* Some nouns, such as "elevo" =  "student" have both masculine (elevo) and feminine (eleva) form in singular and (elevos, elevas) in plural.
+* Some words, such as "klaro" = "clear" can act noun, adjective, or adverb (at least in modern Spanish).
+  The English translation (clear) can also act as verb which then translates back to aklarar.
+
+
