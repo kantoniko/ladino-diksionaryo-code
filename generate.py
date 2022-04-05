@@ -44,20 +44,11 @@ def parse_skill_path(path):
     return match
 
 
-def skillfile_filter(path):
-    match = parse_skill_path(path)
-    # return match.group(1) + '/' + match.group(2)
-    return match.group(2)
-
-
 def render(template_file, **args):
     root = os.path.dirname(os.path.abspath(__file__))
     templates_dir = os.path.join(root, "templates")
     env = Environment(loader=FileSystemLoader(templates_dir), autoescape=True)
-    env.filters["skillfile"] = skillfile_filter
-    env.filters["yaml2md"] = lambda path: re.sub(r"\.yaml$", ".md", path)
     env.filters["yaml2html"] = lambda path: re.sub(r"\.yaml$", ".html", path)
-    env.filters["md2html"] = markdown.markdown
     template = env.get_template(template_file)
     html = template.render(**args)
     return html
