@@ -15,26 +15,22 @@
     },
     "ladino": {
         "andjinara": {
-            "accented": "andjinára",
-            "alternative-spelling": [
-                {
-                    "accented": "endjinára",
-                    "ladino": "endjinara"
-                }
+            "english": [
+                "artichoke"
             ],
-            "gender": "feminine",
-            "ladino": "andjinara",
-            "number": "singular",
-            "translations": {
-                "english": "artichoke",
-                "french": "artichaut",
-                "hebrew": "ארטישוק",
-                "spanish": [
-                    "alcaucil",
-                    "alcachofa"
-                ],
-                "turkish": "enginar"
-            }
+            "french": [
+                "artichaut"
+            ],
+            "hebrew": [
+                "ארטישוק"
+            ],
+            "spanish": [
+                "alcaucil",
+                "alcachofa"
+            ],
+            "turkish": [
+                "enginar"
+            ]
         },
         "andjinára": {
             "accented": "andjinára",
@@ -103,50 +99,61 @@
             }
         },
         "kome": {
-            "ladino": "kome",
-            "translations": {
-                "english": "eats",
-                "spanish": "come"
-            }
+            "english": [
+                "eats"
+            ],
+            "spanish": [
+                "come"
+            ]
         },
         "komemos": {
-            "ladino": "komemos",
-            "translations": {
-                "english": "eat",
-                "spanish": "comemos"
-            }
+            "english": [
+                "eat"
+            ],
+            "spanish": [
+                "comemos"
+            ]
         },
         "komen": {
-            "ladino": "komen",
-            "translations": {
-                "english": "eat",
-                "spanish": "comen"
-            }
+            "english": [
+                "eat"
+            ],
+            "spanish": [
+                "comen"
+            ]
         },
         "komer": {
-            "accented": "komér",
-            "ladino": "komer",
-            "translations": {
-                "english": "eat",
-                "french": "manger",
-                "portuguese": "",
-                "spanish": "comer",
-                "turkish": "yemek yemek"
-            }
+            "english": [
+                "eat"
+            ],
+            "french": [
+                "manger"
+            ],
+            "portuguese": [
+                ""
+            ],
+            "spanish": [
+                "comer"
+            ],
+            "turkish": [
+                "yemek yemek"
+            ]
         },
         "komes": {
-            "ladino": "komes",
-            "translations": {
-                "english": "eat",
-                "spanish": "comes"
-            }
+            "english": [
+                "eat"
+            ],
+            "spanish": [
+                "comes"
+            ]
         },
         "komesh": {
-            "ladino": "komesh",
-            "translations": {
-                "english": "eat",
-                "spanish": "comeis"
-            }
+            "english": [
+                "eat"
+            ],
+            "spanish": [
+                "comeis"
+            ]
         },
         "komo": {
             "accented": "komo",

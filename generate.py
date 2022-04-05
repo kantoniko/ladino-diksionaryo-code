@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import argparse
 import collections
+import copy
 import glob
 import json
 import logging
@@ -321,6 +322,21 @@ def load_dictionary(path_to_dictionary):
                     words.append(version)
     return words
 
+def _add_ladino_word(dictionary, entry):
+    ladino_word = entry['ladino']
+    if ladino_word not in dictionary['ladino']:
+        dictionary['ladino'][ladino_word] = {}
+    for language, words in entry['translations'].items():
+        if language not in dictionary['ladino'][ladino_word]:
+            dictionary['ladino'][ladino_word][language] = []
+        if words.__class__.__name__ == 'str':
+            dictionary['ladino'][ladino_word][language].append(words)
+        elif words.__class__.__name__ == 'list':
+            dictionary['ladino'][ladino_word][language].extend(words)
+        else:
+            raise Exception("bad")
+
+
 def collect_data_from_dictionary(dictionary_source, dictionary, count):
     logging.info("Collect more data")
     count['dictionary'] = {}
@@ -332,8 +348,8 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
         dictionary[language] = {}
 
     for entry in dictionary_source:
-        dictionary['ladino'][ entry['ladino'] ] = entry
-        # it is both ok if we overwrite the ladino entry or if we create a new entry
+        _add_ladino_word(dictionary, entry)
+
         if 'accented' in entry:
             dictionary['ladino'][ entry['accented'] ] = entry
 
