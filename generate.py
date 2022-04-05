@@ -22,25 +22,19 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--course", help="path to course directory that contains the course.yaml",
+        required=True,
     )
     parser.add_argument(
         "--dictionary", help="path to directory where we find the dictionary files",
+        required=True,
     )
     parser.add_argument(
         "--html", help="path to directory where to generate html files",
+        required=True,
     )
     parser.add_argument("--log", action="store_true", help="Additional logging")
     args = parser.parse_args()
     return args
-
-
-def guess_path_to_course(path_to_course):
-    if not path_to_course:
-        if os.path.exists("course.yaml"):
-            path_to_course = "."
-        elif os.path.exists(os.path.join("course", "course.yaml")):
-            path_to_course = "course"
-    return path_to_course
 
 
 def parse_skill_path(path):
@@ -449,9 +443,8 @@ def main():
         logging.basicConfig(level=logging.INFO)
     logging.info("Start generating Ladino dictionary website")
 
-    path_to_course = guess_path_to_course(args.course)
-    logging.info("Path to course: '%s'", path_to_course)
-    course = load_course(path_to_course)
+    logging.info("Path to course: '%s'", args.course)
+    course = load_course(args.course)
     logging.info("Course loaded")
     dictionary_source = load_dictionary(args.dictionary)
 
