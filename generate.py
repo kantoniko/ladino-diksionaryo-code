@@ -67,7 +67,6 @@ def export_main_html_page(course, count, html_dir):
         "about.html",
         title=f"Ladino dictionary - about",
         page="index",
-        course=course,
         count=count,
         languages=languages,
     )
@@ -78,7 +77,6 @@ def export_main_html_page(course, count, html_dir):
         "converter.html",
         title=f"Ladino dictionary",
         page="converter",
-        course=course,
     )
     with open(os.path.join(html_dir, "index.html"), "w") as fh:
         fh.write(html)
@@ -90,9 +88,8 @@ def export_skill_html_pages(course, html_dir):
         for skill in module.skills:
             html = render(
                 "skill.html",
-                title=f"{course.target_language.name} for {course.source_language.name} speakers",
+                title=f"Ladino for English speakers",
                 branch=branch,
-                course=course,
                 skill=skill,
                 repository_url=get_repository_url(course),
             )
@@ -161,10 +158,9 @@ def export_words_html_page(course, all_words, language, path, html_file):
     logging.info("Export words html page")
     html = render(
         "words.html",
-        title=f"{course.target_language.name} for {course.source_language.name} speakers",
+        title=f"Ladino for English words",
         page=path,
         path=path,
-        course=course,
         all_words=all_words,
         words=language["words"],
         dictionary=language["dictionary"],
@@ -202,7 +198,6 @@ def export_word_html_pages(course, all_words, language, words_dir):
             phrases=language["phrases"][target_word],
             repository_url=get_repository_url(course),
             branch=branch,
-            course=course,
         )
         with open(os.path.join(words_dir, target_word.lower() + ".html"), "w") as fh:
             fh.write(html)
