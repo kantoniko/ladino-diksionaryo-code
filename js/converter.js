@@ -60,11 +60,14 @@ $(document).ready(function(){
                 }
             }
 
+            // original word
             if ((source_language == 'ladino' && dict_word) || english_from_ladino) {
                 html += `<td class="has-background-success-light">${word}</td>`;
             } else {
                 html += `<td class="has-background-danger-light">${word}</td>`;
             }
+
+            // ladino column
             if (dict_word) {
                 // console.log(dict_word);
                 if (source_language == 'ladino') {
@@ -80,6 +83,8 @@ $(document).ready(function(){
                 html += "<td></td>";
             }
                 //html += `<td><a href="target/${word}.html">${word}</a></td>`;
+
+            // all the other languages
             for (var jx=0; jx < languages.length; jx++) {
                 if (dict_word) {
                     if (source_language == languages[jx]) {
