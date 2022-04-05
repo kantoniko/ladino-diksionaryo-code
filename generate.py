@@ -372,13 +372,13 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
                 continue
 
             if translations.__class__.__name__ == 'str':
-                words = [translations]
+                translated_words = [translations]
             elif translations.__class__.__name__ == 'list':
-                words = translations
+                translated_words = translations
             else:
                 raise Exception(f"Invalid type {translations.__class__.__name__}")
 
-            for word in words:
+            for word in translated_words:
                 if word not in dictionary[language]:
                     dictionary[language][word] = []
                 dictionary[language][word].append(entry['ladino'])
