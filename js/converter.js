@@ -88,9 +88,9 @@ $(document).ready(function(){
             for (var jx=0; jx < languages.length; jx++) {
                 if (dict_word) {
                     if (source_language == languages[jx]) {
-                        html += '<td class="has-background-success-light">' + (dict_word['translations'][languages[jx]] || '') + '</td>';
+                        html += '<td class="has-background-success-light">' + (dict_word[languages[jx]] || '') + '</td>';
                     } else {
-                        html += '<td>' + (dict_word['translations'][languages[jx]] || '') + '</td>';
+                        html += '<td>' + (dict_word[languages[jx]] || '') + '</td>';
                     }
                 } else if (languages[jx] == 'english') {
                     if (english_from_ladino) {
