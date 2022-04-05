@@ -10,10 +10,15 @@ from generate import load_dictionary, collect_data, export_json
 data_path = 'ladino-diksionaryo-data/words'
 path_to_course = 'LibreLingo-Judeo-Spanish-from-English/course'
 
-@pytest.mark.parametrize("name", ['andjinara', 'komer'])
+@pytest.mark.parametrize("name", ['andjinara', 'komer', 'all'])
 def test_one_file(tmpdir, request, name):
     print(tmpdir)
-    shutil.copy(os.path.join(data_path, f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
+    if name == 'all':
+        for word in ['andjinara', 'komer']:
+            shutil.copy(os.path.join(data_path, f'{word}.yaml'), os.path.join(tmpdir, f'{word}.yaml'))
+    else:
+        shutil.copy(os.path.join(data_path, f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
+
     course = load_course(path_to_course)
     dictionary_source = load_dictionary(tmpdir)
     target, source, dictionary, count = collect_data(course, dictionary_source)

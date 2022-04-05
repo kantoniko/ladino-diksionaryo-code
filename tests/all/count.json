@@ -1,0 +1,39 @@
+{
+    "dictionary": {
+        "english": {
+            "phrases": 0,
+            "words": 8
+        },
+        "french": {
+            "phrases": 0,
+            "words": 2
+        },
+        "hebrew": {
+            "phrases": 0,
+            "words": 1
+        },
+        "ladino": {
+            "phrases": 0,
+            "words": 9
+        },
+        "portuguese": {
+            "phrases": 0,
+            "words": 0
+        },
+        "spanish": {
+            "phrases": 0,
+            "words": 9
+        },
+        "turkish": {
+            "phrases": 0,
+            "words": 2
+        }
+    },
+    "grammar": {
+        "conjugated-verb": 0,
+        "noun": 0,
+        "verb": 0
+    },
+    "source_phrases": 450,
+    "target_phrases": 453
+}

@@ -1,0 +1,77 @@
+[
+    {
+        "accented": "andjinára",
+        "alternative-spelling": [
+            {
+                "accented": "endjinára",
+                "ladino": "endjinara"
+            }
+        ],
+        "gender": "feminine",
+        "ladino": "andjinara",
+        "number": "singular",
+        "translations": {
+            "english": "artichoke",
+            "french": "artichaut",
+            "hebrew": "ארטישוק",
+            "spanish": [
+                "alcaucil",
+                "alcachofa"
+            ],
+            "turkish": "enginar"
+        }
+    },
+    {
+        "accented": "komér",
+        "ladino": "komer",
+        "translations": {
+            "english": "eat",
+            "french": "manger",
+            "portuguese": "",
+            "spanish": "comer",
+            "turkish": "yemek yemek"
+        }
+    },
+    {
+        "ladino": "komo",
+        "translations": {
+            "english": "eat",
+            "spanish": "como"
+        }
+    },
+    {
+        "ladino": "komes",
+        "translations": {
+            "english": "eat",
+            "spanish": "comes"
+        }
+    },
+    {
+        "ladino": "kome",
+        "translations": {
+            "english": "eats",
+            "spanish": "come"
+        }
+    },
+    {
+        "ladino": "komemos",
+        "translations": {
+            "english": "eat",
+            "spanish": "comemos"
+        }
+    },
+    {
+        "ladino": "komesh",
+        "translations": {
+            "english": "eat",
+            "spanish": "comeis"
+        }
+    },
+    {
+        "ladino": "komen",
+        "translations": {
+            "english": "eat",
+            "spanish": "comen"
+        }
+    }
+]
