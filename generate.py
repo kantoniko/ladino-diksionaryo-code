@@ -311,14 +311,6 @@ def collect_data_from_course(course, target, source, dictionary, count):
 
             _collect_phrases(skill, count, target, source)
 
-def check_word(filename, data):
-    if 'versions' not in data:
-        logging.error('versions are missing from file %s', filename)
-    else:
-        for version in data['versions']:
-            if 'ladino' not in version:
-                logging.error('Ladino is missing from file %s', filename)
-
 
 def load_dictionary(path_to_dictionary):
     logging.info("Path to dictionary: '%s'", path_to_dictionary)
@@ -331,14 +323,22 @@ def load_dictionary(path_to_dictionary):
         logging.info(path)
         with open(path) as fh:
             data = safe_load(fh)
-        check_word(filename, data)
+
+        if 'versions' not in data:
+            exit(f'versions are missing from file {filename}')
+
         for version in data['versions']:
+            if 'ladino' not in version:
+                exit(f'Ladino is missing from file {filename}')
             words.append(version)
+
         if 'conjugations' in data:
             for verb_time, conjugation in data['conjugations'].items():
-                print(verb_time)
-                print(conjugation)
+                #print(verb_time)
+                #print(conjugation)
                 for pronoun, version in conjugation.items():
+                    if 'ladino' not in version:
+                        exit(f'Ladino is missing from file {filename}')
                     words.append(version)
     return words
 
