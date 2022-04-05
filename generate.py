@@ -342,11 +342,6 @@ def load_dictionary(path_to_dictionary):
                     words.append(version)
     return words
 
-class Lili:
-    def __init__(self):
-        self.warnings = []
-        self.errors = []
-
 def collect_data_from_dictionary(dictionary_source, dictionary, count):
     logging.info("Collect more data")
     count['dictionary'] = {}
@@ -397,22 +392,11 @@ def main():
     logging.info("Course loaded")
     dictionary_source = load_dictionary(args.dictionary)
 
-    lili = Lili()
     if args.html:
         target, source, dictionary, count = collect_data(course, dictionary_source)
         logging.info(count)
         export_to_html(course, target, source, dictionary, count, args.html)
 
-    if lili.warnings:
-        print("------------------ WARNINGS ---------------------")
-        for warn in lili.warnings:
-            print(warn)
-
-    if lili.errors:
-        print("------------------ ERRORS ---------------------")
-        for err in lili.errors:
-            print(err)
-        sys.exit(1)
     end = time.time()
     logging.info(f"Elapsed time: {int(end-start)} sec")
 
