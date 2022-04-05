@@ -29,11 +29,6 @@
             "words": 1
         }
     },
-    "grammar": {
-        "conjugated-verb": 0,
-        "noun": 0,
-        "verb": 0
-    },
     "source_phrases": 450,
     "target_phrases": 453
 }

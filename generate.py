@@ -312,10 +312,6 @@ def collect_data_from_course(course, target, source, dictionary, count):
             _collect_phrases(skill, count, target, source)
 
 def check_word(filename, data):
-    if 'grammar' not in data:
-        logging.error("Grammar is missing from file %s", filename)
-        return
-    #if data['grammar'] == 'noun':
     if 'versions' not in data:
         logging.error('versions are missing from file %s', filename)
     else:
@@ -354,11 +350,6 @@ class Lili:
 def collect_data_from_dictionary(dictionary_source, dictionary, count):
     logging.info("Collect more data")
     count['dictionary'] = {}
-    count['grammar'] = {
-        'noun': 0,
-        'verb': 0,
-        'conjugated-verb': 0,
-    }
     for language in ['ladino'] + languages:
         count['dictionary'][language] = {
             'words': 0,
@@ -367,8 +358,6 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
         dictionary[language] = {}
 
     for entry in dictionary_source:
-        #grammar = entry['grammar']
-        #count['grammar'][grammar] += 1
         dictionary['ladino'][ entry['ladino'] ] = entry
         # it is both ok if we overwrite the ladino entry or if we create a new entry
         if 'accented' in entry:
