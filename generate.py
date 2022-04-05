@@ -146,10 +146,6 @@ def export_json(all_words, filename, pretty=False):
         else:
             json.dump(all_words, fh)
 
-def export_words_html_pages(html_dir, dictionary):
-    print("---")
-    print(dictionary)
-
 
 def export_words_html_page(all_words, language, path, html_file):
     logging.info("Export words html page")
@@ -238,7 +234,6 @@ def export_to_html(course, target, source, dictionary, count, html_dir):
         "source",
         os.path.join(html_dir, "source.html"),
     )
-    export_words_html_pages(html_dir, dictionary)
     export_word_html_pages(
         all_target_words, target, os.path.join(html_dir, "target")
     )
