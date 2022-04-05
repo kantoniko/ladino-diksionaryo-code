@@ -135,16 +135,14 @@ def remove_previous_content_of(html_dir):
 def export_to_html(course, target, source, dictionary, count, html_dir):
     logging.info("Export to HTML")
     root = os.path.dirname(os.path.abspath(__file__))
-    if not os.path.exists(html_dir):
-        os.mkdir(html_dir)
+    os.makedirs(html_dir, exist_ok=True)
     remove_previous_content_of(html_dir)
 
     shutil.copytree(os.path.join(root, "js"), os.path.join(html_dir, "js"))
 
     for path in ["target", "source"]:
         words_dir = os.path.join(html_dir, path)
-        if not os.path.exists(words_dir):
-            os.mkdir(words_dir)
+        os.makedirs(words_dir, exist_ok=True)
     all_target_words = (
         set(target["words"].keys())
         .union(set(target["dictionary"].keys()))
