@@ -20,25 +20,6 @@ lili_repository_url = 'https://github.com/szabgab/LibreLingo-Judeo-Spanish-from-
 
 languages = ['english', 'french', 'hebrew', 'spanish', 'turkish', 'portuguese']
 
-def get_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--course", help="path to course directory that contains the course.yaml",
-        required=True,
-    )
-    parser.add_argument(
-        "--dictionary", help="path to directory where we find the dictionary files",
-        required=True,
-    )
-    parser.add_argument(
-        "--html", help="path to directory where to generate html files",
-        required=True,
-    )
-    parser.add_argument("--log", action="store_true", help="Additional logging")
-    args = parser.parse_args()
-    return args
-
-
 def parse_skill_path(path):
     match = re.search(r"^([a-zA-Z0-9-]+)/skills/([a-zA-Z0-9_-]+)\.yaml$", path)
     if not match:
@@ -100,43 +81,6 @@ def export_skill_html_pages(course, html_dir):
             # filename = skillurl_filter(skill.filename)
             with open(os.path.join(dir_path, file_name + ".html"), "w") as fh:
                 fh.write(html)
-
-
-def collect_phrases(course):
-    target_to_source = {}
-    source_to_target = {}
-    for module in course.modules:
-        for skill in module.skills:
-            for phrase in skill.phrases:
-                # print(phrase)
-                for sentence in phrase.in_target_language:
-                    # if sentence in target_to_source:
-                    #    print(f"Same sentence '{sentence}' found twice")
-                    target_to_source[sentence] = phrase.in_source_language
-                for sentence in phrase.in_source_language:
-                    # if sentence in source_to_target:
-                    #    print(f"Same sentence '{sentence}' found twice")
-                    source_to_target[sentence] = phrase.in_target_language
-    return target_to_source, source_to_target
-
-
-def collect_words(language, direction):
-    all_words = {}
-    for word, translations in language["words"].items():
-        if word not in all_words:
-            all_words[word] = []
-        for translation in translations:
-            if direction == "source-to-target":
-                all_words[word].extend(translation["word"].in_target_language)
-            else:
-                all_words[word].extend(translation["word"].in_source_language)
-
-    for word, translations in language["dictionary"].items():
-        if word not in all_words:
-            all_words[word] = []
-        for translation in translations:
-            all_words[word].extend(translation["word"])
-    return all_words
 
 
 def export_json(all_words, filename, pretty=False):
@@ -246,6 +190,43 @@ def export_to_html(course, target, source, dictionary, count, html_dir):
 
 def clean(text):
     return re.sub(r'[{}.!?¡¿",/]', "", text)
+
+def collect_phrases(course):
+    target_to_source = {}
+    source_to_target = {}
+    for module in course.modules:
+        for skill in module.skills:
+            for phrase in skill.phrases:
+                # print(phrase)
+                for sentence in phrase.in_target_language:
+                    # if sentence in target_to_source:
+                    #    print(f"Same sentence '{sentence}' found twice")
+                    target_to_source[sentence] = phrase.in_source_language
+                for sentence in phrase.in_source_language:
+                    # if sentence in source_to_target:
+                    #    print(f"Same sentence '{sentence}' found twice")
+                    source_to_target[sentence] = phrase.in_target_language
+    return target_to_source, source_to_target
+
+
+def collect_words(language, direction):
+    all_words = {}
+    for word, translations in language["words"].items():
+        if word not in all_words:
+            all_words[word] = []
+        for translation in translations:
+            if direction == "source-to-target":
+                all_words[word].extend(translation["word"].in_target_language)
+            else:
+                all_words[word].extend(translation["word"].in_source_language)
+
+    for word, translations in language["dictionary"].items():
+        if word not in all_words:
+            all_words[word] = []
+        for translation in translations:
+            all_words[word].extend(translation["word"])
+    return all_words
+
 
 
 def _collect_phrases(skill, count, target, source):
@@ -379,6 +360,26 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
                 count['dictionary'][language]['words'] += len(word)
             else:
                 raise Exception(f"Invalid type {word.__class__.__name__}")
+
+def get_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--course", help="path to course directory that contains the course.yaml",
+        required=True,
+    )
+    parser.add_argument(
+        "--dictionary", help="path to directory where we find the dictionary files",
+        required=True,
+    )
+    parser.add_argument(
+        "--html", help="path to directory where to generate html files",
+        required=True,
+    )
+    parser.add_argument("--log", action="store_true", help="Additional logging")
+    args = parser.parse_args()
+    return args
+
+
 
 def main():
     start = time.time()
