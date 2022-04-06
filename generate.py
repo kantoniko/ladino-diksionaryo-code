@@ -377,6 +377,24 @@ def _add_ladino_word(ladino_word, accented_word, dictionary, pages, entry):
         else:
             raise Exception("bad")
 
+def _add_translated_words(language, dictionary, entry, count):
+    translations = entry['translations'].get(language)
+    if translations is None or translations == '':
+        return
+
+    if translations.__class__.__name__ == 'str':
+        translated_words = [translations]
+    elif translations.__class__.__name__ == 'list':
+        translated_words = translations
+    else:
+        raise Exception(f"Invalid type {translations.__class__.__name__}")
+
+    for word in translated_words:
+        if word not in dictionary[language]:
+            dictionary[language][word] = []
+        dictionary[language][word].append(entry['ladino'])
+        count['dictionary'][language]['words'] += 1
+
 def collect_data_from_dictionary(dictionary_source, dictionary, count):
     logging.info("Collect more data")
     count['dictionary'] = {}
@@ -399,22 +417,8 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
                 _add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), dictionary, pages, entry)
 
         for language in languages:
-            translations = entry['translations'].get(language)
-            if translations is None or translations == '':
-                continue
+            _add_translated_words(language, dictionary, entry, count)
 
-            if translations.__class__.__name__ == 'str':
-                translated_words = [translations]
-            elif translations.__class__.__name__ == 'list':
-                translated_words = translations
-            else:
-                raise Exception(f"Invalid type {translations.__class__.__name__}")
-
-            for word in translated_words:
-                if word not in dictionary[language]:
-                    dictionary[language][word] = []
-                dictionary[language][word].append(entry['ladino'])
-                count['dictionary'][language]['words'] += 1
     return pages
 
 def get_args():
