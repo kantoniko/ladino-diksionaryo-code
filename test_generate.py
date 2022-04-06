@@ -28,13 +28,9 @@ def test_one_file(tmpdir, request, name):
         os.makedirs(path, exist_ok=True)
     else:
         path = tmpdir
-    #export_json(dictionary_source, os.path.join(path, "dictionary_source.json"), pretty=True)
     export_json(dictionary, os.path.join(path, "dictionary.json"), pretty=True)
     export_json(count, os.path.join(path, "count.json"), pretty=True)
 
-    #with open (os.path.join('tests', name, 'dictionary_source.json')) as fh:
-    #    expected_source = json.load(fh)
-    #assert dictionary_source == expected_source
     with open (os.path.join('tests', name, 'dictionary.json')) as fh:
         expected_dictionary = json.load(fh)
     assert dictionary == expected_dictionary
