@@ -1,0 +1,23 @@
+{% include 'incl/header.html' %}
+
+    <h1 class="title">{{ title }}</h1>
+    <div class="content">
+
+    <table class="table is-striped is-hoverable">
+      <thead>
+        <tr><th>Language</th></tr>
+      </thead>
+      <tbody>
+          <tr>
+          <td><a href="ladino/">ladino</a></td>
+          </tr>
+        {% for language in languages %}
+          <tr>
+          <td><a href="{{ language }}/">{{ language }}</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+
+{% include 'incl/footer.html' %}

@@ -69,6 +69,14 @@ def export_dictionary_pages(pages, html_dir):
         with open(os.path.join(words_dir, language, 'index.html'), "w") as fh:
             fh.write(html)
 
+    html = render(
+        "dictionary_languages.html",
+        title=f"Languages",
+        languages=sorted(languages),
+    )
+    with open(os.path.join(words_dir, 'index.html'), "w") as fh:
+        fh.write(html)
+
 
 def export_about_html_page(count, html_dir):
     logging.info("Export about html page")
