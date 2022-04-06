@@ -43,6 +43,8 @@ def export_dictionary_pages(pages, html_dir):
     os.makedirs(words_dir, exist_ok=True)
     branch = "main"
     for language, words in pages.items():
+        if not words:
+            continue
         language_dir = os.path.join(words_dir, language)
         logging.info(f"Export dictionary pages of {language} to {language_dir}")
         os.makedirs(language_dir, exist_ok=True)
