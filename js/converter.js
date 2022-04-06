@@ -29,6 +29,16 @@ $(document).ready(function(){
     function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
     }
+    function word_links(words, language) {
+        words = words.filter(onlyUnique);
+        // return words;
+        let links = Array();
+        for (let tx=0; tx < words.length; tx++) {
+            links.push(`<a href="/words/${language}/${words[tx]}.html">${words[tx]}</a>`);
+        }
+        return links;
+    }
+
     var translate = function() {
         const original = $("#input-text").val();
         //const cleaned = original.replace(/["';,!?.:]/g, " ");
@@ -62,7 +72,9 @@ $(document).ready(function(){
                     ladino_from_source_language = dictionary[source_language][word];
                     console.log('ladino', ladino_from_source_language);
                     if (ladino_from_source_language) {
-                        dictionary_word = dictionary['ladino'][ladino_from_source_language];
+                        // TODO: shall we include the dictionary entry of all the words?
+                        // TODO: should be select a different one not necessarily the first one?
+                        dictionary_word = dictionary['ladino'][ladino_from_source_language[0]];
                         break;
                     }
                 }
@@ -100,11 +112,7 @@ $(document).ready(function(){
                     let translated_words = dictionary_word[languages[jx]];
                     console.log('translated_words', translated_words);
                     if (translated_words) {
-                        translated_words = translated_words.filter(onlyUnique);
-                        links = translated_words;
-                        //for (let tx=0; tx < translated_words.length; tx++) {
-                        //    links.push(`<a href="/words/${languages[jx]}/${translated_words[tx]}.html">${translated_words[tx]}</a>`);
-                        //}
+                        links = word_links(translated_words, languages[jx]);
                     }
                     const subhtml = links.join(", ");
                     if (source_language == languages[jx]) {
