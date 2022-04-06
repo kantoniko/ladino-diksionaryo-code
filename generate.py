@@ -141,50 +141,52 @@ def export_to_html(course, target, source, dictionary, count, html_dir):
 
     shutil.copytree(os.path.join(root, "js"), os.path.join(html_dir, "js"))
 
-    for path in ["target", "source"]:
-        words_dir = os.path.join(html_dir, path)
-        os.makedirs(words_dir, exist_ok=True)
-    all_target_words = (
-        set(target["words"].keys())
-        .union(set(target["dictionary"].keys()))
-        .union(set(target["phrases"].keys()))
-    )
-    count["target_words"] = len(all_target_words)
 
-    all_source_words = (
-        set(source["words"].keys())
-        .union(set(source["dictionary"].keys()))
-        .union(set(source["phrases"].keys()))
-    )
-    count["source_words"] = len(all_source_words)
-
-    logging.info("Export JSON files")
-    export_json(collect_words(source, "source-to-target"), os.path.join(html_dir, "source-to-target.json"))
-    export_json(collect_words(target, "target-to-source"), os.path.join(html_dir, "target-to-source.json"))
     export_json(dictionary, os.path.join(html_dir, "dictionary.json"))
-
     export_main_html_page(count, html_dir)
-    export_skill_html_pages(course, html_dir)
-    export_words_html_page(
-        all_target_words,
-        target,
-        "target",
-        os.path.join(html_dir, "target.html"),
-    )
-    export_words_html_page(
-        all_source_words,
-        source,
-        "source",
-        os.path.join(html_dir, "source.html"),
-    )
-    export_word_html_pages(
-        all_target_words, target, os.path.join(html_dir, "target")
-    )
-    export_word_html_pages(
-        all_source_words, source, os.path.join(html_dir, "source")
-    )
-    with open(os.path.join(html_dir, "course.json"), "w") as fh:
-        json.dump(count, fh)
+
+    if course:
+        all_target_words = (
+            set(target["words"].keys())
+            .union(set(target["dictionary"].keys()))
+            .union(set(target["phrases"].keys()))
+        )
+        count["target_words"] = len(all_target_words)
+
+        all_source_words = (
+            set(source["words"].keys())
+            .union(set(source["dictionary"].keys()))
+            .union(set(source["phrases"].keys()))
+        )
+        count["source_words"] = len(all_source_words)
+
+        for path in ["target", "source"]:
+            words_dir = os.path.join(html_dir, path)
+            os.makedirs(words_dir, exist_ok=True)
+        export_json(collect_words(source, "source-to-target"), os.path.join(html_dir, "source-to-target.json"))
+        export_json(collect_words(target, "target-to-source"), os.path.join(html_dir, "target-to-source.json"))
+
+        export_skill_html_pages(course, html_dir)
+        export_words_html_page(
+            all_target_words,
+            target,
+            "target",
+            os.path.join(html_dir, "target.html"),
+        )
+        export_words_html_page(
+            all_source_words,
+            source,
+            "source",
+            os.path.join(html_dir, "source.html"),
+        )
+        export_word_html_pages(
+            all_target_words, target, os.path.join(html_dir, "target")
+        )
+        export_word_html_pages(
+            all_source_words, source, os.path.join(html_dir, "source")
+        )
+        with open(os.path.join(html_dir, "course.json"), "w") as fh:
+            json.dump(count, fh)
 
 
 def clean(text):
@@ -262,7 +264,8 @@ def collect_data(course, dictionary_source):
     dictionary = {}
 
     collect_data_from_dictionary(dictionary_source, dictionary, count)
-    collect_data_from_course(course, target, source, dictionary, count)
+    if course:
+        collect_data_from_course(course, target, source, dictionary, count)
 
     return target, source, dictionary, count
 
@@ -388,7 +391,6 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--course", help="path to course directory that contains the course.yaml",
-        required=True,
     )
     parser.add_argument(
         "--dictionary", help="path to directory where we find the dictionary files",
@@ -412,7 +414,7 @@ def main():
     logging.info("Start generating Ladino dictionary website")
 
     logging.info("Path to course: '%s'", args.course)
-    course = load_course(args.course)
+    course = load_course(args.course) if args.course else None
     logging.info("Course loaded")
     dictionary_source = load_dictionary(args.dictionary)
 
