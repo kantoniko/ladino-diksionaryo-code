@@ -31,9 +31,6 @@ $(document).ready(function(){
     }
     function word_links(words, language) {
         words = words.filter(onlyUnique);
-        if (language != 'ladino') {
-            return words;
-        }
         let links = Array();
         for (let tx=0; tx < words.length; tx++) {
             links.push(`<a href="/words/${language}/${words[tx]}.html">${words[tx]}</a>`);
@@ -94,7 +91,6 @@ $(document).ready(function(){
             // ladino column
             if (dictionary_word) {
                 if (source_language == 'ladino') {
-                    //html += `<td>${word}</td>`;
                     html += `<td><a href="/words/ladino/${word}.html">${word}</a></td>`;
                 } else {
                     let links = word_links(ladino_from_source_language, "ladino");
@@ -107,7 +103,6 @@ $(document).ready(function(){
             } else {
                 html += "<td></td>";
             }
-                //html += `<td><a href="target/${word}.html">${word}</a></td>`;
 
             // all the other languages
             for (var jx=0; jx < languages.length; jx++) {

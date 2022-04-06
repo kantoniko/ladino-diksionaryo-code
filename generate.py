@@ -377,7 +377,7 @@ def _add_ladino_word(ladino_word, accented_word, dictionary, pages, entry):
         else:
             raise Exception("bad")
 
-def _add_translated_words(language, dictionary, entry, count):
+def _add_translated_words(language, dictionary, pages, entry, count):
     translations = entry['translations'].get(language)
     if translations is None or translations == '':
         return
@@ -394,6 +394,11 @@ def _add_translated_words(language, dictionary, entry, count):
             dictionary[language][word] = []
         dictionary[language][word].append(entry['ladino'])
         count['dictionary'][language]['words'] += 1
+
+        if word not in pages[language]:
+            pages[language][word] = []
+        pages[language][word].append(entry)
+
 
 def collect_data_from_dictionary(dictionary_source, dictionary, count):
     logging.info("Collect more data")
@@ -417,7 +422,7 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
                 _add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), dictionary, pages, entry)
 
         for language in languages:
-            _add_translated_words(language, dictionary, entry, count)
+            _add_translated_words(language, dictionary, pages, entry, count)
 
     return pages
 
