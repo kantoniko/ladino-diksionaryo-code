@@ -1,0 +1,24 @@
+{% include 'incl/header.html' %}
+
+    <h1 class="title">{{ title }}</h1>
+    <div class="content">
+
+    <table class="table is-striped is-hoverable">
+      <thead>
+        <tr><th>Word</th><!--<th>Dictionary #</th><th>Phrases #</th>--></tr>
+      </thead>
+      <tbody>
+        {% for word in words %}
+          <tr>
+          <td><a href="{{ word }}.html">{{ word }}</a></td>
+<!--
+          <td></td>
+          <td></td>
+-->
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+
+{% include 'incl/footer.html' %}
