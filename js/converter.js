@@ -31,7 +31,7 @@ $(document).ready(function(){
     }
     function word_links(words, language) {
         words = words.filter(onlyUnique);
-        // return words;
+        return words;
         let links = Array();
         for (let tx=0; tx < words.length; tx++) {
             links.push(`<a href="/words/${language}/${words[tx]}.html">${words[tx]}</a>`);
@@ -92,7 +92,8 @@ $(document).ready(function(){
             // ladino column
             if (dictionary_word) {
                 if (source_language == 'ladino') {
-                    html += `<td><a href="/words/ladino/${word}.html">${word}</a></td>`;
+                    html += `<td>${word}</td>`;
+                    //html += `<td><a href="/words/ladino/${word}.html">${word}</a></td>`;
                 } else {
                     let links = word_links(ladino_from_source_language, "ladino");
                     html += `<td>${links}</td>`;
