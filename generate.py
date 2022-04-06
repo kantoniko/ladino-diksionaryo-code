@@ -62,9 +62,8 @@ def export_dictionary_pages(pages, html_dir):
                 fh.write(html)
 
 
-def export_main_html_page(count, html_dir):
-    logging.info("Export main html page")
-    branch = "main"
+def export_about_html_page(count, html_dir):
+    logging.info("Export about html page")
 
     html = render(
         "about.html",
@@ -75,6 +74,10 @@ def export_main_html_page(count, html_dir):
     )
     with open(os.path.join(html_dir, "about.html"), "w") as fh:
         fh.write(html)
+
+
+def export_main_html_page(html_dir):
+    logging.info("Export main html page")
 
     html = render(
         "converter.html",
@@ -165,7 +168,7 @@ def export_to_html(course, target, source, dictionary, count, pages, html_dir, p
 
 
     export_json(dictionary, os.path.join(html_dir, "dictionary.json"), pretty=pretty)
-    export_main_html_page(count, html_dir)
+    export_main_html_page(html_dir)
     export_dictionary_pages(pages, html_dir)
 
     if course:
@@ -208,6 +211,7 @@ def export_to_html(course, target, source, dictionary, count, pages, html_dir, p
         export_word_html_pages(
             all_source_words, source, os.path.join(html_dir, "source")
         )
+    export_about_html_page(count, html_dir)
     export_json(count, os.path.join(html_dir, "count.json"), pretty=pretty)
 
 
