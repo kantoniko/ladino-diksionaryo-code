@@ -92,9 +92,10 @@ $(document).ready(function(){
             // ladino column
             if (dictionary_word) {
                 if (source_language == 'ladino') {
-                    html += `<td>${word}</td>`;
+                    html += `<td><a href="/words/ladino/${word}.html">${word}</a></td>`;
                 } else {
-                    html += `<td>${ladino_from_source_language}</td>`;
+                    let links = word_links(ladino_from_source_language, "ladino");
+                    html += `<td>${links}</td>`;
                 }
             } else if (english_from_ladino) {
                 html += `<td><a href="target/${word}.html">${word}</a></td>`;
