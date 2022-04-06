@@ -2,7 +2,6 @@ $(document).ready(function(){
     var english_to_ladino = null;
     var ladino_to_english = null;
     var dictionary = null;
-    var course_data = null;
     var loaded = 0;
     var direction = 'ladino-to-english';
     const languages = ['english', 'french', 'hebrew', 'portuguese', 'spanish', 'turkish'];
@@ -22,11 +21,14 @@ $(document).ready(function(){
     // };
 
     var try_translate = function() {
-        if (loaded == 4) {
+        if (loaded == 3) {
             // update_direction_selector();
             translate();
         }
     };
+    function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+    }
     var translate = function() {
         const original = $("#input-text").val();
         //const cleaned = original.replace(/["';,!?.:]/g, " ");
@@ -48,34 +50,35 @@ $(document).ready(function(){
                 continue;
             }
             let word = words[ix].toLowerCase()
-            const english_from_ladino = ladino_to_english[word];
-            const ladino_from_english = english_to_ladino[word];
+            console.log(word);
+            const english_from_ladino = ladino_to_english ? ladino_to_english[word] : null;
+            const ladino_from_english = english_to_ladino ? english_to_ladino[word] : null;
 
-            html += '<tr>';
             let source_language = 'ladino';
-            let dict_word = dictionary['ladino'][word];
-            if (! dict_word) {
+            let dictionary_word = dictionary['ladino'][word];
+            if (! dictionary_word) {
                 for (var jx=0; jx < languages.length; jx++) {
                     source_language = languages[jx];
                     ladino_from_source_language = dictionary[source_language][word];
-                    //console.log(ladino_from_source_language);
+                    console.log('ladino', ladino_from_source_language);
                     if (ladino_from_source_language) {
-                        dict_word = dictionary['ladino'][ladino_from_source_language];
+                        dictionary_word = dictionary['ladino'][ladino_from_source_language];
                         break;
                     }
                 }
             }
+            console.log('dictionary word', dictionary_word)
 
+            html += '<tr>';
             // original word
-            if ((source_language == 'ladino' && dict_word) || english_from_ladino) {
+            if ((source_language == 'ladino' && dictionary_word) || english_from_ladino) {
                 html += `<td class="has-background-success-light">${word}</td>`;
             } else {
                 html += `<td class="has-background-danger-light">${word}</td>`;
             }
 
             // ladino column
-            if (dict_word) {
-                // console.log(dict_word);
+            if (dictionary_word) {
                 if (source_language == 'ladino') {
                     html += `<td>${word}</td>`;
                 } else {
@@ -92,11 +95,22 @@ $(document).ready(function(){
 
             // all the other languages
             for (var jx=0; jx < languages.length; jx++) {
-                if (dict_word) {
+                if (dictionary_word) {
+                    let links = Array();
+                    let translated_words = dictionary_word[languages[jx]];
+                    console.log('translated_words', translated_words);
+                    if (translated_words) {
+                        translated_words = translated_words.filter(onlyUnique);
+                        links = translated_words;
+                        //for (let tx=0; tx < translated_words.length; tx++) {
+                        //    links.push(`<a href="/words/${languages[jx]}/${translated_words[tx]}.html">${translated_words[tx]}</a>`);
+                        //}
+                    }
+                    const subhtml = links.join(", ");
                     if (source_language == languages[jx]) {
-                        html += '<td class="has-background-success-light">' + (dict_word[languages[jx]] || '') + '</td>';
+                        html += `<td class="has-background-success-light">${subhtml}</td>`;
                     } else {
-                        html += '<td>' + (dict_word[languages[jx]] || '') + '</td>';
+                        html += `<td>${subhtml}</td>`;
                     }
                 } else if (languages[jx] == 'english') {
                     if (english_from_ladino) {
@@ -119,14 +133,6 @@ $(document).ready(function(){
 
         $("#output").html(html);
     };
-    $.getJSON("course.json", function(data){
-        course_data = data;
-        loaded++;
-        try_translate();
-    }).fail(function(){
-        console.log("An error has occurred.");
-    });
-
     $.getJSON("dictionary.json", function(data){
         dictionary = data;
         loaded++;
@@ -141,7 +147,7 @@ $(document).ready(function(){
         loaded++;
         try_translate();
     }).fail(function(){
-        console.log("An error has occurred.");
+        console.log("An error has occurred while loading source-to-target.json.");
     });
 
     $.getJSON("target-to-source.json", function(data){
@@ -149,7 +155,7 @@ $(document).ready(function(){
         loaded++;
         try_translate();
     }).fail(function(){
-        console.log("An error has occurred.");
+        console.log("An error has occurred while loading target-to-source.json.");
     });
 
     $('#input-text').bind('input propertychange', translate);
