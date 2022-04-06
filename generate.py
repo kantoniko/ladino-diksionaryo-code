@@ -133,7 +133,7 @@ def remove_previous_content_of(html_dir):
         else:
             os.remove(thing)
 
-def export_to_html(course, target, source, dictionary, count, html_dir):
+def export_to_html(course, target, source, dictionary, count, html_dir, pretty=False):
     logging.info("Export to HTML")
     root = os.path.dirname(os.path.abspath(__file__))
     os.makedirs(html_dir, exist_ok=True)
@@ -142,7 +142,7 @@ def export_to_html(course, target, source, dictionary, count, html_dir):
     shutil.copytree(os.path.join(root, "js"), os.path.join(html_dir, "js"))
 
 
-    export_json(dictionary, os.path.join(html_dir, "dictionary.json"))
+    export_json(dictionary, os.path.join(html_dir, "dictionary.json"), pretty=pretty)
     export_main_html_page(count, html_dir)
 
     if course:
@@ -163,8 +163,8 @@ def export_to_html(course, target, source, dictionary, count, html_dir):
         for path in ["target", "source"]:
             words_dir = os.path.join(html_dir, path)
             os.makedirs(words_dir, exist_ok=True)
-        export_json(collect_words(source, "source-to-target"), os.path.join(html_dir, "source-to-target.json"))
-        export_json(collect_words(target, "target-to-source"), os.path.join(html_dir, "target-to-source.json"))
+        export_json(collect_words(source, "source-to-target"), os.path.join(html_dir, "source-to-target.json"), pretty=pretty)
+        export_json(collect_words(target, "target-to-source"), os.path.join(html_dir, "target-to-source.json"), pretty=pretty)
 
         export_skill_html_pages(course, html_dir)
         export_words_html_page(
@@ -185,8 +185,7 @@ def export_to_html(course, target, source, dictionary, count, html_dir):
         export_word_html_pages(
             all_source_words, source, os.path.join(html_dir, "source")
         )
-        with open(os.path.join(html_dir, "course.json"), "w") as fh:
-            json.dump(count, fh)
+    export_json(count, os.path.join(html_dir, "count.json"), pretty=pretty)
 
 
 def clean(text):
