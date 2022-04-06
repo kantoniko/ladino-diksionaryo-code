@@ -355,6 +355,7 @@ def load_dictionary(path_to_dictionary):
         for version in data['versions']:
             if 'ladino' not in version:
                 exit(f'Ladino is missing from file {filename}')
+            version['source'] = filename
             words.append(version)
 
         if 'conjugations' in data:
@@ -364,6 +365,7 @@ def load_dictionary(path_to_dictionary):
                 for pronoun, version in conjugation.items():
                     if 'ladino' not in version:
                         exit(f'Ladino is missing from file {filename}')
+                    version['source'] = filename
                     words.append(version)
     return words
 

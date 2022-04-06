@@ -7,9 +7,13 @@
   <h2 class="subtitle">Word</h2>
   {% for entry in data %}
      {{ entry }}
+     <div><a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/words/{{ entry.source }}">source</a></div>
      <hr>
   {% endfor %}
   <h2 class="subtitle">Phrases</h2>
+
+  <hr>
+  <a href=".">all the words</a>
 </div>
 
 {% include 'incl/footer.html' %}
