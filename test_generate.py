@@ -25,7 +25,8 @@ def test_one_file(tmpdir, request, name):
     dictionary_source = load_dictionary(tmpdir)
     target, source, dictionary, count, pages = collect_data(course, dictionary_source)
     # export in case we would like to update the files in the tests/ directory
-    if request.config.getoption("--save"):
+    save = request.config.getoption("--save")
+    if save:
         html_dir = os.path.join('tests', name)
         os.makedirs(html_dir, exist_ok=True)
     else:
@@ -41,9 +42,10 @@ def test_one_file(tmpdir, request, name):
     else:
         os.unlink(os.path.join(tmpdir, f'{name}.yaml'))
 
-    cmd = f"diff -r {os.path.join('tests', name)} {tmpdir}"
-    print(cmd)
-    assert os.system(cmd) == 0
+    if not save:
+        cmd = f"diff -r {os.path.join('tests', name)} {tmpdir}"
+        print(cmd)
+        assert os.system(cmd) == 0
     #with open (os.path.join('tests', name, 'dictionary.json')) as fh:
     #    expected_dictionary = json.load(fh)
     #assert dictionary == expected_dictionary
