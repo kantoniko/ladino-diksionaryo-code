@@ -6,9 +6,9 @@
        the Excel file from the <a href="https://ladinokomunita.groups.io/">Ladinokomunita</a>. (currently we are in the process of
        integrating the data from that file into the site.)
        In addition the site includes lots of words and expressions from the course created for <a href="https://librelingo.app/">LibreLingo</a>.
-       The source code of the LibreLingo data can be found in <div><a href="https://github.com/szabgab/LibreLingo-Judeo-Spanish-from-English">this repository</a>.
-       The files from the Ladinokomunita dictionary can be found in <a href="https://github.com/szabgab/ladino-diksionaryo-data">this repository</a>.
-       This site was created and is being maintained by Gabor Szabo.
+       The source code of the <a href="https://github.com/szabgab/LibreLingo-Judeo-Spanish-from-English">LibreLingo data</a>
+       and the files from the <a href="https://github.com/szabgab/ladino-diksionaryo-data">Ladinokomunita dictionary</a> can be found in Git repositories.
+       This site was created and is being maintained by <a href="https://szabgab.com/">Gabor Szabo</a>.
     </div>
     <div class="content">
        The license of the content is <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0: Attribution-ShareAlike 4.0 International</a>
@@ -37,9 +37,9 @@
       <table class="table">
         <thead>
           <tr><th></th>
-            <th>ladino</th>
+            <th><a href="/words/ladino/">ladino</a></th>
             {% for language in languages %}
-                 <th>{{ language }}</th>
+                 <th><a href="/words/{{ language }}/">{{ language }}</a></th>
             {% endfor %}
           </tr>
         </thead>
@@ -66,7 +66,7 @@
             We don't try to understand the context or the full expression. It is still your job to decide which meaning of a word is relevant in the specific context.
         </li>
         <li>
-          You can see the list of all the words we currently have in <a href="target.html">Ladino</a> and in <a href="source.html">English</a>.
+          You can see the list of all the words from the LibreLingo course in the <a href="target.html">Ladino</a> and in the <a href="source.html">English</a> lists.
         </li>
       </ul>
     </div>
