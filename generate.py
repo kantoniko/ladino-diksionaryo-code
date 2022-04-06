@@ -123,7 +123,6 @@ def export_words_html_page(all_words, language, path, html_file):
         page=path,
         path=path,
         all_words=all_words,
-        words=language["words"],
         dictionary=language["dictionary"],
         phrases=language["phrases"],
     )
