@@ -37,6 +37,28 @@ def render(template_file, **args):
     html = template.render(**args)
     return html
 
+def export_dictionary_pages(pages, html_dir):
+    logging.info("Export dictionary pages")
+    words_dir = os.path.join(html_dir, 'words')
+    os.makedirs(words_dir, exist_ok=True)
+    branch = "main"
+    for language, words in pages.items():
+        language_dir = os.path.join(words_dir, language)
+        logging.info(f"Export dictionary pages of {language} to {language_dir}")
+        os.makedirs(language_dir, exist_ok=True)
+        for word, data in words.items():
+            filename = f'{word}.html'
+            logging.info(f"Export to {filename}")
+            #logging.info(f"Export to {data}")
+            html = render(
+                "dictionary_word.html",
+                data=data,
+                title=f"{word}",
+                word=word,
+            )
+            with open(os.path.join(words_dir, language, filename), "w") as fh:
+                fh.write(html)
+
 
 def export_main_html_page(count, html_dir):
     logging.info("Export main html page")
@@ -77,8 +99,7 @@ def export_skill_html_pages(course, html_dir):
             file_name = match.group(2)
             dir_path = os.path.join(html_dir, "course", module_name, "skills")
             # print(dir_path)
-            if not os.path.exists(dir_path):
-                os.makedirs(dir_path)
+            os.makedirs(dir_path, exist_ok=True)
             # filename = skillurl_filter(skill.filename)
             with open(os.path.join(dir_path, file_name + ".html"), "w") as fh:
                 fh.write(html)
@@ -133,7 +154,7 @@ def remove_previous_content_of(html_dir):
         else:
             os.remove(thing)
 
-def export_to_html(course, target, source, dictionary, count, html_dir, pretty=False):
+def export_to_html(course, target, source, dictionary, count, pages, html_dir, pretty=False):
     logging.info("Export to HTML")
     root = os.path.dirname(os.path.abspath(__file__))
     os.makedirs(html_dir, exist_ok=True)
@@ -144,6 +165,7 @@ def export_to_html(course, target, source, dictionary, count, html_dir, pretty=F
 
     export_json(dictionary, os.path.join(html_dir, "dictionary.json"), pretty=pretty)
     export_main_html_page(count, html_dir)
+    export_dictionary_pages(pages, html_dir)
 
     if course:
         all_target_words = (
@@ -262,11 +284,11 @@ def collect_data(course, dictionary_source):
     }
     dictionary = {}
 
-    collect_data_from_dictionary(dictionary_source, dictionary, count)
+    pages = collect_data_from_dictionary(dictionary_source, dictionary, count)
     if course:
         collect_data_from_course(course, target, source, dictionary, count)
 
-    return target, source, dictionary, count
+    return target, source, dictionary, count, pages
 
 def collect_data_from_course(course, target, source, dictionary, count):
     for module in course.modules:
@@ -295,7 +317,7 @@ def collect_data_from_course(course, target, source, dictionary, count):
 
 
 def load_dictionary(path_to_dictionary):
-    logging.info("Path to dictionary: '%s'", path_to_dictionary)
+    logging.info(f"Path to dictionary: '{path_to_dictionary}'")
     if path_to_dictionary is None:
         return
     files = os.listdir(path_to_dictionary)
@@ -324,7 +346,8 @@ def load_dictionary(path_to_dictionary):
                     words.append(version)
     return words
 
-def _add_ladino_word(ladino_word, accented_word, dictionary, entry):
+def _add_ladino_word(ladino_word, accented_word, dictionary, pages, entry):
+    logging.info(f"Add ladino word: '{ladino_word}' '{accented_word}'")
     if ladino_word not in dictionary['ladino']:
         dictionary['ladino'][ladino_word] = {}
     for language, words in entry['translations'].items():
@@ -336,6 +359,11 @@ def _add_ladino_word(ladino_word, accented_word, dictionary, entry):
             dictionary['ladino'][ladino_word][language].extend(words)
         else:
             raise Exception("bad")
+
+    if ladino_word not in pages['ladino']:
+        pages['ladino'][ladino_word] = []
+    pages['ladino'][ladino_word].append(entry)
+
 
     if accented_word:
         language = 'accented'
@@ -352,21 +380,23 @@ def _add_ladino_word(ladino_word, accented_word, dictionary, entry):
 def collect_data_from_dictionary(dictionary_source, dictionary, count):
     logging.info("Collect more data")
     count['dictionary'] = {}
+    pages = {}
     for language in ['ladino'] + languages:
         count['dictionary'][language] = {
             'words': 0,
             'phrases': 0,
         }
         dictionary[language] = {}
+        pages[language] = {}
 
     for entry in dictionary_source:
-        _add_ladino_word(entry['ladino'], entry.get('accented'), dictionary, entry)
+        _add_ladino_word(entry['ladino'], entry.get('accented'), dictionary, pages, entry)
         count['dictionary']['ladino']['words'] += 1
 
         if 'alternative-spelling' in entry:
             for alt_entry in entry['alternative-spelling']:
                 count['dictionary']['ladino']['words'] += 1
-                _add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), dictionary, entry)
+                _add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), dictionary, pages, entry)
 
         for language in languages:
             translations = entry['translations'].get(language)
@@ -385,6 +415,7 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
                     dictionary[language][word] = []
                 dictionary[language][word].append(entry['ladino'])
                 count['dictionary'][language]['words'] += 1
+    return pages
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -418,9 +449,9 @@ def main():
     dictionary_source = load_dictionary(args.dictionary)
 
     if args.html:
-        target, source, dictionary, count = collect_data(course, dictionary_source)
+        target, source, dictionary, count, pages = collect_data(course, dictionary_source)
         logging.info(count)
-        export_to_html(course, target, source, dictionary, count, args.html)
+        export_to_html(course, target, source, dictionary, count, pages, args.html)
 
     end = time.time()
     logging.info(f"Elapsed time: {int(end-start)} sec")

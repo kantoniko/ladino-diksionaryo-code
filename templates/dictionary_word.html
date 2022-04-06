@@ -1,14 +1,15 @@
 {% include 'incl/header.html' %}
 
-<h1 class="title">{{ target_word }}</h1>
+<h1 class="title">{{ word }}</h1>
 <hr>
 
 <div class="content">
   <h2 class="subtitle">Word</h2>
-  <ul>
+  {% for entry in data %}
+     {{ entry }}
+     <hr>
+  {% endfor %}
   <h2 class="subtitle">Phrases</h2>
-  <ul>
-  </ul>
 </div>
 
 {% include 'incl/footer.html' %}
