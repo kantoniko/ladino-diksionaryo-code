@@ -1,6 +1,12 @@
 {
     "english": {
+        "as": [
+            "komo"
+        ],
         "how": [
+            "komo"
+        ],
+        "like": [
             "komo"
         ]
     },
@@ -16,7 +22,9 @@
                 "komo"
             ],
             "english": [
-                "how"
+                "as",
+                "how",
+                "like"
             ],
             "french": [
                 ""

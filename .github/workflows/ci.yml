@@ -11,16 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     name: Test code
     steps:
-    - name: Checkout this repo
+    - name: Checkout ladino-diksionaryo-code
       uses: actions/checkout@v2
 
-    - name: Checkout the ladino-diksionaryo-data
+    - name: Checkout ladino-diksionaryo-data
       uses: actions/checkout@v2
       with:
         repository: 'szabgab/ladino-diksionaryo-data'
         path: ladino-diksionaryo-data
 
-    - name: Checkout the  LibreLingo-Judeo-Spanish-from-English repo
+    - name: Checkout LibreLingo-Judeo-Spanish-from-English
       uses: actions/checkout@v2
       with:
         repository: 'szabgab/LibreLingo-Judeo-Spanish-from-English'

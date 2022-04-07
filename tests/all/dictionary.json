@@ -3,6 +3,9 @@
         "artichoke": [
             "andjinara"
         ],
+        "as": [
+            "komo"
+        ],
         "eat": [
             "komemos",
             "komen",
@@ -15,6 +18,9 @@
             "kome"
         ],
         "how": [
+            "komo"
+        ],
+        "like": [
             "komo"
         ]
     },
@@ -166,8 +172,10 @@
                 "komo"
             ],
             "english": [
+                "as",
                 "eat",
-                "how"
+                "how",
+                "like"
             ],
             "french": [
                 ""
@@ -186,6 +194,29 @@
             ],
             "turkish": [
                 "nasıl"
+            ]
+        },
+        "kumer": {
+            "accented": [
+                "kumér"
+            ],
+            "english": [
+                "eat"
+            ],
+            "french": [
+                "manger"
+            ],
+            "ladino": [
+                "kumer"
+            ],
+            "portuguese": [
+                ""
+            ],
+            "spanish": [
+                "comer"
+            ],
+            "turkish": [
+                "yemek yemek"
             ]
         }
     },

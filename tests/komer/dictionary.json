@@ -107,6 +107,29 @@
             "spanish": [
                 "como"
             ]
+        },
+        "kumer": {
+            "accented": [
+                "kumér"
+            ],
+            "english": [
+                "eat"
+            ],
+            "french": [
+                "manger"
+            ],
+            "ladino": [
+                "kumer"
+            ],
+            "portuguese": [
+                ""
+            ],
+            "spanish": [
+                "comer"
+            ],
+            "turkish": [
+                "yemek yemek"
+            ]
         }
     },
     "portuguese": {},
