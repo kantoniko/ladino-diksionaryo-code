@@ -60,3 +60,11 @@ def test_one_file(tmpdir, request, name):
     #    expected_count = json.load(fh)
     #assert count == expected_count
 
+def test_all(tmpdir):
+    print(tmpdir)
+    course = load_course(path_to_course)
+    #course = None
+    dictionary_source = load_dictionary(data_path)
+    target, source, dictionary, count, pages = collect_data(course, dictionary_source)
+    export_dictionary_pages(pages, tmpdir)
+
