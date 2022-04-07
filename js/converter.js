@@ -88,7 +88,7 @@ $(document).ready(function(){
             // ladino column
             if (dictionary_word) {
                 if (source_language == 'ladino') {
-                    html += `<td><a href="/words/ladino/${word}.html">${word}</a></td>`;
+                    html += `<td><a href="/words/ladino/${word}.html">${dictionary_word['ladino']}</a></td>`;
                 } else {
                     let links = word_links(ladino_from_source_language, "ladino");
                     html += `<td>${links}</td>`;
