@@ -48,6 +48,9 @@
             "hebrew": [
                 "ארטישוק"
             ],
+            "ladino": [
+                "andjinara"
+            ],
             "spanish": [
                 "alcachofa",
                 "alcaucil"
@@ -69,6 +72,9 @@
             "hebrew": [
                 "ארטישוק"
             ],
+            "ladino": [
+                "endjinara"
+            ],
             "spanish": [
                 "alcachofa",
                 "alcaucil"
@@ -81,6 +87,9 @@
             "english": [
                 "eats"
             ],
+            "ladino": [
+                "kome"
+            ],
             "spanish": [
                 "come"
             ]
@@ -89,6 +98,9 @@
             "english": [
                 "eat"
             ],
+            "ladino": [
+                "komemos"
+            ],
             "spanish": [
                 "comemos"
             ]
@@ -96,6 +108,9 @@
         "komen": {
             "english": [
                 "eat"
+            ],
+            "ladino": [
+                "komen"
             ],
             "spanish": [
                 "comen"
@@ -111,6 +126,9 @@
             "french": [
                 "manger"
             ],
+            "ladino": [
+                "komer"
+            ],
             "portuguese": [
                 ""
             ],
@@ -125,6 +143,9 @@
             "english": [
                 "eat"
             ],
+            "ladino": [
+                "komes"
+            ],
             "spanish": [
                 "comes"
             ]
@@ -132,6 +153,9 @@
         "komesh": {
             "english": [
                 "eat"
+            ],
+            "ladino": [
+                "komesh"
             ],
             "spanish": [
                 "comeis"
@@ -150,6 +174,9 @@
             ],
             "hebrew": [
                 "איך"
+            ],
+            "ladino": [
+                "komo"
             ],
             "portuguese": [
                 ""
