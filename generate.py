@@ -134,7 +134,7 @@ def export_json(all_words, filename, pretty=False):
         if pretty:
             json.dump(all_words, fh, indent=4, ensure_ascii=False, sort_keys=True)
         else:
-            json.dump(all_words, fh)
+            json.dump(all_words, fh, ensure_ascii=False, sort_keys=True)
 
 
 def export_words_html_page(all_words, language, path, html_file):
