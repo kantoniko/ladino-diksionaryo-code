@@ -42,32 +42,34 @@ def export_dictionary_pages(pages, html_dir):
     words_dir = os.path.join(html_dir, 'words')
     os.makedirs(words_dir, exist_ok=True)
     branch = "main"
-    for language, words in pages.items():
-        if not words:
-            continue
-        language_dir = os.path.join(words_dir, language)
-        logging.info(f"Export dictionary pages of {language} to {language_dir}")
-        os.makedirs(language_dir, exist_ok=True)
-        for word, data in words.items():
-            filename = f'{word}.html'
-            logging.info(f"Export to {filename}")
-            #logging.info(f"Export to {data}")
-            html = render(
-                "dictionary_word.html",
-                data=data,
-                title=f"{word}",
-                word=word,
-            )
-            with open(os.path.join(words_dir, language, filename), "w") as fh:
-                fh.write(html)
-
+    #for language, words in pages.items():
+    #if not words:
+    #    continue
+    language = 'ladino'
+    words = pages['ladino']
+    language_dir = os.path.join(words_dir, language)
+    logging.info(f"Export dictionary pages of {language} to {language_dir}")
+    os.makedirs(language_dir, exist_ok=True)
+    for word, data in words.items():
+        filename = f'{word}.html'
+        logging.info(f"Export to {filename}")
+        #logging.info(f"Export to {data}")
         html = render(
-            "dictionary_words.html",
-            title=f"{language}",
-            words=sorted(words.keys()),
+            "dictionary_word.html",
+            data=data,
+            title=f"{word}",
+            word=word,
         )
-        with open(os.path.join(words_dir, language, 'index.html'), "w") as fh:
+        with open(os.path.join(words_dir, language, filename), "w") as fh:
             fh.write(html)
+
+    html = render(
+        "dictionary_words.html",
+        title=f"{language}",
+        words=sorted(words.keys()),
+    )
+    with open(os.path.join(words_dir, language, 'index.html'), "w") as fh:
+        fh.write(html)
 
     html = render(
         "dictionary_languages.html",

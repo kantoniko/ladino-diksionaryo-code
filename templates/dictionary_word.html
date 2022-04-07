@@ -4,10 +4,33 @@
 <hr>
 
 <div class="content">
-  <h2 class="subtitle">Word</h2>
   {% for entry in data %}
-     {{ entry }}
-     <div><a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/words/{{ entry.source }}">source</a></div>
+     <table>
+       <tr><td>ladino</td><td>{{ entry.ladino }}</td></tr>
+       <tr><td>accented</td><td>{{ entry.accented }}</td></tr>
+       <tr><td>gender</td><td>{{ entry.gender }} {{ entry.number }}</td></tr>
+       {% if entry["alternative-spelling"] %}
+         <tr><td></td><td>
+          {% for alternative in entry["alternative-spelling"] %}
+              {{ alternative.ladino }} ({{ alternative.accented }}) {% if not loop.last %},{% endif %}
+          {% endfor %}
+          </td></tr>
+       {% endif %}
+
+       {% for language in entry.translations.keys() %}
+          <tr><td>{{ language }}</td>
+              <td>
+                  {% if entry.translations[language] is string %}
+                     {{ entry.translations[language] }}
+                  {% else %}
+                    {% for word in entry.translations[language] %}
+                      {{ word }} {% if not loop.last %},{% endif %}
+                    {% endfor %}
+                  {% endif %}
+              </td></tr>
+       {% endfor %}
+     <tr><td><a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/words/{{ entry.source }}">source</a></td><td></td></tr>
+     </table>
      <hr>
   {% endfor %}
   <h2 class="subtitle">Phrases</h2>

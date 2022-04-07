@@ -31,6 +31,9 @@ $(document).ready(function(){
     }
     function word_links(words, language) {
         words = words.filter(onlyUnique);
+        if (language != 'ladino') {
+            return words;
+        }
         let links = Array();
         for (let tx=0; tx < words.length; tx++) {
             links.push(`<a href="/words/${language}/${words[tx]}.html">${words[tx]}</a>`);
