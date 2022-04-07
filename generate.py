@@ -389,6 +389,9 @@ def load_dictionary(path_to_dictionary):
                 if number not in ['singular', 'plural']:
                     raise Exception(f"number is '{number}' in {filename} version {version}")
 
+        if 'examples' not in data:
+            raise Exception(f"examples is missing in {filename}")
+
         if 'conjugations' in data:
             for verb_time, conjugation in data['conjugations'].items():
                 #print(verb_time)
