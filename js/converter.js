@@ -12,6 +12,9 @@ $(document).ready(function(){
         'spanish'    : 'Kasteyano',
         'turkish'    : 'Turko'
     };
+    // We save the text in local storage and restore it when the user visits next time.
+    // especially useful when people click on words and than get back to the main page.
+    $("#input-text").val(localStorage.getItem('original'));
 
     var try_translate = function() {
         if (loaded == 3) {
@@ -35,6 +38,7 @@ $(document).ready(function(){
 
     var translate = function() {
         const original = $("#input-text").val();
+        localStorage.setItem('original', original);
         const cleaned = original.replace(/[<>,.:!?"'\n*()=\[\]]/g, " ");
         const words = cleaned.split(" ");
         var html = `<table class="table">`;
