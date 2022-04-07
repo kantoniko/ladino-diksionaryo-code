@@ -1,0 +1,42 @@
+{
+    "english": {
+        "Bible": [
+            "Biblia"
+        ]
+    },
+    "french": {},
+    "hebrew": {},
+    "ladino": {
+        "Biblia": {
+            "accented": [
+                "Bíblia"
+            ],
+            "english": [
+                "Bible"
+            ],
+            "french": [
+                ""
+            ],
+            "portuguese": [
+                ""
+            ],
+            "spanish": [
+                "Biblia"
+            ],
+            "turkish": [
+                "Kutsal Kitap"
+            ]
+        }
+    },
+    "portuguese": {},
+    "spanish": {
+        "Biblia": [
+            "Biblia"
+        ]
+    },
+    "turkish": {
+        "Kutsal Kitap": [
+            "Biblia"
+        ]
+    }
+}
