@@ -352,12 +352,18 @@ def load_dictionary(path_to_dictionary):
         with open(path) as fh:
             data = safe_load(fh)
 
+        if 'grammar' not in data:
+            raise Exception(f'grammar are missing from file {filename}')
+        grammar = data['grammar']
+        if grammar not in ['adjective', 'adverb', 'noun', 'verb', None]:
+            raise Exception(f"Invalid grammar '{grammar}' in file {filename}")
+
         if 'versions' not in data:
-            exit(f'versions are missing from file {filename}')
+            raise Exception(f'versions are missing from file {filename}')
 
         for version in data['versions']:
             if 'ladino' not in version:
-                exit(f'Ladino is missing from file {filename}')
+                raise Exception(f'Ladino is missing from file {filename}')
             version['source'] = filename
             words.append(version)
 
