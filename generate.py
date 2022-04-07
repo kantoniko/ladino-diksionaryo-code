@@ -383,14 +383,15 @@ def _add_word(dictionary, source_language, target_language, source_word, target_
         raise Exception("bad")
     dictionary[source_language][source_word][target_language] = sorted(set(dictionary[source_language][source_word][target_language]))
 
-def _add_ladino_word(word, accented_word, dictionary, pages, entry):
-    logging.info(f"Add ladino word: '{word}' '{accented_word}'")
+def _add_ladino_word(original_word, accented_word, dictionary, pages, entry):
+    word = original_word.lower()
+    logging.info(f"Add ladino word: '{original_word}' '{word}' '{accented_word}'")
     source_language = 'ladino'
     if word not in dictionary[source_language]:
         dictionary[source_language][word] = {}
     for target_language, target_words in entry['translations'].items():
         _add_word(dictionary, source_language, target_language, word, target_words)
-    _add_word(dictionary, source_language, 'ladino', word, word)
+    _add_word(dictionary, source_language, 'ladino', word, original_word)
 
     if word not in pages[source_language]:
         pages[source_language][word] = []
