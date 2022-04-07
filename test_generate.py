@@ -10,7 +10,14 @@ from generate import load_dictionary, collect_data, export_to_html, export_json,
 data_path = 'ladino-diksionaryo-data/words'
 path_to_course = 'LibreLingo-Judeo-Spanish-from-English/course'
 
-@pytest.mark.parametrize("name", ['andjinara', 'komer', 'komo', 'all'])
+
+# Explanation why each word is included in the tests:
+# andjinara: our first test word. noun. for now it does not have a plural.
+# komer: verb
+# komo: has several meanings
+# biblia: word is capitalized
+
+@pytest.mark.parametrize("name", ['andjinara', 'komer', 'komo', 'biblia', 'all'])
 def test_one_file(tmpdir, request, name):
     print(tmpdir)
     words = ['andjinara', 'komer', 'komo']
