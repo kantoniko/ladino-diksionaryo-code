@@ -388,8 +388,9 @@ def _add_ladino_word(word, accented_word, dictionary, pages, entry):
     source_language = 'ladino'
     if word not in dictionary[source_language]:
         dictionary[source_language][word] = {}
-    for target_language, words in entry['translations'].items():
-        _add_word(dictionary, source_language, target_language, word, words)
+    for target_language, target_words in entry['translations'].items():
+        _add_word(dictionary, source_language, target_language, word, target_words)
+    _add_word(dictionary, source_language, 'ladino', word, word)
 
     if word not in pages[source_language]:
         pages[source_language][word] = []
