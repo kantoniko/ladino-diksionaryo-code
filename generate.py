@@ -385,6 +385,7 @@ def _add_ladino_word(ladino_word, accented_word, dictionary, pages, entry):
             dictionary['ladino'][ladino_word][language].extend(words)
         else:
             raise Exception("bad")
+        dictionary['ladino'][ladino_word][language].sort()
 
     if ladino_word not in pages['ladino']:
         pages['ladino'][ladino_word] = []
