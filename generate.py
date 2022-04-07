@@ -372,21 +372,24 @@ def load_dictionary(path_to_dictionary):
                     words.append(version)
     return words
 
+def _add_word(dictionary, source_language, target_language, word, words):
+    if target_language not in dictionary[source_language][word]:
+        dictionary[source_language][word][target_language] = []
+    if words.__class__.__name__ == 'str':
+        dictionary[source_language][word][target_language].append(words)
+    elif words.__class__.__name__ == 'list':
+        dictionary[source_language][word][target_language].extend(words)
+    else:
+        raise Exception("bad")
+    dictionary[source_language][word][target_language] = sorted(set(dictionary[source_language][word][target_language]))
+
 def _add_ladino_word(word, accented_word, dictionary, pages, entry):
     logging.info(f"Add ladino word: '{word}' '{accented_word}'")
     source_language = 'ladino'
     if word not in dictionary[source_language]:
         dictionary[source_language][word] = {}
     for target_language, words in entry['translations'].items():
-        if target_language not in dictionary[source_language][word]:
-            dictionary[source_language][word][target_language] = []
-        if words.__class__.__name__ == 'str':
-            dictionary[source_language][word][target_language].append(words)
-        elif words.__class__.__name__ == 'list':
-            dictionary[source_language][word][target_language].extend(words)
-        else:
-            raise Exception("bad")
-        dictionary[source_language][word][target_language] = sorted(set(dictionary[source_language][word][target_language]))
+        _add_word(dictionary, source_language, target_language, word, words)
 
     if word not in pages[source_language]:
         pages[source_language][word] = []
