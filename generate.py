@@ -396,7 +396,7 @@ def _add_ladino_word(original_word, accented_word, dictionary, pages, entry):
     if word not in pages[source_language]:
         pages[source_language][word] = []
     pages[source_language][word].append(entry)
-    pages[source_language][word].sort(key=lambda x: len(json.dumps(x, sort_keys=True)))
+    pages[source_language][word].sort(key=lambda x: (x['ladino'], x['translations']['english']))
 
     if accented_word:
         _add_word(dictionary, source_language, target_language='accented', source_word=word, target_words=accented_word)
