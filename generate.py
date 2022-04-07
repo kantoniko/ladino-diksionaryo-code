@@ -396,19 +396,8 @@ def _add_ladino_word(word, accented_word, dictionary, pages, entry):
     pages[source_language][word].append(entry)
     pages[source_language][word].sort(key=lambda x: len(json.dumps(x, sort_keys=True)))
 
-
     if accented_word:
-        language = 'accented'
-        words = accented_word
-        if language not in dictionary[source_language][word]:
-            dictionary[source_language][word][language] = []
-        if words.__class__.__name__ == 'str':
-            dictionary[source_language][word][language].append(words)
-        elif words.__class__.__name__ == 'list':
-            dictionary[source_language][word][language].extend(words)
-        else:
-            raise Exception("bad")
-        dictionary[source_language][word][language] = sorted(set(dictionary[source_language][word][language]))
+        _add_word(dictionary, source_language, target_language='accented', source_word=word, target_words=accented_word)
 
 def _add_translated_words(source_language, dictionary, pages, entry, count):
     translations = entry['translations'].get(source_language)
