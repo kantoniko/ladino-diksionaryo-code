@@ -372,13 +372,13 @@ def load_dictionary(path_to_dictionary):
                     words.append(version)
     return words
 
-def _add_word(dictionary, source_language, target_language, word, words):
+def _add_word(dictionary, source_language, target_language, word, target_words):
     if target_language not in dictionary[source_language][word]:
         dictionary[source_language][word][target_language] = []
-    if words.__class__.__name__ == 'str':
-        dictionary[source_language][word][target_language].append(words)
-    elif words.__class__.__name__ == 'list':
-        dictionary[source_language][word][target_language].extend(words)
+    if target_words.__class__.__name__ == 'str':
+        dictionary[source_language][word][target_language].append(target_words)
+    elif target_words.__class__.__name__ == 'list':
+        dictionary[source_language][word][target_language].extend(target_words)
     else:
         raise Exception("bad")
     dictionary[source_language][word][target_language] = sorted(set(dictionary[source_language][word][target_language]))
