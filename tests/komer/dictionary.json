@@ -1,12 +1,12 @@
 {
     "english": {
         "eat": [
-            "komer",
-            "komo",
-            "komes",
             "komemos",
+            "komen",
+            "komer",
+            "komes",
             "komesh",
-            "komen"
+            "komo"
         ],
         "eats": [
             "kome"
