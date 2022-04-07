@@ -3,7 +3,6 @@ $(document).ready(function(){
     var ladino_to_english = null;
     var dictionary = null;
     var loaded = 0;
-    var direction = 'ladino-to-english';
     const languages = ['english', 'french', 'hebrew', 'portuguese', 'spanish', 'turkish'];
     const language_names = {
         'english'    : 'Inglez',
@@ -14,15 +13,8 @@ $(document).ready(function(){
         'turkish'    : 'Turko'
     };
 
-    // const update_direction_selector = function() {
-    //     $('#ladino-to-english').removeClass('is-warning');
-    //     $('#english-to-ladino').removeClass('is-warning');
-    //     $('#' + direction).addClass('is-warning');
-    // };
-
     var try_translate = function() {
         if (loaded == 3) {
-            // update_direction_selector();
             translate();
         }
     };
@@ -169,16 +161,5 @@ $(document).ready(function(){
     });
 
     $('#input-text').bind('input propertychange', translate);
-    //$("#ladino-to-english").click(function() {
-    //    direction = 'ladino-to-english';
-    //    update_direction_selector();
-    //    translate();
-    //});
-    //$("#english-to-ladino").click(function() {
-    //    direction = 'english-to-ladino';
-    //    update_direction_selector();
-    //    translate();
-    //});
-    //update_direction_selector();
 });
 
