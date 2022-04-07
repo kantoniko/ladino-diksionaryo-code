@@ -372,40 +372,40 @@ def load_dictionary(path_to_dictionary):
                     words.append(version)
     return words
 
-def _add_ladino_word(ladino_word, accented_word, dictionary, pages, entry):
-    logging.info(f"Add ladino word: '{ladino_word}' '{accented_word}'")
+def _add_ladino_word(word, accented_word, dictionary, pages, entry):
+    logging.info(f"Add ladino word: '{word}' '{accented_word}'")
     source_language = 'ladino'
-    if ladino_word not in dictionary[source_language]:
-        dictionary[source_language][ladino_word] = {}
+    if word not in dictionary[source_language]:
+        dictionary[source_language][word] = {}
     for language, words in entry['translations'].items():
-        if language not in dictionary[source_language][ladino_word]:
-            dictionary[source_language][ladino_word][language] = []
+        if language not in dictionary[source_language][word]:
+            dictionary[source_language][word][language] = []
         if words.__class__.__name__ == 'str':
-            dictionary[source_language][ladino_word][language].append(words)
+            dictionary[source_language][word][language].append(words)
         elif words.__class__.__name__ == 'list':
-            dictionary[source_language][ladino_word][language].extend(words)
+            dictionary[source_language][word][language].extend(words)
         else:
             raise Exception("bad")
-        dictionary[source_language][ladino_word][language] = sorted(set(dictionary[source_language][ladino_word][language]))
+        dictionary[source_language][word][language] = sorted(set(dictionary[source_language][word][language]))
 
-    if ladino_word not in pages[source_language]:
-        pages[source_language][ladino_word] = []
-    pages[source_language][ladino_word].append(entry)
-    pages[source_language][ladino_word].sort(key=lambda x: len(json.dumps(x, sort_keys=True)))
+    if word not in pages[source_language]:
+        pages[source_language][word] = []
+    pages[source_language][word].append(entry)
+    pages[source_language][word].sort(key=lambda x: len(json.dumps(x, sort_keys=True)))
 
 
     if accented_word:
         language = 'accented'
         words = accented_word
-        if language not in dictionary[source_language][ladino_word]:
-            dictionary[source_language][ladino_word][language] = []
+        if language not in dictionary[source_language][word]:
+            dictionary[source_language][word][language] = []
         if words.__class__.__name__ == 'str':
-            dictionary[source_language][ladino_word][language].append(words)
+            dictionary[source_language][word][language].append(words)
         elif words.__class__.__name__ == 'list':
-            dictionary[source_language][ladino_word][language].extend(words)
+            dictionary[source_language][word][language].extend(words)
         else:
             raise Exception("bad")
-    dictionary[source_language][ladino_word][language] = sorted(set(dictionary[source_language][ladino_word][language]))
+    dictionary[source_language][word][language] = sorted(set(dictionary[source_language][word][language]))
 
 def _add_translated_words(source_language, dictionary, pages, entry, count):
     translations = entry['translations'].get(source_language)
