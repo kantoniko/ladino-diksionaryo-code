@@ -17,7 +17,7 @@
           </td></tr>
        {% endif %}
 
-       {% for language in entry.translations.keys() %}
+       {% for language in entry.translations.keys() | sort %}
           <tr><td>{{ language }}</td>
               <td>
                   {% if entry.translations[language] is string %}
