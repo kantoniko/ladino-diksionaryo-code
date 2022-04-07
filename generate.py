@@ -390,6 +390,7 @@ def _add_ladino_word(ladino_word, accented_word, dictionary, pages, entry):
     if ladino_word not in pages['ladino']:
         pages['ladino'][ladino_word] = []
     pages['ladino'][ladino_word].append(entry)
+    pages['ladino'][ladino_word].sort(key=lambda x: len(json.dumps(x, sort_keys=True)))
 
 
     if accented_word:
@@ -421,11 +422,13 @@ def _add_translated_words(language, dictionary, pages, entry, count):
         if word not in dictionary[language]:
             dictionary[language][word] = []
         dictionary[language][word].append(entry['ladino'])
+        dictionary[language][word] = sorted(set(dictionary[language][word]))
         count['dictionary'][language]['words'] += 1
 
         if word not in pages[language]:
             pages[language][word] = []
         pages[language][word].append(entry)
+        pages[language][word].sort(key=lambda x: len(json.dumps(x, sort_keys=True)))
 
 
 def collect_data_from_dictionary(dictionary_source, dictionary, count):
