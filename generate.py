@@ -358,6 +358,10 @@ def load_dictionary(path_to_dictionary):
         if grammar not in ['adjective', 'adverb', 'noun', 'verb', None]:
             raise Exception(f"Invalid grammar '{grammar}' in file {filename}")
 
+        origen  = data['origen']
+        if origen not in ['Jeneral', 'Estanbol', 'Izmir']:
+            raise Exception(f"Invalid origen '{origen}' in file {filename}")
+
         if 'versions' not in data:
             raise Exception(f'versions are missing from file {filename}')
 
@@ -367,13 +371,18 @@ def load_dictionary(path_to_dictionary):
             version['source'] = filename
             words.append(version)
 
+        if grammar == 'verb' and 'conjugations' not in data:
+            raise Exception(f"Grammar is verb, but there are NO conjugations in {filename}")
+        if grammar != 'verb' and 'conjugations' in data:
+            raise Exception(f"Grammar is NOT verb, but there are conjugations in {filename}")
+
         if 'conjugations' in data:
             for verb_time, conjugation in data['conjugations'].items():
                 #print(verb_time)
                 #print(conjugation)
                 for pronoun, version in conjugation.items():
                     if 'ladino' not in version:
-                        exit(f'Ladino is missing from file {filename}')
+                        raise Exception(f'Ladino is missing from file {filename}')
                     version['source'] = filename
                     words.append(version)
     return words
