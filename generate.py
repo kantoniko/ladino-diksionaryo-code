@@ -385,7 +385,7 @@ def _add_ladino_word(ladino_word, accented_word, dictionary, pages, entry):
             dictionary['ladino'][ladino_word][language].extend(words)
         else:
             raise Exception("bad")
-        dictionary['ladino'][ladino_word][language].sort()
+        dictionary['ladino'][ladino_word][language] = sorted(set(dictionary['ladino'][ladino_word][language]))
 
     if ladino_word not in pages['ladino']:
         pages['ladino'][ladino_word] = []
@@ -403,7 +403,7 @@ def _add_ladino_word(ladino_word, accented_word, dictionary, pages, entry):
             dictionary['ladino'][ladino_word][language].extend(words)
         else:
             raise Exception("bad")
-    dictionary['ladino'][ladino_word][language].sort()
+    dictionary['ladino'][ladino_word][language] = sorted(set(dictionary['ladino'][ladino_word][language]))
 
 def _add_translated_words(language, dictionary, pages, entry, count):
     translations = entry['translations'].get(language)
