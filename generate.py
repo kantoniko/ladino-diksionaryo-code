@@ -376,6 +376,19 @@ def load_dictionary(path_to_dictionary):
         if grammar != 'verb' and 'conjugations' in data:
             raise Exception(f"Grammar is NOT verb, but there are conjugations in {filename}")
 
+        if grammar in ['noun']: # 'adjective',
+            for version in data['versions']:
+                gender = version.get('gender')
+                if gender is None:
+                    raise Exception(f"gender is None in {filename} version {version}")
+                if gender not in ['feminine', 'masculine']:
+                    raise Exception(f"gender is '{gener}' in {filename} version {version}")
+                number = version.get('number')
+                if number is None:
+                    raise Exception(f"number is None in {filename} version {version}")
+                if number not in ['singular', 'plural']:
+                    raise Exception(f"number is '{number}' in {filename} version {version}")
+
         if 'conjugations' in data:
             for verb_time, conjugation in data['conjugations'].items():
                 #print(verb_time)
