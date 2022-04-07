@@ -62,6 +62,7 @@ def export_dictionary_pages(pages, html_dir):
         )
         with open(os.path.join(words_dir, language, filename), "w") as fh:
             fh.write(html)
+        export_json(data, os.path.join(words_dir, language, f'{word}.json'))
 
     html = render(
         "dictionary_words.html",
