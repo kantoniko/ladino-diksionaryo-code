@@ -433,10 +433,11 @@ def _add_word(dictionary, source_language, target_language, source_word, target_
         raise LadinoError("bad")
     dictionary[source_language][source_word][target_language] = sorted(set(dictionary[source_language][source_word][target_language]))
 
-def _add_ladino_word(original_word, accented_word, dictionary, pages, entry):
+def _add_ladino_word(original_word, accented_word, dictionary, pages, entry, count):
     word = original_word.lower()
     logging.info(f"Add ladino word: '{original_word}' '{word}' '{accented_word}'")
     #print(entry)
+    count['dictionary']['ladino']['words'] += 1
     source_language = 'ladino'
     if word not in dictionary[source_language]:
         dictionary[source_language][word] = {}
@@ -485,19 +486,17 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
     for language in ['ladino'] + languages:
         count['dictionary'][language] = {
             'words': 0,
-            'phrases': 0,
+            'examples': 0,
         }
         dictionary[language] = {}
         pages[language] = {}
 
     for entry in dictionary_source:
-        _add_ladino_word(entry['ladino'], entry.get('accented'), dictionary, pages, entry)
-        count['dictionary']['ladino']['words'] += 1
+        _add_ladino_word(entry['ladino'], entry.get('accented'), dictionary, pages, entry, count)
 
         if 'alternative-spelling' in entry:
             for alt_entry in entry['alternative-spelling']:
-                count['dictionary']['ladino']['words'] += 1
-                _add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), dictionary, pages, entry)
+                _add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), dictionary, pages, entry, count)
 
         for language in languages:
             _add_translated_words(language, dictionary, pages, entry, count)
