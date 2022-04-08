@@ -371,7 +371,7 @@ def load_dictionary(path_to_dictionary):
             raise LadinoError(f"The 'versions' field is missing from file '{filename}'")
 
         if grammar == 'verb' and 'conjugations' not in data:
-            raise LadinoError(f"Grammar is verb, but there are NO conjugations in {filename}")
+            raise LadinoError(f"Grammar is 'verb', but there is NO 'conjugations' field in '{filename}'")
         if grammar != 'verb' and 'conjugations' in data:
             raise LadinoError(f"Grammar is NOT verb, but there are conjugations in {filename}")
 
