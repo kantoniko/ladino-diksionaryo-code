@@ -388,12 +388,24 @@ def load_dictionary(path_to_dictionary):
         if 'examples' not in data:
             raise Exception(f"examples is missing in {filename}")
         examples = data['examples']
+        if examples == []:
+            examples = None
         comments = data.get('comments')
+        if comments == []:
+            comments = None
 
         for version in data['versions']:
             if 'ladino' not in version:
                 raise Exception(f'Ladino is missing from file {filename}')
             version['source'] = filename
+
+            # Add examples and comments to the first version of the word.
+            if examples is not None:
+                version['examples'] = examples
+                examples = None
+            if comments is not None:
+                version['comments'] = comments
+                comments = None
             words.append(version)
 
         if 'conjugations' in data:
@@ -421,6 +433,7 @@ def _add_word(dictionary, source_language, target_language, source_word, target_
 def _add_ladino_word(original_word, accented_word, dictionary, pages, entry):
     word = original_word.lower()
     logging.info(f"Add ladino word: '{original_word}' '{word}' '{accented_word}'")
+    #print(entry)
     source_language = 'ladino'
     if word not in dictionary[source_language]:
         dictionary[source_language][word] = {}
@@ -463,6 +476,7 @@ def _add_translated_words(source_language, dictionary, pages, entry, count):
 
 def collect_data_from_dictionary(dictionary_source, dictionary, count):
     logging.info("Collect more data")
+    #print(dictionary_source)
     count['dictionary'] = {}
     pages = {}
     for language in ['ladino'] + languages:
