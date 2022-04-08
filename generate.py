@@ -512,7 +512,6 @@ def get_args():
     )
     parser.add_argument(
         "--html", help="path to directory where to generate html files",
-        required=True,
     )
     parser.add_argument("--log", action="store_true", help="Additional logging")
     args = parser.parse_args()
