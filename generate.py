@@ -353,14 +353,16 @@ def load_dictionary(path_to_dictionary):
             data = safe_load(fh)
 
         if 'grammar' not in data:
-            raise Exception(f'grammar are missing from file {filename}')
+            raise Exception(f"grammar is missing from file '{filename}'")
         grammar = data['grammar']
         if grammar not in ['adjective', 'adverb', 'noun', 'verb', None]:
-            raise Exception(f"Invalid grammar '{grammar}' in file {filename}")
+            raise Exception(f"Invalid grammar '{grammar}' in file '{filename}'")
 
+        if 'origen' not in data:
+            raise Exception(f"origen is missing from file '{filename}'")
         origen  = data['origen']
         if origen not in ['Jeneral', 'Estanbol', 'Izmir']:
-            raise Exception(f"Invalid origen '{origen}' in file {filename}")
+            raise Exception(f"Invalid origen '{origen}' in file '{filename}'")
 
         if 'versions' not in data:
             raise Exception(f'versions are missing from file {filename}')
