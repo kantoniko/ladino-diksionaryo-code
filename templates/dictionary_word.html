@@ -58,10 +58,8 @@
         </ul>
      {% endif %}
 
-     <hr>
+     {% if not loop.last %}<hr>{% endif %}
   {% endfor %}
-  <h2 class="subtitle">Phrases</h2>
-
   <hr>
   <a href=".">all the words</a>
 </div>
