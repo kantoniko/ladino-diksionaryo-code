@@ -16,8 +16,9 @@ path_to_course = 'LibreLingo-Judeo-Spanish-from-English/course'
 # komer: verb
 # komo: has several meanings
 # biblia: word is capitalized
+# klaro: has comments; has examples
 
-@pytest.mark.parametrize("name", ['andjinara', 'komer', 'komo', 'biblia', 'all'])
+@pytest.mark.parametrize("name", ['andjinara', 'komer', 'komo', 'biblia', 'klaro', 'all'])
 def test_one_file(tmpdir, request, name):
     print(tmpdir)
     words = ['andjinara', 'komer', 'komo']
