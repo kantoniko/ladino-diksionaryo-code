@@ -379,14 +379,14 @@ def load_dictionary(path_to_dictionary):
             for version in data['versions']:
                 gender = version.get('gender')
                 if gender is None:
-                    raise LadinoError(f"gender is None in {filename} version {version}")
+                    raise LadinoError(f"The 'gender' field is None in '{filename}' version {version}")
                 if gender not in ['feminine', 'masculine']:
-                    raise LadinoError(f"gender is '{gener}' in {filename} version {version}")
+                    raise LadinoError(f"Invalid value '{gender}' in 'gender' field in '{filename}' version {version}")
                 number = version.get('number')
                 if number is None:
-                    raise LadinoError(f"number is None in {filename} version {version}")
+                    raise LadinoError(f"The 'number' field is None in '{filename}' version {version}")
                 if number not in ['singular', 'plural']:
-                    raise LadinoError(f"number is '{number}' in {filename} version {version}")
+                    raise LadinoError(f"The 'number' field is '{number}' in '{filename}' version {version}")
 
         if 'examples' not in data:
             raise LadinoError(f"examples is missing in {filename}")

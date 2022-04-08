@@ -80,6 +80,8 @@ def test_minimal(tmpdir):
     ('no_origen', "The 'origen' field is missing from file 'no_origen.yaml'"),
     ('bad_origen', "Invalid origen 'Strange' in file 'bad_origen.yaml'"),
     ('no_versions', "The 'versions' field is missing from file 'no_versions.yaml'"),
+    ('noun_no_gender', "The 'gender' field is None in 'noun_no_gender.yaml' version {'ladino': 'klaro'}"),
+    ('noun_bad_gender', "Invalid value 'droid' in 'gender' field in 'noun_bad_gender.yaml' version {'ladino': 'klaro', 'gender': 'droid'}"),
 ])
 def test_bad(tmpdir, name, expected):
     shutil.copy(os.path.join('tests', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
