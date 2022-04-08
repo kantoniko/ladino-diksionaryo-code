@@ -361,7 +361,7 @@ def load_dictionary(path_to_dictionary):
         if 'origen' not in data:
             raise Exception(f"origen is missing from file '{filename}'")
         origen  = data['origen']
-        if origen not in ['Jeneral', 'Estanbol', 'Izmir', 'Salonik', 'NA']:
+        if origen not in ['Jeneral', 'Estanbol', 'Izmir', 'Salonik', 'Balkanes', 'NA']:
             raise Exception(f"Invalid origen '{origen}' in file '{filename}'")
 
         if 'versions' not in data:
