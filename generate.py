@@ -438,6 +438,10 @@ def _add_ladino_word(original_word, accented_word, dictionary, pages, entry, cou
     logging.info(f"Add ladino word: '{original_word}' '{word}' '{accented_word}'")
     #print(entry)
     count['dictionary']['ladino']['words'] += 1
+
+    for example in entry.get('examples', []):
+        if 'ladino' in example:
+            count['dictionary']['ladino']['examples'] += 1
     source_language = 'ladino'
     if word not in dictionary[source_language]:
         dictionary[source_language][word] = {}
