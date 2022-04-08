@@ -74,10 +74,10 @@ def test_minimal(tmpdir):
     shutil.copy(os.path.join('tests', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     dictionary_source = load_dictionary(tmpdir)
 
-def test_bad(tmpdir):
-    name = 'no_grammar'
-    expected = "grammar are missing from file no_grammar.yaml"
-
+@pytest.mark.parametrize("name,expected", [
+    ('no_grammar', "grammar are missing from file no_grammar.yaml"),
+])
+def test_bad(tmpdir, name, expected):
     shutil.copy(os.path.join('tests', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     with pytest.raises(Exception) as err:
         dictionary_source = load_dictionary(tmpdir)
