@@ -365,12 +365,6 @@ def load_dictionary(path_to_dictionary):
         if 'versions' not in data:
             raise Exception(f'versions are missing from file {filename}')
 
-        for version in data['versions']:
-            if 'ladino' not in version:
-                raise Exception(f'Ladino is missing from file {filename}')
-            version['source'] = filename
-            words.append(version)
-
         if grammar == 'verb' and 'conjugations' not in data:
             raise Exception(f"Grammar is verb, but there are NO conjugations in {filename}")
         if grammar != 'verb' and 'conjugations' in data:
@@ -391,6 +385,12 @@ def load_dictionary(path_to_dictionary):
 
         if 'examples' not in data:
             raise Exception(f"examples is missing in {filename}")
+
+        for version in data['versions']:
+            if 'ladino' not in version:
+                raise Exception(f'Ladino is missing from file {filename}')
+            version['source'] = filename
+            words.append(version)
 
         if 'conjugations' in data:
             for verb_time, conjugation in data['conjugations'].items():
