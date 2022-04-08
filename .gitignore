@@ -3,3 +3,5 @@ output/
 ladino-diksionaryo-data
 LibreLingo-Judeo-Spanish-from-English
 __pycache__/
+.coverage
+htmlcov/
