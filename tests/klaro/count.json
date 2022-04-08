@@ -1,0 +1,34 @@
+{
+    "dictionary": {
+        "english": {
+            "phrases": 0,
+            "words": 4
+        },
+        "french": {
+            "phrases": 0,
+            "words": 0
+        },
+        "hebrew": {
+            "phrases": 0,
+            "words": 4
+        },
+        "ladino": {
+            "phrases": 0,
+            "words": 4
+        },
+        "portuguese": {
+            "phrases": 0,
+            "words": 0
+        },
+        "spanish": {
+            "phrases": 0,
+            "words": 4
+        },
+        "turkish": {
+            "phrases": 0,
+            "words": 2
+        }
+    },
+    "source_phrases": 450,
+    "target_phrases": 453
+}
