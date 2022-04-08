@@ -385,6 +385,8 @@ def load_dictionary(path_to_dictionary):
 
         if 'examples' not in data:
             raise Exception(f"examples is missing in {filename}")
+        examples = data['examples']
+        comments = data.get('comments')
 
         for version in data['versions']:
             if 'ladino' not in version:
