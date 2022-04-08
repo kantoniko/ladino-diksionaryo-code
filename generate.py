@@ -18,13 +18,16 @@ from librelingo_yaml_loader.yaml_loader import load_course
 
 lili_repository_url = 'https://github.com/szabgab/LibreLingo-Judeo-Spanish-from-English'
 
+class LadinoError(Exception):
+    pass
+
 
 languages = ['english', 'french', 'hebrew', 'spanish', 'turkish', 'portuguese']
 
 def parse_skill_path(path):
     match = re.search(r"^([a-zA-Z0-9-]+)/skills/([a-zA-Z0-9_-]+)\.yaml$", path)
     if not match:
-        raise Exception(f"unrecoginized skill path: '{path}'")
+        raise LadinoError(f"unrecoginized skill path: '{path}'")
     return match
 
 
@@ -353,40 +356,40 @@ def load_dictionary(path_to_dictionary):
             data = safe_load(fh)
 
         if 'grammar' not in data:
-            raise Exception(f"grammar is missing from file '{filename}'")
+            raise LadinoError(f"grammar is missing from file '{filename}'")
         grammar = data['grammar']
         if grammar not in ['adjective', 'adverb', 'noun', 'verb', None]:
-            raise Exception(f"Invalid grammar '{grammar}' in file '{filename}'")
+            raise LadinoError(f"Invalid grammar '{grammar}' in file '{filename}'")
 
         if 'origen' not in data:
-            raise Exception(f"origen is missing from file '{filename}'")
+            raise LadinoError(f"origen is missing from file '{filename}'")
         origen  = data['origen']
         if origen not in ['Jeneral', 'Estanbol', 'Izmir', 'Salonik', 'Balkanes', 'NA']:
-            raise Exception(f"Invalid origen '{origen}' in file '{filename}'")
+            raise LadinoError(f"Invalid origen '{origen}' in file '{filename}'")
 
         if 'versions' not in data:
-            raise Exception(f'versions are missing from file {filename}')
+            raise LadinoError(f'versions are missing from file {filename}')
 
         if grammar == 'verb' and 'conjugations' not in data:
-            raise Exception(f"Grammar is verb, but there are NO conjugations in {filename}")
+            raise LadinoError(f"Grammar is verb, but there are NO conjugations in {filename}")
         if grammar != 'verb' and 'conjugations' in data:
-            raise Exception(f"Grammar is NOT verb, but there are conjugations in {filename}")
+            raise LadinoError(f"Grammar is NOT verb, but there are conjugations in {filename}")
 
         if grammar in ['noun']: # 'adjective',
             for version in data['versions']:
                 gender = version.get('gender')
                 if gender is None:
-                    raise Exception(f"gender is None in {filename} version {version}")
+                    raise LadinoError(f"gender is None in {filename} version {version}")
                 if gender not in ['feminine', 'masculine']:
-                    raise Exception(f"gender is '{gener}' in {filename} version {version}")
+                    raise LadinoError(f"gender is '{gener}' in {filename} version {version}")
                 number = version.get('number')
                 if number is None:
-                    raise Exception(f"number is None in {filename} version {version}")
+                    raise LadinoError(f"number is None in {filename} version {version}")
                 if number not in ['singular', 'plural']:
-                    raise Exception(f"number is '{number}' in {filename} version {version}")
+                    raise LadinoError(f"number is '{number}' in {filename} version {version}")
 
         if 'examples' not in data:
-            raise Exception(f"examples is missing in {filename}")
+            raise LadinoError(f"examples is missing in {filename}")
         examples = data['examples']
         if examples == []:
             examples = None
@@ -396,7 +399,7 @@ def load_dictionary(path_to_dictionary):
 
         for version in data['versions']:
             if 'ladino' not in version:
-                raise Exception(f'Ladino is missing from file {filename}')
+                raise LadinoError(f'Ladino is missing from file {filename}')
             version['source'] = filename
 
             # Add examples and comments to the first version of the word.
@@ -414,7 +417,7 @@ def load_dictionary(path_to_dictionary):
                 #print(conjugation)
                 for pronoun, version in conjugation.items():
                     if 'ladino' not in version:
-                        raise Exception(f'Ladino is missing from file {filename}')
+                        raise LadinoError(f'Ladino is missing from file {filename}')
                     version['source'] = filename
                     words.append(version)
     return words
@@ -427,7 +430,7 @@ def _add_word(dictionary, source_language, target_language, source_word, target_
     elif target_words.__class__.__name__ == 'list':
         dictionary[source_language][source_word][target_language].extend(target_words)
     else:
-        raise Exception("bad")
+        raise LadinoError("bad")
     dictionary[source_language][source_word][target_language] = sorted(set(dictionary[source_language][source_word][target_language]))
 
 def _add_ladino_word(original_word, accented_word, dictionary, pages, entry):
@@ -459,7 +462,7 @@ def _add_translated_words(source_language, dictionary, pages, entry, count):
     elif translations.__class__.__name__ == 'list':
         translated_words = translations
     else:
-        raise Exception(f"Invalid type {translations.__class__.__name__}")
+        raise LadinoError(f"Invalid type {translations.__class__.__name__}")
 
     for word in translated_words:
         if word not in dictionary[source_language]:

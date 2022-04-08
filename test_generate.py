@@ -4,7 +4,7 @@ import shutil
 import pytest
 
 from librelingo_yaml_loader.yaml_loader import load_course
-from generate import load_dictionary, collect_data, export_to_html, export_json, export_dictionary_pages
+from generate import load_dictionary, collect_data, export_to_html, export_json, export_dictionary_pages, LadinoError
 
 
 data_path = 'ladino-diksionaryo-data/words'
@@ -82,7 +82,7 @@ def test_bad(tmpdir, name, expected):
     shutil.copy(os.path.join('tests', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     with pytest.raises(Exception) as err:
         dictionary_source = load_dictionary(tmpdir)
-    assert err.type == Exception
+    assert err.type == LadinoError
     assert str(err.value) == expected
 
 
