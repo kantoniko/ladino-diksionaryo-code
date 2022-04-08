@@ -356,19 +356,19 @@ def load_dictionary(path_to_dictionary):
             data = safe_load(fh)
 
         if 'grammar' not in data:
-            raise LadinoError(f"grammar is missing from file '{filename}'")
+            raise LadinoError(f"The 'grammar' field is missing from file '{filename}'")
         grammar = data['grammar']
         if grammar not in ['adjective', 'adverb', 'noun', 'verb', None]:
             raise LadinoError(f"Invalid grammar '{grammar}' in file '{filename}'")
 
         if 'origen' not in data:
-            raise LadinoError(f"origen is missing from file '{filename}'")
+            raise LadinoError(f"The 'origen' field is missing from file '{filename}'")
         origen  = data['origen']
         if origen not in ['Jeneral', 'Estanbol', 'Izmir', 'Salonik', 'Balkanes', 'NA']:
             raise LadinoError(f"Invalid origen '{origen}' in file '{filename}'")
 
         if 'versions' not in data:
-            raise LadinoError(f'versions are missing from file {filename}')
+            raise LadinoError(f"The 'versions' field is missing from file '{filename}'")
 
         if grammar == 'verb' and 'conjugations' not in data:
             raise LadinoError(f"Grammar is verb, but there are NO conjugations in {filename}")

@@ -1,0 +1,15 @@
+grammar: null
+origen: Strange
+#id: '571'
+
+versions:
+  - ladino: klaro
+    #accented: klaro
+    #gender: masculine
+    #number: singular
+
+    #translations:
+    #  english: clear
+
+examples: []
+

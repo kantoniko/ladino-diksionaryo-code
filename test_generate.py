@@ -75,8 +75,11 @@ def test_minimal(tmpdir):
     dictionary_source = load_dictionary(tmpdir)
 
 @pytest.mark.parametrize("name,expected", [
-    ('no_grammar', "grammar is missing from file 'no_grammar.yaml'"),
-    ('no_origen', "origen is missing from file 'no_origen.yaml'"),
+    ('no_grammar', "The 'grammar' field is missing from file 'no_grammar.yaml'"),
+    ('bad_grammar', "Invalid grammar 'Strange' in file 'bad_grammar.yaml'"),
+    ('no_origen', "The 'origen' field is missing from file 'no_origen.yaml'"),
+    ('bad_origen', "Invalid origen 'Strange' in file 'bad_origen.yaml'"),
+    ('no_versions', "The 'versions' field is missing from file 'no_versions.yaml'"),
 ])
 def test_bad(tmpdir, name, expected):
     shutil.copy(os.path.join('tests', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
