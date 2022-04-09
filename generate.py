@@ -379,7 +379,7 @@ def chceck_grammar(config, data, filename):
     if 'grammar' not in data:
         raise LadinoError(f"The 'grammar' field is missing from file '{filename}'")
     grammar = data['grammar']
-    if grammar not in ['adjective', 'adverb', 'noun', 'verb', 'preposition', 'pronoun', None]:
+    if grammar not in config['gramatika']:
         raise LadinoError(f"Invalid grammar '{grammar}' in file '{filename}'")
     return grammar
 
