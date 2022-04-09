@@ -361,6 +361,13 @@ def _make_them_list(translations, filename):
             continue
         translations[language] = _make_it_list(translations[language], filename)
 
+def check_categories(data, filename):
+    categories = ['animales']
+    if 'categories' not in data:
+        return
+    for cat in data['categories']:
+        if cat not in categories:
+            raise LadinoError(f"Invalid category '{cat}' in file '{filename}'")
 
 def load_dictionary(path_to_dictionary):
     logging.info(f"Path to dictionary: '{path_to_dictionary}'")
@@ -385,6 +392,8 @@ def load_dictionary(path_to_dictionary):
         origen  = data['origen']
         if origen not in ['Jeneral', 'Estanbol', 'Izmir', 'Salonik', 'Balkanes', 'Aki Yerushalayim', 'Torah/Tanah', 'Otros', 'Gresia', 'Ladinokomunita', 'Sarayevo', 'NA']:
             raise LadinoError(f"Invalid origen '{origen}' in file '{filename}'")
+
+        check_categories(data, filename)
 
         if 'versions' not in data:
             raise LadinoError(f"The 'versions' field is missing from file '{filename}'")
