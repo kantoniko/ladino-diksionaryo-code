@@ -546,7 +546,9 @@ def get_args():
     args = parser.parse_args()
     return args
 
-
+def load_config(path_to_repo):
+    with open(os.path.join(path_to_repo, 'config.yaml')) as fh:
+        return safe_load(fh)
 
 def main():
     start = time.time()
@@ -559,8 +561,7 @@ def main():
     course = load_course(args.course) if args.course else None
     logging.info("Course loaded")
     path_to_repo = args.dictionary
-    with open(os.path.join(path_to_repo, 'config.yaml')) as fh:
-        config = safe_load(fh)
+    config = load_config(path_to_repo)
     dictionary_source = load_dictionary(config, os.path.join(path_to_repo, 'words'))
 
     if args.html:

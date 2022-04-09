@@ -4,9 +4,10 @@ import shutil
 import pytest
 
 from librelingo_yaml_loader.yaml_loader import load_course
-from generate import load_dictionary, collect_data, export_to_html, export_json, export_dictionary_pages, LadinoError
+from generate import load_dictionary, collect_data, export_to_html, export_json, export_dictionary_pages, LadinoError, load_config
 
 
+repo_path = 'ladino-diksionaryo-data'
 data_path = 'ladino-diksionaryo-data/words'
 path_to_course = 'LibreLingo-Judeo-Spanish-from-English/course'
 
@@ -30,7 +31,7 @@ def test_one_file(tmpdir, request, name):
 
     course = load_course(path_to_course)
     #course = None
-    dictionary_source = load_dictionary(tmpdir)
+    dictionary_source = load_dictionary(load_config(repo_path), tmpdir)
     target, source, dictionary, count, pages = collect_data(course, dictionary_source)
     # export in case we would like to update the files in the tests/ directory
     save = request.config.getoption("--save")
@@ -65,14 +66,14 @@ def test_all(tmpdir):
     print(tmpdir)
     course = load_course(path_to_course)
     #course = None
-    dictionary_source = load_dictionary(data_path)
+    dictionary_source = load_dictionary(load_config(repo_path), data_path)
     target, source, dictionary, count, pages = collect_data(course, dictionary_source)
     export_dictionary_pages(pages, tmpdir)
 
 def test_minimal(tmpdir):
     name = 'minimal'
     shutil.copy(os.path.join('tests', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
-    dictionary_source = load_dictionary(tmpdir)
+    dictionary_source = load_dictionary(load_config(repo_path), tmpdir)
 
 @pytest.mark.parametrize("name,expected", [
     ('no_grammar', "The 'grammar' field is missing from file 'no_grammar.yaml'"),
@@ -87,7 +88,7 @@ def test_minimal(tmpdir):
 def test_bad(tmpdir, name, expected):
     shutil.copy(os.path.join('tests', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     with pytest.raises(Exception) as err:
-        dictionary_source = load_dictionary(tmpdir)
+        dictionary_source = load_dictionary(load_config(repo_path), tmpdir)
     assert err.type == LadinoError
     assert str(err.value) == expected
 
