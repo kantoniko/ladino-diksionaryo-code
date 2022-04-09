@@ -376,7 +376,7 @@ def load_dictionary(path_to_dictionary):
         if 'grammar' not in data:
             raise LadinoError(f"The 'grammar' field is missing from file '{filename}'")
         grammar = data['grammar']
-        if grammar not in ['adjective', 'adverb', 'noun', 'verb', None]:
+        if grammar not in ['adjective', 'adverb', 'noun', 'verb', 'preposition', 'pronoun', None]:
             raise LadinoError(f"Invalid grammar '{grammar}' in file '{filename}'")
 
         if 'origen' not in data:
