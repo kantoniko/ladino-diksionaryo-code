@@ -361,18 +361,18 @@ def _make_them_list(translations, filename):
             continue
         translations[language] = _make_it_list(translations[language], filename)
 
-def check_categories(data, filename):
-    categories = ['animales']
+def check_categories(config, data, filename):
     if 'categories' not in data:
         return
     for cat in data['categories']:
-        if cat not in categories:
+        if cat not in config['kategorias']:
             raise LadinoError(f"Invalid category '{cat}' in file '{filename}'")
 
-def load_dictionary(path_to_dictionary):
+def load_dictionary(config, path_to_dictionary):
     logging.info(f"Path to dictionary: '{path_to_dictionary}'")
     if path_to_dictionary is None:
         return
+
     files = os.listdir(path_to_dictionary)
     words = []
     for filename in files:
@@ -393,7 +393,7 @@ def load_dictionary(path_to_dictionary):
         if origen not in ['Jeneral', 'Estanbol', 'Izmir', 'Salonik', 'Balkanes', 'Aki Yerushalayim', 'Torah/Tanah', 'Otros', 'Gresia', 'Ladinokomunita', 'Sarayevo', 'NA']:
             raise LadinoError(f"Invalid origen '{origen}' in file '{filename}'")
 
-        check_categories(data, filename)
+        check_categories(config, data, filename)
 
         if 'versions' not in data:
             raise LadinoError(f"The 'versions' field is missing from file '{filename}'")
@@ -558,7 +558,10 @@ def main():
     logging.info("Path to course: '%s'", args.course)
     course = load_course(args.course) if args.course else None
     logging.info("Course loaded")
-    dictionary_source = load_dictionary(args.dictionary)
+    path_to_repo = args.dictionary
+    with open(os.path.join(path_to_repo, 'config.yaml')) as fh:
+        config = safe_load(fh)
+    dictionary_source = load_dictionary(config, os.path.join(path_to_repo, 'words'))
 
     if args.html:
         target, source, dictionary, count, pages = collect_data(course, dictionary_source)
