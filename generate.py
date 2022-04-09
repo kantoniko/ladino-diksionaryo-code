@@ -449,12 +449,7 @@ def load_dictionary(path_to_dictionary):
 def _add_word(dictionary, source_language, target_language, source_word, target_words):
     if target_language not in dictionary[source_language][source_word]:
         dictionary[source_language][source_word][target_language] = []
-    if target_words.__class__.__name__ == 'str':
-        dictionary[source_language][source_word][target_language].append(target_words)
-    elif target_words.__class__.__name__ == 'list':
-        dictionary[source_language][source_word][target_language].extend(target_words)
-    else:
-        raise LadinoError("bad")
+    dictionary[source_language][source_word][target_language].extend(target_words)
     dictionary[source_language][source_word][target_language] = sorted(set(dictionary[source_language][source_word][target_language]))
 
 def _add_ladino_word(original_word, accented_word, dictionary, pages, entry, count):
@@ -471,7 +466,7 @@ def _add_ladino_word(original_word, accented_word, dictionary, pages, entry, cou
         dictionary[source_language][word] = {}
     for target_language, target_words in entry['translations'].items():
         _add_word(dictionary, source_language, target_language, word, target_words)
-    _add_word(dictionary, source_language, 'ladino', word, original_word)
+    _add_word(dictionary, source_language, 'ladino', word, [original_word])
 
     if word not in pages[source_language]:
         pages[source_language][word] = []
@@ -479,7 +474,7 @@ def _add_ladino_word(original_word, accented_word, dictionary, pages, entry, cou
     pages[source_language][word].sort(key=lambda x: (x['ladino'], x['translations']['english'][0]))
 
     if accented_word:
-        _add_word(dictionary, source_language, target_language='accented', source_word=word, target_words=accented_word)
+        _add_word(dictionary, source_language, target_language='accented', source_word=word, target_words=[accented_word])
 
 def _add_translated_words(source_language, dictionary, pages, entry, count):
     translations = entry['translations'].get(source_language)
