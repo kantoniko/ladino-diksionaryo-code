@@ -30,18 +30,14 @@
             "english": [
                 "clear"
             ],
-            "french": [
-                ""
-            ],
+            "french": [],
             "hebrew": [
                 "ברורה"
             ],
             "ladino": [
                 "klara"
             ],
-            "portuguese": [
-                ""
-            ],
+            "portuguese": [],
             "spanish": [
                 "clara"
             ],
@@ -56,24 +52,18 @@
             "english": [
                 "clear"
             ],
-            "french": [
-                ""
-            ],
+            "french": [],
             "hebrew": [
                 "ברורות"
             ],
             "ladino": [
                 "klaras"
             ],
-            "portuguese": [
-                ""
-            ],
+            "portuguese": [],
             "spanish": [
                 "claras"
             ],
-            "turkish": [
-                ""
-            ]
+            "turkish": []
         },
         "klaro": {
             "accented": [
@@ -82,18 +72,14 @@
             "english": [
                 "clear"
             ],
-            "french": [
-                ""
-            ],
+            "french": [],
             "hebrew": [
                 "ברור"
             ],
             "ladino": [
                 "klaro"
             ],
-            "portuguese": [
-                ""
-            ],
+            "portuguese": [],
             "spanish": [
                 "claro"
             ],
@@ -108,24 +94,18 @@
             "english": [
                 "clear"
             ],
-            "french": [
-                ""
-            ],
+            "french": [],
             "hebrew": [
                 "ברורים"
             ],
             "ladino": [
                 "klaros"
             ],
-            "portuguese": [
-                ""
-            ],
+            "portuguese": [],
             "spanish": [
                 "claros"
             ],
-            "turkish": [
-                ""
-            ]
+            "turkish": []
         }
     },
     "portuguese": {},
