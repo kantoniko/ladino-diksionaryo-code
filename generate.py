@@ -342,21 +342,23 @@ def collect_data_from_course(course, target, source, dictionary, count):
 
             _collect_phrases(skill, count, target, source)
 
-def _make_it_list(translations, filename):
+def _make_it_list(target_words, filename):
+    if target_words.__class__.__name__ == 'str':
+        if target_words == '':
+            return []
+        else:
+            return [target_words]
+    elif target_words.__class__.__name__ == 'list':
+        return target_words
+    else:
+        raise LadinoError(f"bad type {target_words.__class__.__name__} for {translations} in '{filename}'")
+
+
+def _make_them_list(translations, filename):
     for language in languages:
         if language not in translations:
             continue
-        target_words = translations[language]
-        if target_words.__class__.__name__ == 'str':
-            if target_words == '':
-                translations[language] = []
-            else:
-                translations[language] = [target_words]
-        elif target_words.__class__.__name__ == 'list':
-            #version['translations'][language] = target_words
-            pass
-        else:
-            raise LadinoError(f"bad type {target_words.__class__.__name__} for {translations} in '{filename}'")
+        translations[language] = _make_it_list(translations[language], filename)
 
 
 def load_dictionary(path_to_dictionary):
@@ -419,7 +421,7 @@ def load_dictionary(path_to_dictionary):
             version['source'] = filename
 
             if 'translations' in version:
-                _make_it_list(version['translations'], filename)
+                _make_them_list(version['translations'], filename)
 
             # Add examples and comments to the first version of the word.
             if examples is not None:
@@ -439,8 +441,9 @@ def load_dictionary(path_to_dictionary):
                         raise LadinoError(f'Ladino is missing from file {filename}')
                     version['source'] = filename
                     if 'translations' in version:
-                        _make_it_list(version['translations'], filename)
+                        _make_them_list(version['translations'], filename)
                     words.append(version)
+    #print(words)
     return words
 
 def _add_word(dictionary, source_language, target_language, source_word, target_words):
