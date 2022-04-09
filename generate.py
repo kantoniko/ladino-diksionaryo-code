@@ -481,18 +481,10 @@ def _add_ladino_word(original_word, accented_word, dictionary, pages, entry, cou
 def _add_translated_words(source_language, dictionary, pages, entry, count):
     translations = entry['translations'].get(source_language)
     #print(f"{source_language}: {translations}")
-    if translations is None or translations == '':
+    if translations is None:
         return
 
-    if translations.__class__.__name__ == 'str':
-        raise Exception(f"{translations.__class__.__name__} {entry}")
-        translated_words = [translations]
-    elif translations.__class__.__name__ == 'list':
-        translated_words = translations
-    else:
-        raise LadinoError(f"Invalid type {translations.__class__.__name__}")
-
-    for word in translated_words:
+    for word in translations:
         if word not in dictionary[source_language]:
             dictionary[source_language][word] = []
         dictionary[source_language][word].append(entry['ladino'])
