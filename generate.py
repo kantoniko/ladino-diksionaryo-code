@@ -372,7 +372,7 @@ def check_origen(config, data, filename):
     if 'origen' not in data:
         raise LadinoError(f"The 'origen' field is missing from file '{filename}'")
     origen  = data['origen']
-    if origen not in ['Jeneral', 'Estanbol', 'Izmir', 'Salonik', 'Balkanes', 'Aki Yerushalayim', 'Torah/Tanah', 'Otros', 'Gresia', 'Ladinokomunita', 'Sarayevo', 'NA']:
+    if origen not in config['origenes']:
         raise LadinoError(f"Invalid origen '{origen}' in file '{filename}'")
 
 def load_dictionary(config, path_to_dictionary):
