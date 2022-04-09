@@ -57,8 +57,10 @@ $(document).ready(function(){
             }
             let word = words[ix].toLowerCase()
             console.log(word);
-            const english_from_ladino = ladino_to_english ? ladino_to_english[word] : null;
-            const ladino_from_english = english_to_ladino ? english_to_ladino[word] : null;
+            // const english_from_ladino = ladino_to_english ? ladino_to_english[word] : null;
+            // const ladino_from_english = english_to_ladino ? english_to_ladino[word] : null;
+            const english_from_ladino = null;
+            const ladino_from_english = null;
 
             let source_language = 'ladino';
             let dictionary_word = dictionary['ladino'][word];
