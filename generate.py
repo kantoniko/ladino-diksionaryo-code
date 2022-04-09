@@ -368,6 +368,13 @@ def check_categories(config, data, filename):
         if cat not in config['kategorias']:
             raise LadinoError(f"Invalid category '{cat}' in file '{filename}'")
 
+def check_origen(config, data, filename):
+    if 'origen' not in data:
+        raise LadinoError(f"The 'origen' field is missing from file '{filename}'")
+    origen  = data['origen']
+    if origen not in ['Jeneral', 'Estanbol', 'Izmir', 'Salonik', 'Balkanes', 'Aki Yerushalayim', 'Torah/Tanah', 'Otros', 'Gresia', 'Ladinokomunita', 'Sarayevo', 'NA']:
+        raise LadinoError(f"Invalid origen '{origen}' in file '{filename}'")
+
 def load_dictionary(config, path_to_dictionary):
     logging.info(f"Path to dictionary: '{path_to_dictionary}'")
     if path_to_dictionary is None:
@@ -387,12 +394,7 @@ def load_dictionary(config, path_to_dictionary):
         if grammar not in ['adjective', 'adverb', 'noun', 'verb', 'preposition', 'pronoun', None]:
             raise LadinoError(f"Invalid grammar '{grammar}' in file '{filename}'")
 
-        if 'origen' not in data:
-            raise LadinoError(f"The 'origen' field is missing from file '{filename}'")
-        origen  = data['origen']
-        if origen not in ['Jeneral', 'Estanbol', 'Izmir', 'Salonik', 'Balkanes', 'Aki Yerushalayim', 'Torah/Tanah', 'Otros', 'Gresia', 'Ladinokomunita', 'Sarayevo', 'NA']:
-            raise LadinoError(f"Invalid origen '{origen}' in file '{filename}'")
-
+        check_origen(config, data, filename)
         check_categories(config, data, filename)
 
         if 'versions' not in data:
