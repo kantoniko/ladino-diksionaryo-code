@@ -375,6 +375,15 @@ def check_origen(config, data, filename):
     if origen not in config['origenes']:
         raise LadinoError(f"Invalid origen '{origen}' in file '{filename}'")
 
+def chceck_grammar(config, data, filename):
+    if 'grammar' not in data:
+        raise LadinoError(f"The 'grammar' field is missing from file '{filename}'")
+    grammar = data['grammar']
+    if grammar not in ['adjective', 'adverb', 'noun', 'verb', 'preposition', 'pronoun', None]:
+        raise LadinoError(f"Invalid grammar '{grammar}' in file '{filename}'")
+    return grammar
+
+
 def load_dictionary(config, path_to_dictionary):
     logging.info(f"Path to dictionary: '{path_to_dictionary}'")
     if path_to_dictionary is None:
@@ -388,12 +397,7 @@ def load_dictionary(config, path_to_dictionary):
         with open(path) as fh:
             data = safe_load(fh)
 
-        if 'grammar' not in data:
-            raise LadinoError(f"The 'grammar' field is missing from file '{filename}'")
-        grammar = data['grammar']
-        if grammar not in ['adjective', 'adverb', 'noun', 'verb', 'preposition', 'pronoun', None]:
-            raise LadinoError(f"Invalid grammar '{grammar}' in file '{filename}'")
-
+        grammar = chceck_grammar(config, data, filename)
         check_origen(config, data, filename)
         check_categories(config, data, filename)
 
