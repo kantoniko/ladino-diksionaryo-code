@@ -16,8 +16,6 @@ from yaml import safe_load
 import markdown
 from jinja2 import Environment, FileSystemLoader
 
-lili_repository_url = 'https://github.com/szabgab/LibreLingo-Judeo-Spanish-from-English'
-
 class LadinoError(Exception):
     pass
 
@@ -131,24 +129,6 @@ def export_words_html_page(all_words, language, path, html_file):
     with open(html_file, "w") as fh:
         fh.write(html)
 
-
-def export_word_html_pages(all_words, language, words_dir):
-    logging.info("Export word html page")
-    branch = "main"
-
-    for target_word in all_words:
-        html = render(
-            "word.html",
-            title=f"{target_word} in Ladino",
-            target_word=target_word,
-            word_translations=language["words"][target_word],
-            dictionary_words=language["dictionary"][target_word],
-            phrases=language["phrases"][target_word],
-            repository_url=lili_repository_url,
-            branch=branch,
-        )
-        with open(os.path.join(words_dir, target_word.lower() + ".html"), "w") as fh:
-            fh.write(html)
 
 def remove_previous_content_of(html_dir):
     for thing in glob.glob(os.path.join(html_dir, '*')):

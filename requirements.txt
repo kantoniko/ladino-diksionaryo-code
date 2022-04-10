@@ -1,7 +1,5 @@
 markdown
 jinja2
-librelingo_json_export
-librelingo_yaml_loader
 
 pytest
 pytest-random-order
