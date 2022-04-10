@@ -115,21 +115,6 @@ def export_json(all_words, filename, pretty=False):
             json.dump(all_words, fh, ensure_ascii=False, sort_keys=True)
 
 
-def export_words_html_page(all_words, language, path, html_file):
-    logging.info("Export words html page")
-    html = render(
-        "words.html",
-        title=f"Ladino for English words",
-        page=path,
-        path=path,
-        all_words=all_words,
-        dictionary=language["dictionary"],
-        phrases=language["phrases"],
-    )
-    with open(html_file, "w") as fh:
-        fh.write(html)
-
-
 def remove_previous_content_of(html_dir):
     for thing in glob.glob(os.path.join(html_dir, '*')):
         if os.path.isdir(thing):
