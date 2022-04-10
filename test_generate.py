@@ -3,14 +3,11 @@ import os
 import shutil
 import pytest
 
-from librelingo_yaml_loader.yaml_loader import load_course
 from generate import load_dictionary, collect_data, export_to_html, export_json, export_dictionary_pages, LadinoError, load_config
 
 
 repo_path = 'ladino-diksionaryo-data'
 data_path = 'ladino-diksionaryo-data/words'
-path_to_course = 'LibreLingo-Judeo-Spanish-from-English/course'
-
 
 # Explanation why each word is included in the tests:
 # andjinara: our first test word. noun. for now it does not have a plural.
@@ -29,10 +26,8 @@ def test_one_file(tmpdir, request, name):
     else:
         shutil.copy(os.path.join(data_path, f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
 
-    course = load_course(path_to_course)
-    #course = None
     dictionary_source = load_dictionary(load_config(repo_path), tmpdir)
-    target, source, dictionary, count, pages = collect_data(course, dictionary_source)
+    dictionary, count, pages = collect_data(dictionary_source)
     # export in case we would like to update the files in the tests/ directory
     save = request.config.getoption("--save")
     if save:
@@ -40,7 +35,6 @@ def test_one_file(tmpdir, request, name):
         os.makedirs(html_dir, exist_ok=True)
     else:
         html_dir = tmpdir
-    #export_to_html(course, target, source, dictionary, count, html_dir, pretty=True)
     export_json(dictionary, os.path.join(html_dir, "dictionary.json"), pretty=True)
     export_json(count, os.path.join(html_dir, "count.json"), pretty=True)
     export_dictionary_pages(pages, html_dir)
@@ -64,10 +58,8 @@ def test_one_file(tmpdir, request, name):
 
 def test_all(tmpdir):
     print(tmpdir)
-    course = load_course(path_to_course)
-    #course = None
     dictionary_source = load_dictionary(load_config(repo_path), data_path)
-    target, source, dictionary, count, pages = collect_data(course, dictionary_source)
+    dictionary, count, pages = collect_data(dictionary_source)
     export_dictionary_pages(pages, tmpdir)
 
 def test_minimal(tmpdir):

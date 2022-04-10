@@ -15,7 +15,6 @@ from yaml import safe_load
 
 import markdown
 from jinja2 import Environment, FileSystemLoader
-from librelingo_yaml_loader.yaml_loader import load_course
 
 lili_repository_url = 'https://github.com/szabgab/LibreLingo-Judeo-Spanish-from-English'
 
@@ -110,29 +109,6 @@ def export_main_html_page(html_dir):
     with open(os.path.join(html_dir, "index.html"), "w") as fh:
         fh.write(html)
 
-def export_skill_html_pages(course, html_dir):
-    logging.info("Export skill html pages")
-    branch = "main"  # how can we know which is the default branch of a repository?
-    for module in course.modules:
-        for skill in module.skills:
-            html = render(
-                "skill.html",
-                title=f"Ladino for English speakers",
-                branch=branch,
-                skill=skill,
-                repository_url=lili_repository_url,
-            )
-            match = parse_skill_path(skill.filename)
-            module_name = match.group(1)
-            file_name = match.group(2)
-            dir_path = os.path.join(html_dir, "course", module_name, "skills")
-            # print(dir_path)
-            os.makedirs(dir_path, exist_ok=True)
-            # filename = skillurl_filter(skill.filename)
-            with open(os.path.join(dir_path, file_name + ".html"), "w") as fh:
-                fh.write(html)
-
-
 def export_json(all_words, filename, pretty=False):
     with open(filename, "w") as fh:
         if pretty:
@@ -181,7 +157,7 @@ def remove_previous_content_of(html_dir):
         else:
             os.remove(thing)
 
-def export_to_html(course, target, source, dictionary, count, pages, html_dir, pretty=False):
+def export_to_html(dictionary, count, pages, html_dir, pretty=False):
     logging.info("Export to HTML")
     root = os.path.dirname(os.path.abspath(__file__))
     os.makedirs(html_dir, exist_ok=True)
@@ -194,154 +170,17 @@ def export_to_html(course, target, source, dictionary, count, pages, html_dir, p
     export_main_html_page(html_dir)
     export_dictionary_pages(pages, html_dir)
 
-    if course:
-        all_target_words = (
-            set(target["words"].keys())
-            .union(set(target["dictionary"].keys()))
-            .union(set(target["phrases"].keys()))
-        )
-        count["target_words"] = len(all_target_words)
-
-        all_source_words = (
-            set(source["words"].keys())
-            .union(set(source["dictionary"].keys()))
-            .union(set(source["phrases"].keys()))
-        )
-        count["source_words"] = len(all_source_words)
-
-        for path in ["target", "source"]:
-            words_dir = os.path.join(html_dir, path)
-            os.makedirs(words_dir, exist_ok=True)
-        export_json(collect_words(source, "source-to-target"), os.path.join(html_dir, "source-to-target.json"), pretty=pretty)
-        export_json(collect_words(target, "target-to-source"), os.path.join(html_dir, "target-to-source.json"), pretty=pretty)
-
-        export_skill_html_pages(course, html_dir)
-        export_words_html_page(
-            all_target_words,
-            target,
-            "target",
-            os.path.join(html_dir, "target.html"),
-        )
-        export_words_html_page(
-            all_source_words,
-            source,
-            "source",
-            os.path.join(html_dir, "source.html"),
-        )
-        export_word_html_pages(
-            all_target_words, target, os.path.join(html_dir, "target")
-        )
-        export_word_html_pages(
-            all_source_words, source, os.path.join(html_dir, "source")
-        )
     export_about_html_page(count, html_dir)
     export_json(count, os.path.join(html_dir, "count.json"), pretty=pretty)
 
 
-def clean(text):
-    return re.sub(r'[{}.!?¡¿",/]', "", text)
-
-def collect_phrases(course):
-    target_to_source = {}
-    source_to_target = {}
-    for module in course.modules:
-        for skill in module.skills:
-            for phrase in skill.phrases:
-                # print(phrase)
-                for sentence in phrase.in_target_language:
-                    # if sentence in target_to_source:
-                    #    print(f"Same sentence '{sentence}' found twice")
-                    target_to_source[sentence] = phrase.in_source_language
-                for sentence in phrase.in_source_language:
-                    # if sentence in source_to_target:
-                    #    print(f"Same sentence '{sentence}' found twice")
-                    source_to_target[sentence] = phrase.in_target_language
-    return target_to_source, source_to_target
-
-
-def collect_words(language, direction):
-    all_words = {}
-    for word, translations in language["words"].items():
-        if word not in all_words:
-            all_words[word] = []
-        for translation in translations:
-            if direction == "source-to-target":
-                all_words[word].extend(translation["word"].in_target_language)
-            else:
-                all_words[word].extend(translation["word"].in_source_language)
-
-    for word, translations in language["dictionary"].items():
-        if word not in all_words:
-            all_words[word] = []
-        for translation in translations:
-            all_words[word].extend(translation["word"])
-    return all_words
-
-
-
-def _collect_phrases(skill, count, target, source):
-    for phrase in skill.phrases:
-        for sentence in phrase.in_target_language:
-            count["target_phrases"] += 1
-            for word in clean(sentence).split(" "):
-                target["phrases"][word.lower()].append(
-                    {"sentence": sentence, "skill": skill}
-                )
-        for sentence in phrase.in_source_language:
-            count["source_phrases"] += 1
-            for word in clean(sentence).split(" "):
-                source["phrases"][word.lower()].append(
-                    {"sentence": sentence, "skill": skill}
-                )
-
-
-def collect_data(course, dictionary_source):
-    count = {
-        "target_phrases": 0,
-        "source_phrases": 0,
-    }
-    target = {
-        "words": collections.defaultdict(list),
-        "dictionary": collections.defaultdict(list),
-        "phrases": collections.defaultdict(list),
-    }
-    source = {
-        "words": collections.defaultdict(list),
-        "dictionary": collections.defaultdict(list),
-        "phrases": collections.defaultdict(list),
-    }
+def collect_data(dictionary_source):
+    count = {}
     dictionary = {}
 
     pages = collect_data_from_dictionary(dictionary_source, dictionary, count)
-    if course:
-        collect_data_from_course(course, target, source, dictionary, count)
 
-    return target, source, dictionary, count, pages
-
-def collect_data_from_course(course, target, source, dictionary, count):
-    for module in course.modules:
-        for skill in module.skills:
-            for word in skill.words:
-                for txt in word.in_target_language:
-                    target["words"][clean(txt).lower()].append(
-                        {"word": word, "skill": skill}
-                    )
-                for txt in word.in_source_language:
-                    source["words"][clean(txt).lower()].append(
-                        {"word": word, "skill": skill}
-                    )
-
-            for left, right, target_to_source in skill.dictionary:
-                if target_to_source:
-                    target["dictionary"][clean(left).lower()].append(
-                        {"word": right, "skill": skill}
-                    )
-                else:
-                    source["dictionary"][clean(left).lower()].append(
-                        {"word": right, "skill": skill}
-                    )
-
-            _collect_phrases(skill, count, target, source)
+    return dictionary, count, pages
 
 def _make_it_list(target_words, filename):
     if target_words.__class__.__name__ == 'str':
@@ -539,9 +378,6 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--course", help="path to course directory that contains the course.yaml",
-    )
-    parser.add_argument(
         "--dictionary", help="path to directory where we find the dictionary files",
         required=True,
     )
@@ -563,17 +399,14 @@ def main():
         logging.basicConfig(level=logging.INFO)
     logging.info("Start generating Ladino dictionary website")
 
-    logging.info("Path to course: '%s'", args.course)
-    course = load_course(args.course) if args.course else None
-    logging.info("Course loaded")
     path_to_repo = args.dictionary
     config = load_config(path_to_repo)
     dictionary_source = load_dictionary(config, os.path.join(path_to_repo, 'words'))
 
     if args.html:
-        target, source, dictionary, count, pages = collect_data(course, dictionary_source)
+        dictionary, count, pages = collect_data(dictionary_source)
         logging.info(count)
-        export_to_html(course, target, source, dictionary, count, pages, args.html)
+        export_to_html(dictionary, count, pages, args.html)
 
     end = time.time()
     logging.info(f"Elapsed time: {int(end-start)} sec")
