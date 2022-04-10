@@ -1,5 +1,6 @@
 markdown
 jinja2
+pyyaml
 
 pytest
 pytest-random-order
