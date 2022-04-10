@@ -91,7 +91,7 @@ def export_about_html_page(count, html_dir):
     html = render(
         "about.html",
         title=f"Ladino dictionary - about",
-        page="index",
+        page="about",
         count=count,
         languages=languages,
     )
@@ -105,7 +105,7 @@ def export_main_html_page(html_dir):
     html = render(
         "converter.html",
         title=f"Ladino dictionary",
-        page="converter",
+        page="index",
     )
     with open(os.path.join(html_dir, "index.html"), "w") as fh:
         fh.write(html)
