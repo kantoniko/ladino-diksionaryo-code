@@ -1,4 +1,4 @@
-from generate import load_dictionary, collect_data, export_dictionary_pages, load_config
+from ladino.generate import load_dictionary, collect_data, export_dictionary_pages, load_config
 
 repo_path = 'ladino-diksionaryo-data'
 data_path = 'ladino-diksionaryo-data/words'
