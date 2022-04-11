@@ -50,7 +50,6 @@ def export_dictionary_pages(pages, html_dir):
     for word, data in words.items():
         filename = f'{word}.html'
         logging.info(f"Export to {filename}")
-        #logging.info(f"Export to {data}")
         html = render(
             "dictionary_word.html",
             os.path.join(words_dir, language, filename),
@@ -134,10 +133,7 @@ def export_to_html(dictionary, count, pages, html_dir, pretty=False):
 
 
 def collect_data(dictionary_source):
-    count = {}
-    dictionary = {}
-
-    pages = collect_data_from_dictionary(dictionary_source, dictionary, count)
+    dictionary, count, pages = collect_data_from_dictionary(dictionary_source)
 
     return dictionary, count, pages
 
@@ -309,8 +305,10 @@ def _add_translated_words(source_language, dictionary, pages, entry, count):
         pages[source_language][word].sort(key=lambda x: len(json.dumps(x, sort_keys=True)))
 
 
-def collect_data_from_dictionary(dictionary_source, dictionary, count):
+def collect_data_from_dictionary(dictionary_source):
     logging.info("Collect more data")
+    count = {}
+    dictionary = {}
     #print(dictionary_source)
     count['dictionary'] = {}
     pages = {}
@@ -332,7 +330,7 @@ def collect_data_from_dictionary(dictionary_source, dictionary, count):
         for language in languages:
             _add_translated_words(language, dictionary, pages, entry, count)
 
-    return pages
+    return dictionary, count, pages
 
 def get_args():
     parser = argparse.ArgumentParser()
