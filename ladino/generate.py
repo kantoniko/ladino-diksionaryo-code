@@ -132,11 +132,6 @@ def export_to_html(dictionary, count, pages, html_dir, pretty=False):
     export_about_html_page(count, html_dir)
 
 
-def collect_data(dictionary_source):
-    dictionary, count, pages = collect_data_from_dictionary(dictionary_source)
-
-    return dictionary, count, pages
-
 def _make_it_list(target_words, filename):
     if target_words.__class__.__name__ == 'str':
         if target_words == '':
@@ -305,7 +300,7 @@ def _add_translated_words(source_language, dictionary, pages, entry, count):
         pages[source_language][word].sort(key=lambda x: len(json.dumps(x, sort_keys=True)))
 
 
-def collect_data_from_dictionary(dictionary_source):
+def collect_data(dictionary_source):
     logging.info("Collect more data")
     count = {}
     dictionary = {}
