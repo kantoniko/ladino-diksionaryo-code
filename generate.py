@@ -10,7 +10,7 @@ import os
 import re
 import shutil
 import sys
-import time
+import datetime
 from yaml import safe_load
 
 import markdown
@@ -19,8 +19,8 @@ from jinja2 import Environment, FileSystemLoader
 class LadinoError(Exception):
     pass
 
-
 languages = ['english', 'french', 'hebrew', 'spanish', 'turkish', 'portuguese']
+start = datetime.datetime.now().replace(microsecond=0)
 
 def parse_skill_path(path):
     match = re.search(r"^([a-zA-Z0-9-]+)/skills/([a-zA-Z0-9_-]+)\.yaml$", path)
@@ -84,12 +84,15 @@ def export_dictionary_pages(pages, html_dir):
 
 def export_about_html_page(count, html_dir):
     logging.info("Export about html page")
-
+    end = datetime.datetime.now().replace(microsecond=0)
+    elapsed = (end-start).total_seconds()
     html = render(
         "about.html",
         title=f"Ladino dictionary - about",
         page="about",
         count=count,
+        start=str(start),
+        elapsed=elapsed,
         languages=languages,
     )
     with open(os.path.join(html_dir, "about.html"), "w") as fh:
@@ -135,8 +138,8 @@ def export_to_html(dictionary, count, pages, html_dir, pretty=False):
     export_main_html_page(html_dir)
     export_dictionary_pages(pages, html_dir)
 
-    export_about_html_page(count, html_dir)
     export_json(count, os.path.join(html_dir, "count.json"), pretty=pretty)
+    export_about_html_page(count, html_dir)
 
 
 def collect_data(dictionary_source):
@@ -358,7 +361,6 @@ def load_config(path_to_repo):
         return safe_load(fh)
 
 def main():
-    start = time.time()
     args = get_args()
     if args.log:
         logging.basicConfig(level=logging.INFO)
@@ -373,8 +375,8 @@ def main():
         logging.info(count)
         export_to_html(dictionary, count, pages, args.html)
 
-    end = time.time()
-    logging.info(f"Elapsed time: {int(end-start)} sec")
+    end = datetime.datetime.now().replace(microsecond=0)
+    logging.info(f"Elapsed time: {(end-start).total_seconds()} sec")
 
 
 if __name__ == "__main__":
