@@ -22,13 +22,6 @@ class LadinoError(Exception):
 languages = ['english', 'french', 'hebrew', 'spanish', 'turkish', 'portuguese']
 start = datetime.datetime.now().replace(microsecond=0)
 
-def parse_skill_path(path):
-    match = re.search(r"^([a-zA-Z0-9-]+)/skills/([a-zA-Z0-9_-]+)\.yaml$", path)
-    if not match:
-        raise LadinoError(f"unrecoginized skill path: '{path}'")
-    return match
-
-
 def render(template_file, **args):
     root = os.path.dirname(os.path.abspath(__file__))
     templates_dir = os.path.join(root, "templates")
