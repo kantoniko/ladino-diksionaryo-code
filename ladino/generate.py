@@ -94,7 +94,7 @@ def export_main_html_page(html_dir):
     logging.info("Export main html page")
 
     html = render(
-        "converter.html",
+        "index.html",
         os.path.join(html_dir, "index.html"),
         title=f"Ladino dictionary",
         page="index",
