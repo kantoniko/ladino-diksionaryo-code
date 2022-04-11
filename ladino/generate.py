@@ -375,10 +375,10 @@ def main():
     path_to_repo = args.dictionary
     config = load_config(path_to_repo)
     dictionary_source = load_dictionary(config, os.path.join(path_to_repo, 'words'))
+    dictionary, count, pages = collect_data(dictionary_source)
+    logging.info(count)
 
     if args.html:
-        dictionary, count, pages = collect_data(dictionary_source)
-        logging.info(count)
         export_to_html(dictionary, count, pages, args.html)
         export_markdown_pages(path_to_repo, args.html)
 
