@@ -362,6 +362,7 @@ def export_markdown_pages(path_to_repo, html_dir):
             "page.html",
             os.path.join(html_dir, target),
             title=title,
+            page=target.replace('.html', ''),
             content=content,
         )
 
