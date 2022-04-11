@@ -8,7 +8,7 @@ from generate import load_dictionary, collect_data, export_to_html, export_json,
 
 repo_path = 'ladino-diksionaryo-data'
 data_path = 'ladino-diksionaryo-data/words'
-root = os.path.dirname(os.path.abspath(__file__))
+root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Explanation why each word is included in the tests:
 # andjinara: our first test word. noun. for now it does not have a plural.
