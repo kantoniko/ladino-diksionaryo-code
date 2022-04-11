@@ -28,10 +28,10 @@ def test_one_file(tmpdir, request, name):
 
     dictionary_source = load_dictionary(load_config(repo_path), tmpdir)
     dictionary, count, pages = collect_data(dictionary_source)
-    # export in case we would like to update the files in the tests/ directory
+    # export in case we would like to update the files in the tests/files/ directory
     save = request.config.getoption("--save")
     if save:
-        html_dir = os.path.join('tests', name)
+        html_dir = os.path.join('tests', 'files', name)
         os.makedirs(html_dir, exist_ok=True)
     else:
         html_dir = tmpdir
@@ -46,13 +46,13 @@ def test_one_file(tmpdir, request, name):
         os.unlink(os.path.join(tmpdir, f'{name}.yaml'))
 
     if not save:
-        cmd = f"diff -r {os.path.join('tests', name)} {tmpdir}"
+        cmd = f"diff -r {os.path.join('tests', 'files', name)} {tmpdir}"
         print(cmd)
         assert os.system(cmd) == 0
-    #with open (os.path.join('tests', name, 'dictionary.json')) as fh:
+    #with open (os.path.join('tests', 'files', name, 'dictionary.json')) as fh:
     #    expected_dictionary = json.load(fh)
     #assert dictionary == expected_dictionary
-    #with open (os.path.join('tests', name, 'count.json')) as fh:
+    #with open (os.path.join('tests', 'files', name, 'count.json')) as fh:
     #    expected_count = json.load(fh)
     #assert count == expected_count
 
@@ -64,7 +64,7 @@ def test_all(tmpdir):
 
 def test_minimal(tmpdir):
     name = 'minimal'
-    shutil.copy(os.path.join('tests', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
+    shutil.copy(os.path.join('tests', 'files', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     dictionary_source = load_dictionary(load_config(repo_path), tmpdir)
 
 @pytest.mark.parametrize("name,expected", [
@@ -78,7 +78,7 @@ def test_minimal(tmpdir):
     ('verb_no_conjugation', "Grammar is 'verb', but there is NO 'conjugations' field in 'verb_no_conjugation.yaml'"),
 ])
 def test_bad(tmpdir, name, expected):
-    shutil.copy(os.path.join('tests', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
+    shutil.copy(os.path.join('tests', 'files', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     with pytest.raises(Exception) as err:
         dictionary_source = load_dictionary(load_config(repo_path), tmpdir)
     assert err.type == LadinoError
