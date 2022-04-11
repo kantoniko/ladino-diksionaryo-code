@@ -3,7 +3,7 @@ import os
 import shutil
 import pytest
 
-from generate import load_dictionary, collect_data, export_json, export_dictionary_pages, LadinoError, load_config
+from ladino.generate import load_dictionary, collect_data, export_json, export_dictionary_pages, LadinoError, load_config
 
 
 repo_path = 'ladino-diksionaryo-data'
