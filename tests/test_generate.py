@@ -3,7 +3,7 @@ import os
 import shutil
 import pytest
 
-from generate import load_dictionary, collect_data, export_to_html, export_json, export_dictionary_pages, LadinoError, load_config
+from generate import load_dictionary, collect_data, export_json, export_dictionary_pages, LadinoError, load_config
 
 
 repo_path = 'ladino-diksionaryo-data'
@@ -56,12 +56,6 @@ def test_one_file(tmpdir, request, name):
     #with open (os.path.join(root, 'tests', 'files', name, 'count.json')) as fh:
     #    expected_count = json.load(fh)
     #assert count == expected_count
-
-def test_all(tmpdir):
-    print(tmpdir)
-    dictionary_source = load_dictionary(load_config(repo_path), data_path)
-    dictionary, count, pages = collect_data(dictionary_source)
-    export_dictionary_pages(pages, tmpdir)
 
 def test_minimal(tmpdir):
     name = 'minimal'
