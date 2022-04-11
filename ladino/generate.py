@@ -22,13 +22,16 @@ class LadinoError(Exception):
 languages = ['english', 'french', 'hebrew', 'spanish', 'turkish', 'portuguese']
 start = datetime.datetime.now().replace(microsecond=0)
 
-def render(template_file, **args):
+def render(template_file, html_file=None, **args):
     root = os.path.dirname(os.path.abspath(__file__))
     templates_dir = os.path.join(root, "templates")
     env = Environment(loader=FileSystemLoader(templates_dir), autoescape=True)
     env.filters["yaml2html"] = lambda path: re.sub(r"\.yaml$", ".html", path)
     template = env.get_template(template_file)
     html = template.render(**args)
+    if html_file is not None:
+        with open(html_file, "w") as fh:
+            fh.write(html)
     return html
 
 def export_dictionary_pages(pages, html_dir):
@@ -50,29 +53,26 @@ def export_dictionary_pages(pages, html_dir):
         #logging.info(f"Export to {data}")
         html = render(
             "dictionary_word.html",
+            os.path.join(words_dir, language, filename),
             data=data,
             title=f"{word}",
             word=word,
         )
-        with open(os.path.join(words_dir, language, filename), "w") as fh:
-            fh.write(html)
         export_json(data, os.path.join(words_dir, language, f'{word}.json'))
 
     html = render(
         "dictionary_words.html",
+        os.path.join(words_dir, language, 'index.html'),
         title=f"{language}",
         words=sorted(words.keys()),
     )
-    with open(os.path.join(words_dir, language, 'index.html'), "w") as fh:
-        fh.write(html)
 
     html = render(
         "dictionary_languages.html",
+        os.path.join(words_dir, 'index.html'),
         title=f"Languages",
         languages=sorted(languages),
     )
-    with open(os.path.join(words_dir, 'index.html'), "w") as fh:
-        fh.write(html)
 
 
 def export_about_html_page(count, html_dir):
@@ -81,6 +81,7 @@ def export_about_html_page(count, html_dir):
     elapsed = (end-start).total_seconds()
     html = render(
         "about.html",
+        os.path.join(html_dir, "about.html"),
         title=f"Ladino dictionary - about",
         page="about",
         count=count,
@@ -88,8 +89,6 @@ def export_about_html_page(count, html_dir):
         elapsed=elapsed,
         languages=languages,
     )
-    with open(os.path.join(html_dir, "about.html"), "w") as fh:
-        fh.write(html)
 
 
 def export_main_html_page(html_dir):
@@ -97,11 +96,10 @@ def export_main_html_page(html_dir):
 
     html = render(
         "converter.html",
+        os.path.join(html_dir, "index.html"),
         title=f"Ladino dictionary",
         page="index",
     )
-    with open(os.path.join(html_dir, "index.html"), "w") as fh:
-        fh.write(html)
 
 def export_json(all_words, filename, pretty=False):
     with open(filename, "w") as fh:
@@ -369,11 +367,10 @@ def export_markdown_pages(path_to_repo, html_dir):
 
         html = render(
             "page.html",
+            os.path.join(html_dir, target),
             title=title,
             content=content,
         )
-        with open(os.path.join(html_dir, target), "w") as fh:
-            fh.write(html)
 
 
 def main():
