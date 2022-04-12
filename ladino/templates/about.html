@@ -1,12 +1,19 @@
 {% include 'incl/header.html' %}
 
     <h1 class="title">{{ title }}</h1>
-    <div>
+    <div class="content">
        This site is based on the dictionary provided by Güler Orgun, Ricardo Portal i Antonio Ruiz Tinoco and more specifically
        the Excel file from the <a href="https://ladinokomunita.groups.io/">Ladinokomunita</a>.
        In addition the site includes lots of words and expressions from the course created for <a href="https://librelingo.app/">LibreLingo</a>.
+       It is created by the enourmous countribution of the members of the Ladinokomunita and espcially its moderators.
        The files containing the data can be found in this <a href="https://github.com/szabgab/ladino-diksionaryo-data">Git repository</a>.
-       This site was created and is being maintained by <a href="https://szabgab.com/">Gabor Szabo</a>.
+      <ul>
+        <li>On the <a href="/">home page</a> you will be able to see the translation of each word you type in.
+            We don't try to understand the context or the full expression. It is still your job to decide which meaning of a word is relevant in the specific context.
+        </li>
+        <li>The source code of the application can be found <a href="https://github.com/szabgab/ladino-diksionaryo-code/">here</a>.</li>
+        <li>The site was created and is being maintained by <a href="https://szabgab.com/">Gabor Szabo</a>.</li>
+      </ul>
     </div>
     <div class="content">
        The license of the content is <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0: Attribution-ShareAlike 4.0 International</a>
@@ -40,15 +47,10 @@
           </tr>
         </tbody>
       </table>
-
     </div>
     <div class="content">
-      <ul>
-        <li>On the <a href="/">home page</a> you will be able to see the translation of each word you type in.
-            We don't try to understand the context or the full expression. It is still your job to decide which meaning of a word is relevant in the specific context.
-        </li>
-      </ul>
-      Generated at {{start}}. Elapsed time: {{elapsed}}.
+      Generated at {{start}}.<br>
+      Processing time to generate the site: {{elapsed}} seconds.
     </div>
 
 {% include 'incl/footer.html' %}
