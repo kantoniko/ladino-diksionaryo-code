@@ -59,7 +59,7 @@ def test_one_file(tmpdir, request, name):
 
 def test_minimal(tmpdir):
     name = 'minimal'
-    shutil.copy(os.path.join(root, 'tests', 'files', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
+    shutil.copy(os.path.join(root, 'tests', 'files', 'good', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     dictionary_source = load_dictionary(load_config(repo_path), tmpdir)
 
 @pytest.mark.parametrize("name,expected", [
