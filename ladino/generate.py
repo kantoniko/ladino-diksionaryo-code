@@ -288,6 +288,7 @@ def _add_translated_words(source_language, dictionary, pages, entry, count):
         return
 
     for word in translations:
+        word = word.lower()
         if word not in dictionary[source_language]:
             dictionary[source_language][word] = []
         dictionary[source_language][word].append(entry['ladino'])

@@ -1,6 +1,6 @@
 {
     "english": {
-        "Bible": [
+        "bible": [
             "Biblia"
         ]
     },
@@ -29,12 +29,12 @@
     },
     "portuguese": {},
     "spanish": {
-        "Biblia": [
+        "biblia": [
             "Biblia"
         ]
     },
     "turkish": {
-        "Kutsal Kitap": [
+        "kutsal kitap": [
             "Biblia"
         ]
     }
