@@ -9,6 +9,7 @@ from ladino.generate import load_dictionary, collect_data, export_json, export_d
 repo_path = 'ladino-diksionaryo-data'
 data_path = 'ladino-diksionaryo-data/words'
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+examples_path  = os.path.join(root, 'tests', 'files', 'good')
 
 # Explanation why each word is included in the tests:
 # andjinara: our first test word. noun. for now it does not have a plural.
@@ -17,13 +18,16 @@ root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # biblia: word is capitalized
 # klaro: has comments; has examples
 
-@pytest.mark.parametrize("name", ['andjinara', 'komer', 'komo', 'biblia', 'klaro', 'all'])
+@pytest.mark.parametrize("name", ['andjinara', 'komer', 'komo', 'biblia', 'klaro', 'all', 'minimal'])
 def test_one_file(tmpdir, request, name):
     print(tmpdir)
+    example = os.path.join(examples_path, f"{name}.yaml")
     words = ['andjinara', 'komer', 'komo']
     if name == 'all':
         for word in words:
             shutil.copy(os.path.join(data_path, f'{word}.yaml'), os.path.join(tmpdir, f'{word}.yaml'))
+    elif os.path.exists(example):
+        shutil.copy(example, os.path.join(tmpdir, f'{name}.yaml'))
     else:
         shutil.copy(os.path.join(data_path, f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
 
@@ -56,11 +60,6 @@ def test_one_file(tmpdir, request, name):
     #with open (os.path.join(root, 'tests', 'files', name, 'count.json')) as fh:
     #    expected_count = json.load(fh)
     #assert count == expected_count
-
-def test_minimal(tmpdir):
-    name = 'minimal'
-    shutil.copy(os.path.join(root, 'tests', 'files', 'good', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
-    dictionary_source = load_dictionary(load_config(repo_path), tmpdir)
 
 @pytest.mark.parametrize("name,expected", [
     ('no_grammar', "The 'grammar' field is missing from file 'no_grammar.yaml'"),

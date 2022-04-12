@@ -8,7 +8,7 @@ versions:
     #gender: masculine
     #number: singular
 
-    #translations:
-    #  english: clear
+    translations:
+      english: clear
 
 examples: []
