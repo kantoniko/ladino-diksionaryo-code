@@ -1,0 +1,11 @@
+grammar: null
+origen: Jeneral
+#id: '571'
+
+versions:
+  - ladino: Estambol
+
+    translations:
+      english: Istanbul
+
+examples: []

@@ -18,7 +18,7 @@ examples_path  = os.path.join(root, 'tests', 'files', 'good')
 # biblia: word is capitalized
 # klaro: has comments; has examples
 
-@pytest.mark.parametrize("name", ['andjinara', 'komer', 'komo', 'biblia', 'klaro', 'all', 'minimal'])
+@pytest.mark.parametrize("name", ['andjinara', 'komer', 'komo', 'biblia', 'klaro', 'all', 'minimal', 'capital_letters'])
 def test_one_file(tmpdir, request, name):
     print(tmpdir)
     example = os.path.join(examples_path, f"{name}.yaml")
