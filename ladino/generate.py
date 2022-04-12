@@ -348,6 +348,8 @@ def load_config(path_to_repo):
 def export_markdown_pages(path_to_repo, html_dir):
     files = {
         'biervos-de-la-gramer.md': 'gramer.html',
+        'dias-de-la-semana.md':    'dias-de-la-semana.html',
+        'pronombres.md':           'pronombres.html',
     }
     for source, target in files.items():
         with open(os.path.join(path_to_repo, 'pajinas', source)) as fh:
