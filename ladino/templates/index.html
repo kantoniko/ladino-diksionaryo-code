@@ -1,11 +1,18 @@
 {% include 'incl/header.html' %}
 
-<div>
-Type in words in any of the following languages: Ladino, English, Spanish, Turkish, French, Portuguese, or Hebrew and we'll do our best to show all the other translations.
-Click on the Ladino words for more details.
+<article class="message">
+  <div class="message-header">
+      <p>Welcome!</p>
+      <button id="welcome-message" class="delete" aria-label="delete"></button>
+  </div>
+  <div class="message-body">
+  Type in words in any of the following languages: Ladino, English, Spanish, Turkish, French, Portuguese, or Hebrew and we'll do our best to show all the other translations.<br>
+  Click on the Ladino words for more details.
+  </div>
+</article>
+
 <textarea class="textarea" id="input-text">
 </textarea>
-</div>
 <div id="output">
 <div>
 

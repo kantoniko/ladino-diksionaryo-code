@@ -2,6 +2,7 @@ $(document).ready(function(){
     var dictionary = null;
     var loaded = 0;
     const languages = ['english', 'french', 'hebrew', 'portuguese', 'spanish', 'turkish'];
+    //console.log(window.innerWidth, window.innerHeight);
     const language_names = {
         'english'    : 'Inglez',
         'french'     : 'Fransez',
