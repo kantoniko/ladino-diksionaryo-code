@@ -61,7 +61,8 @@ $(document).ready(function(){
             if (words[ix] == "") {
                 continue;
             }
-            let word = words[ix].toLowerCase()
+            const original_word = words[ix];
+            const word = original_word.toLowerCase();
             //console.log(word);
 
             let source_language = 'ladino';
@@ -84,9 +85,9 @@ $(document).ready(function(){
             html += '<tr>';
             // original word
             if (source_language == 'ladino' && dictionary_word) {
-                html += `<td class="has-background-success-light">${word}</td>`;
+                html += `<td class="has-background-success-light">${original_word}</td>`;
             } else {
-                html += `<td class="has-background-danger-light">${word}</td>`;
+                html += `<td class="has-background-danger-light">${original_word}</td>`;
             }
 
             // ladino column
