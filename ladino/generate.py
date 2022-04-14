@@ -117,13 +117,15 @@ def remove_previous_content_of(html_dir):
 
 def generate_main_page(html_dir):
     root = os.path.dirname(os.path.abspath(__file__))
-    js_source_dir = os.path.join(root, "js")
 
-    js_dir = os.path.join(html_dir, 'js')
-    os.makedirs(js_dir, exist_ok=True)
+    for part in ["js", "css"]:
+        source_dir = os.path.join(root, part)
 
-    for filename in os.listdir(js_source_dir):
-        shutil.copy(os.path.join(js_source_dir, filename), os.path.join(js_dir, filename))
+        part_dir = os.path.join(html_dir, part)
+        os.makedirs(part_dir, exist_ok=True)
+
+        for filename in os.listdir(source_dir):
+            shutil.copy(os.path.join(source_dir, filename), os.path.join(part_dir, filename))
 
     export_main_html_page(html_dir)
 
