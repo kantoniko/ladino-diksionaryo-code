@@ -14,6 +14,12 @@ $(document).ready(function(){
     // We save the text in local storage and restore it when the user visits next time.
     // especially useful when people click on words and than get back to the main page.
     $("#input-text").val(localStorage.getItem('original'));
+    const welcome_message = localStorage.getItem('welcome-message');
+    //console.log(welcome_message);
+    if (welcome_message != "1") {
+        //console.log('removeClass');
+        $('#welcome-message').removeClass('is-hidden');
+    }
 
     var try_translate = function() {
         if (loaded == 1) {
@@ -55,7 +61,7 @@ $(document).ready(function(){
                 continue;
             }
             let word = words[ix].toLowerCase()
-            console.log(word);
+            //console.log(word);
 
             let source_language = 'ladino';
             let dictionary_word = dictionary['ladino'][word];
@@ -63,7 +69,7 @@ $(document).ready(function(){
                 for (var jx=0; jx < languages.length; jx++) {
                     source_language = languages[jx];
                     ladino_from_source_language = dictionary[source_language][word];
-                    console.log('ladino', ladino_from_source_language);
+                    //console.log('ladino', ladino_from_source_language);
                     if (ladino_from_source_language) {
                         // TODO: shall we include the dictionary entry of all the words?
                         // TODO: should be select a different one not necessarily the first one?
@@ -72,7 +78,7 @@ $(document).ready(function(){
                     }
                 }
             }
-            console.log('dictionary word', dictionary_word)
+            //console.log('dictionary word', dictionary_word)
 
             html += '<tr>';
             // original word
@@ -99,7 +105,7 @@ $(document).ready(function(){
                 if (dictionary_word) {
                     let links = Array();
                     let translated_words = dictionary_word[languages[jx]];
-                    console.log('translated_words', translated_words);
+                    //console.log('translated_words', translated_words);
                     if (translated_words) {
                         links = word_links(translated_words, languages[jx]);
                     }
@@ -133,5 +139,9 @@ $(document).ready(function(){
     });
 
     $('#input-text').bind('input propertychange', translate);
+    $('#hide-welcome-message').click(function () {
+        localStorage.setItem('welcome-message', "1");
+        $('#welcome-message').hide();
+    });
 });
 
