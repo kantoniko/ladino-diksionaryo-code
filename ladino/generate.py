@@ -373,13 +373,8 @@ def load_config(path_to_repo):
     with open(os.path.join(path_to_repo, 'config.yaml')) as fh:
         return safe_load(fh)
 
-def export_markdown_pages(path_to_repo, html_dir):
-    files = {
-        'biervos-de-la-gramer.md': 'gramer.html',
-        'dias-de-la-semana.md':    'dias-de-la-semana.html',
-        'pronombres.md':           'pronombres.html',
-    }
-    for source, target in files.items():
+def export_markdown_pages(config, path_to_repo, html_dir):
+    for source, target in config['pajinas'].items():
         with open(os.path.join(path_to_repo, 'pajinas', source)) as fh:
             text = fh.read()
 
@@ -417,7 +412,7 @@ def main():
 
     if args.all:
         export_to_html(dictionary, count, pages, args.html)
-        export_markdown_pages(path_to_repo, args.html)
+        export_markdown_pages(config, path_to_repo, args.html)
 
     end = datetime.datetime.now().replace(microsecond=0)
     logging.info(f"Elapsed time: {(end-start).total_seconds()} sec")
