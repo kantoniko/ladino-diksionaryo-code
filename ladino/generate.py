@@ -115,17 +115,28 @@ def remove_previous_content_of(html_dir):
         else:
             os.remove(thing)
 
+def generate_main_page(html_dir):
+    root = os.path.dirname(os.path.abspath(__file__))
+    js_source_dir = os.path.join(root, "js")
+
+    js_dir = os.path.join(html_dir, 'js')
+    os.makedirs(js_dir, exist_ok=True)
+
+    for filename in os.listdir(js_source_dir):
+        shutil.copy(os.path.join(js_source_dir, filename), os.path.join(js_dir, filename))
+
+    export_main_html_page(html_dir)
+
 def export_to_html(dictionary, count, pages, html_dir, pretty=False):
     logging.info("Export to HTML")
-    root = os.path.dirname(os.path.abspath(__file__))
     os.makedirs(html_dir, exist_ok=True)
+
     remove_previous_content_of(html_dir)
 
-    shutil.copytree(os.path.join(root, "js"), os.path.join(html_dir, "js"))
-
-
     export_json(dictionary, os.path.join(html_dir, "dictionary.json"), pretty=pretty)
-    export_main_html_page(html_dir)
+
+    generate_main_page(html_dir)
+
     export_dictionary_pages(pages, html_dir)
 
     export_json(count, os.path.join(html_dir, "count.json"), pretty=pretty)
@@ -332,13 +343,28 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--dictionary", help="path to directory where we find the dictionary files",
-        required=True,
     )
     parser.add_argument(
         "--html", help="path to directory where to generate html files",
     )
+    action = parser.add_mutually_exclusive_group(required=False)
+    action.add_argument("--main", action='store_true', help="Create the main page only")
+    action.add_argument("--all",  action='store_true', help="Create all the pages")
+
     parser.add_argument("--log", action="store_true", help="Additional logging")
+
     args = parser.parse_args()
+
+    if args.all and not args.dictionary:
+        print("\n* If --all is provided we also need --directory\n")
+        parser.print_help()
+        exit(1)
+
+    if (args.main or args.all) and not args.html:
+        print("\n* If either --main or --all are provided we also need --html\n")
+        parser.print_help()
+        exit(1)
+
     return args
 
 def load_config(path_to_repo):
@@ -376,13 +402,18 @@ def main():
         logging.basicConfig(level=logging.INFO)
     logging.info("Start generating Ladino dictionary website")
 
-    path_to_repo = args.dictionary
-    config = load_config(path_to_repo)
-    dictionary_source = load_dictionary(config, os.path.join(path_to_repo, 'words'))
-    dictionary, count, pages = collect_data(dictionary_source)
-    logging.info(count)
+    if args.main:
+        generate_main_page(args.html)
 
-    if args.html:
+    if args.dictionary:
+        path_to_repo = args.dictionary
+        config = load_config(path_to_repo)
+
+        dictionary_source = load_dictionary(config, os.path.join(path_to_repo, 'words'))
+        dictionary, count, pages = collect_data(dictionary_source)
+        logging.info(count)
+
+    if args.all:
         export_to_html(dictionary, count, pages, args.html)
         export_markdown_pages(path_to_repo, args.html)
 
