@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var dictionary = null;
     var loaded = 0;
-    const languages = ['english', 'french', 'hebrew', 'portuguese', 'spanish', 'turkish'];
+    const available_languages = ['english', 'french', 'hebrew', 'portuguese', 'spanish', 'turkish'];
     //console.log(window.innerWidth, window.innerHeight);
     const language_names = {
         'english'    : 'Inglez',
@@ -27,6 +27,43 @@ $(document).ready(function(){
             translate();
         }
     };
+
+    function get_languages() {
+        let languages = [];
+        const config = get_config();
+        for (let ix=0; ix < available_languages.length; ix++) {
+            const language = available_languages[ix];
+            if (config['lashon'][ language ] == '1') {
+                languages.push(language);
+            }
+        }
+        //console.log(languages)
+        return languages;
+    }
+
+
+    function get_config() {
+        const config_str = localStorage.getItem('config');
+
+        let config;
+        if (config_str) {
+            config = JSON.parse(config_str);
+        } else {
+            config = {
+                'lashon': {
+                    'english': '1',
+                    'spanish': '1',
+                    'turkish': '1',
+                    'french' : '0',
+                    'hebrew' : '0',
+                    'portuguese' : '0',
+                }
+            };
+        }
+        //console.log(config);
+        return config;
+    }
+
     function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
     }
@@ -51,6 +88,7 @@ $(document).ready(function(){
         html += '<thead>';
         html += '<tr>';
         html += `<th>biervo</th><th>Ladino</th>`;
+        const languages = get_languages();
         for (var ix=0; ix < languages.length; ix++) {
             html += `<th>${language_names[languages[ix]]}</th>`;
         }
@@ -69,6 +107,7 @@ $(document).ready(function(){
             let dictionary_word = dictionary['ladino'][word];
             if (! dictionary_word) {
                 for (var jx=0; jx < languages.length; jx++) {
+                    //console.log("check language:", languages[jx]);
                     source_language = languages[jx];
                     ladino_from_source_language = dictionary[source_language][word];
                     //console.log('ladino', ladino_from_source_language);
@@ -104,6 +143,7 @@ $(document).ready(function(){
 
             // all the other languages
             for (var jx=0; jx < languages.length; jx++) {
+                //console.log('show language', languages[jx]);
                 if (dictionary_word) {
                     let links = Array();
                     let translated_words = dictionary_word[languages[jx]];
@@ -145,5 +185,37 @@ $(document).ready(function(){
         localStorage.setItem('welcome-message', welcome_message_id);
         $('#welcome-message').addClass('is-hidden');
     });
+    $('#show-config').click(function () {
+        //console.log('show config');
+        $(".navbar-burger").toggleClass("is-active");
+        $(".navbar-menu").toggleClass("is-active");
+
+        const config = get_config();
+        for (let ix=0; ix < available_languages.length; ix++) {
+            const language = available_languages[ix];
+            const checked = config['lashon'][ language ] == "1";
+            $(`#enable-${language}`).prop("checked", checked);
+        }
+
+        $("#config").addClass('is-active');
+        //$("#config").addClass('is-clipped');
+        //console.log('added');
+    });
+    $('#cancel-config').click(function (event) {
+        $("#config").removeClass('is-active');
+        event.stopPropagation();
+    })
+    $('#save-config').click(function (event) {
+        $("#config").removeClass('is-active');
+        let config = get_config();
+        for (let ix=0; ix < available_languages.length; ix++) {
+            const language = available_languages[ix];
+            config['lashon'][ language ] = $(`#enable-${language}`).is(":checked") ? "1" : "0";
+        }
+
+        localStorage.setItem('config', JSON.stringify(config))
+        translate();
+        event.stopPropagation();
+    })
 });
 

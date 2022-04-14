@@ -13,8 +13,44 @@
 
 <textarea class="textarea" id="input-text">
 </textarea>
-<div id="output">
-<div>
+<div id="output"></div>
+
+<div class="modal" id="config">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    Ke lashones keres ver?
+    <div class="control">
+      <label class="checkbox"><input type="checkbox" id="enable-english"> Inglez </label>
+    </div>
+
+    <div class="control">
+      <label class="checkbox"><input type="checkbox" id="enable-spanish"> Kasteyano </label>
+    </div>
+
+    <div class="control">
+      <label class="checkbox"><input type="checkbox" id="enable-turkish"> Turko </label>
+    </div>
+
+    <div class="control">
+      <label class="checkbox"><input type="checkbox" id="enable-french"> Fransez </label>
+    </div>
+
+    <div class="control">
+      <label class="checkbox"><input type="checkbox" id="enable-hebrew"> Ebreo </label>
+    </div>
+
+    <div class="control">
+      <label class="checkbox"><input type="checkbox" id="enable-portuguese"> Portugez </label>
+
+    <div class="control">
+      <button class="button is-primary" id="cancel-config">Cancel</button>
+      <button class="button is-primary" id="save-config">Save</button>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+
 
 <script src="/js/converter.js"></script>
 
