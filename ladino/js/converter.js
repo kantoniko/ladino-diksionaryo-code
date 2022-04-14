@@ -15,8 +15,9 @@ $(document).ready(function(){
     // especially useful when people click on words and than get back to the main page.
     $("#input-text").val(localStorage.getItem('original'));
     const welcome_message = localStorage.getItem('welcome-message');
+    const welcome_message_id = $('#welcome-message').attr('x-id');
     //console.log(welcome_message);
-    if (welcome_message != "1") {
+    if (welcome_message != welcome_message_id) {
         //console.log('removeClass');
         $('#welcome-message').removeClass('is-hidden');
     }
@@ -140,8 +141,8 @@ $(document).ready(function(){
 
     $('#input-text').bind('input propertychange', translate);
     $('#hide-welcome-message').click(function () {
-        localStorage.setItem('welcome-message', "1");
-        $('#welcome-message').hide();
+        localStorage.setItem('welcome-message', welcome_message_id);
+        $('#welcome-message').addClass('is-hidden');
     });
 });
 
