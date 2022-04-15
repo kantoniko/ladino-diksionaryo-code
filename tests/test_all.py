@@ -5,7 +5,7 @@ data_path = 'ladino-diksionaryo-data/words'
 
 def test_all(tmpdir):
     print(tmpdir)
-    dictionary_source = load_dictionary(load_config(repo_path), data_path)
+    dictionary_source, all_examples = load_dictionary(load_config(repo_path), data_path)
     dictionary, count, pages = collect_data(dictionary_source)
     export_dictionary_pages(pages, tmpdir)
 

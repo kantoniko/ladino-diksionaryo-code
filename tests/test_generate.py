@@ -3,7 +3,7 @@ import os
 import shutil
 import pytest
 
-from ladino.generate import load_dictionary, collect_data, export_json, export_dictionary_pages, LadinoError, load_config
+from ladino.generate import load_dictionary, collect_data, export_json, export_dictionary_pages, LadinoError, load_config, export_examples
 
 
 repo_path = 'ladino-diksionaryo-data'
@@ -31,7 +31,7 @@ def test_one_file(tmpdir, request, name):
     else:
         shutil.copy(os.path.join(data_path, f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
 
-    dictionary_source = load_dictionary(load_config(repo_path), tmpdir)
+    dictionary_source, all_examples = load_dictionary(load_config(repo_path), tmpdir)
     dictionary, count, pages = collect_data(dictionary_source)
     # export in case we would like to update the files in the tests/files/ directory
     save = request.config.getoption("--save")
@@ -43,6 +43,7 @@ def test_one_file(tmpdir, request, name):
     export_json(dictionary, os.path.join(html_dir, "dictionary.json"), pretty=True)
     export_json(count, os.path.join(html_dir, "count.json"), pretty=True)
     export_dictionary_pages(pages, html_dir)
+    export_examples(all_examples, pages['ladino'], html_dir)
 
     if name == 'all':
         for word in words:
@@ -74,7 +75,7 @@ def test_one_file(tmpdir, request, name):
 def test_bad(tmpdir, name, expected):
     shutil.copy(os.path.join(root, 'tests', 'files', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     with pytest.raises(Exception) as err:
-        dictionary_source = load_dictionary(load_config(repo_path), tmpdir)
+        dictionary_source, all_examples = load_dictionary(load_config(repo_path), tmpdir)
     assert err.type == LadinoError
     assert str(err.value) == expected
 
