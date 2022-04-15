@@ -38,7 +38,7 @@
         <h2>Examples</h2>
         <ul>
          {% for example in entry.examples %}
-            <li>{{example.ladino}}
+            <li>{{example.ladino_html | safe}}
                 {% if example.english %}
                 <ul>
                     <li>{{example.english}}</li>

@@ -34,6 +34,17 @@ def render(template_file, html_file=None, **args):
             fh.write(html)
     return html
 
+def link_words(sentence, words):
+    return re.sub(r'(\w+)', lambda match:
+        f'<a href="/words/ladino/{match.group(0).lower()}.html">{match.group(0)}</a>' if match.group(0).lower() in words else match.group(0), sentence)
+
+def add_links(data, words):
+    for entry in data:
+        if 'examples' in entry:
+            for example in entry['examples']:
+                example['ladino_html'] = link_words(example['ladino'], words)
+    return data
+
 def export_dictionary_pages(pages, html_dir):
     logging.info("Export dictionary pages")
     words_dir = os.path.join(html_dir, 'words')
@@ -48,12 +59,13 @@ def export_dictionary_pages(pages, html_dir):
     logging.info(f"Export dictionary pages of {language} to {language_dir}")
     os.makedirs(language_dir, exist_ok=True)
     for word, data in words.items():
+        enhanced_data = add_links(copy.deepcopy(data), words)
         filename = f'{word}.html'
         logging.info(f"Export to {filename}")
         html = render(
             "dictionary_word.html",
             os.path.join(words_dir, language, filename),
-            data=data,
+            data=enhanced_data,
             title=f"{word}",
             word=word,
         )
