@@ -1,0 +1,12 @@
+{% include 'incl/header.html' %}
+
+    <h1 class="title">{{ title }}</h1>
+    <div class="content">
+      <ul>
+         {% for example in examples %}
+           <li>{{ example['example']['ladino_html'] | safe }} <a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/words/{{ example['source'] }}">source</a></li>
+         {% endfor %}
+      </ul>
+    </div>
+
+{% include 'incl/footer.html' %}

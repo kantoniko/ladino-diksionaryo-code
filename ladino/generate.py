@@ -205,6 +205,7 @@ def load_dictionary(config, path_to_dictionary):
 
     files = os.listdir(path_to_dictionary)
     words = []
+    all_examples = []
     for filename in files:
         path = os.path.join(path_to_dictionary, filename)
         logging.info(path)
@@ -256,6 +257,12 @@ def load_dictionary(config, path_to_dictionary):
             # Add examples and comments to the first version of the word.
             if examples is not None:
                 version['examples'] = examples
+                for example in examples:
+                    all_examples.append({
+                        'example': example,
+                        'word': version['ladino'].lower(),
+                        'source':  filename,
+                    })
                 examples = None
             if comments is not None:
                 version['comments'] = comments
@@ -274,7 +281,7 @@ def load_dictionary(config, path_to_dictionary):
                         _make_them_list(version['translations'], filename)
                     words.append(version)
     #print(words)
-    return words
+    return words, all_examples
 
 def _add_word(dictionary, source_language, target_language, source_word, target_words):
     if target_language not in dictionary[source_language][source_word]:
@@ -404,6 +411,23 @@ def export_markdown_pages(config, path_to_repo, html_dir):
             content=content,
         )
 
+def export_examples(examples, words, html_dir):
+    if not examples:
+        return
+    examples.sort(key=lambda ex: ex['example']['ladino'])
+    for example in examples:
+        example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
+    #print(examples)
+    target = 'egzempios.html'
+    html = render(
+        "examples.html",
+        os.path.join(html_dir, target),
+        title='Egzempios',
+        page=target.replace('.html', ''),
+        examples=examples,
+    )
+
+
 
 def main():
     args = get_args()
@@ -418,12 +442,13 @@ def main():
         path_to_repo = args.dictionary
         config = load_config(path_to_repo)
 
-        dictionary_source = load_dictionary(config, os.path.join(path_to_repo, 'words'))
+        dictionary_source, all_examples = load_dictionary(config, os.path.join(path_to_repo, 'words'))
         dictionary, count, pages = collect_data(dictionary_source)
         logging.info(count)
 
     if args.all:
         export_to_html(dictionary, count, pages, args.html)
+        export_examples(all_examples, pages['ladino'], args.html)
         export_markdown_pages(config, path_to_repo, args.html)
 
     end = datetime.datetime.now().replace(microsecond=0)
