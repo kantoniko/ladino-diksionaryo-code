@@ -446,6 +446,7 @@ def export_whatsapp(messages, words, html_dir):
             title=message['titulo'],
             filename=message['filename'],
             text=link_words(message['text'], words),
+            title_links=link_words(message['titulo'], words),
         )
 
 def main():

@@ -1,6 +1,6 @@
 {% include 'incl/header.html' %}
 
-    <h1 class="title">{{ titlelinks }}</h1>
+    <h1 class="title">{{ title_links | safe }}</h1>
     <div class="content">
 
     <pre>{{text | safe}}</pre>
