@@ -368,6 +368,9 @@ def get_args():
     parser.add_argument(
         "--html", help="path to directory where to generate html files",
     )
+    parser.add_argument(
+        "--whatsapp", help="path to whatsapp files",
+    )
     action = parser.add_mutually_exclusive_group(required=False)
     action.add_argument("--main", action='store_true', help="Create the main page only")
     action.add_argument("--all",  action='store_true', help="Create all the pages")
@@ -427,7 +430,23 @@ def export_examples(examples, words, html_dir):
         examples=examples,
     )
 
-
+def export_whatsapp(messages, words, html_dir):
+    whatsapp_dir = os.path.join(html_dir, 'whatsapeando')
+    os.makedirs(whatsapp_dir, exist_ok=True)
+    html = render(
+        "whatsapeando_list.html",
+        os.path.join(whatsapp_dir, 'index.html'),
+        title='Estamos Whatsapeando',
+        messages=messages,
+    )
+    for message in messages:
+        html = render(
+            "whatsapeando_page.html",
+            os.path.join(whatsapp_dir, f"{message['page']}.html"),
+            title=message['titulo'],
+            filename=message['filename'],
+            text=link_words(message['text'], words),
+        )
 
 def main():
     args = get_args()
@@ -450,6 +469,12 @@ def main():
         export_to_html(dictionary, count, pages, args.html)
         export_examples(all_examples, pages['ladino'], args.html)
         export_markdown_pages(config, path_to_repo, args.html)
+        if args.whatsapp:
+            sys.path.insert(0, args.whatsapp)
+            import ladino.whatsapeando as whatsapp
+            messages = whatsapp.get_messages()
+            #print(messages)
+            export_whatsapp(messages, pages['ladino'], args.html)
 
     end = datetime.datetime.now().replace(microsecond=0)
     logging.info(f"Elapsed time: {(end-start).total_seconds()} sec")
