@@ -3,7 +3,7 @@ import os
 import shutil
 import pytest
 
-from ladino.generate import load_dictionary, collect_data, export_json, export_dictionary_pages, LadinoError, load_config, export_examples
+from ladino.generate import load_dictionary, collect_data, export_json, export_dictionary_pages, export_dictionary_lists, LadinoError, load_config, export_examples
 
 
 repo_path = 'ladino-diksionaryo-data'
@@ -43,6 +43,7 @@ def test_one_file(tmpdir, request, name):
     export_json(dictionary, os.path.join(html_dir, "dictionary.json"), pretty=True)
     export_json(count, os.path.join(html_dir, "count.json"), pretty=True)
     export_dictionary_pages(pages, html_dir)
+    export_dictionary_lists(pages, html_dir)
     export_examples(all_examples, pages['ladino'], html_dir)
 
     if name == 'all':
