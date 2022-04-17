@@ -433,6 +433,7 @@ def export_examples(examples, words, html_dir):
 def export_whatsapp(messages, words, html_dir):
     whatsapp_dir = os.path.join(html_dir, 'whatsapeando')
     os.makedirs(whatsapp_dir, exist_ok=True)
+    messages.sort(key=lambda message: message['pub'])
     html = render(
         "whatsapeando_list.html",
         os.path.join(whatsapp_dir, 'index.html'),
