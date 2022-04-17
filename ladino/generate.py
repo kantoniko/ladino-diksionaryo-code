@@ -441,9 +441,11 @@ def export_whatsapp(messages, words, html_dir):
         title='Estamos Whatsapeando',
         messages=messages,
     )
-    for message in messages:
+    for idx, message in enumerate(messages):
         text = link_words(message['text'], words)
         text = text.replace("\n", "<br>")
+        next_idx = idx+1 if idx+1 < len(messages) else 0
+        print(next_idx)
         html = render(
             "whatsapeando_page.html",
             os.path.join(whatsapp_dir, f"{message['page']}.html"),
@@ -451,6 +453,8 @@ def export_whatsapp(messages, words, html_dir):
             filename=message['filename'],
             text=text,
             title_links=link_words(message['titulo'], words),
+            prev_message=messages[idx-1]['page'],
+            next_message=messages[next_idx]['page'],
         )
 
 def main():
