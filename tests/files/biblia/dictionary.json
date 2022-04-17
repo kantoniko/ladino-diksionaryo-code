@@ -25,6 +25,25 @@
             "turkish": [
                 "Kutsal Kitap"
             ]
+        },
+        "biblya": {
+            "accented": [
+                "Bíblya"
+            ],
+            "english": [
+                "Bible"
+            ],
+            "french": [],
+            "ladino": [
+                "Biblya"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "Biblia"
+            ],
+            "turkish": [
+                "Kutsal Kitap"
+            ]
         }
     },
     "portuguese": {},
