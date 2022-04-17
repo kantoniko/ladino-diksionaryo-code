@@ -71,6 +71,10 @@ def export_dictionary_pages(pages, html_dir):
         )
         export_json(data, os.path.join(words_dir, language, f'{word}.json'))
 
+def export_dictionary_lists(pages, html_dir):
+    words_dir = os.path.join(html_dir, 'words')
+    language = 'ladino'
+    words = pages['ladino']
     html = render(
         "dictionary_words.html",
         os.path.join(words_dir, language, 'index.html'),
@@ -152,7 +156,7 @@ def export_to_html(dictionary, count, pages, html_dir, pretty=False):
     generate_main_page(html_dir)
 
     export_dictionary_pages(pages, html_dir)
-
+    export_dictionary_lists(pages, html_dir)
     export_json(count, os.path.join(html_dir, "count.json"), pretty=pretty)
     export_about_html_page(count, html_dir)
 
