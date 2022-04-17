@@ -157,7 +157,8 @@ def export_to_html(dictionary, count, pages, html_dir, pretty=False):
     export_about_html_page(count, html_dir)
 
 
-def _make_it_list(target_words, filename):
+def _make_it_list(translations, language, filename):
+    target_words = translations[language]
     if target_words.__class__.__name__ == 'str':
         if target_words == '':
             return []
@@ -166,14 +167,14 @@ def _make_it_list(target_words, filename):
     elif target_words.__class__.__name__ == 'list':
         return target_words
     else:
-        raise LadinoError(f"bad type {target_words.__class__.__name__} for {translations} in '{filename}'")
+        raise LadinoError(f"bad type {target_words.__class__.__name__} for {language} in {translations} in '{filename}'")
 
 
 def _make_them_list(translations, filename):
     for language in languages:
         if language not in translations:
             continue
-        translations[language] = _make_it_list(translations[language], filename)
+        translations[language] = _make_it_list(translations, language, filename)
 
 def check_categories(config, data, filename):
     if 'categories' not in data:
