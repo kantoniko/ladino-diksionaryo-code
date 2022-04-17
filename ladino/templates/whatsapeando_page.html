@@ -3,7 +3,9 @@
     <h1 class="title">{{ title_links | safe }}</h1>
     <div class="content">
 
-    <pre>{{text | safe}}</pre>
+    <div>
+    {{text | safe}}
+    </div>
     <audio controls>
       <source src="https://whatsapeando.szabgab.com/sound/{{filename}}" type="audio/ogg">
       Your browser does not support the audio element.

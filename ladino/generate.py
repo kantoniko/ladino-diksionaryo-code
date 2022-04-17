@@ -441,12 +441,14 @@ def export_whatsapp(messages, words, html_dir):
         messages=messages,
     )
     for message in messages:
+        text = link_words(message['text'], words)
+        text = text.replace("\n", "<br>")
         html = render(
             "whatsapeando_page.html",
             os.path.join(whatsapp_dir, f"{message['page']}.html"),
             title=message['titulo'],
             filename=message['filename'],
-            text=link_words(message['text'], words),
+            text=text,
             title_links=link_words(message['titulo'], words),
         )
 
