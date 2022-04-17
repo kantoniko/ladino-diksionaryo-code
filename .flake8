@@ -1,0 +1,35 @@
+B007 Loop control variable 'pronoun' not used within the loop body. If this is intended, start the name with an underscore.
+E128 continuation line under-indented for visual indent
+E221 multiple spaces before operator
+E261 at least two spaces before inline comment
+E265 block comment should start with '# '
+E302 expected 2 blank lines, found 1
+E305 expected 2 blank lines after class or function definition, found 1
+E501 line too long (102 > 79 characters)
+F401 'collections' imported but unused
+F541 f-string is missing placeholders
+F841 local variable 'html' is assigned to but never used
+PLC0103 Variable name "fh" doesn't conform to snake_case naming style (invalid-name)
+PLC0114 Missing module docstring (missing-module-docstring)
+PLC0115 Missing class docstring (missing-class-docstring)
+PLC0116 Missing function or method docstring (missing-function-docstring)
+PLC0301 Line too long (102/100) (line-too-long)
+PLC0415 Import outside toplevel (ladino.whatsapeando) (import-outside-toplevel)
+PLE0401 Unable to import 'ladino.whatsapeando' (import-error)
+PLR0912 Too many branches (25/12) (too-many-branches)
+PLR0913 Too many arguments (6/5) (too-many-arguments)
+PLR0914 Too many local variables (19/15) (too-many-locals)
+PLR0915 Too many statements (58/50) (too-many-statements)
+PLR1705 Unnecessary "else" after "return" (no-else-return)
+PLR1710 Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+PLR1722 Consider using sys.exit() (consider-using-sys-exit)
+PLW0511 TODO remove all the old content from html_dir (fixme)
+PLW0611 Unused import collections (unused-import)
+PLW0612 Unused variable 'html' (unused-variable)
+PLW1203 Use lazy % formatting in logging functions (logging-fstring-interpolation)
+PLW1309 Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+PLW1514 Using open without explicitly specifying an encoding (unspecified-encoding)
+
+[flake8]
+ignore =
+    *.py B007 E128 E221 E261 E265 E302 E305 E501 F401 F541 F841 PLC0103 PLC0114 PLC0115 PLC0116 PLC0301 PLC0415 PLE0401 PLR0912 PLR0913 PLR0914 PLR0915 PLR1705 PLR1710 PLR1722 PLW0511 PLW0611 PLW0612 PLW1203 PLW1309 PLW1514
