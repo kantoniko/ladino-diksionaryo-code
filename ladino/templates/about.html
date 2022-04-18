@@ -1,20 +1,33 @@
 {% include 'incl/header.html' %}
 
     <h1 class="title">{{ title }}</h1>
+
     <div class="content">
       <ul>
-        <li>This site is based on the dictionary created by Güler Orgun, Ricardo Portal i Antonio Ruiz Tinoco.</li>
+        <li>On the <a href="/">home page</a> you will be able to see the translation of each word you type in.</li>
+        <li>Under <b>Konfig</b> you can select which languages to display.</li>
+        <li>Feel free to type in words in Ladino or any of the languages you selected.
+            If we recognize it as a word in Ladino we'll display it and its translations.
+            If it is not in our list of Ladino words we'll try to see if it is a word in one of the other languages. If it is we'll show the Ladino translation and its meanings.
+        </li>
+        <li>We don't try to understand the context or the full expression. It is still your job to decide which meaning of a word is relevant in the specific context.</li>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Source of the content</h2>
+      <ul>
+        <li>This site is based on the dictionary created by Güler Orgun, Ricardo Portal, and Antonio Ruiz Tinoco.</li>
         <li>More specifically it is based on the Excel file from the <a href="https://ladinokomunita.groups.io/">Ladinokomunita</a>.</li>
         <li>It is created by the enourmous countribution of the members of the Ladinokomunita and espcially its moderators: Rachel Amado Bortnick (founder), Yehuda Hatsvi, Aldo Sevi, Guler Orgun, and Moshe Gormez.</li>
         <li>The <a href="/whatsapeando">WhatsApp messages</a> were created by Albert Israel.</li>
-        <li>On the <a href="/">home page</a> you will be able to see the translation of each word you type in.
-            We don't try to understand the context or the full expression. It is still your job to decide which meaning of a word is relevant in the specific context.
-        </li>
         <li>The site was created and is being maintained by <a href="https://szabgab.com/">Gabor Szabo</a>. All errors are mine. Please report them via email or via the Git repositories below so I can fix them.</li>
       </ul>
     </div>
 
     <div class="content">
+      <h2>Source and License</h2>
       <ul>
         <li>The source code of the application can be found <a href="https://github.com/szabgab/ladino-diksionaryo-code/">here</a>.</li>
         <li>The files containing the dictionary data can be found in the <a href="https://github.com/szabgab/ladino-diksionaryo-data">Ladino diksionaryo data repository</a>.</li>
@@ -24,7 +37,7 @@
       </ul>
     </div>
     <div class="content">
-      <h2>Dictionary</h2>
+      <h2>Statistics</h2>
        <p>
            Statistics for the data based on the dictionary from the Ladino community.
        </p>
