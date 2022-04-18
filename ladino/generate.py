@@ -62,7 +62,7 @@ def export_dictionary_pages(pages, html_dir):
         filename = f'{word}.html'
         logging.info(f"Export to {filename}")
         html = render(
-            "dictionary_word.html",
+            "word.html",
             os.path.join(words_dir, language, filename),
             data=enhanced_data,
             title=f"{word}",
@@ -75,7 +75,7 @@ def export_dictionary_lists(pages, html_dir):
     language = 'ladino'
     words = pages['ladino']
     html = render(
-        "dictionary_words.html",
+        "words.html",
         os.path.join(words_dir, language, 'index.html'),
         title=f"{language}",
         words=sorted(words.keys()),
