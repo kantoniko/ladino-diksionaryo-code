@@ -32,12 +32,12 @@
               </td></tr>
        {% endfor %}
      <tr>
-        <td><a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/words/{{ entry.source }}">source</a></td>
+        <td><a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/words/{{ entry.source }}">📝</a></td>
         <td></td>
      </tr>
      </table>
      {% if entry.examples %}
-        <h2>Examples</h2>
+        <h2>Egzempios</h2>
         <ul>
          {% for example in entry.examples %}
             <li>{{example.ladino_html | safe}}
@@ -62,8 +62,6 @@
 
      {% if not loop.last %}<hr>{% endif %}
   {% endfor %}
-  <hr>
-  <a href=".">all the words</a>
 </div>
 
 {% include 'incl/footer.html' %}
