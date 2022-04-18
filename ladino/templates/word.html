@@ -7,12 +7,14 @@
   {% for entry in data %}
      <table>
        <tr><td>ladino</td><td>{{ entry.ladino }}</td></tr>
+       {% if entry.accented -%}
        <tr><td>accented</td><td>{{ entry.accented }}</td></tr>
+       {%- endif %}
        <tr><td>gender</td><td>{{ entry.gender }} {{ entry.number }}</td></tr>
        {% if entry["alternative-spelling"] %}
          <tr><td></td><td>
           {% for alternative in entry["alternative-spelling"] %}
-              {{ alternative.ladino }} ({{ alternative.accented }}) {% if not loop.last %},{% endif %}
+              {{ alternative.ladino }} {% if alternative.accented %}({{ alternative.accented }}){% endif %} {% if not loop.last %},{% endif %}
           {% endfor %}
           </td></tr>
        {% endif %}
