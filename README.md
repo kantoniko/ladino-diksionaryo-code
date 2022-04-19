@@ -32,6 +32,7 @@ Launch a static web server in the `html` subdirectory.
 
 ```
 pytest -sv test_generate.py
+pytest -vvs -rA -x --log-cli-level=DEBUG --random-order tests/test_generate.p
 ```
 
 the expected output files are in the `tests` subdirectory.
@@ -42,6 +43,11 @@ When the expected output changes we can update the files with the following comm
 pytest -sv test_generate.py --save
 ```
 
+Generate test coverage report:
+
+```
+pytest -vvs -rA -x --log-cli-level=DEBUG --random-order --cov=ladino --cov-report html --cov-report term --cov-branch tests/test_generate.py
+```
 
 ## Language considerations
 
