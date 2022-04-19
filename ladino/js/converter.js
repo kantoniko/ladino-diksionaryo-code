@@ -82,7 +82,7 @@ $(document).ready(function(){
     var translate = function() {
         const original = $("#input-text").val();
         localStorage.setItem('original', original);
-        const cleaned = original.replace(/[<>,.:!?"'\n*()=\[\]]/g, " ");
+        const cleaned = original.replace(/[<>,;.:!?"'\n*()=\[\]]/g, " ");
         const words = cleaned.split(" ");
         var html = `<table class="table">`;
         html += '<thead>';
