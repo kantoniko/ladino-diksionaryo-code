@@ -274,14 +274,17 @@ def load_dictionary(config, path_to_dictionary):
             words.append(version)
 
         conjugations = ['present indicative', 'pasado simple']
+        pronouns = ['yo', 'tu', 'el', 'mozotros', 'vozotros', 'eyos']
         if 'conjugations' in data:
             for verb_time, conjugation in data['conjugations'].items():
                 if verb_time not in conjugations:
                     raise LadinoError(f"Verb conjugation time '{verb_time}' is no recogrnized in '{filename}'")
                 #print(conjugation)
                 for pronoun, version in conjugation.items():
+                    if pronoun not in pronouns:
+                        raise LadinoError(f"Incorrect pronoun '{pronoun}' in verb time '{verb_time}' in '{filename}'")
                     if 'ladino' not in version:
-                        raise LadinoError(f'Ladino is missing from file {filename}')
+                        raise LadinoError(f"The field 'ladino' is missing from verb time: '{verb_time}' pronoun '{pronoun}' in file '{filename}'")
                     version['source'] = filename
                     if 'translations' in version:
                         _make_them_list(version['translations'], filename)
