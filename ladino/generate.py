@@ -382,6 +382,7 @@ def get_args():
     action.add_argument("--all",  action='store_true', help="Create all the pages")
 
     parser.add_argument("--log", action="store_true", help="Additional logging")
+    parser.add_argument("--pretty", action="store_true", help="Pretty save json files")
 
     args = parser.parse_args()
 
@@ -480,7 +481,7 @@ def main():
         logging.info(count)
 
     if args.all:
-        export_to_html(dictionary, count, pages, args.html)
+        export_to_html(dictionary, count, pages, args.html, pretty=args.pretty)
         export_examples(all_examples, pages['ladino'], args.html)
         export_markdown_pages(config, path_to_repo, args.html)
         if args.whatsapp:

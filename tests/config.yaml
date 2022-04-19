@@ -1,0 +1,35 @@
+kategorias:
+  - animales
+  - lavoro
+  - lashon
+  - numeros
+  - gramer
+origenes:
+  - Jeneral
+  - Estanbol
+  - Izmir
+  - Salonik
+  - Balkanes
+  - Aki Yerushalayim
+  - Torah-Tanah
+  - Otros
+  - Gresia
+  - Ladinokomunita
+  - Sarayevo
+  - NA
+gramatika:
+  - adjective
+  - adverb
+  - noun
+  - verb
+  - preposition
+  - pronoun
+  - null
+gender:
+  - feminine
+  - masculine
+  - NA
+numero:
+  - singular
+  - plural
+pajinas: {}

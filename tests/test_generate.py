@@ -1,9 +1,10 @@
+import sys
 import json
 import os
 import shutil
 import pytest
 
-from ladino.generate import load_dictionary, collect_data, LadinoError, load_config, export_examples, export_to_html
+from ladino.generate import load_dictionary, LadinoError, load_config, main
 
 
 real_repo_path = 'ladino-diksionaryo-data'
@@ -25,7 +26,7 @@ def test_one_file(tmpdir, request, name):
     print(path_to_words)
     os.makedirs(path_to_words, exist_ok=True)
 
-    shutil.copy(os.path.join(real_repo_path, 'config.yaml'), os.path.join(tmpdir, f'config.yaml'))
+    shutil.copy(os.path.join('tests', 'config.yaml'), os.path.join(tmpdir, f'config.yaml'))
     example = os.path.join(examples_path, f"{name}.yaml")
     words = ['andjinara', 'komer', 'komo']
     if name == 'all':
@@ -45,12 +46,8 @@ def test_one_file(tmpdir, request, name):
         html_dir = os.path.join(tmpdir, 'html')
     os.makedirs(html_dir, exist_ok=True)
 
-    path_to_repo = str(tmpdir)
-    config = load_config(path_to_repo)
-    dictionary_source, all_examples = load_dictionary(config, os.path.join(path_to_repo, 'words'))
-    dictionary, count, pages = collect_data(dictionary_source)
-    export_to_html(dictionary, count, pages, html_dir, pretty=True)
-    export_examples(all_examples, pages['ladino'], html_dir)
+    sys.argv = [sys.argv[0], '--all', '--html',  html_dir, '--dictionary', str(tmpdir), '--pretty']
+    main()
     os.unlink(os.path.join(html_dir, 'about.html'))
     os.unlink(os.path.join(html_dir, 'index.html'))
     shutil.rmtree(os.path.join(html_dir, 'css'))
