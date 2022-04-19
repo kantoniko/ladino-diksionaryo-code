@@ -273,9 +273,11 @@ def load_dictionary(config, path_to_dictionary):
                 comments = None
             words.append(version)
 
+        conjugations = ['present indicative', 'pasado simple']
         if 'conjugations' in data:
             for verb_time, conjugation in data['conjugations'].items():
-                #print(verb_time)
+                if verb_time not in conjugations:
+                    raise LadinoError(f"Verb conjugation time '{verb_time}' is no recogrnized in '{filename}'")
                 #print(conjugation)
                 for pronoun, version in conjugation.items():
                     if 'ladino' not in version:
