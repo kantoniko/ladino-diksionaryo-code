@@ -204,8 +204,8 @@ def check_grammar(config, data, filename):
 
 def load_dictionary(config, path_to_dictionary):
     logging.info(f"Path to dictionary: '{path_to_dictionary}'")
-    if path_to_dictionary is None:
-        return
+    #if path_to_dictionary is None:
+    #    return
 
     files = os.listdir(path_to_dictionary)
     words = []
