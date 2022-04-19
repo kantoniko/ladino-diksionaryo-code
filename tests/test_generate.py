@@ -19,6 +19,10 @@ examples_path  = os.path.join(root, 'tests', 'files', 'good')
 # biblia: word is capitalized
 # klaro: has comments; has examples
 
+def test_no_params():
+    sys.argv = [sys.argv[0]]
+    main()
+
 @pytest.mark.parametrize("name", ['andjinara', 'komer', 'komo', 'biblia', 'klaro', 'all', 'minimal', 'capital_letters'])
 def test_one_file(tmpdir, request, name):
     print(tmpdir)
