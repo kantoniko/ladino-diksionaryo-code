@@ -242,7 +242,7 @@ def load_dictionary(config, path_to_dictionary):
                     raise LadinoError(f"The 'number' field is '{number}' in '{filename}' version {version}")
 
         if 'examples' not in data:
-            raise LadinoError(f"examples is missing in {filename}")
+            raise LadinoError(f"The 'examples' field is missing in '{filename}'")
         examples = data['examples']
         if examples == []:
             examples = None

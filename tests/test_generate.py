@@ -75,6 +75,7 @@ def test_one_file(tmpdir, request, name):
     ('noun_bad_number', "The 'number' field is 'countless' in 'noun_bad_number.yaml' version {'ladino': 'klaro', 'gender': 'masculine', 'number': 'countless'}"),
     ('verb_no_conjugation', "Grammar is 'verb', but there is NO 'conjugations' field in 'verb_no_conjugation.yaml'"),
     ('non_verb_with_conjugation', "Grammar is NOT a 'verb', but there are conjugations in 'non_verb_with_conjugation.yaml'"),
+    ('no_examples', "The 'examples' field is missing in 'no_examples.yaml'"),
 ])
 def test_bad(tmpdir, name, expected):
     shutil.copy(os.path.join(root, 'tests', 'files', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
