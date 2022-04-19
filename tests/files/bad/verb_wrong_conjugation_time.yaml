@@ -1,0 +1,12 @@
+grammar: verb
+origen: Jeneral
+
+versions:
+  - ladino: komer
+
+conjugations:
+   other:
+     yo:
+       ladino: komo
+
+examples: []
