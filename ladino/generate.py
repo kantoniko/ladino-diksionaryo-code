@@ -252,7 +252,7 @@ def load_dictionary(config, path_to_dictionary):
 
         for version in data['versions']:
             if 'ladino' not in version:
-                raise LadinoError(f'Ladino is missing from file {filename}')
+                raise LadinoError(f"The ladino 'version' is missing from file '{filename}'")
             version['source'] = filename
 
             if 'translations' in version:

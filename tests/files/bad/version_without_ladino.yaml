@@ -1,0 +1,12 @@
+grammar: noun
+origen: Jeneral
+#id: '571'
+
+versions:
+  - gender: masculine
+    number: plural
+
+    #translations:
+    #  english: clear
+
+examples: []
