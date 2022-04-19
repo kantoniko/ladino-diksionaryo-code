@@ -59,12 +59,6 @@ def test_one_file(tmpdir, request, name):
         cmd = f"diff -r {os.path.join(root, 'tests', 'files', name)} {os.path.join(tmpdir, 'html')}"
         print(cmd)
         assert os.system(cmd) == 0
-    #with open (os.path.join(root, 'tests', 'files', name, 'dictionary.json')) as fh:
-    #    expected_dictionary = json.load(fh)
-    #assert dictionary == expected_dictionary
-    #with open (os.path.join(root, 'tests', 'files', name, 'count.json')) as fh:
-    #    expected_count = json.load(fh)
-    #assert count == expected_count
 
 @pytest.mark.parametrize("name,expected", [
     ('no_grammar', "The 'grammar' field is missing from file 'no_grammar.yaml'"),
