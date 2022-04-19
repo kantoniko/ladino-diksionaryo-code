@@ -55,12 +55,6 @@ def test_one_file(tmpdir, request, name):
     export_dictionary_lists(pages, html_dir)
     export_examples(all_examples, pages['ladino'], html_dir)
 
-    if name == 'all':
-        for word in words:
-            os.unlink(os.path.join(tmpdir, 'words', f'{word}.yaml'))
-    else:
-        os.unlink(os.path.join(tmpdir, 'words', f'{name}.yaml'))
-
     if not save:
         cmd = f"diff -r {os.path.join(root, 'tests', 'files', name)} {os.path.join(tmpdir, 'html')}"
         print(cmd)
