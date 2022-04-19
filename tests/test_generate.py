@@ -79,6 +79,7 @@ def test_one_file(tmpdir, request, name):
     ('version_without_ladino', "The ladino 'version' is missing from file 'version_without_ladino.yaml'"),
     ('verb_wrong_conjugation_time', "Verb conjugation time 'other' is no recogrnized in 'verb_wrong_conjugation_time.yaml'"),
     ('verb_wrong_pronoun', "Incorrect pronoun 'you' in verb time 'present indicative' in 'verb_wrong_pronoun.yaml'"),
+    ('verb_conjugation_missing_ladino', "The field 'ladino' is missing from verb time: 'present indicative' pronoun 'yo' in file 'verb_conjugation_missing_ladino.yaml'"),
 ])
 def test_bad(tmpdir, name, expected):
     shutil.copy(os.path.join(root, 'tests', 'files', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
