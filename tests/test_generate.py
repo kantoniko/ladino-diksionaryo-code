@@ -6,8 +6,8 @@ import pytest
 from ladino.generate import load_dictionary, collect_data, export_json, export_dictionary_pages, export_dictionary_lists, LadinoError, load_config, export_examples
 
 
-repo_path = 'ladino-diksionaryo-data'
-data_path = 'ladino-diksionaryo-data/words'
+real_repo_path = 'ladino-diksionaryo-data'
+data_path  = os.path.join(real_repo_path, 'words')
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 examples_path  = os.path.join(root, 'tests', 'files', 'good')
 
@@ -21,15 +21,20 @@ examples_path  = os.path.join(root, 'tests', 'files', 'good')
 @pytest.mark.parametrize("name", ['andjinara', 'komer', 'komo', 'biblia', 'klaro', 'all', 'minimal', 'capital_letters'])
 def test_one_file(tmpdir, request, name):
     print(tmpdir)
+    path_to_words = os.path.join(tmpdir, 'words')
+    print(path_to_words)
+    os.makedirs(path_to_words, exist_ok=True)
+
+    shutil.copy(os.path.join(real_repo_path, 'config.yaml'), os.path.join(tmpdir, f'config.yaml'))
     example = os.path.join(examples_path, f"{name}.yaml")
     words = ['andjinara', 'komer', 'komo']
     if name == 'all':
         for word in words:
-            shutil.copy(os.path.join(data_path, f'{word}.yaml'), os.path.join(tmpdir, f'{word}.yaml'))
+            shutil.copy(os.path.join(data_path, f'{word}.yaml'), os.path.join(tmpdir, 'words', f'{word}.yaml'))
     elif os.path.exists(example):
-        shutil.copy(example, os.path.join(tmpdir, f'{name}.yaml'))
+        shutil.copy(example, os.path.join(tmpdir, 'words', f'{name}.yaml'))
     else:
-        shutil.copy(os.path.join(data_path, f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
+        shutil.copy(os.path.join(data_path, f'{name}.yaml'), os.path.join(tmpdir, 'words', f'{name}.yaml'))
 
     # export in case we would like to update the files in the tests/files/ directory
     save = request.config.getoption("--save")
@@ -37,9 +42,12 @@ def test_one_file(tmpdir, request, name):
         html_dir = os.path.join(root, 'tests', 'files', name)
         os.makedirs(html_dir, exist_ok=True)
     else:
-        html_dir = tmpdir
+        html_dir = os.path.join(tmpdir, 'html')
+    os.makedirs(html_dir, exist_ok=True)
 
-    dictionary_source, all_examples = load_dictionary(load_config(repo_path), tmpdir)
+    path_to_repo = str(tmpdir)
+    config = load_config(path_to_repo)
+    dictionary_source, all_examples = load_dictionary(config, os.path.join(path_to_repo, 'words'))
     dictionary, count, pages = collect_data(dictionary_source)
     export_json(dictionary, os.path.join(html_dir, "dictionary.json"), pretty=True)
     export_json(count, os.path.join(html_dir, "count.json"), pretty=True)
@@ -49,12 +57,12 @@ def test_one_file(tmpdir, request, name):
 
     if name == 'all':
         for word in words:
-            os.unlink(os.path.join(tmpdir, f'{word}.yaml'))
+            os.unlink(os.path.join(tmpdir, 'words', f'{word}.yaml'))
     else:
-        os.unlink(os.path.join(tmpdir, f'{name}.yaml'))
+        os.unlink(os.path.join(tmpdir, 'words', f'{name}.yaml'))
 
     if not save:
-        cmd = f"diff -r {os.path.join(root, 'tests', 'files', name)} {tmpdir}"
+        cmd = f"diff -r {os.path.join(root, 'tests', 'files', name)} {os.path.join(tmpdir, 'html')}"
         print(cmd)
         assert os.system(cmd) == 0
     #with open (os.path.join(root, 'tests', 'files', name, 'dictionary.json')) as fh:
@@ -77,7 +85,7 @@ def test_one_file(tmpdir, request, name):
 def test_bad(tmpdir, name, expected):
     shutil.copy(os.path.join(root, 'tests', 'files', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     with pytest.raises(Exception) as err:
-        dictionary_source, all_examples = load_dictionary(load_config(repo_path), tmpdir)
+        dictionary_source, all_examples = load_dictionary(load_config(real_repo_path), tmpdir)
     assert err.type == LadinoError
     assert str(err.value) == expected
 
