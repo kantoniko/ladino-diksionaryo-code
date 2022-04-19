@@ -3,7 +3,7 @@ import os
 import shutil
 import pytest
 
-from ladino.generate import load_dictionary, collect_data, export_json, export_dictionary_pages, export_dictionary_lists, LadinoError, load_config, export_examples
+from ladino.generate import load_dictionary, collect_data, LadinoError, load_config, export_examples, export_to_html
 
 
 real_repo_path = 'ladino-diksionaryo-data'
@@ -49,11 +49,13 @@ def test_one_file(tmpdir, request, name):
     config = load_config(path_to_repo)
     dictionary_source, all_examples = load_dictionary(config, os.path.join(path_to_repo, 'words'))
     dictionary, count, pages = collect_data(dictionary_source)
-    export_json(dictionary, os.path.join(html_dir, "dictionary.json"), pretty=True)
-    export_json(count, os.path.join(html_dir, "count.json"), pretty=True)
-    export_dictionary_pages(pages, html_dir)
-    export_dictionary_lists(pages, html_dir)
+    export_to_html(dictionary, count, pages, html_dir, pretty=True)
     export_examples(all_examples, pages['ladino'], html_dir)
+    os.unlink(os.path.join(html_dir, 'about.html'))
+    os.unlink(os.path.join(html_dir, 'index.html'))
+    shutil.rmtree(os.path.join(html_dir, 'css'))
+    shutil.rmtree(os.path.join(html_dir, 'js'))
+
 
     if not save:
         cmd = f"diff -r {os.path.join(root, 'tests', 'files', name)} {os.path.join(tmpdir, 'html')}"
