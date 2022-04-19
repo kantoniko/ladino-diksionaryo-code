@@ -226,7 +226,7 @@ def load_dictionary(config, path_to_dictionary):
         if grammar == 'verb' and 'conjugations' not in data:
             raise LadinoError(f"Grammar is 'verb', but there is NO 'conjugations' field in '{filename}'")
         if grammar != 'verb' and 'conjugations' in data:
-            raise LadinoError(f"Grammar is NOT verb, but there are conjugations in {filename}")
+            raise LadinoError(f"Grammar is NOT a 'verb', but there are conjugations in '{filename}'")
 
         if grammar in ['noun']: # 'adjective',
             for version in data['versions']:
