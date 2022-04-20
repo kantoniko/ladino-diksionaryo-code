@@ -15,8 +15,8 @@ import datetime
 import markdown
 from jinja2 import Environment, FileSystemLoader
 
-from .common import LadinoError, languages
-from .load import load_dictionary, load_config
+from ladino.common import LadinoError, languages
+from ladino.load import load_dictionary, load_config
 
 
 start = datetime.datetime.now().replace(microsecond=0)

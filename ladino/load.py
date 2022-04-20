@@ -2,7 +2,7 @@ from yaml import safe_load
 import os
 import logging
 
-from .common import LadinoError, languages
+from ladino.common import LadinoError, languages
 
 def load_config(path_to_repo):
     with open(os.path.join(path_to_repo, 'config.yaml')) as fh:
