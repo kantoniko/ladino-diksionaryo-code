@@ -11,7 +11,7 @@ import datetime
 from ladino.common import LadinoError, languages
 import ladino.common
 from ladino.load import load_dictionary, load_config
-from ladino.export import generate_main_page, export_to_html, export_examples,  export_markdown_pages. export_whatsapp
+from ladino.export import generate_main_page, export_to_html, export_examples,  export_markdown_pages, export_whatsapp
 from ladino.export_to_hunspell import export_to_hunspell
 
 ladino.common.start = datetime.datetime.now().replace(microsecond=0)
