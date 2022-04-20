@@ -12,6 +12,7 @@ from ladino.common import LadinoError, languages
 import ladino.common
 from ladino.load import load_dictionary, load_config
 from ladino.export import generate_main_page, export_to_html, export_examples,  export_markdown_pages
+from ladino.export_to_hunspell import export_to_hunspell
 
 ladino.common.start = datetime.datetime.now().replace(microsecond=0)
 
@@ -145,12 +146,14 @@ def main():
         export_to_html(dictionary, count, pages, args.html, pretty=args.pretty)
         export_examples(all_examples, pages['ladino'], args.html)
         export_markdown_pages(config, path_to_repo, args.html)
+        export_to_hunspell(dictionary)
         if args.whatsapp:
             sys.path.insert(0, args.whatsapp)
             import ladino.whatsapeando as whatsapp
             messages = whatsapp.get_messages()
             #print(messages)
             export_whatsapp(messages, pages['ladino'], args.html)
+
 
     end = datetime.datetime.now().replace(microsecond=0)
     logging.info(f"Elapsed time: {(end-ladino.common.start).total_seconds()} sec")

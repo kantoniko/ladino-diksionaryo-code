@@ -1,12 +1,8 @@
 import json
 import datetime
 
-def export():
-    dictionary_filename = '../ladino-diksionaryo-generated/docs/dictionary.json'
+def export_to_hunspell(dictionary):
     now = datetime.datetime.now()
-
-    with open(dictionary_filename) as fh:
-        dictionary = json.load(fh)
 
     with open("lad.dic", "w") as fh:
         print(len(dictionary["ladino"].keys()), file=fh)
