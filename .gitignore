@@ -4,3 +4,7 @@ ladino-diksionaryo-data
 __pycache__/
 .coverage
 htmlcov/
+
+*.aff
+*.dic
+
