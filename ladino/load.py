@@ -30,13 +30,13 @@ def check_categories(config, data, filename):
         if cat not in config['kategorias']:
             raise LadinoError(f"Invalid category '{cat}' in file '{filename}'")
 
-def _make_them_list(translations, filename):
+def make_them_list(translations, filename):
     for language in languages:
         if language not in translations:
             continue
-        translations[language] = _make_it_list(translations, language, filename)
+        translations[language] = make_it_list(translations, language, filename)
 
-def _make_it_list(translations, language, filename):
+def make_it_list(translations, language, filename):
     target_words = translations[language]
     if target_words.__class__.__name__ == 'str':
         if target_words == '':
@@ -104,7 +104,7 @@ def load_dictionary(config, path_to_dictionary):
             version['source'] = filename
 
             if 'translations' in version:
-                _make_them_list(version['translations'], filename)
+                make_them_list(version['translations'], filename)
 
             # Add examples and comments to the first version of the word.
             if examples is not None:
@@ -135,7 +135,7 @@ def load_dictionary(config, path_to_dictionary):
                         raise LadinoError(f"The field 'ladino' is missing from verb time: '{verb_time}' pronoun '{pronoun}' in file '{filename}'")
                     version['source'] = filename
                     if 'translations' in version:
-                        _make_them_list(version['translations'], filename)
+                        make_them_list(version['translations'], filename)
                     words.append(version)
     #print(words)
     return words, all_examples
