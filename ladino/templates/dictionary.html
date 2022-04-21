@@ -1,0 +1,28 @@
+{% include 'incl/header.html' %}
+
+  <h1 class="title">{{ title }}</h1>
+  <div class="content">
+
+    <table class="table is-striped is-hoverable">
+      <thead>
+        <tr><th>{{ source }}</th><th>{{ target }}</th></tr>
+      </thead>
+      <tbody>
+        {%- for word in words.keys() | sort -%}
+          {%- if source=='Ladino' -%}
+              <tr>
+                <td><a href="/words/ladino/{{ word }}.html">{{ word }}</a></td>
+                <td>{% for translation in words[word][trg] %} {{ translation }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
+              </tr>
+          {%- else -%}
+              <tr>
+                <td>{{ word }}</td>
+                <td>{% for translation in words[word] %} <a href="/words/ladino/{{translation}}.html">{{ translation }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</td>
+              </tr>
+          {%- endif -%}
+        {%- endfor -%}
+      </tbody>
+    </table>
+  </div>
+
+{% include 'incl/footer.html' %}

@@ -102,6 +102,30 @@ def export_json(all_words, filename, pretty=False):
         else:
             json.dump(all_words, fh, ensure_ascii=False, sort_keys=True)
 
+def export_single_page_dictionaries(dictionary, html_dir):
+    logging.info("Export single-page dictionaries")
+
+    for language in languages:
+        render(
+            "dictionary.html",
+            os.path.join(html_dir, f"{language}-ladino.html"),
+            title=f"{language.title()} to Ladino dictionary",
+            source=language.title(),
+            target="Ladino",
+            words=dictionary[language],
+        )
+
+        render(
+            "dictionary.html",
+            os.path.join(html_dir, f"ladino-{language}.html"),
+            title=f"Ladino to {language.title()} dictionary",
+            source="Ladino",
+            target=language.title(),
+            trg=language,
+            words=dictionary['ladino'],
+        )
+
+
 
 def export_to_html(dictionary, count, pages, html_dir, pretty=False):
     logging.info("Export to HTML")
@@ -112,6 +136,7 @@ def export_to_html(dictionary, count, pages, html_dir, pretty=False):
     export_json(dictionary, os.path.join(html_dir, "dictionary.json"), pretty=pretty)
 
     generate_main_page(html_dir)
+    export_single_page_dictionaries(dictionary, html_dir)
 
     export_dictionary_pages(pages, html_dir)
     export_dictionary_lists(pages, html_dir)

@@ -3,6 +3,7 @@ import json
 import os
 import shutil
 import pytest
+import glob
 
 from ladino.generate import load_dictionary, LadinoError, load_config, main
 
@@ -54,6 +55,8 @@ def test_one_file(tmpdir, request, name):
     main()
     os.unlink(os.path.join(html_dir, 'about.html'))
     os.unlink(os.path.join(html_dir, 'index.html'))
+    for filepath in glob.glob(f'{html_dir}/*-*.html'):
+        os.unlink(filepath)
     shutil.rmtree(os.path.join(html_dir, 'css'))
     shutil.rmtree(os.path.join(html_dir, 'js'))
 
