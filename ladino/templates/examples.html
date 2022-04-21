@@ -3,10 +3,18 @@
     <h1 class="title">{{ title }}</h1>
     <div class="content">
       <ul>
-         {% for example in examples %}
+         {% for example in all_examples %}
            <li>{{ example['example']['ladino_html'] | safe }} <a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/words/{{ example['source'] }}">📝</a></li>
          {% endfor %}
       </ul>
+      {%- if extra_examples -%}
+      <h2>Extra examples</h2>
+      <ul>
+         {% for example in extra_examples %}
+           <li>{{ example['example']['ladino_html'] | safe }} <a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/examples/{{ example['source'] }}">📝</a></li>
+         {% endfor %}
+      </ul>
+      {%- endif %}
     </div>
 
 {% include 'incl/footer.html' %}

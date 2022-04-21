@@ -139,20 +139,26 @@ def export_markdown_pages(config, path_to_repo, html_dir):
             content=content,
         )
 
-def export_examples(examples, words, html_dir):
-    if not examples:
+def export_examples(all_examples, extra_examples, words, html_dir):
+    if not all_examples:
         return
-    examples.sort(key=lambda ex: ex['example']['ladino'])
-    for example in examples:
+    all_examples.sort(key=lambda ex: ex['example']['ladino'])
+    for example in all_examples:
         example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
-    #print(examples)
+
+    extra_examples.sort(key=lambda ex: ex['example']['ladino'])
+    for example in extra_examples:
+        example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
+
+    #print(all_examples)
     target = 'egzempios.html'
     html = render(
         "examples.html",
         os.path.join(html_dir, target),
         title='Egzempios',
         page=target.replace('.html', ''),
-        examples=examples,
+        all_examples=all_examples,
+        extra_examples=extra_examples,
     )
 
 def export_whatsapp(messages, words, html_dir):
@@ -169,7 +175,7 @@ def export_whatsapp(messages, words, html_dir):
         text = link_words(message['text'], words)
         text = text.replace("\n", "<br>")
         next_idx = idx+1 if idx+1 < len(messages) else 0
-        print(next_idx)
+        #print(next_idx)
         html = render(
             "whatsapeando_page.html",
             os.path.join(whatsapp_dir, f"{message['page']}.html"),

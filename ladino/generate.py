@@ -10,7 +10,7 @@ import datetime
 
 from ladino.common import LadinoError, languages
 import ladino.common
-from ladino.load import load_dictionary, load_config
+from ladino.load import load_dictionary, load_examples, load_config
 from ladino.export import generate_main_page, export_to_html, export_examples,  export_markdown_pages, export_whatsapp
 from ladino.export_to_hunspell import export_to_hunspell
 
@@ -139,12 +139,13 @@ def main():
         config = load_config(path_to_repo)
 
         dictionary_source, all_examples = load_dictionary(config, os.path.join(path_to_repo, 'words'))
+        extra_examples = load_examples(os.path.join(path_to_repo, 'examples'))
         dictionary, count, pages = collect_data(dictionary_source)
         logging.info(count)
 
     if args.all:
         export_to_html(dictionary, count, pages, args.html, pretty=args.pretty)
-        export_examples(all_examples, pages['ladino'], args.html)
+        export_examples(all_examples, extra_examples, pages['ladino'], args.html)
         export_markdown_pages(config, path_to_repo, args.html)
         export_to_hunspell(dictionary)
         if args.whatsapp:

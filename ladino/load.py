@@ -138,6 +138,22 @@ def load_dictionary(config, path_to_dictionary):
                         make_them_list(version['translations'], filename)
                     words.append(version)
     #print(words)
+    #print(all_examples[0])
     return words, all_examples
+
+def load_examples(path_to_examples):
+    extra_examples = []
+    if os.path.exists(path_to_examples):
+        for filename in os.listdir(path_to_examples):
+            with open(os.path.join(path_to_examples, filename)) as fh:
+                examples = safe_load(fh)
+            #print(examples)
+            for example in examples['examples']:
+                extra_examples.append({
+                    "example": example,
+                    "source" : filename,
+                })
+    #print(extra_examples)
+    return extra_examples
 
 
