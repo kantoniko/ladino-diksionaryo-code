@@ -142,7 +142,16 @@ def export_to_html(dictionary, count, pages, html_dir, pretty=False):
     export_dictionary_lists(pages, html_dir)
     export_json(count, os.path.join(html_dir, "count.json"), pretty=pretty)
     export_about_html_page(count, html_dir)
+    export_lists_html_page(html_dir)
 
+
+def export_lists_html_page(html_dir):
+    render(
+        "lists.html",
+        os.path.join(html_dir, "lists.html"),
+        title=f"Ladino lists",
+        languages=languages,
+    )
 
 
 def export_markdown_pages(config, path_to_repo, html_dir):

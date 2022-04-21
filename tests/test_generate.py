@@ -54,6 +54,7 @@ def test_one_file(tmpdir, request, name):
     sys.argv = [sys.argv[0], '--all', '--html',  html_dir, '--dictionary', str(tmpdir), '--pretty']
     main()
     os.unlink(os.path.join(html_dir, 'about.html'))
+    os.unlink(os.path.join(html_dir, 'lists.html'))
     os.unlink(os.path.join(html_dir, 'index.html'))
     for filepath in glob.glob(f'{html_dir}/*-*.html'):
         os.unlink(filepath)
