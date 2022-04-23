@@ -17,6 +17,9 @@
         "istanbul": [
             "Estambol"
         ],
+        "letterstogether": [
+            "palavra"
+        ],
         "word": [
             "palavra"
         ]
@@ -33,6 +36,7 @@
                 "biérvo"
             ],
             "english": [
+                "letterstogether",
                 "word"
             ],
             "ladino": [
@@ -168,6 +172,7 @@
                 "palávra"
             ],
             "english": [
+                "letterstogether",
                 "word"
             ],
             "ladino": [

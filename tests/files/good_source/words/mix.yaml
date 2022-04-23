@@ -15,7 +15,9 @@ versions:
         accented: biérvo
 
     translations:
-      english: word
+      english:
+        - word
+        - letterstogether
 
 examples:
   - ladino: Una palavra i un biervo.
