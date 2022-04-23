@@ -258,4 +258,13 @@ def link_words(sentence, words):
     return re.sub(r'(\w+)', lambda match:
         f'<a href="/words/ladino/{match.group(0).lower()}.html">{match.group(0)}</a>' if match.group(0).lower() in words else match.group(0), sentence)
 
+def export_categories(categories, html_dir):
+    for cat in categories.keys():
+        render(
+            "category.html",
+            os.path.join(html_dir, f"{cat}.html"),
+            title=cat,
+            words=categories[cat],
+        )
+
 

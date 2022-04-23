@@ -1,0 +1,23 @@
+{% include 'incl/header.html' %}
+
+  <h1 class="title">{{ title }}</h1>
+  <div class="content">
+
+    <table class="table is-striped is-hoverable">
+      <thead>
+        <tr><th>Ladino</th><th>Inglez</th></tr>
+      </thead>
+      <tbody>
+        {%- for word in words -%}
+           {%- for version in word['versions'] %}
+              <tr>
+                  <td><a href="/words/ladino/{{ version['ladino'] }}">{{ version['ladino'] }}</a> {% if version['accented'] %}({{ version['accented'] }}){% endif %}</td>
+                  <td>{% for trans in version.translations['english'] %}{{ trans }} {% endfor %} </td>
+              </tr>
+           {% endfor %}
+        {%- endfor -%}
+      </tbody>
+    </table>
+  </div>
+
+{% include 'incl/footer.html' %}

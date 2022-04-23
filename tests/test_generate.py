@@ -32,6 +32,7 @@ def test_one_file(tmpdir, request, name):
     os.makedirs(path_to_words, exist_ok=True)
 
     shutil.copy(os.path.join('tests', 'config.yaml'), os.path.join(tmpdir, f'config.yaml'))
+    config = load_config(os.path.join(tmpdir))
     example = os.path.join(examples_path, 'words', f"{name}.yaml")
     words = ['andjinara', 'komer', 'komo']
     if name == 'all':
@@ -49,13 +50,13 @@ def test_one_file(tmpdir, request, name):
     save = request.config.getoption("--save")
     if save:
         html_dir = os.path.join(root, 'tests', 'files', name)
-        os.makedirs(html_dir, exist_ok=True)
     else:
         html_dir = os.path.join(tmpdir, 'html')
     os.makedirs(html_dir, exist_ok=True)
 
     sys.argv = [sys.argv[0], '--all', '--html',  html_dir, '--dictionary', str(tmpdir), '--pretty']
     main()
+
     shutil.rmtree(os.path.join(html_dir, 'css'))
     shutil.rmtree(os.path.join(html_dir, 'js'))
     os.unlink(os.path.join(html_dir, 'about.html')) # has the date of generation in it
@@ -65,7 +66,8 @@ def test_one_file(tmpdir, request, name):
         os.unlink(os.path.join(html_dir, 'dictionaries.html'))
         for filepath in glob.glob(f'{html_dir}/*-*.html'):
             os.unlink(filepath)
-
+        for cat in config['kategorias']:
+            os.unlink(os.path.join(html_dir, f'{cat}.html'))
 
     if not save:
         cmd = f"diff -r {os.path.join(root, 'tests', 'files', name)} {os.path.join(tmpdir, 'html')}"

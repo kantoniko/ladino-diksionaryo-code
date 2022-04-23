@@ -23,12 +23,13 @@ def check_origen(config, data, filename):
     if origen not in config['origenes']:
         raise LadinoError(f"Invalid origen '{origen}' in file '{filename}'")
 
-def check_categories(config, data, filename):
+def check_categories(config, data, filename, categories):
     if 'categories' not in data:
         return
     for cat in data['categories']:
         if cat not in config['kategorias']:
             raise LadinoError(f"Invalid category '{cat}' in file '{filename}'")
+        categories[cat].append(data)
 
 def make_them_list(translations, filename):
     for language in languages:
@@ -58,6 +59,7 @@ def load_dictionary(config, path_to_dictionary):
     files = os.listdir(path_to_dictionary)
     words = []
     all_examples = []
+    categories = {cat:[] for cat in config['kategorias'] }
     for filename in files:
         path = os.path.join(path_to_dictionary, filename)
         logging.info(path)
@@ -66,7 +68,7 @@ def load_dictionary(config, path_to_dictionary):
 
         grammar = check_grammar(config, data, filename)
         check_origen(config, data, filename)
-        check_categories(config, data, filename)
+        check_categories(config, data, filename, categories)
 
         if 'versions' not in data:
             raise LadinoError(f"The 'versions' field is missing from file '{filename}'")
@@ -139,7 +141,7 @@ def load_dictionary(config, path_to_dictionary):
                     words.append(version)
     #print(words)
     #print(all_examples[0])
-    return words, all_examples
+    return words, all_examples, categories
 
 def load_examples(path_to_examples):
     extra_examples = []
