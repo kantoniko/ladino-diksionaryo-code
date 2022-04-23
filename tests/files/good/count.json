@@ -2,19 +2,19 @@
     "dictionary": {
         "english": {
             "examples": 0,
-            "words": 3
+            "words": 10
         },
         "french": {
             "examples": 0,
-            "words": 0
+            "words": 1
         },
         "hebrew": {
             "examples": 0,
             "words": 0
         },
         "ladino": {
-            "examples": 2,
-            "words": 4
+            "examples": 4,
+            "words": 12
         },
         "portuguese": {
             "examples": 0,
@@ -22,11 +22,11 @@
         },
         "spanish": {
             "examples": 0,
-            "words": 0
+            "words": 7
         },
         "turkish": {
             "examples": 0,
-            "words": 0
+            "words": 1
         }
     }
 }

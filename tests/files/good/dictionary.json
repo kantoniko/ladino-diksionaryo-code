@@ -3,6 +3,17 @@
         "clear": [
             "klaro"
         ],
+        "eat": [
+            "komemos",
+            "komen",
+            "komer",
+            "komes",
+            "komesh",
+            "komo"
+        ],
+        "eats": [
+            "kome"
+        ],
         "istanbul": [
             "Estambol"
         ],
@@ -10,7 +21,11 @@
             "palavra"
         ]
     },
-    "french": {},
+    "french": {
+        "manger": [
+            "komer"
+        ]
+    },
     "hebrew": {},
     "ladino": {
         "biervo": {
@@ -40,6 +55,114 @@
                 "klaro"
             ]
         },
+        "kome": {
+            "english": [
+                "eats"
+            ],
+            "ladino": [
+                "kome"
+            ],
+            "spanish": [
+                "come"
+            ]
+        },
+        "komemos": {
+            "english": [
+                "eat"
+            ],
+            "ladino": [
+                "komemos"
+            ],
+            "spanish": [
+                "comemos"
+            ]
+        },
+        "komen": {
+            "english": [
+                "eat"
+            ],
+            "ladino": [
+                "komen"
+            ],
+            "spanish": [
+                "comen"
+            ]
+        },
+        "komer": {
+            "accented": [
+                "komér"
+            ],
+            "english": [
+                "eat"
+            ],
+            "french": [
+                "manger"
+            ],
+            "ladino": [
+                "komer"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "comer"
+            ],
+            "turkish": [
+                "yemek yemek"
+            ]
+        },
+        "komes": {
+            "english": [
+                "eat"
+            ],
+            "ladino": [
+                "komes"
+            ],
+            "spanish": [
+                "comes"
+            ]
+        },
+        "komesh": {
+            "english": [
+                "eat"
+            ],
+            "ladino": [
+                "komesh"
+            ],
+            "spanish": [
+                "comeis"
+            ]
+        },
+        "komo": {
+            "english": [
+                "eat"
+            ],
+            "ladino": [
+                "komo"
+            ],
+            "spanish": [
+                "como"
+            ]
+        },
+        "kumer": {
+            "accented": [
+                "kumér"
+            ],
+            "english": [
+                "eat"
+            ],
+            "french": [
+                "manger"
+            ],
+            "ladino": [
+                "kumer"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "comer"
+            ],
+            "turkish": [
+                "yemek yemek"
+            ]
+        },
         "palavra": {
             "accented": [
                 "palávra"
@@ -53,6 +176,32 @@
         }
     },
     "portuguese": {},
-    "spanish": {},
-    "turkish": {}
+    "spanish": {
+        "come": [
+            "kome"
+        ],
+        "comeis": [
+            "komesh"
+        ],
+        "comemos": [
+            "komemos"
+        ],
+        "comen": [
+            "komen"
+        ],
+        "comer": [
+            "komer"
+        ],
+        "comes": [
+            "komes"
+        ],
+        "como": [
+            "komo"
+        ]
+    },
+    "turkish": {
+        "yemek yemek": [
+            "komer"
+        ]
+    }
 }

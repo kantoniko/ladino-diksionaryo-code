@@ -1,0 +1,58 @@
+grammar: verb
+origen: Jeneral
+categories:
+  - animales
+  - lavoro
+
+versions:
+  - ladino: komer
+    accented: komér
+
+    translations:
+      english: eat
+      french: manger
+      portuguese: ''
+      spanish: comer
+      turkish: yemek yemek
+
+    alternative-spelling:
+      - ladino: kumer
+        accented: kumér
+
+conjugations:
+  present indicative:
+    yo:
+      ladino: komo
+      translations:
+        spanish: como
+        english: eat
+    tu:
+      ladino: komes
+      translations:
+        spanish: comes
+        english: eat
+    el:
+      ladino: kome
+      translations:
+        spanish: come
+        english: eats
+    mozotros:
+      ladino: komemos
+      translations:
+        spanish: comemos
+        english: eat
+    vozotros:
+      ladino: komesh
+      translations:
+        spanish: comeis
+        english: eat
+    eyos:
+      ladino: komen
+      translations:
+        spanish: comen
+        english: eat
+
+
+examples:
+  - ladino: Yo komo pan
+    english: I eat bread
