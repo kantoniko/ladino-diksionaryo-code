@@ -148,7 +148,7 @@ def main():
         export_categories(categories, args.html)
         export_examples(all_examples, extra_examples, pages['ladino'], args.html)
         export_markdown_pages(config, path_to_repo, args.html)
-        export_to_hunspell(dictionary)
+        #export_to_hunspell(dictionary)
         if args.whatsapp:
             sys.path.insert(0, args.whatsapp)
             import ladino.whatsapeando as whatsapp
