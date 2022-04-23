@@ -5,14 +5,21 @@
 
     <table class="table is-striped is-hoverable">
       <thead>
-        <tr><th>Ladino</th><th>Inglez</th></tr>
+        <tr>
+           <th>Ladino</th>
+            {%- for lang in languages %}
+               <th>{{ lang }}</th>
+            {% endfor -%}
+        </tr>
       </thead>
       <tbody>
         {%- for word in words -%}
            {%- for version in word['versions'] %}
               <tr>
                   <td><a href="/words/ladino/{{ version['ladino'] }}">{{ version['ladino'] }}</a> {% if version['accented'] %}({{ version['accented'] }}){% endif %}</td>
-                  <td>{% for trans in version.translations['english'] -%}{{ trans }}{%- if not loop.last -%}, {% endif -%}{%- endfor %} </td>
+                  {%- for lang in languages %}
+                     <td>{% for trans in version.translations[lang] -%}{{ trans }}{%- if not loop.last -%}, {% endif -%}{%- endfor %} </td>
+                  {% endfor -%}
               </tr>
            {% endfor %}
         {%- endfor -%}

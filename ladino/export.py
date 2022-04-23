@@ -265,6 +265,7 @@ def export_categories(categories, html_dir):
             os.path.join(html_dir, f"{cat}.html"),
             title=cat,
             words=categories[cat],
+            languages=languages,
         )
 
 
