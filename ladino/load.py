@@ -141,6 +141,8 @@ def load_dictionary(config, path_to_dictionary):
                     words.append(version)
     #print(words)
     #print(all_examples[0])
+    for cat in categories.keys():
+        categories[cat].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
     return words, all_examples, categories
 
 def load_examples(path_to_examples):
