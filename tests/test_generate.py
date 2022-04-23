@@ -32,7 +32,7 @@ def test_one_file(tmpdir, request, name):
     os.makedirs(path_to_words, exist_ok=True)
 
     shutil.copy(os.path.join('tests', 'config.yaml'), os.path.join(tmpdir, f'config.yaml'))
-    example = os.path.join(examples_path, f"{name}.yaml")
+    example = os.path.join(examples_path, 'words', f"{name}.yaml")
     words = ['andjinara', 'komer', 'komo']
     if name == 'all':
         for word in words:
