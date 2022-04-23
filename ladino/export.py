@@ -168,7 +168,7 @@ def export_markdown_pages(config, path_to_repo, html_dir):
         match = re.search(r'^#\s+(.*?)\s*$', text, re.MULTILINE)
         if match:
             title = match.group(1)
-        content = markdown.markdown(text)
+        content = markdown.markdown(text, extensions=['tables'])
 
         html = render(
             "page.html",
