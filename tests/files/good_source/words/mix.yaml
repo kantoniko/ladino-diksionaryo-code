@@ -1,0 +1,22 @@
+grammar: null
+origen: Jeneral
+categories:
+  - animales
+  - lavoro
+
+versions:
+  - ladino: palavra
+    accented: palávra
+    gender: feminine
+    number: singular
+
+    alternative-spelling:
+      - ladino: biervo
+        accented: biérvo
+
+    translations:
+      english: word
+
+examples:
+  - ladino: Una palavra i un biervo.
+

@@ -5,11 +5,25 @@
         ],
         "istanbul": [
             "Estambol"
+        ],
+        "word": [
+            "palavra"
         ]
     },
     "french": {},
     "hebrew": {},
     "ladino": {
+        "biervo": {
+            "accented": [
+                "biérvo"
+            ],
+            "english": [
+                "word"
+            ],
+            "ladino": [
+                "biervo"
+            ]
+        },
         "estambol": {
             "english": [
                 "Istanbul"
@@ -24,6 +38,17 @@
             ],
             "ladino": [
                 "klaro"
+            ]
+        },
+        "palavra": {
+            "accented": [
+                "palávra"
+            ],
+            "english": [
+                "word"
+            ],
+            "ladino": [
+                "palavra"
             ]
         }
     },
