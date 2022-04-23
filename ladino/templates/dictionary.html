@@ -12,7 +12,7 @@
           {%- if source=='Ladino' -%}
               <tr>
                 <td><a href="/words/ladino/{{ word }}.html">{{ word }}</a></td>
-                <td>{% for translation in words[word][trg] %} {{ translation }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
+                <td>{% for translation in words[word][trg] -%}{{ translation }}{%- if not loop.last %}, {% endif %}{%- endfor %}</td>
               </tr>
           {%- else -%}
               <tr>
