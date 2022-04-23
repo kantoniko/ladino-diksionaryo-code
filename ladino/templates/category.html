@@ -12,7 +12,7 @@
            {%- for version in word['versions'] %}
               <tr>
                   <td><a href="/words/ladino/{{ version['ladino'] }}">{{ version['ladino'] }}</a> {% if version['accented'] %}({{ version['accented'] }}){% endif %}</td>
-                  <td>{% for trans in version.translations['english'] %}{{ trans }} {% endfor %} </td>
+                  <td>{% for trans in version.translations['english'] %}{{ trans }}{% if not loop.last %}, {% endif %} {% endfor %} </td>
               </tr>
            {% endfor %}
         {%- endfor -%}
