@@ -1,0 +1,33 @@
+{
+    "english": {
+        "clear": [
+            "klaro"
+        ],
+        "istanbul": [
+            "Estambol"
+        ]
+    },
+    "french": {},
+    "hebrew": {},
+    "ladino": {
+        "estambol": {
+            "english": [
+                "Istanbul"
+            ],
+            "ladino": [
+                "Estambol"
+            ]
+        },
+        "klaro": {
+            "english": [
+                "clear"
+            ],
+            "ladino": [
+                "klaro"
+            ]
+        }
+    },
+    "portuguese": {},
+    "spanish": {},
+    "turkish": {}
+}

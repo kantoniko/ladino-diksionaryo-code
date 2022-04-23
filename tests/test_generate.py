@@ -24,7 +24,7 @@ def test_no_params():
     sys.argv = [sys.argv[0]]
     main()
 
-@pytest.mark.parametrize("name", ['andjinara', 'komer', 'komo', 'biblia', 'klaro', 'all', 'minimal', 'capital_letters'])
+@pytest.mark.parametrize("name", ['andjinara', 'komer', 'komo', 'biblia', 'klaro', 'all', 'minimal', 'capital_letters', 'good'])
 def test_one_file(tmpdir, request, name):
     print(tmpdir)
     path_to_words = os.path.join(tmpdir, 'words')
@@ -37,6 +37,9 @@ def test_one_file(tmpdir, request, name):
     if name == 'all':
         for word in words:
             shutil.copy(os.path.join(data_path, f'{word}.yaml'), os.path.join(tmpdir, 'words', f'{word}.yaml'))
+    elif name == 'good':
+        for filename in os.listdir(os.path.join(examples_path, 'words')):
+            shutil.copy(os.path.join(examples_path, 'words', filename), os.path.join(tmpdir, 'words', filename))
     elif os.path.exists(example):
         shutil.copy(example, os.path.join(tmpdir, 'words', f'{name}.yaml'))
     else:
@@ -53,14 +56,15 @@ def test_one_file(tmpdir, request, name):
 
     sys.argv = [sys.argv[0], '--all', '--html',  html_dir, '--dictionary', str(tmpdir), '--pretty']
     main()
-    os.unlink(os.path.join(html_dir, 'about.html'))
-    os.unlink(os.path.join(html_dir, 'lists.html'))
-    os.unlink(os.path.join(html_dir, 'dictionaries.html'))
-    os.unlink(os.path.join(html_dir, 'index.html'))
-    for filepath in glob.glob(f'{html_dir}/*-*.html'):
-        os.unlink(filepath)
     shutil.rmtree(os.path.join(html_dir, 'css'))
     shutil.rmtree(os.path.join(html_dir, 'js'))
+    os.unlink(os.path.join(html_dir, 'about.html')) # has the date of generation in it
+    if name != 'good':
+        os.unlink(os.path.join(html_dir, 'index.html'))
+        os.unlink(os.path.join(html_dir, 'lists.html'))
+        os.unlink(os.path.join(html_dir, 'dictionaries.html'))
+        for filepath in glob.glob(f'{html_dir}/*-*.html'):
+            os.unlink(filepath)
 
 
     if not save:
