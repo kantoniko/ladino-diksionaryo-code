@@ -150,6 +150,11 @@ def export_lists_html_page(html_dir):
         "lists.html",
         os.path.join(html_dir, "lists.html"),
         title=f"Ladino lists",
+    )
+    render(
+        "dictionaries.html",
+        os.path.join(html_dir, "dictionaries.html"),
+        title=f"Ladino dictionaries",
         languages=languages,
     )
 

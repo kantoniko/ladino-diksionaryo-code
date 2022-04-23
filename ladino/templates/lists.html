@@ -3,7 +3,6 @@
     <h1 class="title">{{ title }}</h1>
 
     <div class="content">
-      <h2>Listas</h2>
       <ul>
         <li><a href="/egzempios">Egzempios</a></li>
         <li><a href="/words/ladino/">Palavras en ladino</a></li>
@@ -11,16 +10,6 @@
         <li><a href="/mezes">Mezes del anyo</a></li>
         <li><a href="/sezones">Sezones del anyo</a></li>
         <li><a href="/numeros">Numeros</a></li>
-      </ul>
-    </div>
-
-    <div class="content">
-      <h2>Dictionaries</h2>
-      <ul>
-        {% for language in languages %}
-          <li><a href="/ladino-{{language}}">Ladino - {{language}}</a></li>
-          <li><a href="/{{language}}-ladino">{{language}}-Ladino</a></li>
-        {% endfor %}
       </ul>
     </div>
 

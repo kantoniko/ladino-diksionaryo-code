@@ -1,0 +1,15 @@
+{% include 'incl/header.html' %}
+
+    <h1 class="title">{{ title }}</h1>
+
+    <div class="content">
+      <ul>
+        {% for language in languages %}
+          <li><a href="/ladino-{{language}}">Ladino - {{language}}</a></li>
+          <li><a href="/{{language}}-ladino">{{language}}-Ladino</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+{% include 'incl/footer.html' %}
+
