@@ -11,7 +11,7 @@ from ladino.generate import load_dictionary, LadinoError, load_config, main
 real_repo_path = 'ladino-diksionaryo-data'
 data_path  = os.path.join(real_repo_path, 'words')
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-examples_path  = os.path.join(root, 'tests', 'files', 'good')
+examples_path  = os.path.join(root, 'tests', 'files', 'good_source')
 
 # Explanation why each word is included in the tests:
 # andjinara: our first test word. noun. for now it does not have a plural.
