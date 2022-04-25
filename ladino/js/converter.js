@@ -218,11 +218,54 @@ $(document).ready(function(){
         event.stopPropagation();
     });
 
+    const get_words = function() {
+        let stored = {
+            "ok": [],
+            "failed" : [],
+        };
+        const stored_words_json = localStorage.getItem('ladino_words');
+        if (stored_words_json) {
+            stored = JSON.parse(stored_words_json)
+        }
+        return stored;
+    }
 
-    const start_game = function() {
+    const start_game = function(status="") {
+        //console.log("status: ", status);
+
+        let stored = get_words();
+
+        if (status != "") {
+            const old_word = $('#game-text').html();
+            const word_type = $('#game-text').attr("word-type");
+            //console.log(old_word);
+            //console.log(word_type);
+            if (word_type != "") {
+                stored[word_type].shift();
+            }
+            if (status != "later") {
+                stored[status].push(old_word);
+            }
+            localStorage.setItem('ladino_words', JSON.stringify(stored));
+        }
+
         const words = Object.keys(dictionary["ladino"]);
+
+        let word = words[Math.floor(Math.random() * words.length)];
+        $('#game-text').attr("word-type", "");
+        const which = Math.random();
+        if (stored["ok"].length + stored["failed"].length > 10) {
+            if (stored["ok"].length > 0 && which > 0.75) {
+                word = stored["ok"][0];
+                $('#game-text').attr("word-type", "ok");
+            }
+            if (stored["failed"].length > 0 && 0.75 > which && which > 0.5) {
+                $('#game-text').attr("word-type", "failed");
+                word = stored["failed"][0];
+            }
+        }
         //console.log(words.length);
-        const word = words[Math.floor(Math.random() * words.length)];
+        console.log($('#game-text').attr("word-type"));
         const translations = dictionary["ladino"][word]["english"].join(", ");
 
         $("#game-translation").addClass('is-hidden')
@@ -232,6 +275,7 @@ $(document).ready(function(){
         $("#game-reveal").removeClass('is-hidden');
         $("#game-ok").addClass('is-hidden')
         $("#game-fail").addClass('is-hidden')
+        $("#game-later").addClass('is-hidden')
     };
 
     $('#show-game').click(function () {
@@ -245,15 +289,18 @@ $(document).ready(function(){
         $("#game-reveal").addClass('is-hidden');
         $("#game-ok").removeClass('is-hidden');
         $("#game-fail").removeClass('is-hidden');
+        $("#game-later").removeClass('is-hidden');
     });
     $("#game-ok").click(function(event) {
-        console.log("ok");
-        start_game();
+        start_game("ok");
     });
     $("#game-fail").click(function(event) {
-        console.log("fail");
-        start_game();
+        start_game("failed");
     });
+    $("#game-later").click(function(event) {
+        start_game("later");
+    });
+
 
     $('#game-close').click(function () {
         $("#game").removeClass('is-active');
