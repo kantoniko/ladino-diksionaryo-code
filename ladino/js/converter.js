@@ -204,7 +204,7 @@ $(document).ready(function(){
     $('#cancel-config').click(function (event) {
         $("#config").removeClass('is-active');
         event.stopPropagation();
-    })
+    });
     $('#save-config').click(function (event) {
         $("#config").removeClass('is-active');
         let config = get_config();
@@ -216,6 +216,47 @@ $(document).ready(function(){
         localStorage.setItem('config', JSON.stringify(config))
         translate();
         event.stopPropagation();
-    })
+    });
+
+
+    const start_game = function() {
+        const words = Object.keys(dictionary["ladino"]);
+        //console.log(words.length);
+        const word = words[Math.floor(Math.random() * words.length)];
+        const translations = dictionary["ladino"][word]["english"].join(", ");
+
+        $("#game-translation").addClass('is-hidden')
+        $('#game-text').html(word);
+
+        $('#game-translation').html(translations);
+        $("#game-reveal").removeClass('is-hidden');
+        $("#game-ok").addClass('is-hidden')
+        $("#game-fail").addClass('is-hidden')
+    };
+
+    $('#show-game').click(function () {
+        $(".navbar-burger").toggleClass("is-active");
+        $(".navbar-menu").toggleClass("is-active");
+        $("#game").addClass('is-active');
+        start_game();
+    });
+    $("#game-reveal").click(function(event) {
+        $('#game-translation').removeClass('is-hidden');
+        $("#game-reveal").addClass('is-hidden');
+        $("#game-ok").removeClass('is-hidden');
+        $("#game-fail").removeClass('is-hidden');
+    });
+    $("#game-ok").click(function(event) {
+        console.log("ok");
+        start_game();
+    });
+    $("#game-fail").click(function(event) {
+        console.log("fail");
+        start_game();
+    });
+
+    $('#game-close').click(function () {
+        $("#game").removeClass('is-active');
+    });
 });
 
