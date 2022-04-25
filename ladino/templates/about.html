@@ -63,6 +63,20 @@
       </ul>
     </div>
 
+    <div class="content">
+      <h2>(Learning) Game</h2>
+       <p>
+            There is an experimental learning game that is accessible from the front page by clicking "Djugo" in the menu.
+            It will show random words in Ladino. Then you can try to guess the word. Pressing the "Reveal" button you will see the translations.
+            At this point you can confirm that you guessed correctly (OK) or that you failed to guess correctly (Fail). Based on a spaced repetion algorightm
+            you will see the same word appear again. If at this point you are not interested to learn this word you can click <b>Later</b> and it will be put back to the list of random words.
+
+            We maintain 2 lists. One for words that were last time marked as "OK" and one for the words marked as "Fail". (And we have the pool of all the words.)
+            When the user clickes OK or Failure the word is placed at the end of the appropriate queue.
+            if we have less than 10 words in the two lists, pick from the pool.
+            If there are 10 or more then: 50% pick the first one from the "failed", 25% pick the first from the "ok" list 25% pick from the general pool (till we have a word that is not in the other two lists).
+       </p>
+    </div>
 
     <div class="content">
       <h2>Statistics</h2>
