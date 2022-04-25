@@ -21,7 +21,7 @@ the subdirectory `ladino-diksionaryo-data` of this project.
 
 ```
 pip install -r requirements.txt
-git python generate.py --html html --dictionary ladino-diksionaryo-data/words/ --log
+PYTHONPATH=. python ladino/generate.py --dictionary ladino-diksionaryo-data/ --html docs --all --log
 ```
 
 This will generate the static files in the `html` subdrirectory.
