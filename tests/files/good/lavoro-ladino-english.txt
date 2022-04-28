@@ -1,0 +1,3 @@
+Ladino             English
+komer               eat
+palavra             word, letterstogether
