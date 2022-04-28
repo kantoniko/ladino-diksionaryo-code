@@ -1,0 +1,7 @@
+Ladino             {{language.capitalize()}}
+{%- for word in words -%}
+   {%- for version in word['versions'] %}
+{{'%-20s'|format(version['ladino'])}}  {%- for trans in version.translations[language] -%}{{ trans }}{%- if not loop.last -%}, {% endif -%}{%- endfor %}
+   {%- endfor -%}
+{%- endfor -%}
+

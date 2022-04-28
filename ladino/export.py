@@ -267,5 +267,10 @@ def export_categories(categories, html_dir):
             words=categories[cat],
             languages=languages,
         )
-
-
+        for language in languages:
+            render(
+                "dictionary.txt",
+                os.path.join(html_dir, f"{cat}-ladino-{language}.txt"),
+                words=categories[cat],
+                language=language,
+            )
