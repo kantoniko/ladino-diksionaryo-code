@@ -144,7 +144,7 @@ def main():
         logging.info(count)
 
     if args.all:
-        export_to_html(dictionary, count, pages, args.html, pretty=args.pretty)
+        export_to_html(config, dictionary, count, pages, args.html, pretty=args.pretty)
         export_categories(categories, args.html)
         export_lists(lists, args.html)
         export_examples(all_examples, extra_examples, pages['ladino'], args.html)

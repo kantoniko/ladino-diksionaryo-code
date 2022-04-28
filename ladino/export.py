@@ -127,7 +127,7 @@ def export_single_page_dictionaries(dictionary, html_dir):
 
 
 
-def export_to_html(dictionary, count, pages, html_dir, pretty=False):
+def export_to_html(config, dictionary, count, pages, html_dir, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
 
@@ -142,14 +142,15 @@ def export_to_html(dictionary, count, pages, html_dir, pretty=False):
     export_dictionary_lists(pages, html_dir)
     export_json(count, os.path.join(html_dir, "count.json"), pretty=pretty)
     export_about_html_page(count, html_dir)
-    export_lists_html_page(html_dir)
+    export_lists_html_page(config, html_dir)
 
 
-def export_lists_html_page(html_dir):
+def export_lists_html_page(config, html_dir):
     render(
         "lists.html",
         os.path.join(html_dir, "lists.html"),
         title=f"Ladino lists",
+        config=config,
     )
     render(
         "dictionaries.html",
