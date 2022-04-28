@@ -60,6 +60,7 @@ def load_dictionary(config, path_to_dictionary):
     words = []
     all_examples = []
     categories = {cat:[] for cat in config['kategorias'] }
+    lists = {lst:[] for lst in config['listas'] }
     for filename in files:
         path = os.path.join(path_to_dictionary, filename)
         logging.info(path)
@@ -69,6 +70,11 @@ def load_dictionary(config, path_to_dictionary):
         grammar = check_grammar(config, data, filename)
         check_origen(config, data, filename)
         check_categories(config, data, filename, categories)
+        for lst, listed_words in config['listas'].items():
+            #print(data['versions'][0]['ladino'])
+            #print(listed_words)
+            if 'versions' in data and 'ladino' in data['versions'][0] and data['versions'][0]['ladino'] in listed_words:
+                lists[lst].append(data)
 
         if 'versions' not in data:
             raise LadinoError(f"The 'versions' field is missing from file '{filename}'")
@@ -143,7 +149,10 @@ def load_dictionary(config, path_to_dictionary):
     #print(all_examples[0])
     for cat in categories.keys():
         categories[cat].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
-    return words, all_examples, categories
+    for lst in lists.keys():
+        lookup = {word:ix for ix, word in enumerate(config['listas'][lst])}
+        lists[lst].sort(key=lambda word: lookup[word['versions'][0]['ladino']])
+    return words, all_examples, categories, lists
 
 def load_examples(path_to_examples):
     extra_examples = []

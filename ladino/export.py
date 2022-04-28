@@ -274,3 +274,16 @@ def export_categories(categories, html_dir):
                 words=categories[cat],
                 language=language,
             )
+
+def export_lists(lists, html_dir):
+    for lst in lists.keys():
+        render(
+            "category.html",
+            os.path.join(html_dir, f"{lst}.html"),
+            title=lst,
+            words=lists[lst],
+            languages=languages,
+        )
+
+
+
