@@ -11,8 +11,7 @@ import datetime
 from ladino.common import LadinoError, languages
 import ladino.common
 from ladino.load import load_dictionary, load_examples, load_config
-from ladino.export import generate_main_page, export_to_html, export_examples,  export_markdown_pages, export_whatsapp, export_categories, export_lists, export_verbs
-from ladino.export_to_hunspell import export_to_hunspell
+from ladino.export import generate_main_page, export_to_html, export_whatsapp
 
 ladino.common.start = datetime.datetime.now().replace(microsecond=0)
 
@@ -144,13 +143,7 @@ def main():
         logging.info(count)
 
     if args.all:
-        export_to_html(config, dictionary, count, pages, args.html, pretty=args.pretty)
-        export_categories(categories, args.html)
-        export_lists(lists, args.html)
-        export_verbs(verbs, args.html)
-        export_examples(all_examples, extra_examples, pages['ladino'], args.html)
-        export_markdown_pages(config, path_to_repo, args.html)
-        #export_to_hunspell(dictionary)
+        export_to_html(config, categories, lists, verbs, all_examples, extra_examples, dictionary, count, pages, path_to_repo, args.html, pretty=args.pretty)
         if args.whatsapp:
             sys.path.insert(0, args.whatsapp)
             import ladino.whatsapeando as whatsapp

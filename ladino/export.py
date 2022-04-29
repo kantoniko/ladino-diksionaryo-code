@@ -12,6 +12,7 @@ from jinja2 import Environment, FileSystemLoader
 
 from ladino.common import languages
 import ladino.common
+from ladino.export_to_hunspell import export_to_hunspell
 
 def render(template_file, html_file=None, **args):
     root = os.path.dirname(os.path.abspath(__file__))
@@ -127,7 +128,7 @@ def export_single_page_dictionaries(dictionary, html_dir):
 
 
 
-def export_to_html(config, dictionary, count, pages, html_dir, pretty=False):
+def export_to_html(config, categories, lists, verbs, all_examples, extra_examples, dictionary, count, pages, path_to_repo, html_dir, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
 
@@ -143,7 +144,12 @@ def export_to_html(config, dictionary, count, pages, html_dir, pretty=False):
     export_json(count, os.path.join(html_dir, "count.json"), pretty=pretty)
     export_about_html_page(count, html_dir)
     export_lists_html_page(config, html_dir)
-
+    export_categories(categories, html_dir)
+    export_lists(lists, html_dir)
+    export_verbs(verbs, html_dir)
+    export_examples(all_examples, extra_examples, pages['ladino'], html_dir)
+    export_markdown_pages(config, path_to_repo, html_dir)
+    #export_to_hunspell(dictionary)
 
 def export_lists_html_page(config, html_dir):
     render(
