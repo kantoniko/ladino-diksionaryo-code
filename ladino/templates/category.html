@@ -6,7 +6,9 @@
     <table class="table is-striped is-hoverable">
       <thead>
         <tr>
+           <th></th>
            <th>Ladino</th>
+           <th>Accented</th>
             {%- for lang in languages %}
                <th>{{ lang }}</th>
             {% endfor -%}
@@ -14,25 +16,29 @@
       </thead>
       <tbody>
         {%- for word in words -%}
-           {%- for version in word['versions'] %}
-              <tr>
-                  <td><a href="/words/ladino/{{ version['ladino'].lower() }}">{{ version['ladino'] }}</a>
-                        {%- if version['gender'] == 'masculine' and version['number'] == 'singular' %} [el] {% endif -%}
-                        {%- if version['gender'] == 'masculine' and version['number'] == 'plural' %} [los] {% endif -%}
-                        {%- if version['gender'] == 'feminine' and version['number'] == 'singular' %} [la] {% endif -%}
-                        {%- if version['gender'] == 'feminine' and version['number'] == 'plural' %} [las] {% endif -%}
-                        {%- if version['gender'] == 'both' and version['number'] == 'singular' %} [la/el] {% endif -%}
-                        {%- if version['gender'] == 'both' and version['number'] == 'plural' %} [las/los] {% endif -%}
-                        {%- if version['accented'] %}({{ version['accented'] }}){% endif -%}
-                        {% for alt in version['alternative-spelling'] %}
-                            {{ alt['ladino'] }} {% if alt['accented'] %}({{ alt['accented'] }}){% endif %}
-                        {% endfor %}
-                  </td>
-                  {%- for lang in languages %}
-                     <td>{%- for trans in version.translations[lang] -%}{{ trans }}{%- if not loop.last -%}, {% endif -%}{%- endfor %} </td>
-                  {% endfor -%}
-              </tr>
-           {% endfor %}
+          {%- for version in word['versions'] %}
+            <tr>
+              <td>
+                {%- if version['gender'] == 'masculine' and version['number'] == 'singular' %}el{% endif -%}
+                {%- if version['gender'] == 'masculine' and version['number'] == 'plural' %}los{% endif -%}
+                {%- if version['gender'] == 'feminine' and version['number'] == 'singular' %}la{% endif -%}
+                {%- if version['gender'] == 'feminine' and version['number'] == 'plural' %}las{% endif -%}
+                {%- if version['gender'] == 'both' and version['number'] == 'singular' %}la/el{% endif -%}
+                {%- if version['gender'] == 'both' and version['number'] == 'plural' %}las/los{% endif -%}
+              </td>
+              <td>
+                <a href="/words/ladino/{{ version['ladino'].lower() }}">{{ version['ladino'] }}</a>
+                {% for alt in version['alternative-spelling'] %}<br>{{ alt['ladino'] }}{% endfor %}
+              </td>
+              <td>
+                {{ version['accented'] }}
+                {% for alt in version['alternative-spelling'] %}<br>{{ alt['accented'] }}{% endfor %}
+              </td>
+              {%- for lang in languages %}
+                <td>{%- for trans in version.translations[lang] -%}{{ trans }}{%- if not loop.last -%}, {% endif -%}{%- endfor %} </td>
+              {% endfor -%}
+            </tr>
+          {% endfor %}
         {%- endfor -%}
       </tbody>
     </table>
