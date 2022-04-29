@@ -310,5 +310,15 @@ def export_verbs(verbs, html_dir):
         data = {
             'to': verb['versions'][0]['ladino'],
         }
+        if ladino.endswith('er'):
+            root = ladino[0:-2]
+        data['prezente'] = {
+            'yo': root + 'o',
+            'tu': root + 'es',
+            'el': root + 'e',
+            'moz': root + 'emos',
+            'voz': root + 'ésh',
+            'eyos': root + 'en',
+        }
         export_json(data, os.path.join(verbs_dir, f'{ladino}.json'))
 
