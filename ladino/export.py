@@ -295,6 +295,8 @@ def export_lists(lists, html_dir):
         )
 
 def export_verbs(verbs, html_dir):
+    verbs_dir = os.path.join(html_dir, 'verbos')
+    os.makedirs(verbs_dir, exist_ok=True)
     verbs.sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
     render(
         "category.html",
@@ -303,6 +305,10 @@ def export_verbs(verbs, html_dir):
         words=verbs,
         languages=languages,
     )
-
-
+    for verb in verbs:
+        ladino = verb['versions'][0]['ladino']
+        data = {
+            'to': verb['versions'][0]['ladino'],
+        }
+        export_json(data, os.path.join(verbs_dir, f'{ladino}.json'))
 
