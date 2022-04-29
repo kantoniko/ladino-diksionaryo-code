@@ -55,6 +55,7 @@ def export_dictionary_lists(pages, html_dir):
     words_dir = os.path.join(html_dir, 'words')
     language = 'ladino'
     words = pages['ladino']
+    os.makedirs(os.path.join(words_dir, language), exist_ok=True)
     html = render(
         "words.html",
         os.path.join(words_dir, language, 'index.html'),
@@ -139,7 +140,6 @@ def export_to_html(config, categories, lists, verbs, all_examples, extra_example
     generate_main_page(html_dir)
     export_single_page_dictionaries(dictionary, html_dir)
 
-    export_dictionary_pages(pages, html_dir)
     export_dictionary_lists(pages, html_dir)
     export_json(count, os.path.join(html_dir, "count.json"), pretty=pretty)
     export_about_html_page(count, html_dir)
@@ -147,8 +147,10 @@ def export_to_html(config, categories, lists, verbs, all_examples, extra_example
     export_categories(categories, html_dir)
     export_lists(lists, html_dir)
     export_verbs(verbs, html_dir)
-    export_examples(all_examples, extra_examples, pages['ladino'], html_dir)
+    export_examples(copy.deepcopy(all_examples), extra_examples, pages['ladino'], html_dir)
     export_markdown_pages(config, path_to_repo, html_dir)
+
+    export_dictionary_pages(pages, html_dir)
     #export_to_hunspell(dictionary)
 
 def export_lists_html_page(config, html_dir):
