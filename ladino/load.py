@@ -61,6 +61,7 @@ def load_dictionary(config, path_to_dictionary):
     all_examples = []
     categories = {cat:[] for cat in config['kategorias'] }
     lists = {lst:[] for lst in config['listas'] }
+    verbs = []
     for filename in files:
         path = os.path.join(path_to_dictionary, filename)
         logging.info(path)
@@ -96,6 +97,9 @@ def load_dictionary(config, path_to_dictionary):
                     raise LadinoError(f"The 'number' field is None in '{filename}' version {version}")
                 if number not in config['numero']:
                     raise LadinoError(f"The 'number' field is '{number}' in '{filename}' version {version}")
+
+        if grammar == 'verb':
+            verbs.append(data)
 
         if 'examples' not in data:
             raise LadinoError(f"The 'examples' field is missing in '{filename}'")
@@ -157,7 +161,7 @@ def load_dictionary(config, path_to_dictionary):
     for lst in lists.keys():
         lookup = {word:ix for ix, word in enumerate(config['listas'][lst])}
         lists[lst].sort(key=lambda word: lookup[word['versions'][0]['ladino']])
-    return words, all_examples, categories, lists
+    return words, all_examples, categories, lists, verbs
 
 def load_examples(path_to_examples):
     extra_examples = []

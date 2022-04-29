@@ -11,7 +11,7 @@ import datetime
 from ladino.common import LadinoError, languages
 import ladino.common
 from ladino.load import load_dictionary, load_examples, load_config
-from ladino.export import generate_main_page, export_to_html, export_examples,  export_markdown_pages, export_whatsapp, export_categories, export_lists
+from ladino.export import generate_main_page, export_to_html, export_examples,  export_markdown_pages, export_whatsapp, export_categories, export_lists, export_verbs
 from ladino.export_to_hunspell import export_to_hunspell
 
 ladino.common.start = datetime.datetime.now().replace(microsecond=0)
@@ -138,7 +138,7 @@ def main():
         path_to_repo = args.dictionary
         config = load_config(path_to_repo)
 
-        dictionary_source, all_examples, categories, lists = load_dictionary(config, os.path.join(path_to_repo, 'words'))
+        dictionary_source, all_examples, categories, lists, verbs = load_dictionary(config, os.path.join(path_to_repo, 'words'))
         extra_examples = load_examples(os.path.join(path_to_repo, 'examples'))
         dictionary, count, pages = collect_data(dictionary_source)
         logging.info(count)
@@ -147,6 +147,7 @@ def main():
         export_to_html(config, dictionary, count, pages, args.html, pretty=args.pretty)
         export_categories(categories, args.html)
         export_lists(lists, args.html)
+        export_verbs(verbs, args.html)
         export_examples(all_examples, extra_examples, pages['ladino'], args.html)
         export_markdown_pages(config, path_to_repo, args.html)
         #export_to_hunspell(dictionary)

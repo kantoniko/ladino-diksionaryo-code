@@ -286,5 +286,15 @@ def export_lists(lists, html_dir):
             languages=languages,
         )
 
+def export_verbs(verbs, html_dir):
+    verbs.sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
+    render(
+        "category.html",
+        os.path.join(html_dir, f"verbos.html"),
+        title="Verbos",
+        words=verbs,
+        languages=languages,
+    )
+
 
 
