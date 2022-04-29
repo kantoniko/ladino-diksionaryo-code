@@ -1,1 +1,2 @@
 Ladino             English
+komer               eat

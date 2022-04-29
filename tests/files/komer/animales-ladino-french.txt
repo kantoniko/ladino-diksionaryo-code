@@ -1,1 +1,2 @@
 Ladino             French
+komer               manger
