@@ -88,6 +88,7 @@ def test_one_file(tmpdir, request, name):
     ('non_verb_with_conjugation', "Grammar is NOT a 'verb', but there are conjugations in 'non_verb_with_conjugation.yaml'"),
     ('no_examples', "The 'examples' field is missing in 'no_examples.yaml'"),
     ('example_without_language', "The example 'Una palavra i un biervo.' is a string instead of a dictionary in 'example_without_language.yaml'"),
+    ('example_with_incorrect_language', "Incorrect language 'klingon' in example in 'example_with_incorrect_language.yaml'"),
     ('version_without_ladino', "The ladino 'version' is missing from file 'version_without_ladino.yaml'"),
     ('verb_wrong_conjugation_time', "Verb conjugation time 'other' is no recogrnized in 'verb_wrong_conjugation_time.yaml'"),
     ('verb_wrong_pronoun', "Incorrect pronoun 'you' in verb time 'present indicative' in 'verb_wrong_pronoun.yaml'"),
