@@ -35,7 +35,7 @@
                 {% for alt in version['alternative-spelling'] %}<br>{{ alt['accented'] }}{% endfor %}
               </td>
               {%- for lang in languages %}
-                <td>{%- for trans in version.translations[lang] -%}{{ trans }}{%- if not loop.last -%}, {% endif -%}{%- endfor %} </td>
+                <td>{%- for trans in version.translations[lang] -%}{{ trans }}{%- if not loop.last -%},<br>{% endif -%}{%- endfor %} </td>
               {% endfor -%}
             </tr>
           {% endfor %}
