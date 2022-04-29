@@ -3,18 +3,22 @@
     <h1 class="title">{{ title_links | safe }}</h1>
     <div class="content">
 
-    <div>
-    {{text | safe}}
-    </div>
-    <audio controls>
-      <source src="https://whatsapeando.szabgab.com/sound/{{filename}}" type="audio/ogg">
-      Your browser does not support the audio element.
-    </audio>
+      <div>
+      {{text | safe}}
+      </div>
+      <div>
+        <audio controls>
+          <source src="https://whatsapeando.szabgab.com/sound/{{filename}}" type="audio/ogg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
     </div>
 
+    <div class="content">
     <a class="button" href="{{prev_message}}">⬅️</a>
     <a class="button" href=".">⬆️</a>
     <a class="button" href="{{next_message}}">➡️</a>
+    </div>
 
    {% include 'incl/whatsapp.html' %}
 
