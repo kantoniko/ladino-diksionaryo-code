@@ -19,39 +19,7 @@ versions:
       - ladino: kumer
         accented: kumér
 
-conjugations:
-  present indicative:
-    yo:
-      ladino: komo
-      translations:
-        spanish: como
-        english: eat
-    tu:
-      ladino: komes
-      translations:
-        spanish: comes
-        english: eat
-    el:
-      ladino: kome
-      translations:
-        spanish: come
-        english: eats
-    mozotros:
-      ladino: komemos
-      translations:
-        spanish: comemos
-        english: eat
-    vozotros:
-      ladino: komesh
-      translations:
-        spanish: comeis
-        english: eat
-    eyos:
-      ladino: komen
-      translations:
-        spanish: comen
-        english: eat
-
+conjugations: {}
 
 examples:
   - ladino: Yo komo pan
