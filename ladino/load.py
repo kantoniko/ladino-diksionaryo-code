@@ -118,6 +118,8 @@ def load_dictionary(config, path_to_dictionary):
             if examples is not None:
                 version['examples'] = examples
                 for example in examples:
+                    if example.__class__.__name__ == 'str':
+                        raise LadinoError(f"The example '{example}' is a string instead of a dictionary in '{filename}'")
                     all_examples.append({
                         'example': example,
                         'word': version['ladino'].lower(),

@@ -1,0 +1,14 @@
+grammar: null
+origen: Jeneral
+
+versions:
+  - ladino: palavra
+
+    translations:
+      english:
+        - word
+        - letterstogether
+
+examples:
+  - Una palavra i un biervo.
+
