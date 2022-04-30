@@ -51,7 +51,6 @@ def create_pdf(all_words, source, target):
             translations = word['versions'][0]['translations'].get(target)
             if not translations:
                 continue
-            can.setFont(fontname_bold, fontsize)
             word['versions'][0]['ladino']
             ladino_text = ladino
             if word['grammar'] == 'verb':
@@ -65,6 +64,7 @@ def create_pdf(all_words, source, target):
             if word['versions'][0].get('gender', '') == 'feminine' and word['versions'][0].get('number', '') == 'plural':
                 ladino_text += ' (las)'
             ladino_text += ':'
+            can.setFont(fontname_bold, fontsize)
             can.drawString(20, row, ladino_text)
             width = can.stringWidth(ladino_text)
             can.setFont(fontname, fontsize)
@@ -73,6 +73,22 @@ def create_pdf(all_words, source, target):
             if row < 30:
                 row = 760
                 can.showPage()
+    else:
+        filtered_words = filter(lambda word: len(word['versions'][0]['translations'].get(source, '')) > 0, all_words)
+        for word in sorted(filtered_words, key=lambda word: word['versions'][0]['translations'].get(source, '')[0].lower()):
+            source_list = word['versions'][0]['translations'].get(source, '')
+            for source_text in source_list:
+                source_text += ':'
+                can.setFont(fontname_bold, fontsize)
+                can.drawString(20, row, source_text)
+                width = can.stringWidth(source_text)
+                can.setFont(fontname, fontsize)
+                can.drawString(20+2+width, row, word['versions'][0].get('accented', word['versions'][0]['ladino']))
+
+                row -= 12
+                if row < 30:
+                    row = 760
+                    can.showPage()
 
 
     can.save()
