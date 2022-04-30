@@ -9,7 +9,8 @@ def create_pdf_dictionaries(dictionary, languages):
 
 def create_pdf(dictionary, source, target):
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    pdf_dir = os.path.join(root, 'pdf')
+    # put the files in a subdirectory so if the user unzips the artifact created on GitHub Actions, all the files will be in a subdirectory.
+    pdf_dir = os.path.join(root, 'pdf', 'diksionaryo-ladino')
     os.makedirs(pdf_dir, exist_ok=True)
 
     pdf_file = os.path.join(pdf_dir, f'{source}-{target}.pdf')
