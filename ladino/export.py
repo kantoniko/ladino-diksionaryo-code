@@ -133,7 +133,7 @@ def export_single_page_dictionaries(dictionary, html_dir):
 
 
 
-def export_to_html(config, categories, lists, verbs, all_examples, extra_examples, dictionary, count, pages, path_to_repo, html_dir, pretty=False):
+def export_to_html(config, categories, lists, verbs, all_examples, extra_examples, dictionary, count, pages, all_words, path_to_repo, html_dir, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
 
@@ -144,7 +144,7 @@ def export_to_html(config, categories, lists, verbs, all_examples, extra_example
     generate_main_page(html_dir)
     export_single_page_dictionaries(dictionary, html_dir)
 
-    create_pdf_dictionaries(dictionary, languages)
+    create_pdf_dictionaries(all_words, languages)
 
     export_dictionary_lists(pages, html_dir)
     export_json(count, os.path.join(html_dir, "count.json"), pretty=pretty)

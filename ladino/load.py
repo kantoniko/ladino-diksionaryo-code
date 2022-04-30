@@ -59,6 +59,7 @@ def load_dictionary(config, path_to_dictionary):
     files = os.listdir(path_to_dictionary)
     words = []
     all_examples = []
+    all_words = []
     categories = {cat:[] for cat in config['kategorias'] }
     lists = {lst:[] for lst in config['listas'] }
     verbs = []
@@ -67,6 +68,8 @@ def load_dictionary(config, path_to_dictionary):
         logging.info(path)
         with open(path) as fh:
             data = safe_load(fh)
+
+        all_words.append(data)
 
         grammar = check_grammar(config, data, filename)
         check_origen(config, data, filename)
@@ -161,7 +164,7 @@ def load_dictionary(config, path_to_dictionary):
     for lst in lists.keys():
         lookup = {word:ix for ix, word in enumerate(config['listas'][lst])}
         lists[lst].sort(key=lambda word: lookup[word['versions'][0]['ladino']])
-    return words, all_examples, categories, lists, verbs
+    return words, all_examples, categories, lists, verbs, all_words
 
 def load_examples(path_to_examples):
     extra_examples = []
