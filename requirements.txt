@@ -2,5 +2,7 @@ markdown
 jinja2
 pyyaml
 
+reportlab
+
 pytest
 pytest-random-order

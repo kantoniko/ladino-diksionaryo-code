@@ -13,6 +13,9 @@ from jinja2 import Environment, FileSystemLoader
 from ladino.common import languages
 import ladino.common
 from ladino.export_to_hunspell import export_to_hunspell
+from ladino.pdf import create_pdf_dictionaries
+
+
 
 def render(template_file, html_file=None, **args):
     root = os.path.dirname(os.path.abspath(__file__))
@@ -139,6 +142,8 @@ def export_to_html(config, categories, lists, verbs, all_examples, extra_example
 
     generate_main_page(html_dir)
     export_single_page_dictionaries(dictionary, html_dir)
+
+    create_pdf_dictionaries(dictionary, languages)
 
     export_dictionary_lists(pages, html_dir)
     export_json(count, os.path.join(html_dir, "count.json"), pretty=pretty)
