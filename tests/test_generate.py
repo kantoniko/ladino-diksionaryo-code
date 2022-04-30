@@ -62,10 +62,10 @@ def test_one_file(tmpdir, request, name):
     shutil.rmtree(os.path.join(html_dir, 'css'))
     shutil.rmtree(os.path.join(html_dir, 'js'))
     os.unlink(os.path.join(html_dir, 'about.html')) # has the date of generation in it
+    os.unlink(os.path.join(html_dir, 'dictionaries.html')) # has chaning link in it
     if name != 'good':
         os.unlink(os.path.join(html_dir, 'index.html'))
         os.unlink(os.path.join(html_dir, 'lists.html'))
-        os.unlink(os.path.join(html_dir, 'dictionaries.html'))
         for filepath in glob.glob(f'{html_dir}/*-*.html'):
             os.unlink(filepath)
         for cat in config['kategorias']:
