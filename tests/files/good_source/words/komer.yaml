@@ -1,6 +1,6 @@
 grammar: verb
 origen: Jeneral
-categories:
+kategorias:
   - animales
   - lavoro
 

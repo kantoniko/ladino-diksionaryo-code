@@ -24,9 +24,9 @@ def check_origen(config, data, filename):
         raise LadinoError(f"Invalid origen '{origen}' in file '{filename}'")
 
 def check_categories(config, data, filename, categories):
-    if 'categories' not in data:
+    if 'kategorias' not in data:
         return
-    for cat in data['categories']:
+    for cat in data['kategorias']:
         if cat not in config['kategorias']:
             raise LadinoError(f"Invalid category '{cat}' in file '{filename}'")
         categories[cat].append(data)
