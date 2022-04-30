@@ -4,8 +4,8 @@ import os
 from reportlab.pdfgen import canvas
 
 def create_pdf_dictionaries(dictionary, languages):
-    create_pdf(dictionary, 'ladino', 'portuguese')
-    #for language in languages:
+    for language in languages:
+        create_pdf(dictionary, 'ladino', language)
 
 def create_pdf(dictionary, source, target):
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
