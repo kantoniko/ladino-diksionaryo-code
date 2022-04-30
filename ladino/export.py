@@ -86,7 +86,6 @@ def export_about_html_page(count, html_dir):
         count=count,
         start=str(ladino.common.start),
         elapsed=elapsed,
-        github_run_id=os.environ.get('GITHUB_RUN_ID', ''),
         languages=languages,
     )
 
@@ -170,6 +169,7 @@ def export_lists_html_page(config, html_dir):
         "dictionaries.html",
         os.path.join(html_dir, "dictionaries.html"),
         title=f"Ladino dictionaries",
+        github_run_id=os.environ.get('GITHUB_RUN_ID', ''),
         languages=languages,
     )
 
