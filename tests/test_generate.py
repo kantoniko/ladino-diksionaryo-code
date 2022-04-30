@@ -57,6 +57,8 @@ def test_one_file(tmpdir, request, name):
     sys.argv = [sys.argv[0], '--all', '--html',  html_dir, '--dictionary', str(tmpdir), '--pretty']
     main()
 
+    if len(os.listdir(os.path.join(html_dir, 'verbos'))) == 0:
+        os.rmdir(os.path.join(html_dir, 'verbos'))
     shutil.rmtree(os.path.join(html_dir, 'css'))
     shutil.rmtree(os.path.join(html_dir, 'js'))
     os.unlink(os.path.join(html_dir, 'about.html')) # has the date of generation in it
