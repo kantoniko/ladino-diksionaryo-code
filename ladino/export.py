@@ -86,6 +86,7 @@ def export_about_html_page(count, html_dir):
         count=count,
         start=str(ladino.common.start),
         elapsed=elapsed,
+        github_run_id=os.environ.get('GITHUB_RUN_ID', ''),
         languages=languages,
     )
 
