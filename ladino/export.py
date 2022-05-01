@@ -107,6 +107,25 @@ def export_json(all_words, filename, pretty=False):
         else:
             json.dump(all_words, fh, ensure_ascii=False, sort_keys=True)
 
+def export_missing_words(all_words, languages):
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    helper = os.path.join(root, 'helper')
+    os.makedirs(helper, exist_ok=True)
+
+    for language in languages:
+        rows = []
+        for word in all_words:
+            for version in word['versions']:
+                if 'translations' not in version:
+                    continue
+                if version['translations'].get(language):
+                    # has content
+                    continue
+                rows.append(version['ladino'])
+        with open(os.path.join(helper, f"{language}.txt"), 'w') as fh:
+            for row in sorted(rows):
+                print(row, file=fh)
+
 def export_single_page_dictionaries(dictionary, html_dir):
     logging.info("Export single-page dictionaries")
 
@@ -141,6 +160,8 @@ def export_to_html(config, categories, lists, verbs, all_examples, extra_example
     export_json(dictionary, os.path.join(html_dir, "dictionary.json"), pretty=pretty)
 
     generate_main_page(html_dir)
+    export_missing_words(all_words, languages)
+
     export_single_page_dictionaries(dictionary, html_dir)
 
     create_pdf_dictionaries(all_words, languages)
