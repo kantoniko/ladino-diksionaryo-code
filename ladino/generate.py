@@ -150,7 +150,7 @@ def main():
         sys.path.insert(0, args.sounds)
         from ladino.sounds import load_sounds
         sounds = load_sounds()
-    print(sounds)
+    #print(sounds)
 
     if args.all:
         export_to_html(config, categories, lists, verbs, all_examples, extra_examples, dictionary, count, pages, all_words, sounds, path_to_repo, args.html, pretty=args.pretty)
