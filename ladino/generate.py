@@ -103,6 +103,9 @@ def get_args():
     parser.add_argument(
         "--whatsapp", help="path to whatsapp files",
     )
+    parser.add_argument(
+        "--sounds", help="path to sounds repository",
+    )
     action = parser.add_mutually_exclusive_group(required=False)
     action.add_argument("--main", action='store_true', help="Create the main page only")
     action.add_argument("--all",  action='store_true', help="Create all the pages")
@@ -142,8 +145,15 @@ def main():
         dictionary, count, pages = collect_data(dictionary_source)
         logging.info(count)
 
+    sounds = None
+    if args.sounds:
+        sys.path.insert(0, args.sounds)
+        from ladino.sounds import load_sounds
+        sounds = load_sounds()
+    print(sounds)
+
     if args.all:
-        export_to_html(config, categories, lists, verbs, all_examples, extra_examples, dictionary, count, pages, all_words, path_to_repo, args.html, pretty=args.pretty)
+        export_to_html(config, categories, lists, verbs, all_examples, extra_examples, dictionary, count, pages, all_words, sounds, path_to_repo, args.html, pretty=args.pretty)
         if args.whatsapp:
             sys.path.insert(0, args.whatsapp)
             import ladino.whatsapeando as whatsapp

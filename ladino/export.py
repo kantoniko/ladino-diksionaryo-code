@@ -29,7 +29,7 @@ def render(template_file, html_file=None, **args):
             fh.write(html)
     return html
 
-def export_dictionary_pages(pages, html_dir):
+def export_dictionary_pages(pages, sounds, html_dir):
     logging.info("Export dictionary pages")
     words_dir = os.path.join(html_dir, 'words')
     os.makedirs(words_dir, exist_ok=True)
@@ -50,8 +50,10 @@ def export_dictionary_pages(pages, html_dir):
             os.path.join(words_dir, language, filename),
             data=enhanced_data,
             title=f"{word}",
+            sounds=sounds.get(word) if sounds else [],
             word=word,
         )
+
         export_json(data, os.path.join(words_dir, language, f'{word}.json'))
 
 def export_dictionary_lists(pages, html_dir):
@@ -151,7 +153,7 @@ def export_single_page_dictionaries(dictionary, html_dir):
 
 
 
-def export_to_html(config, categories, lists, verbs, all_examples, extra_examples, dictionary, count, pages, all_words, path_to_repo, html_dir, pretty=False):
+def export_to_html(config, categories, lists, verbs, all_examples, extra_examples, dictionary, count, pages, all_words, sounds, path_to_repo, html_dir, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
 
@@ -176,7 +178,7 @@ def export_to_html(config, categories, lists, verbs, all_examples, extra_example
     export_examples(copy.deepcopy(all_examples), extra_examples, pages['ladino'], html_dir)
     export_markdown_pages(config, path_to_repo, html_dir)
 
-    export_dictionary_pages(pages, html_dir)
+    export_dictionary_pages(pages, sounds, html_dir)
     #export_to_hunspell(dictionary)
 
 def export_lists_html_page(config, html_dir):

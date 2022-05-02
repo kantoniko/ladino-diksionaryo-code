@@ -7,6 +7,14 @@
   {% for entry in data %}
      <table>
        <tr><td>ladino</td><td>{{ entry.ladino }}</td></tr>
+       {%- if sounds -%}
+       <tr><td>
+           <audio controls>
+             <source src="https://ladino-sounds.szabgab.com/{{sounds[0].filename}}" type="audio/ogg">
+             Your browser does not support the audio element.
+           </audio>
+           </td><td></td></tr>
+       {%- endif %}
        {% if entry.accented -%}
        <tr><td>accented</td><td>{{ entry.accented }}</td></tr>
        {%- endif %}
