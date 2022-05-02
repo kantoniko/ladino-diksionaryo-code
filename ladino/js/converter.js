@@ -14,13 +14,6 @@ $(document).ready(function(){
     // We save the text in local storage and restore it when the user visits next time.
     // especially useful when people click on words and than get back to the main page.
     $("#input-text").val(localStorage.getItem('original'));
-    const welcome_message = localStorage.getItem('welcome-message');
-    const welcome_message_id = $('#welcome-message').attr('x-id');
-    //console.log(welcome_message);
-    if (welcome_message != welcome_message_id) {
-        //console.log('removeClass');
-        $('#welcome-message').removeClass('is-hidden');
-    }
 
     var try_translate = function() {
         if (loaded == 1) {
@@ -82,6 +75,14 @@ $(document).ready(function(){
     var translate = function() {
         const original = $("#input-text").val();
         localStorage.setItem('original', original);
+        if (/^\s*$/.exec(original)) {
+            $('#welcome-message').removeClass('is-hidden');
+            $('#output').addClass('is-hidden');
+            return;
+        }
+        $('#welcome-message').addClass('is-hidden');
+        $('#output').removeClass('is-hidden');
+
         const cleaned = original.replace(/[<>,;.:!?"'\n*()=\[\]\/]/g, " ");
         const words = cleaned.split(" ");
         var html = `<table class="table">`;
@@ -181,10 +182,6 @@ $(document).ready(function(){
     });
 
     $('#input-text').bind('input propertychange', translate);
-    $('#hide-welcome-message').click(function () {
-        localStorage.setItem('welcome-message', welcome_message_id);
-        $('#welcome-message').addClass('is-hidden');
-    });
     $('#show-config').click(function () {
         //console.log('show config');
         $(".navbar-burger").toggleClass("is-active");
