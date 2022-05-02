@@ -90,10 +90,12 @@
 
 
 
-<article class="message is-hidden" id="welcome-message" x-id="1">
+<textarea class="textarea" id="input-text">
+</textarea>
+<div id="output"></div>
+<article class="message is-hidden" id="welcome-message">
   <div class="message-header">
       <p>Welcome!</p>
-      <button id="hide-welcome-message" class="delete" aria-label="delete"></button>
   </div>
   <div class="message-body">
   Type in words in any of the following languages: Ladino, English, Spanish, Turkish, French, Portuguese, or Hebrew and we'll do our best to show all the other translations.<br>
@@ -101,9 +103,6 @@
   </div>
 </article>
 
-<textarea class="textarea" id="input-text">
-</textarea>
-<div id="output"></div>
 
 <div class="modal" id="game">
   <div class="modal-background"></div>
