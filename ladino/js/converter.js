@@ -83,7 +83,7 @@ $(document).ready(function(){
         $('#welcome-message').addClass('is-hidden');
         $('#output').removeClass('is-hidden');
 
-        const cleaned = original.replace(/[<>,;.:!?"'\n*()=\[\]\/]/g, " ");
+        const cleaned = original.replace(/[<>,;.:!?"'\n*()=\[\]\/\s]/g, " ");
         const words = cleaned.split(" ");
         var html = `<table class="table">`;
         html += '<thead>';
