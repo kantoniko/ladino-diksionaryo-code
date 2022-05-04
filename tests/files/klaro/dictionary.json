@@ -63,7 +63,9 @@
             "spanish": [
                 "claras"
             ],
-            "turkish": []
+            "turkish": [
+                "aydınlık"
+            ]
         },
         "klaro": {
             "accented": [
@@ -105,7 +107,9 @@
             "spanish": [
                 "claros"
             ],
-            "turkish": []
+            "turkish": [
+                "aydınlık"
+            ]
         }
     },
     "portuguese": {},
@@ -126,7 +130,9 @@
     "turkish": {
         "aydınlık": [
             "klara",
-            "klaro"
+            "klaras",
+            "klaro",
+            "klaros"
         ]
     }
 }
