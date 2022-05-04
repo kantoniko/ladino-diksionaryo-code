@@ -141,8 +141,8 @@ def load_dictionary(config, path_to_dictionary):
                 comments = None
             words.append(version)
 
-        conjugations = ['present indicative', 'pasado simple']
-        pronouns = ['yo', 'tu', 'el', 'mozotros', 'vozotros', 'eyos']
+        conjugations = config['tiempos']
+        pronouns = config['pronombres']
         if 'conjugations' in data:
             for verb_time, conjugation in data['conjugations'].items():
                 if verb_time not in conjugations:

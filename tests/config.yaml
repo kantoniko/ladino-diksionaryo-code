@@ -34,3 +34,14 @@ numero:
   - plural
 pajinas: {}
 listas: {}
+tiempos:
+  - present indicative
+  - pasado simple
+pronombres:
+  - yo
+  - tu
+  - el
+  - mozotros
+  - vozotros
+  - eyos
+
