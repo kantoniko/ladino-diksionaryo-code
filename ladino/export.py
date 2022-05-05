@@ -115,18 +115,24 @@ def export_missing_words(all_words, languages):
     os.makedirs(helper, exist_ok=True)
 
     for language in languages:
-        rows = []
+        missing_rows = []
+        existing_rows = []
         for word in all_words:
             for version in word['versions']:
                 if 'translations' not in version:
                     continue
-                if version['translations'].get(language):
-                    # has content
+                translations = version['translations'].get(language)
+                if translations:
+                    existing_rows.append((version['ladino'], translations))
                     continue
-                rows.append(version['ladino'])
-        with open(os.path.join(helper, f"{language}.txt"), 'w') as fh:
-            for row in sorted(rows):
+                missing_rows.append(version['ladino'])
+        with open(os.path.join(helper, f"{language}-missing.txt"), 'w') as fh:
+            for row in sorted(missing_rows):
                 print(row, file=fh)
+
+        with open(os.path.join(helper, f"{language}-has.txt"), 'w') as fh:
+            for ladino, translations in sorted(existing_rows):
+                print(f"{ladino}   {', '.join(translations)}", file=fh)
 
 def export_single_page_dictionaries(dictionary, html_dir):
     logging.info("Export single-page dictionaries")
