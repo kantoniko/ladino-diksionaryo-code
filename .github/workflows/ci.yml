@@ -10,7 +10,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     name: Test code
+
     steps:
+    - name: Install NodeJS
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14
+
     - name: Checkout ladino-diksionaryo-code
       uses: actions/checkout@v2
       with:
@@ -28,9 +34,13 @@ jobs:
           python -V
           pip install -r requirements.txt
 
-    - name: Run tests
+    - name: Run tests in Python
       run: |
           pytest -sv --random-order tests/
+
+    - name: Run test in NodeJS
+      run: |
+          node tests/test_verbs.js
 
   generate:
     runs-on: ubuntu-latest
