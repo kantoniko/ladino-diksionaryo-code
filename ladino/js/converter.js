@@ -83,19 +83,11 @@ $(document).ready(function(){
         $('#welcome-message').addClass('is-hidden');
         $('#output').removeClass('is-hidden');
 
+        const languages = get_languages();
+
         const cleaned = original.replace(/[<>,;.:!?"'\n*()=\[\]\/\s]/g, " ");
         const words = cleaned.split(" ");
-        var html = `<table class="table">`;
-        html += '<thead>';
-        html += '<tr>';
-        html += `<th>biervo</th><th>Ladino</th>`;
-        const languages = get_languages();
-        for (var ix=0; ix < languages.length; ix++) {
-            html += `<th>${language_names[languages[ix]]}</th>`;
-        }
-        html += '</tr>';
-        html += '</thead>';
-        html += '<tbody>';
+        let rows = [];
         for (var ix = 0; ix < words.length; ix++) {
             if (words[ix] == "") {
                 continue;
@@ -106,6 +98,7 @@ $(document).ready(function(){
 
             let source_language = 'ladino';
             let dictionary_word = dictionary['ladino'][word];
+            let ladino_from_source_language = null;
             if (! dictionary_word) {
                 for (var jx=0; jx < languages.length; jx++) {
                     //console.log("check language:", languages[jx]);
@@ -120,22 +113,46 @@ $(document).ready(function(){
                     }
                 }
             }
+            rows.push(
+                {
+                    'source_language': source_language,
+                    'original_word': original_word,
+                    'dictionary_word': dictionary_word,
+                    'word': word,
+                    'ladino_from_source_language': ladino_from_source_language
+                }
+            );
             //console.log('dictionary word', dictionary_word)
+        }
 
+        var html = `<table class="table">`;
+        html += '<thead>';
+        html += '<tr>';
+        html += `<th>biervo</th><th>Ladino</th>`;
+        for (var ix=0; ix < languages.length; ix++) {
+            html += `<th>${language_names[languages[ix]]}</th>`;
+        }
+        html += '</tr>';
+        html += '</thead>';
+        html += '<tbody>';
+
+
+        for (var ix = 0; ix < rows.length; ix++) {
+            let row = rows[ix];
             html += '<tr>';
             // original word
-            if (source_language == 'ladino' && dictionary_word) {
-                html += `<td class="has-background-success-light">${original_word}</td>`;
+            if (row.source_language == 'ladino' && row.dictionary_word) {
+                html += `<td class="has-background-success-light">${row.original_word}</td>`;
             } else {
-                html += `<td class="has-background-danger-light">${original_word}</td>`;
+                html += `<td class="has-background-danger-light">${row.original_word}</td>`;
             }
 
             // ladino column
-            if (dictionary_word) {
-                if (source_language == 'ladino') {
-                    html += `<td><a href="/words/ladino/${word}.html">${dictionary_word['ladino']}</a></td>`;
+            if (row.dictionary_word) {
+                if (row.source_language == 'ladino') {
+                    html += `<td><a href="/words/ladino/${row.word}.html">${row.dictionary_word['ladino']}</a></td>`;
                 } else {
-                    let links = word_links(ladino_from_source_language, "ladino");
+                    let links = word_links(row.ladino_from_source_language, "ladino");
                     html += `<td>${links}</td>`;
                 }
             } else {
@@ -145,15 +162,15 @@ $(document).ready(function(){
             // all the other languages
             for (var jx=0; jx < languages.length; jx++) {
                 //console.log('show language', languages[jx]);
-                if (dictionary_word) {
+                if (row.dictionary_word) {
                     let links = Array();
-                    let translated_words = dictionary_word[languages[jx]];
+                    let translated_words = row.dictionary_word[languages[jx]];
                     //console.log('translated_words', translated_words);
                     if (translated_words) {
                         links = word_links(translated_words, languages[jx]);
                     }
                     const subhtml = links.join(", ");
-                    if (source_language == languages[jx]) {
+                    if (row.source_language == languages[jx]) {
                         html += `<td class="has-background-success-light">${subhtml}</td>`;
                     } else {
                         html += `<td>${subhtml}</td>`;
@@ -170,6 +187,7 @@ $(document).ready(function(){
         html += '</tbody>';
         html += "</table>";
         //console.log(html);
+        console.log(rows);
 
         $("#output").html(html);
     };
