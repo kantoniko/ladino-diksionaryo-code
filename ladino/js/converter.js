@@ -72,20 +72,8 @@ $(document).ready(function(){
         return links;
     }
 
-    var display_translate = function() {
-        const original = $("#input-text").val();
-        localStorage.setItem('original', original);
-        if (/^\s*$/.exec(original)) {
-            $('#welcome-message').removeClass('is-hidden');
-            $('#output').addClass('is-hidden');
-            return;
-        }
-        $('#welcome-message').addClass('is-hidden');
-        $('#output').removeClass('is-hidden');
-
-        const languages = get_languages();
-
-        const cleaned = original.replace(/[<>,;.:!?"'\n*()=\[\]\/\s]/g, " ");
+    var translate = function(text, languages, dictionary) {
+        const cleaned = text.replace(/[<>,;.:!?"'\n*()=\[\]\/\s]/g, " ");
         const words = cleaned.split(" ");
         let rows = [];
         for (var ix = 0; ix < words.length; ix++) {
@@ -124,6 +112,23 @@ $(document).ready(function(){
             );
             //console.log('dictionary word', dictionary_word)
         }
+        return rows;
+    }
+
+    var display_translate = function() {
+        const original = $("#input-text").val();
+        localStorage.setItem('original', original);
+        if (/^\s*$/.exec(original)) {
+            $('#welcome-message').removeClass('is-hidden');
+            $('#output').addClass('is-hidden');
+            return;
+        }
+        $('#welcome-message').addClass('is-hidden');
+        $('#output').removeClass('is-hidden');
+
+        const languages = get_languages();
+
+        let rows = translate(original, languages, dictionary);
 
         var html = `<table class="table">`;
         html += '<thead>';
