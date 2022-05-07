@@ -280,7 +280,14 @@ def generate_main_page(html_dir):
         os.makedirs(part_dir, exist_ok=True)
 
         for filename in os.listdir(source_dir):
-            shutil.copy(os.path.join(source_dir, filename), os.path.join(part_dir, filename))
+            if part == "js":
+                with open(os.path.join(source_dir, filename)) as fh:
+                    lines = filter(lambda line: not line.startswith('module.exports'), fh.readlines())
+                with open(os.path.join(part_dir, filename), "w") as fh:
+                    for line in lines:
+                        print(line, end="", file=fh)
+            else:
+                shutil.copy(os.path.join(source_dir, filename), os.path.join(part_dir, filename))
 
     export_main_html_page(html_dir)
 
