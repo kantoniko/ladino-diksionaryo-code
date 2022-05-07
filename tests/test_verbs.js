@@ -73,4 +73,5 @@ komer = {
 //console.log(res)
 
 assert.deepEqual(res, komer);
+console.log("All good");
 
