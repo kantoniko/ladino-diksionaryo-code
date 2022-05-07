@@ -17,7 +17,7 @@ $(document).ready(function(){
 
     var try_translate = function() {
         if (loaded == 1) {
-            translate();
+            display_translate();
         }
     };
 
@@ -72,7 +72,7 @@ $(document).ready(function(){
         return links;
     }
 
-    var translate = function() {
+    var display_translate = function() {
         const original = $("#input-text").val();
         localStorage.setItem('original', original);
         if (/^\s*$/.exec(original)) {
@@ -181,7 +181,7 @@ $(document).ready(function(){
         console.log("An error has occurred while loading dictionary.json");
     });
 
-    $('#input-text').bind('input propertychange', translate);
+    $('#input-text').bind('input propertychange', display_translate);
     $('#show-config').click(function () {
         //console.log('show config');
         $(".navbar-burger").toggleClass("is-active");
@@ -211,7 +211,7 @@ $(document).ready(function(){
         }
 
         localStorage.setItem('config', JSON.stringify(config))
-        translate();
+        display_translate();
         event.stopPropagation();
     });
 
