@@ -54,6 +54,13 @@
                     <li>{{example.english}}</li>
                 </ul>
                 {% endif %}
+
+                {% for boz in example.bozes %}
+                   <audio controls>
+                     <source src="https://ladino-sounds.szabgab.com/{{boz.person}}/{{boz.arkivo}}" type="audio/ogg">
+                     Your browser does not support the audio element.
+                   </audio>
+                {%- endfor %}
             </li>
          {% endfor %}
         </ul>

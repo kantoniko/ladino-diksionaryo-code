@@ -128,7 +128,7 @@ def load_dictionary(config, path_to_dictionary):
                     if example.__class__.__name__ == 'str':
                         raise LadinoError(f"The example '{example}' is a string instead of a dictionary in '{filename}'")
                     for language in example.keys():
-                        if language != 'ladino' and language not in languages:
+                        if language not in ['ladino', 'bozes'] and language not in languages:
                             raise LadinoError(f"Incorrect language '{language}' in example in '{filename}'")
                     all_examples.append({
                         'example': example,
