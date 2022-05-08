@@ -7,10 +7,10 @@
   {% for entry in data %}
      <table>
        <tr><td>ladino</td><td>{{ entry.ladino }}</td></tr>
-       {%- if sounds -%}
+       {%- if entry.bozes -%}
        <tr><td>
            <audio controls>
-             <source src="https://ladino-sounds.szabgab.com/{{sounds[0].filename}}" type="audio/ogg">
+             <source src="https://ladino-sounds.szabgab.com/{{entry.bozes[0].person}}/{{entry.bozes[0].arkivo}}" type="audio/ogg">
              Your browser does not support the audio element.
            </audio>
            </td><td></td></tr>

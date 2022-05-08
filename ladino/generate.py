@@ -146,10 +146,10 @@ def main():
         logging.info(count)
 
     sounds = None
-    if args.sounds:
-        sys.path.insert(0, args.sounds)
-        from ladino.sounds import load_sounds
-        sounds = load_sounds()
+    #if args.sounds:
+    #    sys.path.insert(0, args.sounds)
+    #    from ladino.sounds import load_sounds
+    #    sounds = load_sounds()
     #print(sounds)
 
     if args.all:

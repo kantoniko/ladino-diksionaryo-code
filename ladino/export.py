@@ -50,7 +50,7 @@ def export_dictionary_pages(pages, sounds, html_dir):
             os.path.join(words_dir, language, filename),
             data=enhanced_data,
             title=f"{word}",
-            sounds=sounds.get(word) if sounds else [],
+            #sounds=sounds.get(word) if sounds else [],
             word=word,
         )
 
