@@ -7,14 +7,14 @@
   {% for entry in data %}
      <table>
        <tr><td>ladino</td><td>{{ entry.ladino }}</td></tr>
-       {%- if entry.bozes -%}
+       {%- for boz in entry.bozes -%}
        <tr><td>
            <audio controls>
-             <source src="https://ladino-sounds.szabgab.com/{{entry.bozes[0].person}}/{{entry.bozes[0].arkivo}}" type="audio/ogg">
+             <source src="https://ladino-sounds.szabgab.com/{{boz.person}}/{{boz.arkivo}}" type="audio/ogg">
              Your browser does not support the audio element.
            </audio>
            </td><td></td></tr>
-       {%- endif %}
+       {%- endfor %}
        {% if entry.accented -%}
        <tr><td>accented</td><td>{{ entry.accented }}</td></tr>
        {%- endif %}
@@ -55,12 +55,13 @@
                 </ul>
                 {% endif %}
 
-                {% for boz in example.bozes %}
+                {%- for boz in example.bozes -%}
+                   <br>
                    <audio controls>
                      <source src="https://ladino-sounds.szabgab.com/{{boz.person}}/{{boz.arkivo}}" type="audio/ogg">
                      Your browser does not support the audio element.
                    </audio>
-                {%- endfor %}
+                {%- endfor -%}
             </li>
          {% endfor %}
         </ul>
