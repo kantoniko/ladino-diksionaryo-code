@@ -132,7 +132,7 @@ def export_missing_words(all_words, languages):
 
         with open(os.path.join(helper, f"{language}-has.txt"), 'w') as fh:
             for ladino, translations in sorted(existing_rows):
-                print(f"{ladino}   {', '.join(translations)}", file=fh)
+                print(f"{ladino:20} = {', '.join(translations)}", file=fh)
 
 def export_single_page_dictionaries(dictionary, html_dir):
     logging.info("Export single-page dictionaries")
