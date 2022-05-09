@@ -40,7 +40,7 @@ def add_ladino_word(original_word, accented_word, dictionary, pages, entry, coun
     if word not in pages[source_language]:
         pages[source_language][word] = []
     pages[source_language][word].append(entry)
-    pages[source_language][word].sort(key=lambda x: (x['ladino'], x['translations']['english'][0]))
+    pages[source_language][word].sort(key=lambda x: (x['ladino'], x['translations']['english'][0] if x['translations']['english'] else ''))
 
     if accented_word:
         add_word(dictionary, source_language, target_language='accented', source_word=word, target_words=[accented_word])
