@@ -128,7 +128,7 @@ def export_missing_words(all_words, languages):
                 missing_rows.append(version['ladino'])
         with open(os.path.join(helper, f"{language}-missing.txt"), 'w') as fh:
             for row in sorted(missing_rows):
-                print(row, file=fh)
+                print(f"{row:20} =", file=fh)
 
         with open(os.path.join(helper, f"{language}-has.txt"), 'w') as fh:
             for ladino, translations in sorted(existing_rows):
