@@ -24,11 +24,9 @@ def render(template, filename=None, **args):
     env.filters["yaml2html"] = lambda path: re.sub(r"\.yaml$", ".html", path)
     html_template = env.get_template(template)
     html = html_template.render(**args)
-    if filename is not None:
-        sitemap.append(filename)
-        with open(filename, "w") as fh:
-            fh.write(html)
-    return html
+    sitemap.append(filename)
+    with open(filename, "w") as fh:
+        fh.write(html)
 
 def export_dictionary_pages(pages, sounds, html_dir):
     logging.info("Export dictionary pages")
@@ -385,6 +383,7 @@ def export_verbs(verbs, html_dir):
         export_json(data, os.path.join(verbs_dir, f'{ladino}.json'))
 
 def create_sitemap(html_dir):
+    return
     xml = '''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 '''
