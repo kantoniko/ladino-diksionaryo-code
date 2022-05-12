@@ -25,9 +25,12 @@ def render(template, filename=None, **args):
     env.filters["yaml2html"] = lambda path: re.sub(r"\.yaml$", ".html", path)
     html_template = env.get_template(template)
     html = html_template.render(**args)
-    sitemap.append(filename)
     with open(os.path.join(html_path, filename), "w") as fh:
         fh.write(html)
+    if filename == 'index.html':
+        sitemap.append('')
+    elif filename.endswith('.html'):
+        sitemap.append(filename[0:-5])
 
 def export_dictionary_pages(pages, sounds, html_dir):
     logging.info("Export dictionary pages")
@@ -330,7 +333,7 @@ def export_categories(categories, html_dir):
     for cat in categories.keys():
         render(
             template="category.html",
-            filename=os.path.join(html_dir, f"{cat}.html"),
+            filename=f"{cat}.html",
 
             title=cat,
             words=categories[cat],
@@ -339,7 +342,7 @@ def export_categories(categories, html_dir):
         for language in languages:
             render(
                 template="dictionary.txt",
-                filename=os.path.join(html_dir, f"{cat}-ladino-{language}.txt"),
+                filename=f"{cat}-ladino-{language}.txt",
 
                 words=categories[cat],
                 language=language,
@@ -386,14 +389,12 @@ def export_verbs(verbs, html_dir):
         export_json(data, os.path.join(verbs_dir, f'{ladino}.json'))
 
 def create_sitemap(html_dir):
-    return
+    #return
     xml = '''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 '''
     for entry in sitemap:
-        xml += f'''<url>
-            <loc>https://diksionaryo.szabgab.com/{entry}</loc>
-            </url>'''
+        xml += f'''<url><loc>https://diksionaryo.szabgab.com/{entry}</loc></url>\n'''
     xml += '</urlset>'
     with open(os.path.join(html_dir, 'sitemap.xml'), 'w') as fh:
         fh.write(xml)
