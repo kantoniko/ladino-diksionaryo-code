@@ -293,6 +293,7 @@ def export_whatsapp(messages, words, html_dir):
 def generate_main_page(html_dir):
     root = os.path.dirname(os.path.abspath(__file__))
 
+    shutil.copy(os.path.join(root, 'robots.txt'), os.path.join(html_dir, 'robots.txt'))
     for part in ["js", "css"]:
         source_dir = os.path.join(root, part)
 
