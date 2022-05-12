@@ -11,13 +11,13 @@
         {%- for word in words.keys() | sort -%}
           {%- if source=='Ladino' -%}
               <tr>
-                <td><a href="/words/ladino/{{ word }}.html">{{ word }}</a></td>
+                <td><a href="/words/ladino/{{ word }}">{{ word }}</a></td>
                 <td>{% for translation in words[word][trg] -%}{{ translation }}{%- if not loop.last %}, {% endif %}{%- endfor %}</td>
               </tr>
           {%- else -%}
               <tr>
                 <td>{{ word }}</td>
-                <td>{% for translation in words[word] %} <a href="/words/ladino/{{translation}}.html">{{ translation }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</td>
+                <td>{% for translation in words[word] %} <a href="/words/ladino/{{translation}}">{{ translation }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</td>
               </tr>
           {%- endif -%}
         {%- endfor -%}
