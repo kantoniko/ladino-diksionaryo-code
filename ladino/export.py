@@ -15,6 +15,15 @@ import ladino.common
 from ladino.export_to_hunspell import export_to_hunspell
 from ladino.pdf import create_pdf_dictionaries
 
+language_names = {
+            'english'    : 'inglez',
+            'french'     : 'fransez',
+            'hebrew'     : 'ebreo',
+            'portuguese' : 'portugez',
+            'spanish'    : 'kasteyano',
+            'turkish'    : 'turko'
+}
+
 sitemap = []
 html_path = None
 
@@ -56,6 +65,7 @@ def export_dictionary_pages(pages, sounds, html_dir):
             title=f"{word}",
             #sounds=sounds.get(word) if sounds else [],
             word=word,
+            language_names=language_names,
         )
 
         export_json(data, os.path.join(words_dir, language, f'{word}.json'))

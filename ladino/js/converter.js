@@ -4,12 +4,12 @@ $(document).ready(function(){
     const site = {
         'available_languages': ['english', 'french', 'hebrew', 'portuguese', 'spanish', 'turkish'],
         'language_names': {
-            'english'    : 'Inglez',
-            'french'     : 'Fransez',
-            'hebrew'     : 'Ebreo',
-            'portuguese' : 'Portugez',
-            'spanish'    : 'Kasteyano',
-            'turkish'    : 'Turko'
+            'english'    : 'inglez',
+            'french'     : 'fransez',
+            'hebrew'     : 'ebreo',
+            'portuguese' : 'portugez',
+            'spanish'    : 'kasteyano',
+            'turkish'    : 'turko'
         }
     };
     //console.log(window.innerWidth, window.innerHeight);

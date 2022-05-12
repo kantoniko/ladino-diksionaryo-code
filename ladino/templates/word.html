@@ -16,9 +16,9 @@
            </td><td></td></tr>
        {%- endfor %}
        {% if entry.accented -%}
-       <tr><td>accented</td><td>{{ entry.accented }}</td></tr>
+       <tr><td>kon aksan</td><td>{{ entry.accented }}</td></tr>
        {%- endif %}
-       <tr><td>gender</td><td>{{ entry.gender }} {{ entry.number }}</td></tr>
+       <tr><td>djenero</td><td>{{ entry.gender }} {{ entry.number }}</td></tr>
        {% if entry["alternative-spelling"] %}
          <tr><td></td><td>
           {% for alternative in entry["alternative-spelling"] %}
@@ -28,7 +28,7 @@
        {% endif %}
 
        {% for language in entry.translations.keys() | sort %}
-          <tr><td>{{ language }}</td>
+          <tr><td>{{ language_names[language] }}</td>
               <td>
                   {% if entry.translations[language] is string %}
                      {{ entry.translations[language] }}
