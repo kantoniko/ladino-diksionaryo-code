@@ -328,7 +328,7 @@ def add_links(data, words):
 
 def link_words(sentence, words):
     return re.sub(r'(\w+)', lambda match:
-        f'<a href="/words/ladino/{match.group(0).lower()}.html">{match.group(0)}</a>' if match.group(0).lower() in words else match.group(0), sentence)
+        f'<a href="/words/ladino/{match.group(0).lower()}">{match.group(0)}</a>' if match.group(0).lower() in words else match.group(0), sentence)
 
 def export_categories(categories, html_dir):
     for cat in categories.keys():
