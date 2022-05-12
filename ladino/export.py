@@ -17,15 +17,15 @@ from ladino.pdf import create_pdf_dictionaries
 
 
 
-def render(template_file, html_file=None, **args):
+def render(template, filename=None, **args):
     root = os.path.dirname(os.path.abspath(__file__))
     templates_dir = os.path.join(root, "templates")
     env = Environment(loader=FileSystemLoader(templates_dir), autoescape=True)
     env.filters["yaml2html"] = lambda path: re.sub(r"\.yaml$", ".html", path)
-    template = env.get_template(template_file)
-    html = template.render(**args)
-    if html_file is not None:
-        with open(html_file, "w") as fh:
+    html_template = env.get_template(template)
+    html = html_template.render(**args)
+    if filename is not None:
+        with open(filename, "w") as fh:
             fh.write(html)
     return html
 
