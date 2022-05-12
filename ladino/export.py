@@ -45,9 +45,10 @@ def export_dictionary_pages(pages, sounds, html_dir):
         enhanced_data = add_links(copy.deepcopy(data), words)
         filename = f'{word}.html'
         logging.info(f"Export to {filename}")
-        html = render(
-            "word.html",
-            os.path.join(words_dir, language, filename),
+        render(
+            template="word.html",
+            filename=os.path.join(words_dir, language, filename),
+
             data=enhanced_data,
             title=f"{word}",
             #sounds=sounds.get(word) if sounds else [],
@@ -61,16 +62,18 @@ def export_dictionary_lists(pages, html_dir):
     language = 'ladino'
     words = pages['ladino']
     os.makedirs(os.path.join(words_dir, language), exist_ok=True)
-    html = render(
-        "words.html",
-        os.path.join(words_dir, language, 'index.html'),
+    render(
+        template="words.html",
+        filename=os.path.join(words_dir, language, 'index.html'),
+
         title=f"{language}",
         words=sorted(words.keys()),
     )
 
-    html = render(
-        "dictionary_languages.html",
-        os.path.join(words_dir, 'index.html'),
+    render(
+        template="dictionary_languages.html",
+        filename=os.path.join(words_dir, 'index.html'),
+
         title=f"Languages",
         languages=sorted(languages),
     )
@@ -80,9 +83,10 @@ def export_about_html_page(count, html_dir):
     logging.info("Export about html page")
     end = datetime.datetime.now().replace(microsecond=0)
     elapsed = (end-ladino.common.start).total_seconds()
-    html = render(
-        "about.html",
-        os.path.join(html_dir, "about.html"),
+    render(
+        template="about.html",
+        filename=os.path.join(html_dir, "about.html"),
+
         title=f"Ladino dictionary - about",
         page="about",
         count=count,
@@ -95,9 +99,10 @@ def export_about_html_page(count, html_dir):
 def export_main_html_page(html_dir):
     logging.info("Export main html page")
 
-    html = render(
-        "index.html",
-        os.path.join(html_dir, "index.html"),
+    render(
+        template="index.html",
+        filename=os.path.join(html_dir, "index.html"),
+
         title=f"Ladino dictionary",
         page="index",
     )
@@ -139,8 +144,9 @@ def export_single_page_dictionaries(dictionary, html_dir):
 
     for language in languages:
         render(
-            "dictionary.html",
-            os.path.join(html_dir, f"{language}-ladino.html"),
+            template="dictionary.html",
+            filename=os.path.join(html_dir, f"{language}-ladino.html"),
+
             title=f"{language.title()} to Ladino dictionary",
             source=language.title(),
             target="Ladino",
@@ -148,8 +154,9 @@ def export_single_page_dictionaries(dictionary, html_dir):
         )
 
         render(
-            "dictionary.html",
-            os.path.join(html_dir, f"ladino-{language}.html"),
+            template="dictionary.html",
+            filename=os.path.join(html_dir, f"ladino-{language}.html"),
+
             title=f"Ladino to {language.title()} dictionary",
             source="Ladino",
             target=language.title(),
@@ -189,14 +196,16 @@ def export_to_html(config, categories, lists, verbs, all_examples, extra_example
 
 def export_lists_html_page(config, html_dir):
     render(
-        "lists.html",
-        os.path.join(html_dir, "lists.html"),
+        template="lists.html",
+        filename=os.path.join(html_dir, "lists.html"),
+
         title=f"Ladino lists",
         config=config,
     )
     render(
-        "dictionaries.html",
-        os.path.join(html_dir, "dictionaries.html"),
+        template="dictionaries.html",
+        filename=os.path.join(html_dir, "dictionaries.html"),
+
         title=f"Ladino dictionaries",
         github_run_id=os.environ.get('GITHUB_RUN_ID', ''),
         languages=languages,
@@ -214,9 +223,10 @@ def export_markdown_pages(config, path_to_repo, html_dir):
             title = match.group(1)
         content = markdown.markdown(text, extensions=['tables'])
 
-        html = render(
-            "page.html",
-            os.path.join(html_dir, target),
+        render(
+            template="page.html",
+            filename=os.path.join(html_dir, target),
+
             title=title,
             page=target.replace('.html', ''),
             content=content,
@@ -235,9 +245,10 @@ def export_examples(all_examples, extra_examples, words, html_dir):
 
     #print(all_examples)
     target = 'egzempios.html'
-    html = render(
-        "examples.html",
-        os.path.join(html_dir, target),
+    render(
+        template="examples.html",
+        filename=os.path.join(html_dir, target),
+
         title='Egzempios',
         page=target.replace('.html', ''),
         all_examples=all_examples,
@@ -248,9 +259,10 @@ def export_whatsapp(messages, words, html_dir):
     whatsapp_dir = os.path.join(html_dir, 'whatsapeando')
     os.makedirs(whatsapp_dir, exist_ok=True)
     messages.sort(key=lambda message: message['pub'], reverse=True)
-    html = render(
-        "whatsapeando_list.html",
-        os.path.join(whatsapp_dir, 'index.html'),
+    render(
+        template="whatsapeando_list.html",
+        filename=os.path.join(whatsapp_dir, 'index.html'),
+
         title='Estamos Whatsapeando',
         messages=messages,
     )
@@ -259,11 +271,12 @@ def export_whatsapp(messages, words, html_dir):
         text = text.replace("\n", "<br>")
         next_idx = idx+1 if idx+1 < len(messages) else 0
         #print(next_idx)
-        html = render(
-            "whatsapeando_page.html",
-            os.path.join(whatsapp_dir, f"{message['page']}.html"),
+        render(
+            template="whatsapeando_page.html",
+            filename=os.path.join(whatsapp_dir, f"{message['page']}.html"),
+
             title=message['titulo'],
-            filename=message['filename'],
+            sound_filename=message['filename'],
             text=text,
             title_links=link_words(message['titulo'], words),
             prev_message=messages[idx-1]['page'],
@@ -312,16 +325,18 @@ def link_words(sentence, words):
 def export_categories(categories, html_dir):
     for cat in categories.keys():
         render(
-            "category.html",
-            os.path.join(html_dir, f"{cat}.html"),
+            template="category.html",
+            filename=os.path.join(html_dir, f"{cat}.html"),
+
             title=cat,
             words=categories[cat],
             languages=languages,
         )
         for language in languages:
             render(
-                "dictionary.txt",
-                os.path.join(html_dir, f"{cat}-ladino-{language}.txt"),
+                template="dictionary.txt",
+                filename=os.path.join(html_dir, f"{cat}-ladino-{language}.txt"),
+
                 words=categories[cat],
                 language=language,
             )
@@ -329,8 +344,9 @@ def export_categories(categories, html_dir):
 def export_lists(lists, html_dir):
     for lst in lists.keys():
         render(
-            "category.html",
-            os.path.join(html_dir, f"{lst}.html"),
+            template="category.html",
+            filename=os.path.join(html_dir, f"{lst}.html"),
+
             title=lst,
             words=lists[lst],
             languages=languages,
@@ -341,8 +357,9 @@ def export_verbs(verbs, html_dir):
     os.makedirs(verbs_dir, exist_ok=True)
     verbs.sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
     render(
-        "category.html",
-        os.path.join(html_dir, f"verbos.html"),
+        template="category.html",
+        filename=os.path.join(html_dir, f"verbos.html"),
+
         title="Verbos",
         words=verbs,
         languages=languages,
