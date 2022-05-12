@@ -15,7 +15,7 @@ import ladino.common
 from ladino.export_to_hunspell import export_to_hunspell
 from ladino.pdf import create_pdf_dictionaries
 
-
+sitemap = []
 
 def render(template, filename=None, **args):
     root = os.path.dirname(os.path.abspath(__file__))
@@ -25,6 +25,7 @@ def render(template, filename=None, **args):
     html_template = env.get_template(template)
     html = html_template.render(**args)
     if filename is not None:
+        sitemap.append(filename)
         with open(filename, "w") as fh:
             fh.write(html)
     return html
@@ -174,6 +175,8 @@ def export_to_html(config, categories, lists, verbs, all_examples, extra_example
 
     export_json(dictionary, os.path.join(html_dir, "dictionary.json"), pretty=pretty)
 
+    global sitemap
+    sitemap = []
     generate_main_page(html_dir)
     export_missing_words(all_words, languages)
 
@@ -380,4 +383,16 @@ def export_verbs(verbs, html_dir):
                 'eyos': root + 'en',
             }
         export_json(data, os.path.join(verbs_dir, f'{ladino}.json'))
+
+def create_sitemap(html_dir):
+    xml = '''<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+'''
+    for entry in sitemap:
+        xml += f'''<url>
+            <loc>https://diksionaryo.szabgab.com/{entry}</loc>
+            </url>'''
+    xml += '</urlset>'
+    with open(os.path.join(html_dir, 'sitemap.xml'), 'w') as fh:
+        fh.write(xml)
 

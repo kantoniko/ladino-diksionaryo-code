@@ -11,7 +11,7 @@ import datetime
 from ladino.common import LadinoError, languages
 import ladino.common
 from ladino.load import load_dictionary, load_examples, load_config
-from ladino.export import generate_main_page, export_to_html, export_whatsapp
+from ladino.export import generate_main_page, export_to_html, export_whatsapp, create_sitemap
 
 ladino.common.start = datetime.datetime.now().replace(microsecond=0)
 
@@ -160,6 +160,7 @@ def main():
             messages = whatsapp.get_messages()
             #print(messages)
             export_whatsapp(messages, pages['ladino'], args.html)
+        create_sitemap(args.html)
 
 
     end = datetime.datetime.now().replace(microsecond=0)
