@@ -1,16 +1,18 @@
 $(document).ready(function(){
     var dictionary = null;
     var loaded = 0;
-    const available_languages = ['english', 'french', 'hebrew', 'portuguese', 'spanish', 'turkish'];
-    //console.log(window.innerWidth, window.innerHeight);
-    const language_names = {
-        'english'    : 'Inglez',
-        'french'     : 'Fransez',
-        'hebrew'     : 'Ebreo',
-        'portuguese' : 'Portugez',
-        'spanish'    : 'Kasteyano',
-        'turkish'    : 'Turko'
+    const site = {
+        'available_languages': ['english', 'french', 'hebrew', 'portuguese', 'spanish', 'turkish'],
+        'language_names': {
+            'english'    : 'Inglez',
+            'french'     : 'Fransez',
+            'hebrew'     : 'Ebreo',
+            'portuguese' : 'Portugez',
+            'spanish'    : 'Kasteyano',
+            'turkish'    : 'Turko'
+        }
     };
+    //console.log(window.innerWidth, window.innerHeight);
     // We save the text in local storage and restore it when the user visits next time.
     // especially useful when people click on words and than get back to the main page.
     $("#input-text").val(localStorage.getItem('original'));
@@ -24,8 +26,8 @@ $(document).ready(function(){
     function get_languages() {
         let languages = [];
         const config = get_config();
-        for (let ix=0; ix < available_languages.length; ix++) {
-            const language = available_languages[ix];
+        for (let ix=0; ix < site.available_languages.length; ix++) {
+            const language = site.available_languages[ix];
             if (config['lashon'][ language ] == '1') {
                 languages.push(language);
             }
@@ -92,7 +94,7 @@ $(document).ready(function(){
         html += '<tr>';
         html += `<th>biervo</th><th>Ladino</th>`;
         for (var ix=0; ix < languages.length; ix++) {
-            html += `<th>${language_names[languages[ix]]}</th>`;
+            html += `<th>${site.language_names[languages[ix]]}</th>`;
         }
         html += '</tr>';
         html += '</thead>';
@@ -167,8 +169,8 @@ $(document).ready(function(){
         $(".navbar-menu").toggleClass("is-active");
 
         const config = get_config();
-        for (let ix=0; ix < available_languages.length; ix++) {
-            const language = available_languages[ix];
+        for (let ix=0; ix < site.available_languages.length; ix++) {
+            const language = site.available_languages[ix];
             const checked = config['lashon'][ language ] == "1";
             $(`#enable-${language}`).prop("checked", checked);
         }
@@ -184,8 +186,8 @@ $(document).ready(function(){
     $('#save-config').click(function (event) {
         $("#config").removeClass('is-active');
         let config = get_config();
-        for (let ix=0; ix < available_languages.length; ix++) {
-            const language = available_languages[ix];
+        for (let ix=0; ix < site.available_languages.length; ix++) {
+            const language = site.available_languages[ix];
             config['lashon'][ language ] = $(`#enable-${language}`).is(":checked") ? "1" : "0";
         }
 
