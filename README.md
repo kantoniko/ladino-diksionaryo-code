@@ -50,6 +50,12 @@ Generate test coverage report:
 pytest -vvs -rA -x --log-cli-level=DEBUG --random-order --cov=ladino --cov-report html --cov-report term --cov-branch tests/test_generate.py
 ```
 
+## Run locally
+
+```
+FLASK_DEBUG=1 flask run
+```
+
 ## Language considerations
 
 * Verbs in Ladino have a lot of conjugations. (are there are many as in modern Spanish?)
