@@ -32,7 +32,7 @@ Launch a static web server in the `html` subdirectory.
 ## Testing
 
 ```
-pytest -sv test_generate.py
+pytest -vvs tests/test_generate.py
 pytest -vvs -rA -x --log-cli-level=DEBUG --random-order tests/test_generate.p
 ```
 
@@ -41,7 +41,7 @@ the expected output files are in the `tests` subdirectory.
 When the expected output changes we can update the files with the following command:
 
 ```
-pytest -sv test_generate.py --save
+pytest -vvs tests/test_generate.py --save
 ```
 
 Generate test coverage report:
