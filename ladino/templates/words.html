@@ -5,16 +5,13 @@
 
     <table class="table is-striped is-hoverable">
       <thead>
-        <tr><th>Word</th><!--<th>Dictionary #</th><th>Phrases #</th>--></tr>
+        <tr><th>Word</th><th>Examples #</th></tr>
       </thead>
       <tbody>
-        {% for word in words %}
+        {% for word in words.keys() | sort %}
           <tr>
           <td><a href="{{ word }}.html">{{ word }}</a></td>
-<!--
-          <td></td>
-          <td></td>
--->
+          <td>{{ examples[word] }}</td>
           </tr>
         {% endfor %}
       </tbody>

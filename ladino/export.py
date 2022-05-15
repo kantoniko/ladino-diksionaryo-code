@@ -75,12 +75,19 @@ def export_dictionary_lists(pages, html_dir):
     language = 'ladino'
     words = pages['ladino']
     os.makedirs(os.path.join(words_dir, language), exist_ok=True)
+    examples = {}
+    for word, data in words.items():
+        ex = 0
+        for dt in data:
+            ex += len(dt.get('examples', []))
+        examples[word] = ex
     render(
         template="words.html",
         filename=os.path.join('words', language, 'index.html'),
 
         title=f"{language}",
-        words=sorted(words.keys()),
+        words=words,
+        examples=examples,
     )
 
     render(
