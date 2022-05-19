@@ -71,7 +71,7 @@ def test_one_file(tmpdir, request, name):
         for filepath in glob.glob(f'{html_dir}/*-*.html'):
             os.unlink(filepath)
         for cat in config['kategorias']:
-            os.unlink(os.path.join(html_dir, f'{cat}.html'))
+            os.unlink(os.path.join(html_dir, 'kategorias', f'{cat}.html'))
 
     if not save:
         cmd = f"diff -r {os.path.join(root, 'tests', 'files', name)} {os.path.join(tmpdir, 'html')}"
