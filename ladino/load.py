@@ -7,9 +7,9 @@ from ladino.common import LadinoError, languages
 
 class Dictionary():
     def __init__(self, config):
+        self.yaml_files = []  # each entry as loaded from the yaml files of words
         self.words = []
         self.all_examples = []
-        self.all_words = []
         self.lists = {lst:[] for lst in config['listas'] }
         self.categories = {cat:[] for cat in config['kategorias'] }
         self.verbs = []
@@ -116,7 +116,7 @@ def load_dictionary(config, path_to_dictionary):
         with open(path) as fh:
             data = safe_load(fh)
 
-        dictionary.all_words.append(data)
+        dictionary.yaml_files.append(data)
 
         check_and_collect_grammar(config, data, dictionary, filename)
         check_origen(config, data, filename)

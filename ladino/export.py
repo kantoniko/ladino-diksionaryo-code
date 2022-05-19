@@ -134,7 +134,7 @@ def export_json(data, filename, pretty=False):
         else:
             json.dump(data, fh, ensure_ascii=False, sort_keys=True)
 
-def export_missing_words(all_words, languages):
+def export_missing_words(yaml_files, languages):
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     helper = os.path.join(root, 'helper')
     os.makedirs(helper, exist_ok=True)
@@ -142,7 +142,7 @@ def export_missing_words(all_words, languages):
     for language in languages:
         missing_rows = []
         existing_rows = []
-        for word in all_words:
+        for word in yaml_files:
             for version in word['versions']:
                 if 'translations' not in version:
                     continue
@@ -199,11 +199,11 @@ def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, htm
     global sitemap
     sitemap = []
     generate_main_page(html_dir)
-    export_missing_words(dictionary.all_words, languages)
+    export_missing_words(dictionary.yaml_files, languages)
 
     export_single_page_dictionaries(dictionary.word_mapping, html_dir)
 
-    create_pdf_dictionaries(dictionary.all_words, languages)
+    create_pdf_dictionaries(dictionary.yaml_files, languages)
 
     export_dictionary_lists(dictionary.pages, html_dir)
     export_json(dictionary.count, os.path.join(html_dir, "count.json"), pretty=pretty)
