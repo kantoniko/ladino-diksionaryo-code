@@ -209,7 +209,7 @@ def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, htm
     export_json(dictionary.count, os.path.join(html_dir, "count.json"), pretty=pretty)
     export_about_html_page(dictionary.count, html_dir)
     export_lists_html_page(config, html_dir)
-    export_categories(dictionary.categories, html_dir)
+    export_categories(config, dictionary.categories, html_dir)
     export_lists(dictionary.lists, html_dir)
     export_verbs(dictionary.verbs, html_dir)
     export_examples(copy.deepcopy(dictionary.all_examples), extra_examples, dictionary.pages['ladino'], html_dir)
@@ -349,24 +349,35 @@ def link_words(sentence, words):
     return re.sub(r'(\w+)', lambda match:
         f'<a href="/words/ladino/{match.group(0).lower()}">{match.group(0)}</a>' if match.group(0).lower() in words else match.group(0), sentence)
 
-def export_categories(categories, html_dir):
+def export_categories(config, categories, html_dir):
+    os.makedirs(os.path.join(html_dir, 'kategorias'), exist_ok=True)
     for cat in categories.keys():
         render(
             template="category.html",
-            filename=f"{cat}.html",
+            filename=os.path.join('kategorias', f"{cat}.html"),
 
             title=cat,
             words=categories[cat],
             languages=languages,
         )
+        # Text files for easier editing
+        # TODO: shall weshall we  add links to them?
         for language in languages:
             render(
                 template="dictionary.txt",
-                filename=f"{cat}-ladino-{language}.txt",
+                filename=os.path.join('kategorias', f"{cat}-ladino-{language}.txt"),
 
                 words=categories[cat],
                 language=language,
             )
+
+    render(
+        template="categories.html",
+        filename="kategorias/index.html",
+
+        title=f"Katagorias",
+        config=config,
+    )
 
 def export_lists(lists, html_dir):
     for lst in lists.keys():

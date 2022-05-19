@@ -1,0 +1,14 @@
+{% include 'incl/header.html' %}
+
+    <h1 class="title">{{ title }}</h1>
+
+    <div class="content">
+      <ul>
+        {% for cat in config['kategorias'] %}
+          <li><a href="/kategorias/{{cat}}">{{cat.capitalize()}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+{% include 'incl/footer.html' %}
+
