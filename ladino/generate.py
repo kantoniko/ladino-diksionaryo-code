@@ -90,7 +90,9 @@ def collect_data(dictionary):
         for language in languages:
             add_translated_words(language, word_mapping_dictionary, pages, entry, count)
 
-    return word_mapping_dictionary, count, pages
+    dictionary.word_mapping = word_mapping_dictionary
+    dictionary.count = count
+    dictionary.pages = pages
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -142,8 +144,8 @@ def main():
 
         dictionary = load_dictionary(config, os.path.join(path_to_repo, 'words'))
         extra_examples = load_examples(os.path.join(path_to_repo, 'examples'))
-        word_mapping_dictionary, count, pages = collect_data(dictionary)
-        logging.info(count)
+        collect_data(dictionary)
+        logging.info(dictionary.count)
 
     sounds = None
     #if args.sounds:
@@ -153,13 +155,13 @@ def main():
     #print(sounds)
 
     if args.all:
-        export_to_html(config, dictionary, extra_examples, word_mapping_dictionary, count, pages, sounds, path_to_repo, args.html, pretty=args.pretty)
+        export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, args.html, pretty=args.pretty)
         if args.whatsapp:
             sys.path.insert(0, args.whatsapp)
             import ladino.whatsapeando as whatsapp
             messages = whatsapp.get_messages()
             #print(messages)
-            export_whatsapp(messages, pages['ladino'], args.html)
+            export_whatsapp(messages, dictionary.pages['ladino'], args.html)
         create_sitemap(args.html)
 
 

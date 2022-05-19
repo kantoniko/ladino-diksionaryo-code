@@ -159,7 +159,7 @@ def export_missing_words(all_words, languages):
             for ladino, translations in sorted(existing_rows):
                 print(f"{ladino:20} = {', '.join(translations)}", file=fh)
 
-def export_single_page_dictionaries(word_mapping_dictionary, html_dir):
+def export_single_page_dictionaries(word_mapping, html_dir):
     logging.info("Export single-page dictionaries")
 
     for language in languages:
@@ -170,7 +170,7 @@ def export_single_page_dictionaries(word_mapping_dictionary, html_dir):
             title=f"{language.title()} to Ladino dictionary",
             source=language.title(),
             target="Ladino",
-            words=word_mapping_dictionary[language],
+            words=word_mapping[language],
         )
 
         render(
@@ -181,12 +181,12 @@ def export_single_page_dictionaries(word_mapping_dictionary, html_dir):
             source="Ladino",
             target=language.title(),
             trg=language,
-            words=word_mapping_dictionary['ladino'],
+            words=word_mapping['ladino'],
         )
 
 
 
-def export_to_html(config, dictionary, extra_examples, word_mapping_dictionary, count, pages, sounds, path_to_repo, html_dir, pretty=False):
+def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, html_dir, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
     global html_path
@@ -194,29 +194,29 @@ def export_to_html(config, dictionary, extra_examples, word_mapping_dictionary, 
 
     remove_previous_content_of(html_dir)
 
-    export_json(word_mapping_dictionary, os.path.join(html_dir, "dictionary.json"), pretty=pretty)
+    export_json(dictionary.word_mapping, os.path.join(html_dir, "dictionary.json"), pretty=pretty)
 
     global sitemap
     sitemap = []
     generate_main_page(html_dir)
     export_missing_words(dictionary.all_words, languages)
 
-    export_single_page_dictionaries(word_mapping_dictionary, html_dir)
+    export_single_page_dictionaries(dictionary.word_mapping, html_dir)
 
     create_pdf_dictionaries(dictionary.all_words, languages)
 
-    export_dictionary_lists(pages, html_dir)
-    export_json(count, os.path.join(html_dir, "count.json"), pretty=pretty)
-    export_about_html_page(count, html_dir)
+    export_dictionary_lists(dictionary.pages, html_dir)
+    export_json(dictionary.count, os.path.join(html_dir, "count.json"), pretty=pretty)
+    export_about_html_page(dictionary.count, html_dir)
     export_lists_html_page(config, html_dir)
     export_categories(dictionary.categories, html_dir)
     export_lists(dictionary.lists, html_dir)
     export_verbs(dictionary.verbs, html_dir)
-    export_examples(copy.deepcopy(dictionary.all_examples), extra_examples, pages['ladino'], html_dir)
+    export_examples(copy.deepcopy(dictionary.all_examples), extra_examples, dictionary.pages['ladino'], html_dir)
     export_markdown_pages(config, path_to_repo, html_dir)
 
-    export_dictionary_pages(pages, sounds, html_dir)
-    #export_to_hunspell(word_mapping_dictionary)
+    export_dictionary_pages(dictionary.pages, sounds, html_dir)
+    #export_to_hunspell(dictionary.word_mapping)
 
 def export_lists_html_page(config, html_dir):
     render(
