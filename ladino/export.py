@@ -307,7 +307,7 @@ def export_whatsapp(messages, words, html_dir):
             next_message=messages[next_idx]['page'],
         )
 
-def generate_main_page(html_dir):
+def copy_static_files(html_dir):
     root = os.path.dirname(os.path.abspath(__file__))
 
     shutil.copy(os.path.join(root, 'robots.txt'), os.path.join(html_dir, 'robots.txt'))
@@ -327,6 +327,8 @@ def generate_main_page(html_dir):
             else:
                 shutil.copy(os.path.join(source_dir, filename), os.path.join(part_dir, filename))
 
+def generate_main_page(html_dir):
+    copy_static_files(html_dir)
     export_main_html_page(html_dir)
 
 def remove_previous_content_of(html_dir):
