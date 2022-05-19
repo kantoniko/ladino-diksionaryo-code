@@ -11,6 +11,7 @@ class Dictionary():
         self.all_words = []
         self.lists = {lst:[] for lst in config['listas'] }
         self.categories = {cat:[] for cat in config['kategorias'] }
+        self.verbs = []
 
         self.count = {}
         self.word_mapping = {}
@@ -70,7 +71,6 @@ def load_dictionary(config, path_to_dictionary):
     dictionary = Dictionary(config)
 
     files = os.listdir(path_to_dictionary)
-    verbs = []
     for filename in files:
         path = os.path.join(path_to_dictionary, filename)
         logging.info(path)
@@ -110,7 +110,7 @@ def load_dictionary(config, path_to_dictionary):
                     raise LadinoError(f"The 'number' field is '{number}' in '{filename}' version {version}")
 
         if grammar == 'verb':
-            verbs.append(data)
+            dictionary.verbs.append(data)
 
         if 'examples' not in data:
             raise LadinoError(f"The 'examples' field is missing in '{filename}'")
@@ -173,7 +173,6 @@ def load_dictionary(config, path_to_dictionary):
         lookup = {word:ix for ix, word in enumerate(config['listas'][lst])}
         dictionary.lists[lst].sort(key=lambda word: lookup[word['versions'][0]['ladino']])
 
-    dictionary.verbs             = verbs
     return dictionary
 
 def load_examples(path_to_examples):
