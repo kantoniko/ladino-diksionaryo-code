@@ -166,8 +166,8 @@ def load_dictionary(config, path_to_dictionary):
                 examples = None
             if comments is not None:
                 version['comments'] = comments
-                version['origen'] = origen
                 comments = None
+            version['origen'] = origen
             dictionary.words.append(version)
 
         conjugations = config['tiempos']
