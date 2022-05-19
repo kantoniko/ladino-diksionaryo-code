@@ -190,6 +190,8 @@ def load_dictionary(config, path_to_dictionary):
     #print(dictionary.all_examples[0])
     for cat in dictionary.categories.keys():
         dictionary.categories[cat].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
+    for field in dictionary.origenes.keys():
+        dictionary.origenes[field].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
     for lst in dictionary.lists.keys():
         lookup = {word:ix for ix, word in enumerate(config['listas'][lst])}
         dictionary.lists[lst].sort(key=lambda word: lookup[word['versions'][0]['ladino']])
