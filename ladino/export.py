@@ -53,22 +53,22 @@ def export_dictionary_pages(pages, sounds, html_dir):
     language_dir = os.path.join(words_dir, language)
     logging.info(f"Export dictionary pages of {language} to {language_dir}")
     os.makedirs(language_dir, exist_ok=True)
-    for word, data in words.items():
+    for plain_word, data in words.items():
         enhanced_data = add_links(copy.deepcopy(data), words)
-        filename = f'{word}.html'
+        filename = f'{plain_word}.html'
         logging.info(f"Export to {filename}")
         render(
             template="word.html",
             filename=os.path.join('words', language, filename),
 
             data=enhanced_data,
-            title=f"{word}",
-            #sounds=sounds.get(word) if sounds else [],
-            word=word,
+            title=f"{plain_word}",
+            #sounds=sounds.get(plain_word) if sounds else [],
+            plain_word=plain_word,
             language_names=language_names,
         )
 
-        export_json(data, os.path.join(words_dir, language, f'{word}.json'))
+        export_json(data, os.path.join(words_dir, language, f'{plain_word}.json'))
 
 def export_dictionary_lists(pages, html_dir):
     words_dir = os.path.join(html_dir, 'words')
