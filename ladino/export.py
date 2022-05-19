@@ -159,7 +159,7 @@ def export_missing_words(all_words, languages):
             for ladino, translations in sorted(existing_rows):
                 print(f"{ladino:20} = {', '.join(translations)}", file=fh)
 
-def export_single_page_dictionaries(dictionary, html_dir):
+def export_single_page_dictionaries(word_mapping_dictionary, html_dir):
     logging.info("Export single-page dictionaries")
 
     for language in languages:
@@ -170,7 +170,7 @@ def export_single_page_dictionaries(dictionary, html_dir):
             title=f"{language.title()} to Ladino dictionary",
             source=language.title(),
             target="Ladino",
-            words=dictionary[language],
+            words=word_mapping_dictionary[language],
         )
 
         render(
@@ -181,12 +181,12 @@ def export_single_page_dictionaries(dictionary, html_dir):
             source="Ladino",
             target=language.title(),
             trg=language,
-            words=dictionary['ladino'],
+            words=word_mapping_dictionary['ladino'],
         )
 
 
 
-def export_to_html(config, categories, lists, verbs, all_examples, extra_examples, dictionary, count, pages, all_words, sounds, path_to_repo, html_dir, pretty=False):
+def export_to_html(config, categories, lists, verbs, all_examples, extra_examples, word_mapping_dictionary, count, pages, all_words, sounds, path_to_repo, html_dir, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
     global html_path
@@ -194,14 +194,14 @@ def export_to_html(config, categories, lists, verbs, all_examples, extra_example
 
     remove_previous_content_of(html_dir)
 
-    export_json(dictionary, os.path.join(html_dir, "dictionary.json"), pretty=pretty)
+    export_json(word_mapping_dictionary, os.path.join(html_dir, "dictionary.json"), pretty=pretty)
 
     global sitemap
     sitemap = []
     generate_main_page(html_dir)
     export_missing_words(all_words, languages)
 
-    export_single_page_dictionaries(dictionary, html_dir)
+    export_single_page_dictionaries(word_mapping_dictionary, html_dir)
 
     create_pdf_dictionaries(all_words, languages)
 
@@ -216,7 +216,7 @@ def export_to_html(config, categories, lists, verbs, all_examples, extra_example
     export_markdown_pages(config, path_to_repo, html_dir)
 
     export_dictionary_pages(pages, sounds, html_dir)
-    #export_to_hunspell(dictionary)
+    #export_to_hunspell(word_mapping_dictionary)
 
 def export_lists_html_page(config, html_dir):
     render(

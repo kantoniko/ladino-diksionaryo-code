@@ -15,13 +15,13 @@ from ladino.export import generate_main_page, export_to_html, export_whatsapp, c
 
 ladino.common.start = datetime.datetime.now().replace(microsecond=0)
 
-def add_word(dictionary, source_language, target_language, source_word, target_words):
-    if target_language not in dictionary[source_language][source_word]:
-        dictionary[source_language][source_word][target_language] = []
-    dictionary[source_language][source_word][target_language].extend(target_words)
-    dictionary[source_language][source_word][target_language] = sorted(set(dictionary[source_language][source_word][target_language]))
+def add_word(word_mapping_dictionary, source_language, target_language, source_word, target_words):
+    if target_language not in word_mapping_dictionary[source_language][source_word]:
+        word_mapping_dictionary[source_language][source_word][target_language] = []
+    word_mapping_dictionary[source_language][source_word][target_language].extend(target_words)
+    word_mapping_dictionary[source_language][source_word][target_language] = sorted(set(word_mapping_dictionary[source_language][source_word][target_language]))
 
-def add_ladino_word(original_word, accented_word, dictionary, pages, entry, count):
+def add_ladino_word(original_word, accented_word, word_mapping_dictionary, pages, entry, count):
     word = original_word.lower()
     logging.info(f"Add ladino word: '{original_word}' '{word}' '{accented_word}'")
     #print(entry)
@@ -31,11 +31,11 @@ def add_ladino_word(original_word, accented_word, dictionary, pages, entry, coun
         if 'ladino' in example:
             count['dictionary']['ladino']['examples'] += 1
     source_language = 'ladino'
-    if word not in dictionary[source_language]:
-        dictionary[source_language][word] = {}
+    if word not in word_mapping_dictionary[source_language]:
+        word_mapping_dictionary[source_language][word] = {}
     for target_language, target_words in entry['translations'].items():
-        add_word(dictionary, source_language, target_language, word, target_words)
-    add_word(dictionary, source_language, 'ladino', word, [original_word])
+        add_word(word_mapping_dictionary, source_language, target_language, word, target_words)
+    add_word(word_mapping_dictionary, source_language, 'ladino', word, [original_word])
 
     if word not in pages[source_language]:
         pages[source_language][word] = []
@@ -43,9 +43,9 @@ def add_ladino_word(original_word, accented_word, dictionary, pages, entry, coun
     pages[source_language][word].sort(key=lambda x: (x['ladino'], x['translations']['english'][0] if x['translations']['english'] else ''))
 
     if accented_word:
-        add_word(dictionary, source_language, target_language='accented', source_word=word, target_words=[accented_word])
+        add_word(word_mapping_dictionary, source_language, target_language='accented', source_word=word, target_words=[accented_word])
 
-def add_translated_words(source_language, dictionary, pages, entry, count):
+def add_translated_words(source_language, word_mapping_dictionary, pages, entry, count):
     translations = entry['translations'].get(source_language)
     #print(f"{source_language}: {translations}")
     if translations is None:
@@ -53,10 +53,10 @@ def add_translated_words(source_language, dictionary, pages, entry, count):
 
     for word in translations:
         word = word.lower()
-        if word not in dictionary[source_language]:
-            dictionary[source_language][word] = []
-        dictionary[source_language][word].append(entry['ladino'])
-        dictionary[source_language][word] = sorted(set(dictionary[source_language][word]))
+        if word not in word_mapping_dictionary[source_language]:
+            word_mapping_dictionary[source_language][word] = []
+        word_mapping_dictionary[source_language][word].append(entry['ladino'])
+        word_mapping_dictionary[source_language][word] = sorted(set(word_mapping_dictionary[source_language][word]))
         count['dictionary'][source_language]['words'] += 1
 
         if word not in pages[source_language]:
@@ -68,7 +68,7 @@ def add_translated_words(source_language, dictionary, pages, entry, count):
 def collect_data(dictionary_source):
     logging.info("Collect more data")
     count = {}
-    dictionary = {}
+    word_mapping_dictionary = {}
     #print(dictionary_source)
     count['dictionary'] = {}
     pages = {}
@@ -77,20 +77,20 @@ def collect_data(dictionary_source):
             'words': 0,
             'examples': 0,
         }
-        dictionary[language] = {}
+        word_mapping_dictionary[language] = {}
         pages[language] = {}
 
     for entry in dictionary_source:
-        add_ladino_word(entry['ladino'], entry.get('accented'), dictionary, pages, entry, count)
+        add_ladino_word(entry['ladino'], entry.get('accented'), word_mapping_dictionary, pages, entry, count)
 
         if 'alternative-spelling' in entry:
             for alt_entry in entry['alternative-spelling']:
-                add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), dictionary, pages, entry, count)
+                add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), word_mapping_dictionary, pages, entry, count)
 
         for language in languages:
-            add_translated_words(language, dictionary, pages, entry, count)
+            add_translated_words(language, word_mapping_dictionary, pages, entry, count)
 
-    return dictionary, count, pages
+    return word_mapping_dictionary, count, pages
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -142,7 +142,7 @@ def main():
 
         dictionary_source, all_examples, categories, lists, verbs, all_words = load_dictionary(config, os.path.join(path_to_repo, 'words'))
         extra_examples = load_examples(os.path.join(path_to_repo, 'examples'))
-        dictionary, count, pages = collect_data(dictionary_source)
+        word_mapping_dictionary, count, pages = collect_data(dictionary_source)
         logging.info(count)
 
     sounds = None
@@ -153,7 +153,7 @@ def main():
     #print(sounds)
 
     if args.all:
-        export_to_html(config, categories, lists, verbs, all_examples, extra_examples, dictionary, count, pages, all_words, sounds, path_to_repo, args.html, pretty=args.pretty)
+        export_to_html(config, categories, lists, verbs, all_examples, extra_examples, word_mapping_dictionary, count, pages, all_words, sounds, path_to_repo, args.html, pretty=args.pretty)
         if args.whatsapp:
             sys.path.insert(0, args.whatsapp)
             import ladino.whatsapeando as whatsapp
