@@ -375,7 +375,7 @@ def export_categories(config, categories, html_dir):
         template="categories.html",
         filename="kategorias/index.html",
 
-        title=f"Katagorias",
+        title=f"Kategorias",
         config=config,
     )
 
