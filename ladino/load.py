@@ -97,8 +97,6 @@ def check_and_collect_lists(config, data, dictionary):
 
 def load_dictionary(config, path_to_dictionary):
     logging.info(f"Path to dictionary: '{path_to_dictionary}'")
-    #if path_to_dictionary is None:
-    #    return
     dictionary = Dictionary(config)
 
     files = os.listdir(path_to_dictionary)
