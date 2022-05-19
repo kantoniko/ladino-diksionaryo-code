@@ -140,9 +140,9 @@ def main():
         path_to_repo = args.dictionary
         config = load_config(path_to_repo)
 
-        dictionary_source, all_examples, categories, lists, verbs, all_words = load_dictionary(config, os.path.join(path_to_repo, 'words'))
+        dictionary = load_dictionary(config, os.path.join(path_to_repo, 'words'))
         extra_examples = load_examples(os.path.join(path_to_repo, 'examples'))
-        word_mapping_dictionary, count, pages = collect_data(dictionary_source)
+        word_mapping_dictionary, count, pages = collect_data(dictionary.dictionary_source)
         logging.info(count)
 
     sounds = None
@@ -153,7 +153,7 @@ def main():
     #print(sounds)
 
     if args.all:
-        export_to_html(config, categories, lists, verbs, all_examples, extra_examples, word_mapping_dictionary, count, pages, all_words, sounds, path_to_repo, args.html, pretty=args.pretty)
+        export_to_html(config, dictionary, extra_examples, word_mapping_dictionary, count, pages, sounds, path_to_repo, args.html, pretty=args.pretty)
         if args.whatsapp:
             sys.path.insert(0, args.whatsapp)
             import ladino.whatsapeando as whatsapp

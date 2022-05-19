@@ -4,6 +4,9 @@ import logging
 
 from ladino.common import LadinoError, languages
 
+class Dictionary():
+    pass
+
 def load_config(path_to_repo):
     with open(os.path.join(path_to_repo, 'config.yaml')) as fh:
         return safe_load(fh)
@@ -164,7 +167,15 @@ def load_dictionary(config, path_to_dictionary):
     for lst in lists.keys():
         lookup = {word:ix for ix, word in enumerate(config['listas'][lst])}
         lists[lst].sort(key=lambda word: lookup[word['versions'][0]['ladino']])
-    return words, all_examples, categories, lists, verbs, all_words
+
+    dictionary = Dictionary()
+    dictionary.dictionary_source = words
+    dictionary.all_examples      = all_examples
+    dictionary.categories        = categories
+    dictionary.lists             = lists
+    dictionary.verbs             = verbs
+    dictionary.all_words         = all_words
+    return dictionary
 
 def load_examples(path_to_examples):
     extra_examples = []

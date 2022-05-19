@@ -186,7 +186,7 @@ def export_single_page_dictionaries(word_mapping_dictionary, html_dir):
 
 
 
-def export_to_html(config, categories, lists, verbs, all_examples, extra_examples, word_mapping_dictionary, count, pages, all_words, sounds, path_to_repo, html_dir, pretty=False):
+def export_to_html(config, dictionary, extra_examples, word_mapping_dictionary, count, pages, sounds, path_to_repo, html_dir, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
     global html_path
@@ -199,20 +199,20 @@ def export_to_html(config, categories, lists, verbs, all_examples, extra_example
     global sitemap
     sitemap = []
     generate_main_page(html_dir)
-    export_missing_words(all_words, languages)
+    export_missing_words(dictionary.all_words, languages)
 
     export_single_page_dictionaries(word_mapping_dictionary, html_dir)
 
-    create_pdf_dictionaries(all_words, languages)
+    create_pdf_dictionaries(dictionary.all_words, languages)
 
     export_dictionary_lists(pages, html_dir)
     export_json(count, os.path.join(html_dir, "count.json"), pretty=pretty)
     export_about_html_page(count, html_dir)
     export_lists_html_page(config, html_dir)
-    export_categories(categories, html_dir)
-    export_lists(lists, html_dir)
-    export_verbs(verbs, html_dir)
-    export_examples(copy.deepcopy(all_examples), extra_examples, pages['ladino'], html_dir)
+    export_categories(dictionary.categories, html_dir)
+    export_lists(dictionary.lists, html_dir)
+    export_verbs(dictionary.verbs, html_dir)
+    export_examples(copy.deepcopy(dictionary.all_examples), extra_examples, pages['ladino'], html_dir)
     export_markdown_pages(config, path_to_repo, html_dir)
 
     export_dictionary_pages(pages, sounds, html_dir)
