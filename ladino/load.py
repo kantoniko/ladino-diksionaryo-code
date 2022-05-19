@@ -21,13 +21,36 @@ def load_config(path_to_repo):
     with open(os.path.join(path_to_repo, 'config.yaml')) as fh:
         return safe_load(fh)
 
-def check_grammar(config, data, filename):
+def check_and_collect_grammar(config, data, dictionary, filename):
     if 'grammar' not in data:
         raise LadinoError(f"The 'grammar' field is missing from file '{filename}'")
+
     grammar = data['grammar']
+
     if grammar not in config['gramatika']:
         raise LadinoError(f"Invalid grammar '{grammar}' in file '{filename}'")
-    return grammar
+
+    if grammar == 'verb' and 'conjugations' not in data:
+        raise LadinoError(f"Grammar is 'verb', but there is NO 'conjugations' field in '{filename}'")
+    if grammar != 'verb' and 'conjugations' in data:
+        raise LadinoError(f"Grammar is NOT a 'verb', but there are conjugations in '{filename}'")
+
+    if grammar in ['noun']: # 'adjective',
+        for version in data['versions']:
+            gender = version.get('gender')
+            if gender is None:
+                raise LadinoError(f"The 'gender' field is None in '{filename}' version {version}")
+            if gender not in config['gender']:
+                raise LadinoError(f"Invalid value '{gender}' in 'gender' field in '{filename}' version {version}")
+            number = version.get('number')
+            if number is None:
+                raise LadinoError(f"The 'number' field is None in '{filename}' version {version}")
+            if number not in config['numero']:
+                raise LadinoError(f"The 'number' field is '{number}' in '{filename}' version {version}")
+
+    if grammar == 'verb':
+        dictionary.verbs.append(data)
+
 
 def check_origen(config, data, filename):
     if 'origen' not in data:
@@ -71,6 +94,7 @@ def check_and_collect_lists(config, data, dictionary):
         # TODO: include also words from the lists that don't appear in our dictionaries (without a link)
         # TODO: add these words to the list of missing words
 
+
 def load_dictionary(config, path_to_dictionary):
     logging.info(f"Path to dictionary: '{path_to_dictionary}'")
     #if path_to_dictionary is None:
@@ -86,7 +110,7 @@ def load_dictionary(config, path_to_dictionary):
 
         dictionary.all_words.append(data)
 
-        grammar = check_grammar(config, data, filename)
+        check_and_collect_grammar(config, data, dictionary, filename)
         check_origen(config, data, filename)
         check_and_collect_categories(config, data, filename, dictionary.categories)
         check_and_collect_lists(config, data, dictionary)
@@ -94,26 +118,6 @@ def load_dictionary(config, path_to_dictionary):
         if 'versions' not in data:
             raise LadinoError(f"The 'versions' field is missing from file '{filename}'")
 
-        if grammar == 'verb' and 'conjugations' not in data:
-            raise LadinoError(f"Grammar is 'verb', but there is NO 'conjugations' field in '{filename}'")
-        if grammar != 'verb' and 'conjugations' in data:
-            raise LadinoError(f"Grammar is NOT a 'verb', but there are conjugations in '{filename}'")
-
-        if grammar in ['noun']: # 'adjective',
-            for version in data['versions']:
-                gender = version.get('gender')
-                if gender is None:
-                    raise LadinoError(f"The 'gender' field is None in '{filename}' version {version}")
-                if gender not in config['gender']:
-                    raise LadinoError(f"Invalid value '{gender}' in 'gender' field in '{filename}' version {version}")
-                number = version.get('number')
-                if number is None:
-                    raise LadinoError(f"The 'number' field is None in '{filename}' version {version}")
-                if number not in config['numero']:
-                    raise LadinoError(f"The 'number' field is '{number}' in '{filename}' version {version}")
-
-        if grammar == 'verb':
-            dictionary.verbs.append(data)
 
         if 'examples' not in data:
             raise LadinoError(f"The 'examples' field is missing in '{filename}'")
