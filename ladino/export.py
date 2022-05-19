@@ -127,12 +127,12 @@ def export_main_html_page(html_dir):
         page="index",
     )
 
-def export_json(all_words, filename, pretty=False):
+def export_json(data, filename, pretty=False):
     with open(filename, "w") as fh:
         if pretty:
-            json.dump(all_words, fh, indent=4, ensure_ascii=False, sort_keys=True)
+            json.dump(data, fh, indent=4, ensure_ascii=False, sort_keys=True)
         else:
-            json.dump(all_words, fh, ensure_ascii=False, sort_keys=True)
+            json.dump(data, fh, ensure_ascii=False, sort_keys=True)
 
 def export_missing_words(all_words, languages):
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
