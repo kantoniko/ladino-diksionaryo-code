@@ -68,6 +68,7 @@ def check_origen(config, data, filename):
     origen  = data['origen']
     if origen not in config['origenes']:
         raise LadinoError(f"Invalid origen '{origen}' in file '{filename}'")
+    return origen
 
 def check_and_collect_categories(config, data, filename, dictionary):
     if 'kategorias' not in data:
@@ -119,7 +120,7 @@ def load_dictionary(config, path_to_dictionary):
         dictionary.yaml_files.append(data)
 
         check_and_collect_grammar(config, data, dictionary, filename)
-        check_origen(config, data, filename)
+        origen = check_origen(config, data, filename)
         check_and_collect_categories(config, data, filename, dictionary)
         check_and_collect_lists(config, data, dictionary)
 
@@ -161,6 +162,7 @@ def load_dictionary(config, path_to_dictionary):
                 examples = None
             if comments is not None:
                 version['comments'] = comments
+                version['origen'] = origen
                 comments = None
             dictionary.words.append(version)
 
