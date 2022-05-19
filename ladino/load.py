@@ -18,6 +18,15 @@ class Dictionary():
         self.word_mapping = {}
         self.pages = {}
 
+        self.count['dictionary'] = {}
+        for language in ['ladino'] + languages:
+            self.count['dictionary'][language] = {
+                'words': 0,
+                'examples': 0,
+            }
+            self.word_mapping[language] = {}
+            self.pages[language] = {}
+
 def load_config(path_to_repo):
     with open(os.path.join(path_to_repo, 'config.yaml')) as fh:
         return safe_load(fh)
@@ -236,14 +245,6 @@ def add_translated_words(source_language, entry, dictionary):
 
 def collect_data(dictionary):
     logging.info("Collect more data")
-    dictionary.count['dictionary'] = {}
-    for language in ['ladino'] + languages:
-        dictionary.count['dictionary'][language] = {
-            'words': 0,
-            'examples': 0,
-        }
-        dictionary.word_mapping[language] = {}
-        dictionary.pages[language] = {}
 
     for entry in dictionary.words:
         add_ladino_word(entry['ladino'], entry.get('accented'), entry, dictionary)
