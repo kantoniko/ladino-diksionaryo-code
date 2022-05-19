@@ -219,7 +219,7 @@ def add_ladino_word(original_word, accented_word, entry, dictionary):
     dictionary.pages[source_language][word].append(entry)
     dictionary.pages[source_language][word].sort(key=lambda x: (x['ladino'], x['translations']['english'][0] if x['translations']['english'] else ''))
 
-    if accented_word:
+    if accented_word and accented_word != word:
         add_word(dictionary.word_mapping, source_language, target_language='accented', source_word=word, target_words=[accented_word])
 
 def add_translated_words(source_language, entry, dictionary):
