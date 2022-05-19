@@ -4,8 +4,8 @@
 
     <div class="content">
       <ul>
-        {% for cat in config['kategorias'] %}
-          <li><a href="/kategorias/{{cat}}">{{cat.capitalize()}}</a></li>
+        {% for val in values %}
+          <li><a href="/{{dname}}/{{val.lower()}}">{{val.capitalize()}}</a></li>
         {% endfor %}
       </ul>
     </div>

@@ -13,6 +13,7 @@ class Dictionary():
         self.lists = {lst:[] for lst in config['listas'] }
         self.categories = {cat:[] for cat in config['kategorias'] }
         self.verbs = []
+        self.origenes = {name:[] for name in config['origenes'] }
 
         self.count = {}
         self.word_mapping = {}
@@ -62,12 +63,15 @@ def check_and_collect_grammar(config, data, dictionary, filename):
         dictionary.verbs.append(data)
 
 
-def check_origen(config, data, filename):
+def check_and_collect_origen(config, data, filename, dictionary):
     if 'origen' not in data:
         raise LadinoError(f"The 'origen' field is missing from file '{filename}'")
     origen  = data['origen']
     if origen not in config['origenes']:
         raise LadinoError(f"Invalid origen '{origen}' in file '{filename}'")
+
+    dictionary.origenes[origen].append(data)
+
     return origen
 
 def check_and_collect_categories(config, data, filename, dictionary):
@@ -120,7 +124,7 @@ def load_dictionary(config, path_to_dictionary):
         dictionary.yaml_files.append(data)
 
         check_and_collect_grammar(config, data, dictionary, filename)
-        origen = check_origen(config, data, filename)
+        origen = check_and_collect_origen(config, data, filename, dictionary)
         check_and_collect_categories(config, data, filename, dictionary)
         check_and_collect_lists(config, data, dictionary)
 

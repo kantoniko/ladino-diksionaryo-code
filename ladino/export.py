@@ -210,6 +210,7 @@ def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, htm
     export_about_html_page(dictionary.count, html_dir)
     export_lists_html_page(config, html_dir)
     export_categories(config, dictionary.categories, html_dir)
+    export_origenes(config, dictionary.origenes, html_dir)
     export_lists(dictionary.lists, html_dir)
     export_verbs(dictionary.verbs, html_dir)
     export_examples(copy.deepcopy(dictionary.all_examples), extra_examples, dictionary.pages['ladino'], html_dir)
@@ -349,7 +350,32 @@ def link_words(sentence, words):
     return re.sub(r'(\w+)', lambda match:
         f'<a href="/words/ladino/{match.group(0).lower()}">{match.group(0)}</a>' if match.group(0).lower() in words else match.group(0), sentence)
 
+def export_origenes(config, origenes, html_dir):
+    dname = 'origenes'
+    os.makedirs(os.path.join(html_dir, dname), exist_ok=True)
+    for origen in origenes.keys():
+        render(
+            template="category.html",
+            filename=os.path.join(dname, f"{origen.lower()}.html"),
+
+            title=origen,
+            words=origenes[origen],
+            languages=languages,
+        )
+
+    render(
+        template="categories.html",
+        filename=f"{dname}/index.html",
+        dname=dname,
+
+        title=f"Origenes",
+        values=config['origenes'],
+    )
+
+
+
 def export_categories(config, categories, html_dir):
+    dname = 'kategorias'
     os.makedirs(os.path.join(html_dir, 'kategorias'), exist_ok=True)
     for cat in categories.keys():
         render(
@@ -373,10 +399,11 @@ def export_categories(config, categories, html_dir):
 
     render(
         template="categories.html",
-        filename="kategorias/index.html",
+        filename=f"{dname}/index.html",
+        dname=dname,
 
         title=f"Kategorias",
-        config=config,
+        values=config['kategorias'],
     )
 
 def export_lists(lists, html_dir):
