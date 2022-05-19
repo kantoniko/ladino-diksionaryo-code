@@ -7,6 +7,7 @@ from ladino.common import LadinoError, languages
 class Dictionary():
     def __init__(self):
         self.words = []
+        self.all_examples = []
 
         self.count = {}
         self.word_mapping = {}
@@ -66,7 +67,6 @@ def load_dictionary(config, path_to_dictionary):
     dictionary = Dictionary()
 
     files = os.listdir(path_to_dictionary)
-    all_examples = []
     all_words = []
     categories = {cat:[] for cat in config['kategorias'] }
     lists = {lst:[] for lst in config['listas'] }
@@ -138,7 +138,7 @@ def load_dictionary(config, path_to_dictionary):
                     for language in example.keys():
                         if language not in ['ladino', 'bozes'] and language not in languages:
                             raise LadinoError(f"Incorrect language '{language}' in example in '{filename}'")
-                    all_examples.append({
+                    dictionary.all_examples.append({
                         'example': example,
                         'word': version['ladino'].lower(),
                         'source':  filename,
@@ -166,14 +166,13 @@ def load_dictionary(config, path_to_dictionary):
                         make_them_list(version['translations'], filename)
                     dictionary.words.append(version)
     #print(dictionary.words)
-    #print(all_examples[0])
+    #print(dictionary.all_examples[0])
     for cat in categories.keys():
         categories[cat].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
     for lst in lists.keys():
         lookup = {word:ix for ix, word in enumerate(config['listas'][lst])}
         lists[lst].sort(key=lambda word: lookup[word['versions'][0]['ladino']])
 
-    dictionary.all_examples      = all_examples
     dictionary.categories        = categories
     dictionary.lists             = lists
     dictionary.verbs             = verbs
