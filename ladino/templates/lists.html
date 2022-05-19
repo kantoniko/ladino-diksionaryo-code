@@ -13,14 +13,24 @@
       </ul>
     </div>
 
-    <h2>Kategorias</h2>
+    <h2><a href="/kategorias/">Kategorias</a></h2>
     <div class="content">
       <ul>
-        {% for cat in config['kategorias'] %}
-          <li><a href="/kategorias/{{cat}}">{{cat.capitalize()}}</a></li>
+        {% for name in config['kategorias'] %}
+          <li><a href="/kategorias/{{name}}">{{name.capitalize()}}</a></li>
         {% endfor %}
       </ul>
     </div>
+
+    <h2><a href="/origenes/">Origenes</a></h2>
+    <div class="content">
+      <ul>
+        {% for name in config['origenes'] %}
+          <li><a href="/origenes/{{name}}">{{name}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
 
     <h2>Listas</h2>
     <div class="content">
