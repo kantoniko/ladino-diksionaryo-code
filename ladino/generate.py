@@ -67,10 +67,7 @@ def add_translated_words(source_language, entry, dictionary):
 
 def collect_data(dictionary):
     logging.info("Collect more data")
-    dictionary.count = {}
-    dictionary.word_mapping = {}
     dictionary.count['dictionary'] = {}
-    dictionary.pages = {}
     for language in ['ladino'] + languages:
         dictionary.count['dictionary'][language] = {
             'words': 0,

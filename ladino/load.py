@@ -8,6 +8,10 @@ class Dictionary():
     def __init__(self):
         self.words = []
 
+        self.count = {}
+        self.word_mapping = {}
+        self.pages = {}
+
 def load_config(path_to_repo):
     with open(os.path.join(path_to_repo, 'config.yaml')) as fh:
         return safe_load(fh)
