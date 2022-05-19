@@ -65,11 +65,11 @@ def add_translated_words(source_language, word_mapping_dictionary, pages, entry,
         pages[source_language][word].sort(key=lambda x: len(json.dumps(x, sort_keys=True)))
 
 
-def collect_data(dictionary_source):
+def collect_data(dictionary):
     logging.info("Collect more data")
     count = {}
     word_mapping_dictionary = {}
-    #print(dictionary_source)
+    #print(dictionary.dictionary_source)
     count['dictionary'] = {}
     pages = {}
     for language in ['ladino'] + languages:
@@ -80,7 +80,7 @@ def collect_data(dictionary_source):
         word_mapping_dictionary[language] = {}
         pages[language] = {}
 
-    for entry in dictionary_source:
+    for entry in dictionary.dictionary_source:
         add_ladino_word(entry['ladino'], entry.get('accented'), word_mapping_dictionary, pages, entry, count)
 
         if 'alternative-spelling' in entry:
@@ -142,7 +142,7 @@ def main():
 
         dictionary = load_dictionary(config, os.path.join(path_to_repo, 'words'))
         extra_examples = load_examples(os.path.join(path_to_repo, 'examples'))
-        word_mapping_dictionary, count, pages = collect_data(dictionary.dictionary_source)
+        word_mapping_dictionary, count, pages = collect_data(dictionary)
         logging.info(count)
 
     sounds = None
