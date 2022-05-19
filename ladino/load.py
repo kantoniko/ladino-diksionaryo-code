@@ -59,13 +59,13 @@ def check_origen(config, data, filename):
     if origen not in config['origenes']:
         raise LadinoError(f"Invalid origen '{origen}' in file '{filename}'")
 
-def check_and_collect_categories(config, data, filename, categories):
+def check_and_collect_categories(config, data, filename, dictionary):
     if 'kategorias' not in data:
         return
     for cat in data['kategorias']:
         if cat not in config['kategorias']:
             raise LadinoError(f"Invalid category '{cat}' in file '{filename}'")
-        categories[cat].append(data)
+        dictionary.categories[cat].append(data)
 
 def make_them_list(translations, filename):
     for language in languages:
@@ -112,7 +112,7 @@ def load_dictionary(config, path_to_dictionary):
 
         check_and_collect_grammar(config, data, dictionary, filename)
         check_origen(config, data, filename)
-        check_and_collect_categories(config, data, filename, dictionary.categories)
+        check_and_collect_categories(config, data, filename, dictionary)
         check_and_collect_lists(config, data, dictionary)
 
         if 'versions' not in data:
