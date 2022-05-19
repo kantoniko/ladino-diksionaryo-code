@@ -8,6 +8,7 @@ class Dictionary():
     def __init__(self, config):
         self.words = []
         self.all_examples = []
+        self.all_words = []
         self.lists = {lst:[] for lst in config['listas'] }
 
         self.count = {}
@@ -68,7 +69,6 @@ def load_dictionary(config, path_to_dictionary):
     dictionary = Dictionary(config)
 
     files = os.listdir(path_to_dictionary)
-    all_words = []
     categories = {cat:[] for cat in config['kategorias'] }
     verbs = []
     for filename in files:
@@ -77,7 +77,7 @@ def load_dictionary(config, path_to_dictionary):
         with open(path) as fh:
             data = safe_load(fh)
 
-        all_words.append(data)
+        dictionary.all_words.append(data)
 
         grammar = check_grammar(config, data, filename)
         check_origen(config, data, filename)
@@ -175,7 +175,6 @@ def load_dictionary(config, path_to_dictionary):
 
     dictionary.categories        = categories
     dictionary.verbs             = verbs
-    dictionary.all_words         = all_words
     return dictionary
 
 def load_examples(path_to_examples):
