@@ -62,7 +62,14 @@ def make_it_list(translations, language, filename):
     else:
         raise LadinoError(f"bad type {target_words.__class__.__name__} for {language} in {translations} in '{filename}'")
 
-
+def check_and_collect_lists(config, data, dictionary):
+    for lst, listed_words in config['listas'].items():
+        #print(data['versions'][0]['ladino'])
+        #print(listed_words)
+        if 'versions' in data and 'ladino' in data['versions'][0] and data['versions'][0]['ladino'] in listed_words:
+            dictionary.lists[lst].append(data)
+        # TODO: include also words from the lists that don't appear in our dictionaries (without a link)
+        # TODO: add these words to the list of missing words
 
 def load_dictionary(config, path_to_dictionary):
     logging.info(f"Path to dictionary: '{path_to_dictionary}'")
@@ -82,11 +89,7 @@ def load_dictionary(config, path_to_dictionary):
         grammar = check_grammar(config, data, filename)
         check_origen(config, data, filename)
         check_and_collect_categories(config, data, filename, dictionary.categories)
-        for lst, listed_words in config['listas'].items():
-            #print(data['versions'][0]['ladino'])
-            #print(listed_words)
-            if 'versions' in data and 'ladino' in data['versions'][0] and data['versions'][0]['ladino'] in listed_words:
-                dictionary.lists[lst].append(data)
+        check_and_collect_lists(config, data, dictionary)
 
         if 'versions' not in data:
             raise LadinoError(f"The 'versions' field is missing from file '{filename}'")
