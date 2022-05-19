@@ -5,7 +5,8 @@ import logging
 from ladino.common import LadinoError, languages
 
 class Dictionary():
-    pass
+    def __init__(self):
+        self.words = []
 
 def load_config(path_to_repo):
     with open(os.path.join(path_to_repo, 'config.yaml')) as fh:
@@ -58,9 +59,9 @@ def load_dictionary(config, path_to_dictionary):
     logging.info(f"Path to dictionary: '{path_to_dictionary}'")
     #if path_to_dictionary is None:
     #    return
+    dictionary = Dictionary()
 
     files = os.listdir(path_to_dictionary)
-    words = []
     all_examples = []
     all_words = []
     categories = {cat:[] for cat in config['kategorias'] }
@@ -142,7 +143,7 @@ def load_dictionary(config, path_to_dictionary):
             if comments is not None:
                 version['comments'] = comments
                 comments = None
-            words.append(version)
+            dictionary.words.append(version)
 
         conjugations = config['tiempos']
         pronouns = config['pronombres']
@@ -159,8 +160,8 @@ def load_dictionary(config, path_to_dictionary):
                     version['source'] = filename
                     if 'translations' in version:
                         make_them_list(version['translations'], filename)
-                    words.append(version)
-    #print(words)
+                    dictionary.words.append(version)
+    #print(dictionary.words)
     #print(all_examples[0])
     for cat in categories.keys():
         categories[cat].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
@@ -168,8 +169,6 @@ def load_dictionary(config, path_to_dictionary):
         lookup = {word:ix for ix, word in enumerate(config['listas'][lst])}
         lists[lst].sort(key=lambda word: lookup[word['versions'][0]['ladino']])
 
-    dictionary = Dictionary()
-    dictionary.words             = words
     dictionary.all_examples      = all_examples
     dictionary.categories        = categories
     dictionary.lists             = lists
