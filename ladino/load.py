@@ -169,7 +169,7 @@ def load_dictionary(config, path_to_dictionary):
         lists[lst].sort(key=lambda word: lookup[word['versions'][0]['ladino']])
 
     dictionary = Dictionary()
-    dictionary.dictionary_source = words
+    dictionary.words             = words
     dictionary.all_examples      = all_examples
     dictionary.categories        = categories
     dictionary.lists             = lists

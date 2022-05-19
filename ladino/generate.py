@@ -69,7 +69,6 @@ def collect_data(dictionary):
     logging.info("Collect more data")
     dictionary.count = {}
     dictionary.word_mapping = {}
-    #print(dictionary.dictionary_source)
     dictionary.count['dictionary'] = {}
     dictionary.pages = {}
     for language in ['ladino'] + languages:
@@ -80,7 +79,7 @@ def collect_data(dictionary):
         dictionary.word_mapping[language] = {}
         dictionary.pages[language] = {}
 
-    for entry in dictionary.dictionary_source:
+    for entry in dictionary.words:
         add_ladino_word(entry['ladino'], entry.get('accented'), entry, dictionary)
 
         if 'alternative-spelling' in entry:
