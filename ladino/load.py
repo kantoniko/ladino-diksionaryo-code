@@ -5,9 +5,10 @@ import logging
 from ladino.common import LadinoError, languages
 
 class Dictionary():
-    def __init__(self):
+    def __init__(self, config):
         self.words = []
         self.all_examples = []
+        self.lists = {lst:[] for lst in config['listas'] }
 
         self.count = {}
         self.word_mapping = {}
@@ -64,12 +65,11 @@ def load_dictionary(config, path_to_dictionary):
     logging.info(f"Path to dictionary: '{path_to_dictionary}'")
     #if path_to_dictionary is None:
     #    return
-    dictionary = Dictionary()
+    dictionary = Dictionary(config)
 
     files = os.listdir(path_to_dictionary)
     all_words = []
     categories = {cat:[] for cat in config['kategorias'] }
-    lists = {lst:[] for lst in config['listas'] }
     verbs = []
     for filename in files:
         path = os.path.join(path_to_dictionary, filename)
@@ -86,7 +86,7 @@ def load_dictionary(config, path_to_dictionary):
             #print(data['versions'][0]['ladino'])
             #print(listed_words)
             if 'versions' in data and 'ladino' in data['versions'][0] and data['versions'][0]['ladino'] in listed_words:
-                lists[lst].append(data)
+                dictionary.lists[lst].append(data)
 
         if 'versions' not in data:
             raise LadinoError(f"The 'versions' field is missing from file '{filename}'")
@@ -169,12 +169,11 @@ def load_dictionary(config, path_to_dictionary):
     #print(dictionary.all_examples[0])
     for cat in categories.keys():
         categories[cat].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
-    for lst in lists.keys():
+    for lst in dictionary.lists.keys():
         lookup = {word:ix for ix, word in enumerate(config['listas'][lst])}
-        lists[lst].sort(key=lambda word: lookup[word['versions'][0]['ladino']])
+        dictionary.lists[lst].sort(key=lambda word: lookup[word['versions'][0]['ladino']])
 
     dictionary.categories        = categories
-    dictionary.lists             = lists
     dictionary.verbs             = verbs
     dictionary.all_words         = all_words
     return dictionary
