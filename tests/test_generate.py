@@ -5,7 +5,9 @@ import shutil
 import pytest
 import glob
 
-from ladino.generate import load_dictionary, LadinoError, load_config, main
+from ladino.generate import main
+from ladino.load import load_dictionary, load_config
+from ladino.common import LadinoError
 
 
 real_repo_path = 'ladino-diksionaryo-data'
