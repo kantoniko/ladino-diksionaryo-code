@@ -10,6 +10,7 @@ class Dictionary():
         self.all_examples = []
         self.all_words = []
         self.lists = {lst:[] for lst in config['listas'] }
+        self.categories = {cat:[] for cat in config['kategorias'] }
 
         self.count = {}
         self.word_mapping = {}
@@ -69,7 +70,6 @@ def load_dictionary(config, path_to_dictionary):
     dictionary = Dictionary(config)
 
     files = os.listdir(path_to_dictionary)
-    categories = {cat:[] for cat in config['kategorias'] }
     verbs = []
     for filename in files:
         path = os.path.join(path_to_dictionary, filename)
@@ -81,7 +81,7 @@ def load_dictionary(config, path_to_dictionary):
 
         grammar = check_grammar(config, data, filename)
         check_origen(config, data, filename)
-        check_categories(config, data, filename, categories)
+        check_categories(config, data, filename, dictionary.categories)
         for lst, listed_words in config['listas'].items():
             #print(data['versions'][0]['ladino'])
             #print(listed_words)
@@ -167,13 +167,12 @@ def load_dictionary(config, path_to_dictionary):
                     dictionary.words.append(version)
     #print(dictionary.words)
     #print(dictionary.all_examples[0])
-    for cat in categories.keys():
-        categories[cat].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
+    for cat in dictionary.categories.keys():
+        dictionary.categories[cat].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
     for lst in dictionary.lists.keys():
         lookup = {word:ix for ix, word in enumerate(config['listas'][lst])}
         dictionary.lists[lst].sort(key=lambda word: lookup[word['versions'][0]['ladino']])
 
-    dictionary.categories        = categories
     dictionary.verbs             = verbs
     return dictionary
 
