@@ -24,7 +24,7 @@ gramatika:
   - verb
   - preposition
   - pronoun
-  - null
+  - NA
 gender:
   - feminine
   - masculine
