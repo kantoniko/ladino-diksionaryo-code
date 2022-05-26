@@ -12,7 +12,7 @@ class Dictionary():
         self.all_examples = []
         self.lists = {lst:[] for lst in config['listas'] }
         self.categories = {cat:[] for cat in config['kategorias'] }
-        self.verbs = []
+        self.gramer = {name:[] for name in config['gramatika'] }
         self.origenes = {name:[] for name in config['origenes'] }
 
         self.count = {}
@@ -59,8 +59,7 @@ def check_and_collect_grammar(config, data, dictionary, filename):
             if number not in config['numero']:
                 raise LadinoError(f"The 'number' field is '{number}' in '{filename}' version {version}")
 
-    if grammar == 'verb':
-        dictionary.verbs.append(data)
+    dictionary.gramer[grammar].append(data)
 
 
 def check_and_collect_origen(config, data, filename, dictionary):

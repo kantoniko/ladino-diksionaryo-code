@@ -212,7 +212,8 @@ def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, htm
     export_categories(config, dictionary.categories, html_dir)
     export_origenes(config, dictionary.origenes, html_dir)
     export_lists(dictionary.lists, html_dir)
-    export_verbs(dictionary.verbs, html_dir)
+    export_gramer(config, dictionary.gramer, html_dir)
+    export_verbs(dictionary.gramer['verb'], html_dir)
     export_examples(copy.deepcopy(dictionary.all_examples), extra_examples, dictionary.pages['ladino'], html_dir)
     export_markdown_pages(config, path_to_repo, html_dir)
 
@@ -417,18 +418,34 @@ def export_lists(lists, html_dir):
             languages=languages,
         )
 
+def export_gramer(config, gramer, html_dir):
+    dname = 'gramer'
+    os.makedirs(os.path.join(html_dir, dname), exist_ok=True)
+    for name in gramer.keys():
+        words = gramer[name]
+        words.sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
+        render(
+            template="category.html",
+            filename=os.path.join(dname, f"{name.lower()}.html"),
+
+            title=f"gramer: {name}",
+            words=words,
+            languages=languages,
+        )
+
+    render(
+        template="categories.html",
+        filename=f"{dname}/index.html",
+        dname=dname,
+
+        title=f"Gramers",
+        values=config['gramatika'],
+    )
+
+
 def export_verbs(verbs, html_dir):
     verbs_dir = os.path.join(html_dir, 'verbos')
     os.makedirs(verbs_dir, exist_ok=True)
-    verbs.sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
-    render(
-        template="category.html",
-        filename=f"verbos.html",
-
-        title="Verbos",
-        words=verbs,
-        languages=languages,
-    )
     for verb in verbs:
         ladino = verb['versions'][0]['ladino']
         data = {

@@ -30,6 +30,15 @@
       </ul>
     </div>
 
+    <h2><a href="/gramer/">Gramer</a></h2>
+    <div class="content">
+      <ul>
+        {% for name in config['gramer'] %}
+          <li><a href="/origenes/{{name.lower()}}">{{name}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
 
     <h2>Listas</h2>
     <div class="content">
