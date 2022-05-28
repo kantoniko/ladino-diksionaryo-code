@@ -25,6 +25,16 @@ language_names = {
             'turkish'    : 'turko'
 }
 
+language_codes = {
+            'english'    : 'en',
+            'french'     : 'fr',
+            'hebrew'     : 'he',
+            'portuguese' : 'pt',
+            'spanish'    : 'es',
+            'turkish'    : 'tr'
+}
+
+
 sitemap = []
 html_path = None
 
@@ -67,6 +77,7 @@ def export_dictionary_pages(pages, sounds, html_dir):
             #sounds=sounds.get(plain_word) if sounds else [],
             plain_word=plain_word,
             language_names=language_names,
+            language_codes=language_codes,
         )
 
         export_json(data, os.path.join(words_dir, language, f'{plain_word}.json'))
