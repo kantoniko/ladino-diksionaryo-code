@@ -6,6 +6,7 @@ import json
 import shutil
 import re
 import datetime
+import sys
 
 import markdown
 from jinja2 import Environment, FileSystemLoader
@@ -186,7 +187,7 @@ def export_single_page_dictionaries(word_mapping, html_dir):
 
 
 
-def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, html_dir, pretty=False):
+def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, html_dir, whatsapp=None, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
     global html_path
@@ -200,6 +201,13 @@ def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, htm
     sitemap = []
     generate_main_page(html_dir)
     export_missing_words(dictionary.yaml_files, languages)
+
+    if whatsapp:
+        sys.path.insert(0, whatsapp)
+        import ladino.whatsapeando as whatsapp
+        messages = whatsapp.get_messages()
+        #print(messages)
+        export_whatsapp(messages, dictionary.pages['ladino'], html_dir)
 
     export_single_page_dictionaries(dictionary.word_mapping, html_dir)
 

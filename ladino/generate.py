@@ -9,7 +9,7 @@ import datetime
 
 import ladino.common
 from ladino.load import load_dictionary, load_examples, load_config
-from ladino.export import generate_main_page, export_to_html, export_whatsapp, create_sitemap
+from ladino.export import generate_main_page, export_to_html, create_sitemap
 
 ladino.common.start = datetime.datetime.now().replace(microsecond=0)
 
@@ -73,13 +73,7 @@ def main():
     #print(sounds)
 
     if args.all:
-        export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, args.html, pretty=args.pretty)
-        if args.whatsapp:
-            sys.path.insert(0, args.whatsapp)
-            import ladino.whatsapeando as whatsapp
-            messages = whatsapp.get_messages()
-            #print(messages)
-            export_whatsapp(messages, dictionary.pages['ladino'], args.html)
+        export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, args.html, whatsapp=args.whatsapp, pretty=args.pretty)
         create_sitemap(args.html)
 
 
