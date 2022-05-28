@@ -40,4 +40,30 @@ function translate(text, languages, dictionary) {
     }
     return rows;
 }
+
+function lookup(text, languages, dictionary) {
+    const cleaned = text.replace(/[<>,;.:!?"'\n*()=\[\]\/\s]/g, " ");
+    const ladino = Object.keys(dictionary["ladino"]);
+    //console.log(cleaned);
+
+    let source_language = 'ladino';
+    let rows = [];
+    for (let ix=0; ix < ladino.length; ix++) {
+        let ladino_word = ladino[ix];
+        if (ladino_word.includes(cleaned)) {
+            let dictionary_word = dictionary['ladino'][ladino_word];
+            rows.push(
+                {
+                    'source_language': source_language,
+                    'original_word': '',
+                    'dictionary_word': dictionary_word,
+                    'word': ladino_word
+                }
+            );
+        }
+    }
+    return rows;
+}
+
 module.exports.translate = translate;
+module.exports.lookup = lookup;

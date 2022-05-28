@@ -52,12 +52,21 @@ $(document).ready(function(){
                     'french' : '0',
                     'hebrew' : '0',
                     'portuguese' : '0',
-                }
+                },
+                'search-type': 'multi-search',
             };
         }
         //console.log(config);
         return config;
     }
+
+    function show_input(idx) {
+        $('#input-text').addClass('is-hidden');
+        $('#input-expression').addClass('is-hidden');
+        $(idx).removeClass('is-hidden');
+        save_config_search_type();
+        try_translate();
+    };
 
     function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
@@ -75,8 +84,16 @@ $(document).ready(function(){
     }
 
     var display_translate = function() {
-        const original = $("#input-text").val();
-        localStorage.setItem('original', original);
+        let original;
+        const languages = get_languages();
+
+        if ($('#single-search').prop('checked')) {
+            original = $("#input-expression").val();
+            save_config_search_text();
+        } else {
+            original = $("#input-text").val();
+            localStorage.setItem('original', original);
+        }
         if (/^\s*$/.exec(original)) {
             $('#welcome-message').removeClass('is-hidden');
             $('#output').addClass('is-hidden');
@@ -85,11 +102,24 @@ $(document).ready(function(){
         $('#welcome-message').addClass('is-hidden');
         $('#output').removeClass('is-hidden');
 
-        const languages = get_languages();
+        let rows = [];
+        let count;
+        const row_limit = 20;
+        if ($('#single-search').prop('checked')) {
+            rows = lookup(original, languages, dictionary);
+            count = rows.length;
+            rows = rows.slice(0, row_limit);
+            //console.log(count);
+        } else {
+            rows = translate(original, languages, dictionary);
+        }
+        //console.log(rows);
 
-        let rows = translate(original, languages, dictionary);
-
-        var html = `<table class="table">`;
+        var html = '';
+        if (count) {
+            html += `<span>Mostramos ${rows.length} ekspresiones de un total de ${count} ke topamos.</span>`;
+        }
+        html += `<table class="table">`;
         html += '<thead>';
         html += '<tr>';
         html += `<th>biervo</th><th>Ladino</th>`;
@@ -196,6 +226,21 @@ $(document).ready(function(){
         event.stopPropagation();
     });
 
+    function save_config_search_text() {
+        let config = get_config();
+        config['search-text'] = $("#input-expression").val();
+        localStorage.setItem('config', JSON.stringify(config));
+    }
+
+    function save_config_search_type() {
+        let config = get_config();
+        config['search-type'] = 'multi-search';
+        if ($('#single-search').prop('checked')) {
+            config['search-type'] = 'single-search';
+        }
+        localStorage.setItem('config', JSON.stringify(config));
+    }
+
     const get_words = function() {
         let stored = {
             "ok": [],
@@ -283,5 +328,27 @@ $(document).ready(function(){
     $('#game-close').click(function () {
         $("#game").removeClass('is-active');
     });
+
+    $('#multi-search').change(function() {
+        show_input('#input-text');
+    });
+
+    $('#single-search').change(function() {
+        show_input('#input-expression');
+    });
+    $('#input-expression').on('input', display_translate)
+
+    const config = get_config();
+    if ('search-text' in config) {
+        $("#input-expression").val(config['search-text']);
+    }
+    if ('search-type' in config && config['search-type'] == 'single-search') {
+        $('#single-search').prop('checked', 'true');
+        show_input('#input-expression');
+    } else {
+        $('#multi-search').prop('checked', 'true');
+        show_input('#input-text');
+    }
+
 });
 
