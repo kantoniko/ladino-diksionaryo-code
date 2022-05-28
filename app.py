@@ -19,6 +19,7 @@ def all(fullpath):
             else:
                 #print(f"No file {path}")
                 return '', 404
-
+    if fullpath.endswith('/'):
+        fullpath += 'index'
     return send_file(os.path.join(root, f"{fullpath}.html"))
 
