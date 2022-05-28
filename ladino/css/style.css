@@ -15,3 +15,8 @@ table thead tr th.sort-asc:after {
 table thead tr th.sort-desc:after {
 	content: "\25be";
 }
+
+div[lang="he"] {
+    dir: rtl;
+    text-align: right;
+}
