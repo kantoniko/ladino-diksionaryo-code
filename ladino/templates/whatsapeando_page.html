@@ -3,9 +3,14 @@
     <h1 class="title">{{ title_links | safe }}</h1>
     <div class="content">
 
-      <div>
-      {{text | safe}}
-      </div>
+       {% for entry in teksto %}
+         <div>
+           {{entry['ladino'] | safe}}
+         </div>
+         <div lang="he">
+           {{entry['ebreo'] | safe}}
+         </div>
+       {% endfor %}
       <div>
         <audio controls>
           <source src="https://whatsapeando.szabgab.com/sound/{{sound_filename}}" type="audio/ogg">

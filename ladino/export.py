@@ -301,8 +301,12 @@ def export_whatsapp(messages, words, html_dir):
         messages=messages,
     )
     for idx, message in enumerate(messages):
-        text = link_words(message['text'], words)
-        text = text.replace("\n", "<br>")
+        teksto = copy.deepcopy(message['teksto'])
+        print(teksto)
+        for entry in teksto:
+            text = link_words(entry['ladino'], words)
+            text = text.replace("\n", "<br>")
+            entry['ladino'] = text
         next_idx = idx+1 if idx+1 < len(messages) else 0
         #print(next_idx)
         render(
@@ -311,7 +315,7 @@ def export_whatsapp(messages, words, html_dir):
 
             title=message['titulo'],
             sound_filename=message['filename'],
-            text=text,
+            teksto=teksto,
             title_links=link_words(message['titulo'], words),
             prev_message=messages[idx-1]['page'],
             next_message=messages[next_idx]['page'],
