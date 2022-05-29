@@ -1,0 +1,77 @@
+{
+    "english": {
+        "example": [
+            "egzempio"
+        ],
+        "examples": [
+            "egzempios"
+        ]
+    },
+    "french": {},
+    "hebrew": {},
+    "ladino": {
+        "egzempio": {
+            "english": [
+                "example"
+            ],
+            "french": [],
+            "ladino": [
+                "egzempio"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplo"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        },
+        "egzempios": {
+            "english": [
+                "examples"
+            ],
+            "french": [],
+            "ladino": [
+                "egzempios"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplos"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        },
+        "egzemplo": {
+            "english": [
+                "example"
+            ],
+            "french": [],
+            "ladino": [
+                "egzemplo"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplo"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        }
+    },
+    "portuguese": {},
+    "spanish": {
+        "ejemplo": [
+            "egzempio"
+        ],
+        "ejemplos": [
+            "egzempios"
+        ]
+    },
+    "turkish": {
+        "misâl": [
+            "egzempio",
+            "egzempios"
+        ]
+    }
+}

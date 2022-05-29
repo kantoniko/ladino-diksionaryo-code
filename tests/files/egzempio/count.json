@@ -1,0 +1,32 @@
+{
+    "dictionary": {
+        "english": {
+            "examples": 0,
+            "words": 2
+        },
+        "french": {
+            "examples": 0,
+            "words": 0
+        },
+        "hebrew": {
+            "examples": 0,
+            "words": 0
+        },
+        "ladino": {
+            "examples": 1,
+            "words": 3
+        },
+        "portuguese": {
+            "examples": 0,
+            "words": 0
+        },
+        "spanish": {
+            "examples": 0,
+            "words": 2
+        },
+        "turkish": {
+            "examples": 0,
+            "words": 2
+        }
+    }
+}
