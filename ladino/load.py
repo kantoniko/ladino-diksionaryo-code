@@ -260,10 +260,19 @@ def collect_data(dictionary):
         if 'alternative-spelling' in entry:
             for alt_entry in entry['alternative-spelling']:
                 entry_copy = copy.deepcopy(entry)
-                if 'bozes' in entry_copy:
-                    del entry_copy['bozes']
-                if 'bozes' in alt_entry:
-                    entry_copy['bozes'] = alt_entry['bozes']
+                alt_entries =  entry_copy.pop('alternative-spelling')
+
+                new_alt = {}
+                fields = ['ladino', 'accented', 'bozes']
+                for field in fields:
+                    if field in entry_copy:
+                        new_alt[field] =  entry_copy.pop(field)
+                    if field in alt_entry:
+                        entry_copy[field] = alt_entry[field]
+                alt_entries.append(new_alt)
+
+                entry_copy['alternative-spelling'] = list(filter(lambda xyz: xyz['ladino'] != alt_entry['ladino'], alt_entries))
+
                 if 'examples' in entry_copy:
                     entry_copy['examples'] = list(filter(lambda xyz: alt_entry['ladino'] in xyz['ladino'], entry['examples']))
                 add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), entry_copy, dictionary)

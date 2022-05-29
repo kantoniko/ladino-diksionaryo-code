@@ -21,9 +21,9 @@
        <tr><td>djenero</td><td>{{ entry.gender }} {{ entry.number }}</td></tr>
        <tr><td>orijin</td><td>{{ entry.origen }}</td></tr>
        {% if entry["alternative-spelling"] %}
-         <tr><td></td><td>
+         <tr><td>Alternativos</td><td>
           {% for alternative in entry["alternative-spelling"] %}
-              {{ alternative.ladino }} {% if alternative.accented %}({{ alternative.accented }}){% endif %} {% if not loop.last %},{% endif %}
+              <a href="{{ alternative.ladino }}">{{ alternative.ladino }}</a> {% if alternative.accented %}({{ alternative.accented }}){% endif %} {% if not loop.last %},{% endif %}
           {% endfor %}
           </td></tr>
        {% endif %}
