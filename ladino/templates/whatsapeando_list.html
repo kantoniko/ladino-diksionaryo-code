@@ -1,6 +1,7 @@
 {% include 'incl/header.html' %}
 
     <h1 class="title">{{ title }}</h1>
+   {% include 'incl/whatsapp.html' %}
     <div class="content">
       <ul>
         {% for message in messages %}
@@ -9,6 +10,5 @@
       </ul>
     </div>
 
-   {% include 'incl/whatsapp.html' %}
 
 {% include 'incl/footer.html' %}
