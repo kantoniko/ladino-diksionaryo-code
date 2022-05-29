@@ -2,6 +2,7 @@ from yaml import safe_load
 import os
 import logging
 import json
+import copy
 
 from ladino.common import LadinoError, languages
 
@@ -258,7 +259,14 @@ def collect_data(dictionary):
 
         if 'alternative-spelling' in entry:
             for alt_entry in entry['alternative-spelling']:
-                add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), entry, dictionary)
+                entry_copy = copy.deepcopy(entry)
+                if 'bozes' in entry_copy:
+                    del entry_copy['bozes']
+                if 'bozes' in alt_entry:
+                    entry_copy['bozes'] = alt_entry['bozes']
+                if 'examples' in entry_copy:
+                    entry_copy['examples'] = list(filter(lambda xyz: alt_entry['ladino'] in xyz['ladino'], entry['examples']))
+                add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), entry_copy, dictionary)
 
         for language in languages:
             add_translated_words(language, entry, dictionary)
