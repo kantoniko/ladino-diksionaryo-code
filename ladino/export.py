@@ -318,6 +318,8 @@ def export_whatsapp(messages, words, html_dir):
             text = link_words(entry['ladino'], words)
             text = text.replace("\n", "<br>")
             entry['ladino'] = text
+            if 'ebreo' in entry:
+                entry['ebreo'] = entry['ebreo'].replace("\n", "<br>")
         next_idx = idx+1 if idx+1 < len(messages) else 0
         #print(next_idx)
         render(
