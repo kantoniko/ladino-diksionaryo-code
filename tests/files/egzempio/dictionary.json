@@ -57,6 +57,86 @@
             "turkish": [
                 "misâl"
             ]
+        },
+        "egzemplos": {
+            "english": [
+                "examples"
+            ],
+            "french": [],
+            "ladino": [
+                "egzemplos"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplos"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        },
+        "enshemplo": {
+            "english": [
+                "example"
+            ],
+            "french": [],
+            "ladino": [
+                "enshemplo"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplo"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        },
+        "enshemplos": {
+            "english": [
+                "examples"
+            ],
+            "french": [],
+            "ladino": [
+                "enshemplos"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplos"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        },
+        "eshemplo": {
+            "english": [
+                "example"
+            ],
+            "french": [],
+            "ladino": [
+                "eshemplo"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplo"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        },
+        "eshemplos": {
+            "english": [
+                "examples"
+            ],
+            "french": [],
+            "ladino": [
+                "eshemplos"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplos"
+            ],
+            "turkish": [
+                "misâl"
+            ]
         }
     },
     "portuguese": {},
