@@ -1,9 +1,10 @@
 {% include 'incl/header.html' %}
 
-<div> Palavras: <input type="radio" name="searchtype" id="multi-search"> Ekspresiones: <input type="radio" name="searchtype" id="single-search"></div>
+<div> Palavras: <input type="radio" name="searchtype" id="multi-search"> Ekspresiones: <input type="radio" name="searchtype" id="single-search"> Mazal: <input type="radio" name="searchtype" id="lucky-search"></div>
 <textarea class="textarea" id="input-text">
 </textarea>
 <input class="is-hidden" id="input-expression">
+<button class="button is-primary is-hidden" id="input-lucky">Mazal</button>
 <div id="output"></div>
 <article class="message is-hidden" id="welcome-message">
   <div class="message-header">

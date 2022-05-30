@@ -63,6 +63,7 @@ $(document).ready(function(){
     function show_input(idx) {
         $('#input-text').addClass('is-hidden');
         $('#input-expression').addClass('is-hidden');
+        $('#input-lucky').addClass('is-hidden');
         $(idx).removeClass('is-hidden');
         save_config_search_type();
         try_translate();
@@ -83,6 +84,17 @@ $(document).ready(function(){
         return links;
     }
 
+    const display_lucky = function() {
+        const words = Object.keys(dictionary["ladino"]);
+        const word = words[Math.floor(Math.random() * words.length)];
+        console.log(word);
+        console.log(dictionary['ladino'][word])
+        let html = '';
+        html += '<div>Kada vez tu klikas en el boton de Mazal, vas a ver otra palavra. Tu puedes ambezarte la palavra o tu puedes eskrivir frazas i kontribuir al diksionaryo.</div>';
+        html += `<h3><a href="/words/ladino/${word}">${word}</a></h3>`;
+        $("#output").html(html);
+    }
+
     var display_translate = function() {
         let original;
         const languages = get_languages();
@@ -90,9 +102,14 @@ $(document).ready(function(){
         if ($('#single-search').prop('checked')) {
             original = $("#input-expression").val();
             save_config_search_text();
-        } else {
+        } else if ($('#multi-search').prop('checked')) {
             original = $("#input-text").val();
             localStorage.setItem('original', original);
+        } else if ($('#lucky-search').prop('checked')) {
+            display_lucky();
+            return;
+        } else {
+            console.log('ohoh');
         }
         if (/^\s*$/.exec(original)) {
             $('#welcome-message').removeClass('is-hidden');
@@ -110,8 +127,11 @@ $(document).ready(function(){
             count = rows.length;
             rows = rows.slice(0, row_limit);
             //console.log(count);
-        } else {
+        } else if ($('#multi-search').prop('checked')) {
             rows = translate(original, languages, dictionary);
+        //} else if ($('#lucky-search').prop('checked')) {
+        } else {
+            console.log('ohoh');
         }
         //console.log(rows);
 
@@ -238,6 +258,12 @@ $(document).ready(function(){
         if ($('#single-search').prop('checked')) {
             config['search-type'] = 'single-search';
         }
+        if ($('#multi-search').prop('checked')) {
+            config['search-type'] = 'multi-search';
+        }
+        if ($('#lucky-search').prop('checked')) {
+            config['search-type'] = 'lucky-search';
+        }
         localStorage.setItem('config', JSON.stringify(config));
     }
 
@@ -338,16 +364,30 @@ $(document).ready(function(){
     });
     $('#input-expression').on('input', display_translate)
 
+    $('#lucky-search').change(function() {
+        show_input('#input-lucky');
+    });
+
+    $('#input-lucky').click(function () {
+        try_translate();
+    });
+
     const config = get_config();
     if ('search-text' in config) {
         $("#input-expression").val(config['search-text']);
     }
-    if ('search-type' in config && config['search-type'] == 'single-search') {
+    if (! 'search-type' in config) {
+        config['search-type'] = 'multi-search';
+    }
+    if (config['search-type'] == 'single-search') {
         $('#single-search').prop('checked', 'true');
         show_input('#input-expression');
-    } else {
+    } else if (config['search-type'] == 'multi-search') {
         $('#multi-search').prop('checked', 'true');
         show_input('#input-text');
+    } else if (config['search-type'] == 'lucky-search') {
+        $('#lucky-search').prop('checked', 'true');
+        show_input('#input-lucky');
     }
 
 });
