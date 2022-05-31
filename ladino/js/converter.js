@@ -110,7 +110,7 @@ $(document).ready(function(){
         const languages = get_languages();
 
         if ($('#single-search').prop('checked')) {
-            original = $("#input-expression").val();
+            original = $("#input-expression").val().toLowerCase();
             save_config_search_text();
         } else if ($('#multi-search').prop('checked')) {
             original = $("#input-text").val();
