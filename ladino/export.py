@@ -230,7 +230,7 @@ def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, htm
     export_lists_html_page(config, html_dir)
     export_categories(config, dictionary.categories, html_dir)
     export_origenes(config, dictionary.origenes, html_dir)
-    export_lists(dictionary.lists, html_dir)
+    export_lists(config, dictionary.lists, html_dir)
     export_gramer(config, dictionary.gramer, html_dir)
     export_verbs(dictionary.gramer['verb'], html_dir)
     export_examples(copy.deepcopy(dictionary.all_examples), extra_examples, dictionary.pages['ladino'], html_dir)
@@ -432,16 +432,28 @@ def export_categories(config, categories, html_dir):
         values=config['kategorias'],
     )
 
-def export_lists(lists, html_dir):
+def export_lists(config, lists, html_dir):
+    dname = 'listas'
+    os.makedirs(os.path.join(html_dir, dname), exist_ok=True)
     for lst in lists.keys():
         render(
             template="category.html",
-            filename=f"{lst}.html",
+            filename=f"{dname}/{lst}.html",
 
             title=lst,
             words=lists[lst],
             languages=languages,
         )
+
+    render(
+        template="categories.html",
+        filename=f"{dname}/index.html",
+        dname=dname,
+
+        title=f"Listas",
+        values=config['listas'],
+    )
+
 
 def export_gramer(config, gramer, html_dir):
     dname = 'gramer'

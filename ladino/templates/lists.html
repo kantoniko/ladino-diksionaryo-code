@@ -40,11 +40,11 @@
     </div>
 
 
-    <h2>Listas</h2>
+    <h2><a href="/listas/">Listas</a></h2>
     <div class="content">
       <ul>
         {% for lst in config['listas'].keys() %}
-          <li><a href="/{{lst}}">{{lst.capitalize()}}</a></li>
+          <li><a href="/listas/{{lst}}">{{lst.capitalize()}}</a></li>
         {% endfor %}
       </ul>
     </div>
