@@ -528,8 +528,8 @@ def export_verbs(config, verbs, html_dir):
                         'yo':   { 'ladino': root + 'o' },
                         'tu':   { 'ladino': root + 'es' },
                         'el':   { 'ladino': root + 'e' },
-                        'moz':  { 'ladino': root + 'emos' },
-                        'voz':  { 'ladino': root + 'ésh' },
+                        'mozotros':  { 'ladino': root + 'emos' },
+                        'vozotros':  { 'ladino': root + 'ésh' },
                         'eyos': { 'ladino': root + 'en' },
                     }
                 #print(verb)
