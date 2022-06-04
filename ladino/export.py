@@ -232,7 +232,7 @@ def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, htm
     export_origenes(config, dictionary.origenes, html_dir)
     export_lists(config, dictionary.lists, html_dir)
     export_gramer(config, dictionary.gramer, html_dir)
-    export_verbs(dictionary.gramer['verb'], html_dir)
+    export_verbs(config, dictionary.gramer['verb'], html_dir)
     export_examples(copy.deepcopy(dictionary.all_examples), extra_examples, dictionary.pages['ladino'], html_dir)
     export_markdown_pages(config, path_to_repo, html_dir)
 
@@ -480,26 +480,82 @@ def export_gramer(config, gramer, html_dir):
     )
 
 
-def export_verbs(verbs, html_dir):
+def export_verbs(config, verbs, html_dir):
     verbs_dir = os.path.join(html_dir, 'verbos')
     os.makedirs(verbs_dir, exist_ok=True)
+    irregulars = [
+            'aver',
+            'azer',
+            'dar',
+            'dever',
+            'dizir',
+            'doler',
+            'entender',
+            'estar',
+            'fuyir',
+            'goler',
+            'inchir',
+            'ir',
+            'kaver',
+            'kayer',
+            'kerer',
+            'konoser',
+            'kozer',
+            'kuzir',
+            'murir',
+            'oyir',
+            'poder',
+            'pueder',
+            'ser',
+            'salir',
+            'saver',
+            'servir',
+            'sintir',
+            'tener',
+            'trayer',
+            'ver',
+            'vinir',
+        ]
     for verb in verbs:
         ladino = verb['versions'][0]['ladino']
-        data = {
-            'to': verb['versions'][0]['ladino'],
-        }
-        if ladino.endswith('er'):
-            root = ladino[0:-2]
-            if 'prezente' not in data:
-                data['prezente'] = {
-                    'yo': root + 'o',
-                    'tu': root + 'es',
-                    'el': root + 'e',
-                    'moz': root + 'emos',
-                    'voz': root + 'ésh',
-                    'eyos': root + 'en',
-                }
+        data = verb['conjugations']
+        #data['infinito'] = verb['versions'][0]['ladino'],
+        if ladino not in irregulars:
+            if ladino.endswith('er'):
+                root = ladino[0:-2]
+                if 'prezente' not in data:
+                    data['prezente'] = {
+                        'yo':   { 'ladino': root + 'o' },
+                        'tu':   { 'ladino': root + 'es' },
+                        'el':   { 'ladino': root + 'e' },
+                        'moz':  { 'ladino': root + 'emos' },
+                        'voz':  { 'ladino': root + 'ésh' },
+                        'eyos': { 'ladino': root + 'en' },
+                    }
+                #print(verb)
+                #print('-----')
+                #exit()
         export_json(data, os.path.join(verbs_dir, f'{ladino}.json'))
+        render(
+            template="verb.html",
+            filename=os.path.join('verbos', f'{ladino}.html'),
+            title=ladino,
+            verb=verb,
+            irregular = ladino in irregulars,
+            tiempos=config['tiempos'],
+            pronombres=config['pronombres'],
+        )
+# {'grammar': 'verb', 'id': '236', 'origen': 'Jeneral', 'versions': [{'ladino': 'depender', 'translations': {'english': ['depend'], 'french': [], 'portuguese': [], 'spanish': ['depender'], 'turkish': ['bağımlı olmak']}, 'source': 'depender.yaml', 'origen': 'Jeneral'}],
+# 'conjugations': {'infinito': ('depender',), 'prezente': {'ladino': {'yo': 'dependo', 'tu': 'dependes', 'el': 'depende', 'moz': 'dependemos', 'voz': 'dependésh', 'eyos': 'dependen'}}}, 'examples': []}
+
+    render(
+        template="verbs.html",
+        filename=os.path.join('verbos', "index.html"),
+        title=f"Verbos",
+        words=verbs,
+        languages=languages,
+    )
+
 
 def create_sitemap(html_dir):
     #return

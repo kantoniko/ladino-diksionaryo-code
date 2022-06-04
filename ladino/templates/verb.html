@@ -1,0 +1,48 @@
+{% include 'incl/header.html' %}
+
+<h1 class="title">{{ verb['versions'][0]['ladino'] }}</h1>
+<hr>
+
+<div class="content">
+  {% if irregular %}
+        Irregular
+  {% else %}
+        Regular
+  {% endif %}
+
+  {% for tiempo in tiempos %}
+    <h2>{{ tiempo }}</h2>
+        <table>
+        {% for pro in pronombres %}
+            <tr>
+                <td>
+                    {% if pro == "el" %}
+                        el/eya
+                    {% elif pro == "mozotros" %}
+                        mozotros/mozotras
+                    {% elif pro == "vozotros" %}
+                        vozotros/vozotras
+                    {% elif pro == "eyos" %}
+                        eyos/eyas
+                    {% else %}
+                        {{pro}}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if tiempo in verb['conjugations'] %}
+                        {% if pro in verb['conjugations'][tiempo] %}
+                            {{verb['conjugations'][tiempo][pro]['ladino']}}
+                        {% else %}
+                            -
+                        {% endif %}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+  {% endfor %}
+</div>
+
+{% include 'incl/footer.html' %}
