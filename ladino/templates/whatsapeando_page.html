@@ -27,6 +27,10 @@
     <a class="button" href="{{next_message}}">➡️</a>
     </div>
 
+    {% if img_filename %}
+        <img src="https://whatsapeando.szabgab.com/img/{{img_filename}}">
+    {% endif %}
+
    {% include 'incl/whatsapp.html' %}
 
 {% include 'incl/footer.html' %}

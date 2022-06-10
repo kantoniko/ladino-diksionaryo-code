@@ -332,6 +332,7 @@ def export_whatsapp(messages, words, html_dir):
             title_links=link_words(message['titulo'], words),
             prev_message=messages[idx-1]['page'],
             next_message=messages[next_idx]['page'],
+            img_filename=message.get('img'),
         )
 
 def copy_static_files(html_dir):
