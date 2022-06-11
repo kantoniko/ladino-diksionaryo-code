@@ -111,6 +111,19 @@
           </tr>
         </tbody>
       </table>
+      <div>
+      {% if count.whatsapp %}
+      <h3>Whatsapp Messages</h3>
+      <table class="table">
+        <thead>
+          <tr><th>All</th><th>With Hebrew</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>{{ count.whatsapp.all }}</td><td>{{ count.whatsapp.hebrew }}</td></tr>
+        </tbody>
+      </table>
+      </div>
+      {% endif %}
     </div>
     <div class="content">
       Generated at {{start}}.<br>

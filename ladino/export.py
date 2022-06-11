@@ -217,6 +217,11 @@ def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, htm
         sys.path.insert(0, whatsapp)
         import ladino.whatsapeando as whatsapp
         messages = whatsapp.get_messages()
+        dictionary.count['whatsapp'] = {
+            'all' : len(messages),
+            'hebrew': len(list(filter(lambda msg: msg['teksto'][0].get('ebreo') != '', messages))),
+            'images': len(list(filter(lambda msg: msg.get('img') is not None, messages))),
+        }
         #print(messages)
         export_whatsapp(messages, dictionary.pages['ladino'], html_dir)
 
