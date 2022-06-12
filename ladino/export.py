@@ -242,7 +242,7 @@ def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, htm
     export_markdown_pages(config, path_to_repo, html_dir)
 
     export_dictionary_pages(dictionary.pages, sounds, html_dir)
-    #export_to_hunspell(dictionary.word_mapping)
+    export_to_hunspell(dictionary.word_mapping, html_dir)
 
 def export_lists_html_page(config, html_dir):
     render(

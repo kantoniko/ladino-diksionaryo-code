@@ -1,15 +1,18 @@
+import os
 import json
 import datetime
 
-def export_to_hunspell(dictionary):
+def export_to_hunspell(dictionary, html_dir):
+    hun_dir = os.path.join(html_dir, 'hunspell')
+    os.makedirs(hun_dir, exist_ok=True)
     now = datetime.datetime.now()
 
-    with open("lad.dic", "w") as fh:
+    with open(os.path.join(hun_dir, "lad.dic"), "w") as fh:
         print(len(dictionary["ladino"].keys()), file=fh)
         for word in sorted(dictionary["ladino"].keys()):
             print(word, file=fh)
 
-    with open("lad.aff", "w") as fh:
+    with open(os.path.join(hun_dir, "lad.aff"), "w") as fh:
         print("SET UTF-8", file=fh)
         print("FLAG UTF-8", file=fh)
         rows = []
