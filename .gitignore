@@ -6,8 +6,5 @@ __pycache__/
 .coverage
 htmlcov/
 
-*.aff
-*.dic
-
 /pdf/
 /helper/
