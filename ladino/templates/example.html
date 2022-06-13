@@ -1,0 +1,17 @@
+{% include 'incl/header.html' %}
+
+    <div class="content">
+       {{ example['example']['ladino_html'] | safe }}
+        <a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/examples/{{ example['source'] }}">📝</a>
+       {%- for boz in example.example.bozes -%}
+         <div>
+           <audio controls>
+             <source src="https://ladino-sounds.szabgab.com/{{boz.person}}/{{boz.arkivo}}" type="audio/ogg">
+             Your browser does not support the audio element.
+           </audio>
+         </div>
+       {%- endfor %}
+
+    </div>
+
+{% include 'incl/footer.html' %}

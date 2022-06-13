@@ -282,9 +282,18 @@ def export_markdown_pages(config, path_to_repo, html_dir):
             content=content,
         )
 
+def words_to_url(words):
+    plain = re.sub(r'[^a-z0-9]', ' ', words.lower())
+    plain = plain.strip()
+    plain = re.sub(r'\s+', '-', plain)
+    return plain
+
 def export_examples(all_examples, extra_examples, words, html_dir):
     if not all_examples:
         return
+    target = 'egzempios'
+    examples_dir = os.path.join(html_dir, target)
+    os.makedirs(examples_dir, exist_ok=True)
     all_examples.sort(key=lambda ex: ex['example']['ladino'])
     for example in all_examples:
         example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
@@ -292,15 +301,25 @@ def export_examples(all_examples, extra_examples, words, html_dir):
     extra_examples.sort(key=lambda ex: ex['example']['ladino'])
     for example in extra_examples:
         example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
+        if 'bozes' in example['example']:
+            example['url'] = words_to_url(example['example']['ladino'])
+
+            render(
+                template="example.html",
+                filename=os.path.join(target, example['url'] + '.html'),
+
+                title='Egzempio',
+                example=example,
+            )
+
 
     #print(all_examples)
-    target = 'egzempios.html'
     render(
         template="examples.html",
-        filename=target,
+        filename=os.path.join(target, 'index.html'),
 
         title='Egzempios',
-        page=target.replace('.html', ''),
+        page=target,
         all_examples=all_examples,
         extra_examples=extra_examples,
     )

@@ -11,7 +11,13 @@
       <h2>Extra examples</h2>
       <ul>
          {% for example in extra_examples %}
-           <li>{{ example['example']['ladino_html'] | safe }} <a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/examples/{{ example['source'] }}">📝</a></li>
+           <li>
+             {% if example['url'] %}
+             <a href="/egzempios/{{example['url']}}">🖱️</a>
+             {% endif %}
+             {{ example['example']['ladino_html'] | safe }}
+             <a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/examples/{{ example['source'] }}">📝</a>
+           </li>
          {% endfor %}
       </ul>
       {%- endif %}
