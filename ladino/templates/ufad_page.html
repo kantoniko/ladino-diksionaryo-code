@@ -3,10 +3,19 @@
     <h1 class="title">{{ title_links | safe }}</h1>
     <div class="content">
         <div>
+          {{message['ladino_html'] | safe}}
+        </div>
+        <div>
           {{message['Ladino'] | safe}}
         </div>
-        <divlang="es">
+        <div lang="es">
           {{message['Español'] | safe}}
+        </div>
+        <div lang="en">
+          {{message['English'] | safe}}
+        </div>
+        <div lang="tr">
+          {{message['Türkçe'] | safe}}
         </div>
       <div>
         <audio controls>
