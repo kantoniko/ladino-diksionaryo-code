@@ -1,0 +1,27 @@
+{% include 'incl/header.html' %}
+
+    <h1 class="title">{{ title_links | safe }}</h1>
+    <div class="content">
+        <div>
+          {{message['Ladino'] | safe}}
+        </div>
+        <divlang="es">
+          {{message['Español'] | safe}}
+        </div>
+      <div>
+        <audio controls>
+          <source src="https://ufad.szabgab.com/audio/{{message['audio']}}" type="audio/ogg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+
+    <div class="content">
+    <a class="button" href="{{prev_message}}">⬅️</a>
+    <a class="button" href=".">⬆️</a>
+    <a class="button" href="{{next_message}}">➡️</a>
+    </div>
+
+   {% include 'incl/ufad.html' %}
+
+{% include 'incl/footer.html' %}

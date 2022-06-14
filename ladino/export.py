@@ -198,7 +198,7 @@ def export_single_page_dictionaries(word_mapping, html_dir):
 
 
 
-def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, html_dir, whatsapp=None, pretty=False):
+def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, html_dir, whatsapp=None, unafraza=None, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
     global html_path
@@ -224,6 +224,12 @@ def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, htm
         }
         #print(messages)
         export_whatsapp(messages, dictionary.pages['ladino'], html_dir)
+
+    if unafraza:
+        sys.path.insert(0, unafraza)
+        from ladino.ufad import ufad
+        entries = ufad()
+        export_ufad(entries, dictionary.pages['ladino'], html_dir)
 
     export_single_page_dictionaries(dictionary.word_mapping, html_dir)
 
@@ -323,6 +329,35 @@ def export_examples(all_examples, extra_examples, words, html_dir):
         all_examples=all_examples,
         extra_examples=extra_examples,
     )
+
+def export_ufad(messages, words, html_dir):
+    ufad_dir = os.path.join(html_dir, 'ufad')
+    os.makedirs(ufad_dir, exist_ok=True)
+
+    for message in messages:
+        message['id'] = message['audio'][0:-4].lower()
+
+    for idx, message in enumerate(messages):
+        message['ladino_html'] = link_words(message['Ladino'], words)
+        next_idx = idx+1 if idx+1 < len(messages) else 0
+        render(
+            template="ufad_page.html",
+            filename=os.path.join('ufad', f"{message['id']}.html"),
+
+            title=message['Ladino'],
+            message=message,
+            prev_message=messages[idx-1]['id'],
+            next_message=messages[next_idx]['id'],
+        )
+
+    render(
+        template="ufad_list.html",
+        filename=os.path.join('ufad', 'index.html'),
+
+        title='Una fraza al diya',
+        messages=messages,
+    )
+
 
 def export_whatsapp(messages, words, html_dir):
     whatsapp_dir = os.path.join(html_dir, 'whatsapeando')

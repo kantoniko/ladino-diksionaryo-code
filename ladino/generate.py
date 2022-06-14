@@ -25,6 +25,9 @@ def get_args():
         "--whatsapp", help="path to whatsapp files",
     )
     parser.add_argument(
+        "--unafraza", help="path to una fraza files",
+    )
+    parser.add_argument(
         "--sounds", help="path to sounds repository",
     )
     action = parser.add_mutually_exclusive_group(required=False)
@@ -73,7 +76,7 @@ def main():
     #print(sounds)
 
     if args.all:
-        export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, args.html, whatsapp=args.whatsapp, pretty=args.pretty)
+        export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, args.html, whatsapp=args.whatsapp, unafraza=args.unafraza, pretty=args.pretty)
         create_sitemap(args.html)
 
 

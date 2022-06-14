@@ -1,0 +1,14 @@
+{% include 'incl/header.html' %}
+
+    <h1 class="title">{{ title }}</h1>
+   {% include 'incl/ufad.html' %}
+    <div class="content">
+      <ul>
+        {% for message in messages %}
+          <li><a href="/ufad/{{message.id}}">{{message.Ladino}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+
+{% include 'incl/footer.html' %}
