@@ -311,9 +311,10 @@ def export_examples(all_examples, extra_examples, words, sound_people, html_dir)
             example['url'] = words_to_url(example['example']['ladino'])
             for sound in example['example']['bozes']:
                 person = sound['person']
-                if person not in sounds:
-                    sounds[person] = []
-                sounds[person].append(example)
+                if person in sound_people:
+                    if person not in sounds:
+                        sounds[person] = []
+                    sounds[person].append(example)
 
             render(
                 template="example.html",
