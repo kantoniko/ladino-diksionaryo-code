@@ -52,7 +52,7 @@ def render(template, filename=None, **args):
     elif filename.endswith('.html'):
         sitemap.append(filename[0:-5])
 
-def export_dictionary_pages(pages, sounds, html_dir):
+def export_dictionary_pages(pages, html_dir):
     logging.info("Export dictionary pages")
     words_dir = os.path.join(html_dir, 'words')
     os.makedirs(words_dir, exist_ok=True)
@@ -74,7 +74,6 @@ def export_dictionary_pages(pages, sounds, html_dir):
 
             data=enhanced_data,
             title=f"{plain_word}",
-            #sounds=sounds.get(plain_word) if sounds else [],
             plain_word=plain_word,
             language_names=language_names,
             language_codes=language_codes,
@@ -198,7 +197,7 @@ def export_single_page_dictionaries(word_mapping, html_dir):
 
 
 
-def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, html_dir, whatsapp=None, unafraza=None, pretty=False):
+def export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, html_dir, whatsapp=None, unafraza=None, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
     global html_path
@@ -244,10 +243,10 @@ def export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, htm
     export_lists(config, dictionary.lists, html_dir)
     export_gramer(config, dictionary.gramer, html_dir)
     export_verbs(config, dictionary.gramer['verb'], html_dir)
-    export_examples(copy.deepcopy(dictionary.all_examples), extra_examples, dictionary.pages['ladino'], html_dir)
+    export_examples(copy.deepcopy(dictionary.all_examples), extra_examples, dictionary.pages['ladino'], sound_people, html_dir)
     export_markdown_pages(config, path_to_repo, html_dir)
 
-    export_dictionary_pages(dictionary.pages, sounds, html_dir)
+    export_dictionary_pages(dictionary.pages, html_dir)
     export_to_hunspell(dictionary.word_mapping, html_dir)
 
 def export_lists_html_page(config, html_dir):
@@ -294,13 +293,14 @@ def words_to_url(words):
     plain = re.sub(r'\s+', '-', plain)
     return plain
 
-def export_examples(all_examples, extra_examples, words, html_dir):
+def export_examples(all_examples, extra_examples, words, sound_people, html_dir):
     if not all_examples:
         return
     target = 'egzempios'
     examples_dir = os.path.join(html_dir, target)
     os.makedirs(examples_dir, exist_ok=True)
     all_examples.sort(key=lambda ex: ex['example']['ladino'])
+    sounds = {}
     for example in all_examples:
         example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
 
@@ -309,6 +309,11 @@ def export_examples(all_examples, extra_examples, words, html_dir):
         example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
         if 'bozes' in example['example']:
             example['url'] = words_to_url(example['example']['ladino'])
+            for sound in example['example']['bozes']:
+                person = sound['person']
+                if person not in sounds:
+                    sounds[person] = []
+                sounds[person].append(example)
 
             render(
                 template="example.html",
@@ -318,6 +323,17 @@ def export_examples(all_examples, extra_examples, words, html_dir):
                 example=example,
             )
 
+    for person, examples in sounds.items():
+        render(
+            template="examples_with_sound.html",
+            filename=os.path.join(target, person + '.html'),
+
+            title=f'Egzempios kon la boz de {sound_people[person]["nombre"]}',
+            sounds=sounds,
+            person=sound_people[person],
+            page=target,
+            examples=examples,
+        )
 
     #print(all_examples)
     render(
@@ -325,6 +341,8 @@ def export_examples(all_examples, extra_examples, words, html_dir):
         filename=os.path.join(target, 'index.html'),
 
         title='Egzempios',
+        sounds=sounds,
+        people=sound_people,
         page=target,
         all_examples=all_examples,
         extra_examples=extra_examples,
@@ -372,7 +390,7 @@ def export_whatsapp(messages, words, html_dir):
     )
     for idx, message in enumerate(messages):
         teksto = copy.deepcopy(message['teksto'])
-        print(teksto)
+        #print(teksto)
         for entry in teksto:
             text = link_words(entry['ladino'], words)
             text = text.replace("\n", "<br>")

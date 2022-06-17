@@ -1,0 +1,13 @@
+{% include 'incl/header.html' %}
+
+    <h1 class="title">{{ title }}</h1>
+    <div>{{person.titulo}}</div>
+    <div class="content">
+      <ul>
+         {% for example in examples %}
+           <li><a href="/egzempios/{{example['url']}}">{{ example['example']['ladino'] }}</a></li>
+         {% endfor %}
+      </ul>
+    </div>
+
+{% include 'incl/footer.html' %}

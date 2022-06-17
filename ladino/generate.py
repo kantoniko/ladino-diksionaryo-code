@@ -6,6 +6,7 @@ import logging
 import os
 import sys
 import datetime
+from yaml import safe_load
 
 import ladino.common
 from ladino.load import load_dictionary, load_examples, load_config
@@ -68,15 +69,13 @@ def main():
         extra_examples = load_examples(os.path.join(path_to_repo, 'examples'))
         logging.info(dictionary.count)
 
-    sounds = None
-    #if args.sounds:
-    #    sys.path.insert(0, args.sounds)
-    #    from ladino.sounds import load_sounds
-    #    sounds = load_sounds()
-    #print(sounds)
+    sound_people = {}
+    if args.sounds:
+        with open(os.path.join(args.sounds, 'people.yaml')) as fh:
+            sound_people = safe_load(fh)
 
     if args.all:
-        export_to_html(config, dictionary, extra_examples, sounds, path_to_repo, args.html, whatsapp=args.whatsapp, unafraza=args.unafraza, pretty=args.pretty)
+        export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, args.html, whatsapp=args.whatsapp, unafraza=args.unafraza, pretty=args.pretty)
         create_sitemap(args.html)
 
 
