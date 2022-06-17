@@ -293,19 +293,9 @@ def words_to_url(words):
     plain = re.sub(r'\s+', '-', plain)
     return plain
 
-def export_examples(all_examples, extra_examples, words, sound_people, html_dir):
-    if not all_examples:
-        return
-    target = 'egzempios'
-    examples_dir = os.path.join(html_dir, target)
-    os.makedirs(examples_dir, exist_ok=True)
-    all_examples.sort(key=lambda ex: ex['example']['ladino'])
-    sounds = {}
-    for example in all_examples:
-        example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
 
-    extra_examples.sort(key=lambda ex: ex['example']['ladino'])
-    for example in extra_examples:
+def prepare_examples(examples, sounds, words, sound_people, target):
+    for example in examples:
         example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
         if 'bozes' in example['example']:
             example['url'] = words_to_url(example['example']['ladino'])
@@ -323,6 +313,20 @@ def export_examples(all_examples, extra_examples, words, sound_people, html_dir)
                 title='Egzempio',
                 example=example,
             )
+
+def export_examples(all_examples, extra_examples, words, sound_people, html_dir):
+    if not all_examples:
+        return
+    target = 'egzempios'
+    examples_dir = os.path.join(html_dir, target)
+    os.makedirs(examples_dir, exist_ok=True)
+    all_examples.sort(key=lambda ex: ex['example']['ladino'])
+    sounds = {}
+    for example in all_examples:
+        example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
+
+    extra_examples.sort(key=lambda ex: ex['example']['ladino'])
+    prepare_examples(extra_examples, sounds, words, sound_people, target)
 
     for person, examples in sounds.items():
         render(
