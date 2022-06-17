@@ -23,9 +23,10 @@
          {% for example in extra_examples %}
            <li>
              {% if example['url'] %}
-             <a href="/egzempios/{{example['url']}}">🖱️</a>
-             {% endif %}
+             <a href="/egzempios/{{example['url']}}">{{ example['example']['ladino'] }}</a>
+             {% else %}
              {{ example['example']['ladino_html'] | safe }}
+             {% endif %}
              <a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/examples/{{ example['source'] }}">📝</a>
            </li>
          {% endfor %}
