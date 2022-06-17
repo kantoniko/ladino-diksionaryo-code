@@ -326,6 +326,7 @@ def export_examples(all_examples, extra_examples, words, sound_people, html_dir)
         example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
 
     extra_examples.sort(key=lambda ex: ex['example']['ladino'])
+    prepare_examples(all_examples, sounds, words, sound_people, target)
     prepare_examples(extra_examples, sounds, words, sound_people, target)
 
     for person, examples in sounds.items():
