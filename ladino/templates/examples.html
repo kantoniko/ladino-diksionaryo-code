@@ -14,7 +14,13 @@
       <h2>Egzempios</h2>
       <ul>
          {% for example in all_examples %}
-           <li>{{ example['example']['ladino_html'] | safe }} <a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/words/{{ example['source'] }}">📝</a></li>
+           <li>
+             {% if example['url'] %}
+               <a href="/egzempios/{{example['url']}}">{{ example['example']['ladino'] }}</a>
+             {% else %}
+               {{ example['example']['ladino_html'] | safe }}
+               <a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/words/{{ example['source'] }}">📝</a></li>
+             {% endif %}
          {% endfor %}
       </ul>
       {%- if extra_examples -%}
@@ -23,11 +29,11 @@
          {% for example in extra_examples %}
            <li>
              {% if example['url'] %}
-             <a href="/egzempios/{{example['url']}}">{{ example['example']['ladino'] }}</a>
+               <a href="/egzempios/{{example['url']}}">{{ example['example']['ladino'] }}</a>
              {% else %}
-             {{ example['example']['ladino_html'] | safe }}
+               {{ example['example']['ladino_html'] | safe }}
+               <a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/examples/{{ example['source'] }}">📝</a>
              {% endif %}
-             <a href="https://github.com/szabgab/ladino-diksionaryo-data/blob/main/examples/{{ example['source'] }}">📝</a>
            </li>
          {% endfor %}
       </ul>
