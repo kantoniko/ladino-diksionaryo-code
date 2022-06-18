@@ -567,39 +567,7 @@ def export_gramer(config, gramer, html_dir):
 def export_verbs(config, verbs, html_dir):
     verbs_dir = os.path.join(html_dir, 'verbos')
     os.makedirs(verbs_dir, exist_ok=True)
-    irregulars = [
-            'aver',
-            'azer',
-            'dar',
-            'dever',
-            'dizir',
-            'doler',
-            'entender',
-            'estar',
-            'fuyir',
-            'goler',
-            'inchir',
-            'ir',
-            'kaver',
-            'kayer',
-            'kerer',
-            'konoser',
-            'kozer',
-            'kuzir',
-            'murir',
-            'oyir',
-            'poder',
-            'pueder',
-            'ser',
-            'salir',
-            'saver',
-            'servir',
-            'sintir',
-            'tener',
-            'trayer',
-            'ver',
-            'vinir',
-        ]
+    irregulars = config['verbos-iregolares']
     for verb in verbs:
         ladino = verb['versions'][0]['ladino']
         data = verb['conjugations']
