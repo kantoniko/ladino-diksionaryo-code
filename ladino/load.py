@@ -213,8 +213,28 @@ def add_conjugation(verb, irregulars):
     ladino = verb['versions'][0]['ladino']
     #verb['conjugations']['infinito'] = verb['versions'][0]['ladino'],
     if ladino not in irregulars:
+        root = ladino[0:-2]
+
+        if ladino.endswith('ar'):
+            if 'prezente' not in verb['conjugations']:
+                verb['conjugations']['prezente'] = {
+                    'yo':       { 'translations': {}, 'ladino': root + 'o' },
+                    'tu':       { 'translations': {}, 'ladino': root + 'as' },
+                    'el':       { 'translations': {}, 'ladino': root + 'a' },
+                    'mozotros': { 'translations': {}, 'ladino': root + 'amos' },
+                    'vozotros': { 'translations': {}, 'ladino': root + 'ash' }, # ásh
+                    'eyos':     { 'translations': {}, 'ladino': root + 'an' },
+                }
+                verb['conjugations']['pasado'] = {
+                    'yo':       { 'translations': {}, 'ladino': root + 'i' },   # í
+                    'tu':       { 'translations': {}, 'ladino': root + 'ates' },
+                    'el':       { 'translations': {}, 'ladino': root + 'o' },  # ó
+                    'mozotros': { 'translations': {}, 'ladino': root + 'imos' },
+                    'vozotros': { 'translations': {}, 'ladino': root + 'atesh' },
+                    'eyos':     { 'translations': {}, 'ladino': root + 'aron' },
+                }
+
         if ladino.endswith('er'):
-            root = ladino[0:-2]
             if 'prezente' not in verb['conjugations']:
                 verb['conjugations']['prezente'] = {
                     'yo':       { 'translations': {}, 'ladino': root + 'o' },
@@ -224,9 +244,36 @@ def add_conjugation(verb, irregulars):
                     'vozotros': { 'translations': {}, 'ladino': root + 'esh' }, # ésh
                     'eyos':     { 'translations': {}, 'ladino': root + 'en' },
                 }
-            #print(verb)
-            #print('-----')
-            #exit()
+            if 'pasado' not in verb['conjugations']:
+                verb['conjugations']['pasado'] = {
+                    'yo':       { 'translations': {}, 'ladino': root + 'i' },   # í
+                    'tu':       { 'translations': {}, 'ladino': root + 'ites' },
+                    'el':       { 'translations': {}, 'ladino': root + 'io' },  # ió
+                    'mozotros': { 'translations': {}, 'ladino': root + 'imos' },
+                    'vozotros': { 'translations': {}, 'ladino': root + 'itesh' },
+                    'eyos':     { 'translations': {}, 'ladino': root + 'ieron' },
+                }
+
+        if ladino.endswith('ir'):
+            if 'prezente' not in verb['conjugations']:
+                verb['conjugations']['prezente'] = {
+                    'yo':       { 'translations': {}, 'ladino': root + 'o' },
+                    'tu':       { 'translations': {}, 'ladino': root + 'es' },
+                    'el':       { 'translations': {}, 'ladino': root + 'e' },
+                    'mozotros': { 'translations': {}, 'ladino': root + 'imos' },
+                    'vozotros': { 'translations': {}, 'ladino': root + 'ish' }, # ísh
+                    'eyos':     { 'translations': {}, 'ladino': root + 'en' },
+                }
+            if 'pasado' not in verb['conjugations']:
+                verb['conjugations']['pasado'] = {
+                    'yo':       { 'translations': {}, 'ladino': root + 'i' },   # í
+                    'tu':       { 'translations': {}, 'ladino': root + 'ites' },
+                    'el':       { 'translations': {}, 'ladino': root + 'io' },  # ió
+                    'mozotros': { 'translations': {}, 'ladino': root + 'imos' },
+                    'vozotros': { 'translations': {}, 'ladino': root + 'itesh' },
+                    'eyos':     { 'translations': {}, 'ladino': root + 'ieron' },
+                }
+
 
 
 def add_word(word_mapping, source_language, target_language, source_word, target_words):
