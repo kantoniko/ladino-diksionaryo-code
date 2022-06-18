@@ -114,6 +114,8 @@ def load_dictionary(config, path_to_dictionary):
     logging.info(f"Path to dictionary: '{path_to_dictionary}'")
     dictionary = Dictionary(config)
 
+    irregulars = config['verbos-iregolares']
+
     files = os.listdir(path_to_dictionary)
     for filename in files:
         path = os.path.join(path_to_dictionary, filename)
@@ -178,6 +180,7 @@ def load_dictionary(config, path_to_dictionary):
         conjugations = config['tiempos']
         pronouns = config['pronombres']
         if 'conjugations' in data:
+            add_conjugation(data, irregulars)
             for verb_time, conjugation in data['conjugations'].items():
                 if verb_time not in conjugations:
                     raise LadinoError(f"Verb conjugation time '{verb_time}' is no recogrnized in '{filename}'")
@@ -191,6 +194,7 @@ def load_dictionary(config, path_to_dictionary):
                     if 'translations' in version:
                         make_them_list(version['translations'], filename)
                     dictionary.words.append(version)
+
     #print(dictionary.words)
     #print(dictionary.all_examples[0])
     for cat in dictionary.categories.keys():
@@ -204,6 +208,26 @@ def load_dictionary(config, path_to_dictionary):
     collect_data(dictionary)
 
     return dictionary
+
+def add_conjugation(verb, irregulars):
+    ladino = verb['versions'][0]['ladino']
+    #verb['conjugations']['infinito'] = verb['versions'][0]['ladino'],
+    if ladino not in irregulars:
+        if ladino.endswith('er'):
+            root = ladino[0:-2]
+            if 'prezente' not in verb['conjugations']:
+                verb['conjugations']['prezente'] = {
+                    'yo':       { 'translations': {}, 'ladino': root + 'o' },
+                    'tu':       { 'translations': {}, 'ladino': root + 'es' },
+                    'el':       { 'translations': {}, 'ladino': root + 'e' },
+                    'mozotros': { 'translations': {}, 'ladino': root + 'emos' },
+                    'vozotros': { 'translations': {}, 'ladino': root + 'esh' }, # ésh
+                    'eyos':     { 'translations': {}, 'ladino': root + 'en' },
+                }
+            #print(verb)
+            #print('-----')
+            #exit()
+
 
 def add_word(word_mapping, source_language, target_language, source_word, target_words):
     if target_language not in word_mapping[source_language][source_word]:
@@ -230,7 +254,7 @@ def add_ladino_word(original_word, accented_word, entry, dictionary):
     if word not in dictionary.pages[source_language]:
         dictionary.pages[source_language][word] = []
     dictionary.pages[source_language][word].append(entry)
-    dictionary.pages[source_language][word].sort(key=lambda x: (x['ladino'], x['translations']['english'][0] if x['translations']['english'] else ''))
+    dictionary.pages[source_language][word].sort(key=lambda x: (x['ladino'], x['translations']['english'][0] if x['translations'].get('english') else ''))
 
     if accented_word and accented_word != word:
         add_word(dictionary.word_mapping, source_language, target_language='accented', source_word=word, target_words=[accented_word])
