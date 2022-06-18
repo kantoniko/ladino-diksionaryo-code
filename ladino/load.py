@@ -225,6 +225,16 @@ def add_conjugation(verb, irregulars):
                     'vozotros': { 'translations': {}, 'ladino': root + 'ash' }, # ásh
                     'eyos':     { 'translations': {}, 'ladino': root + 'an' },
                 }
+            if 'imperfekto' not in verb['conjugations']:
+                verb['conjugations']['imperfekto'] = {
+                    'yo':       { 'translations': {}, 'ladino': root + 'ava' },
+                    'tu':       { 'translations': {}, 'ladino': root + 'avas' },
+                    'el':       { 'translations': {}, 'ladino': root + 'ava' },
+                    'mozotros': { 'translations': {}, 'ladino': root + 'avamos' }, # ávamos
+                    'vozotros': { 'translations': {}, 'ladino': root + 'avash' },
+                    'eyos':     { 'translations': {}, 'ladino': root + 'avan' },
+                }
+            if 'pasado' not in verb['conjugations']:
                 verb['conjugations']['pasado'] = {
                     'yo':       { 'translations': {}, 'ladino': root + 'i' },   # í
                     'tu':       { 'translations': {}, 'ladino': root + 'ates' },
@@ -243,6 +253,15 @@ def add_conjugation(verb, irregulars):
                     'mozotros': { 'translations': {}, 'ladino': root + 'emos' },
                     'vozotros': { 'translations': {}, 'ladino': root + 'esh' }, # ésh
                     'eyos':     { 'translations': {}, 'ladino': root + 'en' },
+                }
+            if 'imperfekto' not in verb['conjugations']:
+                verb['conjugations']['imperfekto'] = {
+                    'yo':       { 'translations': {}, 'ladino': root + 'ia' },    # ía
+                    'tu':       { 'translations': {}, 'ladino': root + 'ias' },   # ías
+                    'el':       { 'translations': {}, 'ladino': root + 'ia' },    # ía
+                    'mozotros': { 'translations': {}, 'ladino': root + 'iamos' }, # íamos
+                    'vozotros': { 'translations': {}, 'ladino': root + 'iash' },  # íash
+                    'eyos':     { 'translations': {}, 'ladino': root + 'ian' },   # ían
                 }
             if 'pasado' not in verb['conjugations']:
                 verb['conjugations']['pasado'] = {
@@ -263,6 +282,15 @@ def add_conjugation(verb, irregulars):
                     'mozotros': { 'translations': {}, 'ladino': root + 'imos' },
                     'vozotros': { 'translations': {}, 'ladino': root + 'ish' }, # ísh
                     'eyos':     { 'translations': {}, 'ladino': root + 'en' },
+                }
+            if 'imperfekto' not in verb['conjugations']:
+                verb['conjugations']['imperfekto'] = {
+                    'yo':       { 'translations': {}, 'ladino': root + 'ia' },    # ía
+                    'tu':       { 'translations': {}, 'ladino': root + 'ias' },   # ías
+                    'el':       { 'translations': {}, 'ladino': root + 'ia' },    # ía
+                    'mozotros': { 'translations': {}, 'ladino': root + 'iamos' }, # íamos
+                    'vozotros': { 'translations': {}, 'ladino': root + 'iash' },  # íash
+                    'eyos':     { 'translations': {}, 'ladino': root + 'ian' },   # ían
                 }
             if 'pasado' not in verb['conjugations']:
                 verb['conjugations']['pasado'] = {
