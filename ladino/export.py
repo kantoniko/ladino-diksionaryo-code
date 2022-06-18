@@ -563,6 +563,24 @@ def export_gramer(config, gramer, html_dir):
         values=config['gramatika'],
     )
 
+def add_conjugation(verb, irregulars):
+    ladino = verb['versions'][0]['ladino']
+    #verb['conjugations']['infinito'] = verb['versions'][0]['ladino'],
+    if ladino not in irregulars:
+        if ladino.endswith('er'):
+            root = ladino[0:-2]
+            if 'prezente' not in verb['conjugations']:
+                verb['conjugations']['prezente'] = {
+                    'yo':   { 'ladino': root + 'o' },
+                    'tu':   { 'ladino': root + 'es' },
+                    'el':   { 'ladino': root + 'e' },
+                    'mozotros':  { 'ladino': root + 'emos' },
+                    'vozotros':  { 'ladino': root + 'ésh' },
+                    'eyos': { 'ladino': root + 'en' },
+                }
+            #print(verb)
+            #print('-----')
+            #exit()
 
 def export_verbs(config, verbs, html_dir):
     verbs_dir = os.path.join(html_dir, 'verbos')
@@ -570,24 +588,8 @@ def export_verbs(config, verbs, html_dir):
     irregulars = config['verbos-iregolares']
     for verb in verbs:
         ladino = verb['versions'][0]['ladino']
-        data = verb['conjugations']
-        #data['infinito'] = verb['versions'][0]['ladino'],
-        if ladino not in irregulars:
-            if ladino.endswith('er'):
-                root = ladino[0:-2]
-                if 'prezente' not in data:
-                    data['prezente'] = {
-                        'yo':   { 'ladino': root + 'o' },
-                        'tu':   { 'ladino': root + 'es' },
-                        'el':   { 'ladino': root + 'e' },
-                        'mozotros':  { 'ladino': root + 'emos' },
-                        'vozotros':  { 'ladino': root + 'ésh' },
-                        'eyos': { 'ladino': root + 'en' },
-                    }
-                #print(verb)
-                #print('-----')
-                #exit()
-        export_json(data, os.path.join(verbs_dir, f'{ladino}.json'))
+        add_conjugation(verb, irregulars)
+        export_json(verb['conjugations'], os.path.join(verbs_dir, f'{ladino}.json'))
         render(
             template="verb.html",
             filename=os.path.join('verbos', f'{ladino}.html'),
