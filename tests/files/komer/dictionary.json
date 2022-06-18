@@ -11,6 +11,21 @@
     },
     "hebrew": {},
     "ladino": {
+        "kome": {
+            "ladino": [
+                "kome"
+            ]
+        },
+        "komemos": {
+            "ladino": [
+                "komemos"
+            ]
+        },
+        "komen": {
+            "ladino": [
+                "komen"
+            ]
+        },
         "komer": {
             "accented": [
                 "komér"
@@ -30,6 +45,21 @@
             ],
             "turkish": [
                 "yemek yemek"
+            ]
+        },
+        "komes": {
+            "ladino": [
+                "komes"
+            ]
+        },
+        "komesh": {
+            "ladino": [
+                "komesh"
+            ]
+        },
+        "komo": {
+            "ladino": [
+                "komo"
             ]
         },
         "kumer": {
