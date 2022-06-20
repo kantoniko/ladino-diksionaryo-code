@@ -18,6 +18,9 @@
        {% if entry.accented -%}
        <tr><td>kon aksan</td><td>{{ entry.accented }}</td></tr>
        {%- endif %}
+       {% if entry.rashi -%}
+       <tr><td>rashi</td><td><span class="rashi">{{ entry.rashi }}</span></td></tr>
+       {%- endif %}
        <tr><td>djenero</td><td>{{ entry.gender }} {{ entry.number }}</td></tr>
        <tr><td>orijin</td><td>{{ entry.origen }}</td></tr>
        {% if entry["alternative-spelling"] %}

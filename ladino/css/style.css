@@ -20,3 +20,7 @@ div[lang="he"] {
     dir: rtl;
     text-align: right;
 }
+.rashi {
+    font-family: 'Noto Rashi Hebrew', serif;
+}
+
