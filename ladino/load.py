@@ -210,6 +210,7 @@ def load_dictionary(config, path_to_dictionary):
     return dictionary
 
 def add_conjugation(verb, irregulars):
+    return;
     ladino = verb['versions'][0]['ladino']
     #verb['conjugations']['infinito'] = verb['versions'][0]['ladino'],
     if ladino not in irregulars:
