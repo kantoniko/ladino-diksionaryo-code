@@ -17,12 +17,8 @@
       <ul>
          {% for example in all_examples %}
            <li>
-             {% if example['url'] %}
-               <a href="/egzempios/{{example['url']}}">{{ example['example']['ladino'] }}</a> 🎧
-             {% else %}
-               {{ example['example']['ladino_html'] | safe }}
-               <a href="https://github.com/djudezmo-org/ladino-diksionaryo-data/blob/main/words/{{ example['source'] }}">📝</a></li>
-             {% endif %}
+             <a href="/egzempios/{{example['url']}}">{{ example['example']['ladino'] }}</a> {% if example['example']['bozes'] %}🎧{% endif %}
+           </li>
          {% endfor %}
       </ul>
       {%- if extra_examples -%}
@@ -30,12 +26,7 @@
       <ul>
          {% for example in extra_examples %}
            <li>
-             {% if example['url'] %}
-               <a href="/egzempios/{{example['url']}}">{{ example['example']['ladino'] }}</a> 🎧
-             {% else %}
-               {{ example['example']['ladino_html'] | safe }}
-               <a href="https://github.com/djudezmo-org/ladino-diksionaryo-data/blob/main/examples/{{ example['source'] }}">📝</a>
-             {% endif %}
+             <a href="/egzempios/{{example['url']}}">{{ example['example']['ladino'] }}</a> {% if example['example']['bozes'] %}🎧{% endif %}
            </li>
          {% endfor %}
       </ul>

@@ -4,7 +4,7 @@ import logging
 import json
 import copy
 
-from ladino.common import LadinoError, languages
+from ladino.common import LadinoError, languages, words_to_url
 
 class Dictionary():
     def __init__(self, config):
@@ -169,6 +169,7 @@ def load_dictionary(config, path_to_dictionary):
                         'example': example,
                         'word': version['ladino'].lower(),
                         'source':  filename,
+                        'url': words_to_url(version['ladino']),
                     })
                 examples = None
             if comments is not None:
@@ -397,6 +398,7 @@ def load_examples(path_to_examples):
                 extra_examples.append({
                     "example": example,
                     "source" : filename,
+                    'url': words_to_url(example['ladino']),
                 })
     #print(extra_examples)
     return extra_examples

@@ -287,18 +287,10 @@ def export_markdown_pages(config, path_to_repo, html_dir):
             content=content,
         )
 
-def words_to_url(words):
-    plain = re.sub(r'[^a-z0-9]', ' ', words.lower())
-    plain = plain.strip()
-    plain = re.sub(r'\s+', '-', plain)
-    return plain
-
-
-def prepare_examples(examples, sounds, words, sound_people, target):
+def prepare_examples(examples, path, sounds, words, sound_people, target):
     for example in examples:
         example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
         if 'bozes' in example['example']:
-            example['url'] = words_to_url(example['example']['ladino'])
             for sound in example['example']['bozes']:
                 person = sound['person']
                 if person in sound_people:
@@ -306,13 +298,19 @@ def prepare_examples(examples, sounds, words, sound_people, target):
                         sounds[person] = []
                     sounds[person].append(example)
 
-            render(
-                template="example.html",
-                filename=os.path.join(target, example['url'] + '.html'),
+        else:
+            if 'silent' not in sounds:
+                sounds['silent'] = []
+            sounds['silent'].append(example)
 
-                title='Egzempio',
-                example=example,
-            )
+        render(
+            template="example.html",
+            filename=os.path.join(target, example['url'] + '.html'),
+            path=path,
+
+            title='Egzempio',
+            example=example,
+        )
 
 def export_examples(all_examples, extra_examples, words, sound_people, html_dir):
     if not all_examples:
@@ -326,22 +324,38 @@ def export_examples(all_examples, extra_examples, words, sound_people, html_dir)
         example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
 
     extra_examples.sort(key=lambda ex: ex['example']['ladino'])
-    prepare_examples(all_examples, sounds, words, sound_people, target)
-    prepare_examples(extra_examples, sounds, words, sound_people, target)
+    prepare_examples(all_examples, 'words', sounds, words, sound_people, target)
+    prepare_examples(extra_examples, 'examples', sounds, words, sound_people, target)
 
     for person, examples in sounds.items():
-        render(
-            template="examples_with_sound.html",
-            filename=os.path.join(target, person + '.html'),
+        if person == 'silent':
+            render(
+                template="examples_with_sound.html",
+                filename=os.path.join(target, person + '.html'),
 
-            title=f'Egzempios kon la boz de {sound_people[person]["nombre"]}',
-            sounds=sounds,
-            person=sound_people[person],
-            page=target,
-            examples=examples,
-        )
+                title=f'Egzempios sin audio',
+                #sounds=sounds,
+                person_titulo='',
+                page=target,
+                examples=examples,
+            )
+
+        else:
+            render(
+                template="examples_with_sound.html",
+                filename=os.path.join(target, person + '.html'),
+
+                title=f'Egzempios kon la boz de {sound_people[person]["nombre"]}',
+                #sounds=sounds,
+                person_titulo=sound_people[person]['titulo'],
+                page=target,
+                examples=examples,
+            )
 
     #print(all_examples)
+    sound_people['silent'] = {
+        'nombre': 'Silent',
+    }
     render(
         template="examples.html",
         filename=os.path.join(target, 'index.html'),

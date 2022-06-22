@@ -2,7 +2,10 @@
 
     <div class="content">
        {{ example['example']['ladino_html'] | safe }}
-        <a href="https://github.com/djudezmo-org/ladino-diksionaryo-data/blob/main/examples/{{ example['source'] }}">📝</a>
+        <a href="https://github.com/djudezmo-org/ladino-diksionaryo-data/blob/main/{{path}}/{{ example['source'] }}">📝</a>
+        {% if example['example']['english'] %}
+        <div lan="en"> {{ example['example']['english'] }}</div>
+        {% endif %}
        {%- for boz in example.example.bozes -%}
          <div>
            <audio controls>
