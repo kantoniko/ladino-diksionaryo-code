@@ -96,3 +96,8 @@ From the yaml files we generate several json files and several static html files
     },
 
 ```
+
+### Rashi fonts
+
+https://fonts.google.com/noto/specimen/Noto+Rashi+Hebrew/about
+
