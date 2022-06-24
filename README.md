@@ -6,13 +6,13 @@ The code behind https://diksionaryo.szabgab.com/
 Clone this project:
 
 ```
-git clone https://github.com/djudezmo-org/ladino-diksionaryo-code.git
+git clone https://github.com/kantoniko/ladino-diksionaryo-code.git
 ```
 
-Clone https://github.com/djudezmo-org/ladino-diksionaryo-data/ using the following command:
+Clone https://github.com/kantoniko/ladino-diksionaryo-data/ using the following command:
 
 ```
-git clone https://github.com/djudezmo-org/ladino-diksionaryo-data.git
+git clone https://github.com/kantoniko/ladino-diksionaryo-data.git
 ```
 
 Alternatively you can clone it in some other place and then add symbolic link so it will be accessible as
