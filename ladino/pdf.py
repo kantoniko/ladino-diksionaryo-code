@@ -23,8 +23,8 @@ def create_pdf(all_words, source, target):
     can.drawString(20, 780, f'Version de {now}')
 
     #can.saveState()
-    hostname = "Puedes deskargar la mueva version de aki: https://diksionaryo.szabgab.com/"
-    hostlink = "https://diksionaryo.szabgab.com/"
+    hostname = "Puedes deskargar la mueva version de aki: https://kantomiko.com/"
+    hostlink = "https://kantoniko.com/"
     fontsize = 12
     fontname = 'Times-Roman'
     fontname_bold = 'Times-Bold'
