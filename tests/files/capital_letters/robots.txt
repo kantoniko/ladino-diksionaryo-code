@@ -1,2 +1,2 @@
-Sitemap: https://kantoniko.com/sitemap.xml
+Sitemap: https://diksionaryo.szabgab.com/sitemap.xml
 User-agent: *
