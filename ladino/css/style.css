@@ -16,6 +16,11 @@ table thead tr th.sort-desc:after {
 	content: "\25be";
 }
 
+html[lang="he"] {
+    dir: rtl;
+    text-align: right;
+}
+
 div[lang="he"] {
     dir: rtl;
     text-align: right;
