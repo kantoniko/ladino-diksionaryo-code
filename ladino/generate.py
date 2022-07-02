@@ -37,6 +37,7 @@ def get_args():
 
     parser.add_argument("--log", action="store_true", help="Additional logging")
     parser.add_argument("--pretty", action="store_true", help="Pretty save json files")
+    parser.add_argument("--limit", type=int, help="Limit number of words")
 
     args = parser.parse_args()
 
@@ -65,7 +66,7 @@ def main():
         path_to_repo = args.dictionary
         config = load_config(path_to_repo)
 
-        dictionary = load_dictionary(config, os.path.join(path_to_repo, 'words'))
+        dictionary = load_dictionary(config, args.limit, os.path.join(path_to_repo, 'words'))
         extra_examples = load_examples(os.path.join(path_to_repo, 'examples'))
         logging.info(dictionary.count)
 

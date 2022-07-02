@@ -110,14 +110,19 @@ def check_and_collect_lists(config, data, dictionary):
         # TODO: add these words to the list of missing words
 
 
-def load_dictionary(config, path_to_dictionary):
+def load_dictionary(config, limit, path_to_dictionary):
     logging.info(f"Path to dictionary: '{path_to_dictionary}'")
     dictionary = Dictionary(config)
 
     irregulars = config['verbos-iregolares']
+    count = 0
 
     files = os.listdir(path_to_dictionary)
     for filename in files:
+        count += 1
+        if limit is not None and count > limit:
+            break
+
         path = os.path.join(path_to_dictionary, filename)
         logging.info(path)
         with open(path) as fh:
