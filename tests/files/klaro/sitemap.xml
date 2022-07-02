@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://kantoniko.com/</loc></url>
-<url><loc>https://kantoniko.com/about</loc></url>
 <url><loc>https://kantoniko.com/dictionaries</loc></url>
 <url><loc>https://kantoniko.com/egzempios/</loc></url>
 <url><loc>https://kantoniko.com/egzempios/klaro</loc></url>
 <url><loc>https://kantoniko.com/egzempios/silent</loc></url>
 <url><loc>https://kantoniko.com/en/</loc></url>
+<url><loc>https://kantoniko.com/en/about</loc></url>
 <url><loc>https://kantoniko.com/english-ladino</loc></url>
 <url><loc>https://kantoniko.com/french-ladino</loc></url>
 <url><loc>https://kantoniko.com/gramer/</loc></url>
@@ -48,6 +48,7 @@
 <url><loc>https://kantoniko.com/origenes/torah-tanah</loc></url>
 <url><loc>https://kantoniko.com/portuguese-ladino</loc></url>
 <url><loc>https://kantoniko.com/spanish-ladino</loc></url>
+<url><loc>https://kantoniko.com/statistika</loc></url>
 <url><loc>https://kantoniko.com/turkish-ladino</loc></url>
 <url><loc>https://kantoniko.com/verbos/</loc></url>
 <url><loc>https://kantoniko.com/words/</loc></url>
