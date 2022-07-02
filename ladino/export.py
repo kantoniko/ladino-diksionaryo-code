@@ -128,6 +128,12 @@ def export_static_pages(html_dir):
                 filename=os.path.join(lang, tmpl),
             )
 
+    tmpl = "echar-lashon.html"
+    render(
+        template=tmpl,
+        filename=tmpl,
+    )
+
 def export_statistics_html_page(count, html_dir):
     logging.info("Export statistics html page")
     render(
