@@ -128,14 +128,14 @@ def export_static_pages(html_dir):
                 filename=os.path.join(lang, tmpl),
             )
 
-def export_about_html_page(count, html_dir):
-    logging.info("Export about html page")
+def export_statistics_html_page(count, html_dir):
+    logging.info("Export statistics html page")
     render(
-        template="about.html",
-        filename="about.html",
+        template="statistika.html",
+        filename="statistika.html",
 
-        title=f"Ladino dictionary - about",
-        page="about",
+        title=f"Statistika",
+        page="statistika",
         count=count,
         start=str(ladino.common.start),
         languages=languages,
@@ -252,7 +252,7 @@ def export_to_html(config, dictionary, extra_examples, sound_people, path_to_rep
     export_static_pages(html_dir)
     export_dictionary_lists(dictionary.pages, html_dir)
     export_json(dictionary.count, os.path.join(html_dir, "count.json"), pretty=pretty)
-    export_about_html_page(dictionary.count, html_dir)
+    export_statistics_html_page(dictionary.count, html_dir)
     export_lists_html_page(config, html_dir)
     export_categories(config, dictionary.categories, html_dir)
     export_origenes(config, dictionary.origenes, html_dir)

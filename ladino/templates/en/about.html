@@ -1,3 +1,4 @@
+{% set title="About Kantoniko, the corner of Ladino" %}
 {% include 'incl/header.html' %}
 
     <h1 class="title">{{ title }}</h1>
@@ -80,53 +81,6 @@
             if we have less than 10 words in the two lists, pick from the pool.
             If there are 10 or more then: 50% pick the first one from the "failed", 25% pick the first from the "ok" list 25% pick from the general pool (till we have a word that is not in the other two lists).
        </p>
-    </div>
-
-    <div class="content">
-      <h2>Statistics</h2>
-       <p>
-           Statistics for the data based on the dictionary from the Ladino community.
-       </p>
-      <table class="table">
-        <thead>
-          <tr><th></th>
-            <th><a href="/words/ladino/">ladino</a></th>
-            {% for language in languages %}
-                 <th><a href="/words/{{ language }}/">{{ language }}</a></th>
-            {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          <tr><th>Words</th>
-                <td>{{ count.dictionary['ladino'].words }}</td>
-            {% for language in languages %}
-                <td>{{ count.dictionary[language].words }}</td>
-            {% endfor %}
-          </tr>
-          <tr><th>Examples</th>
-                <td>{{ count.dictionary['ladino'].examples }}</td>
-            {% for language in languages %}
-                <td>{{ count.dictionary[language].examples }}</td>
-            {% endfor %}
-          </tr>
-        </tbody>
-      </table>
-      <div>
-      {% if count.whatsapp %}
-      <h3>Whatsapp Messages</h3>
-      <table class="table">
-        <thead>
-          <tr><th>All</th><th>With Hebrew</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>{{ count.whatsapp.all }}</td><td>{{ count.whatsapp.hebrew }}</td></tr>
-        </tbody>
-      </table>
-      </div>
-      {% endif %}
-    </div>
-    <div class="content">
-      Generated at {{start}}.<br>
     </div>
 
 {% include 'incl/footer.html' %}

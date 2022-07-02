@@ -1,0 +1,52 @@
+{% include 'incl/header.html' %}
+
+    <h1 class="title">{{ title }}</h1>
+
+    <div class="content">
+      <h2>Palavras i egzempios</h2>
+       <p>
+           Numeros sovre el diksionaryo Ladino.
+       </p>
+      <table class="table">
+        <thead>
+          <tr><th></th>
+            <th><a href="/words/ladino/">ladino</a></th>
+            {% for language in languages %}
+                 <th><a href="/words/{{ language }}/">{{ language }}</a></th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th>Palavras</th>
+                <td>{{ count.dictionary['ladino'].words }}</td>
+            {% for language in languages %}
+                <td>{{ count.dictionary[language].words }}</td>
+            {% endfor %}
+          </tr>
+          <tr><th>Egzempios</th>
+                <td>{{ count.dictionary['ladino'].examples }}</td>
+            {% for language in languages %}
+                <td>{{ count.dictionary[language].examples }}</td>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+      <div>
+      {% if count.whatsapp %}
+      <h3>Mesajes de Whatsapeando</h3>
+      <table class="table">
+        <thead>
+          <tr><th>Todos</th><th>Kon ebreo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>{{ count.whatsapp.all }}</td><td>{{ count.whatsapp.hebrew }}</td></tr>
+        </tbody>
+      </table>
+      </div>
+      {% endif %}
+    </div>
+    <div class="content">
+      Generasion en {{start}}.<br>
+    </div>
+
+{% include 'incl/footer.html' %}
