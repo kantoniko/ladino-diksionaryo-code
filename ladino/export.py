@@ -130,8 +130,6 @@ def export_static_pages(html_dir):
 
 def export_about_html_page(count, html_dir):
     logging.info("Export about html page")
-    end = datetime.datetime.now().replace(microsecond=0)
-    elapsed = (end-ladino.common.start).total_seconds()
     render(
         template="about.html",
         filename="about.html",
@@ -140,7 +138,6 @@ def export_about_html_page(count, html_dir):
         page="about",
         count=count,
         start=str(ladino.common.start),
-        elapsed=elapsed,
         languages=languages,
     )
 
