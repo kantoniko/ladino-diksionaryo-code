@@ -44,7 +44,12 @@ def render(template, filename=None, **args):
     env = Environment(loader=FileSystemLoader(templates_dir), autoescape=True)
     env.filters["yaml2html"] = lambda path: re.sub(r"\.yaml$", ".html", path)
     html_template = env.get_template(template)
-    html = html_template.render(**args)
+    lang = "lad"
+    if filename.startswith("en/"):
+        lang = "en"
+    if filename.startswith("he/"):
+        lang = "he"
+    html = html_template.render(**args, lang=lang)
     with open(os.path.join(html_path, filename), "w") as fh:
         fh.write(html)
     if filename == 'index.html':
