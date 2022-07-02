@@ -52,8 +52,8 @@ def render(template, filename=None, **args):
     html = html_template.render(**args, lang=lang)
     with open(os.path.join(html_path, filename), "w") as fh:
         fh.write(html)
-    if filename == 'index.html':
-        sitemap.append('')
+    if filename.endswith('index.html'):
+        sitemap.append(filename[0:-10])
     elif filename.endswith('.html'):
         sitemap.append(filename[0:-5])
 
