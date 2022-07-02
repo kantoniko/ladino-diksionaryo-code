@@ -110,6 +110,19 @@ def export_dictionary_lists(pages, html_dir):
     )
 
 
+def export_static_pages(html_dir):
+    logging.info("Export English and Hebrew html pages")
+    root = os.path.dirname(os.path.abspath(__file__))
+    templates_dir = os.path.join(root, "templates")
+    for lang in ["en"]:
+        os.makedirs(os.path.join(html_dir, lang), exist_ok=True)
+        for tmpl in os.listdir(os.path.join(templates_dir, lang)):
+            logging.info(tmpl)
+            render(
+                template=os.path.join(lang, tmpl),
+                filename=os.path.join(lang, tmpl),
+            )
+
 def export_about_html_page(count, html_dir):
     logging.info("Export about html page")
     end = datetime.datetime.now().replace(microsecond=0)
@@ -234,6 +247,7 @@ def export_to_html(config, dictionary, extra_examples, sound_people, path_to_rep
 
     create_pdf_dictionaries(dictionary.yaml_files, languages)
 
+    export_static_pages(html_dir)
     export_dictionary_lists(dictionary.pages, html_dir)
     export_json(dictionary.count, os.path.join(html_dir, "count.json"), pretty=pretty)
     export_about_html_page(dictionary.count, html_dir)
