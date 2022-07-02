@@ -102,7 +102,7 @@ def test_one_file(tmpdir, request, name):
 def test_bad(tmpdir, name, expected):
     shutil.copy(os.path.join(root, 'tests', 'files', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     with pytest.raises(Exception) as err:
-        dictionary_source, all_examples = load_dictionary(load_config(real_repo_path), tmpdir)
+        dictionary_source, all_examples = load_dictionary(load_config(real_repo_path), None, tmpdir)
     assert err.type == LadinoError
     assert str(err.value) == expected
 
