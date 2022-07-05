@@ -68,6 +68,7 @@ def test_one_file(tmpdir, request, name):
     shutil.rmtree(os.path.join(html_dir, 'he'))
     os.unlink(os.path.join(html_dir, 'statistika.html')) # has the date of generation in it
     os.unlink(os.path.join(html_dir, 'dictionaries.html')) # has chaning link in it
+    os.unlink(os.path.join(html_dir, 'echar-lashon.html')) # has chaning link in it
     if name != 'good':
         os.unlink(os.path.join(html_dir, 'index.html'))
         os.unlink(os.path.join(html_dir, 'lists.html'))
