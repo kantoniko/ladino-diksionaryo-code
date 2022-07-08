@@ -218,7 +218,7 @@ def export_single_page_dictionaries(word_mapping, html_dir):
 
 
 
-def export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, html_dir, whatsapp=None, unafraza=None, pretty=False):
+def export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, html_dir, whatsapp=None, unafraza=None, pages=None, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
     global html_path
@@ -251,6 +251,7 @@ def export_to_html(config, dictionary, extra_examples, sound_people, path_to_rep
         entries = ufad()
         export_ufad(entries, dictionary.pages['ladino'], html_dir)
 
+
     export_single_page_dictionaries(dictionary.word_mapping, html_dir)
 
     create_pdf_dictionaries(dictionary.yaml_files, languages)
@@ -266,10 +267,26 @@ def export_to_html(config, dictionary, extra_examples, sound_people, path_to_rep
     export_gramer(config, dictionary.gramer, html_dir)
     export_verbs(config, dictionary.gramer['verb'], html_dir)
     export_examples(copy.deepcopy(dictionary.all_examples), extra_examples, dictionary.pages['ladino'], sound_people, html_dir)
-    export_markdown_pages(config, path_to_repo, html_dir)
+    export_listed_pages(config, path_to_repo, html_dir)
+    export_fixed_pages(pages)
 
     export_dictionary_pages(dictionary.pages, html_dir)
     export_to_hunspell(dictionary.word_mapping, html_dir)
+
+
+def export_fixed_pages(pages):
+    logging.info("Export fixed pages")
+    if not pages:
+        return
+    mapping = {
+        'en': 'en',
+    }
+    for source, target in mapping.items():
+        for filename in os.listdir(os.path.join(pages, source)):
+            logging.info(f"Exporting {source}/{filename}")
+            if filename.endswith('.md'):
+                target_file = filename.replace('.md', '.html')
+                export_markdown_page(os.path.join(pages, source, filename), os.path.join(target, target_file))
 
 def export_lists_html_page(config, html_dir):
     render(
@@ -288,10 +305,12 @@ def export_lists_html_page(config, html_dir):
         languages=languages,
     )
 
-
-def export_markdown_pages(config, path_to_repo, html_dir):
+def export_listed_pages(config, path_to_repo, html_dir):
     for source, target in config['pajinas'].items():
-        with open(os.path.join(path_to_repo, 'pajinas', source)) as fh:
+        export_markdown_page(os.path.join(path_to_repo, 'pajinas', source), target)
+
+def export_markdown_page(path_to_md_file, target):
+        with open(path_to_md_file) as fh:
             text = fh.read()
 
         title = 'Pajina'

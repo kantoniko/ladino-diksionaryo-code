@@ -31,6 +31,9 @@ def get_args():
     parser.add_argument(
         "--sounds", help="path to sounds repository",
     )
+    parser.add_argument(
+        "--pages", help="path to fixed pages repository",
+    )
     action = parser.add_mutually_exclusive_group(required=False)
     action.add_argument("--main", action='store_true', help="Create the main page only")
     action.add_argument("--all",  action='store_true', help="Create all the pages")
@@ -76,7 +79,7 @@ def main():
             sound_people = safe_load(fh)
 
     if args.all:
-        export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, args.html, whatsapp=args.whatsapp, unafraza=args.unafraza, pretty=args.pretty)
+        export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, args.html, whatsapp=args.whatsapp, unafraza=args.unafraza, pages=args.pages, pretty=args.pretty)
         create_sitemap(args.html)
 
 
