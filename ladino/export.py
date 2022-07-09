@@ -240,6 +240,7 @@ def export_book(book, html_dir):
         data = safe_load(fh)
 
     pages = []
+    done = False
     for chapter in data['chapters']:
         #print(chapter['titulo'])
         for page in chapter['pajinas']:
@@ -250,8 +251,9 @@ def export_book(book, html_dir):
                 'chapter': chapter['titulo'],
             })
             if page['numero'] == data['publish']:
+                done = True
                 break
-        else:
+        if done:
             break
 
     for idx, page in enumerate(pages):
