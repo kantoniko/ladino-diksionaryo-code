@@ -21,8 +21,8 @@ the subdirectory `ladino-diksionaryo-data` of this project.
 
 ```
 pip install -r requirements.txt
-PYTHONPATH=. python ladino/generate.py --dictionary ladino-diksionaryo-data/ --html docs --all --log
-time PYTHONPATH=. python ladino/generate.py --dictionary ladino-diksionaryo-data/ --html docs --all --log --whatsapp ../ladino-estamos-whatsapeando/ --sounds ../ladino-diksionaryo-sounds/ --unafraza ../ladino-una-fraza-al-diya/ --pages ../ladino-pages --limit 10
+PYTHONPATH=. python ladino/generate.py --dictionary ../ladino-diksionaryo-data/ --html docs --all --log
+time PYTHONPATH=. python ladino/generate.py --dictionary ../ladino-diksionaryo-data/ --html docs --all --log --whatsapp ../ladino-estamos-whatsapeando/ --sounds ../ladino-diksionaryo-sounds/ --unafraza ../ladino-una-fraza-al-diya/ --pages ../ladino-pages --limit 10
 ```
 
 This will generate the static files in the `html` subdrirectory.
