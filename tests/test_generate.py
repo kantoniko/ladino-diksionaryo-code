@@ -9,8 +9,12 @@ from ladino.generate import main
 from ladino.load import load_dictionary, load_config
 from ladino.common import LadinoError
 
+for real_repo_path  in ['ladino-diksionaryo-data', '../ladino-diksionaryo-data']:
+    if os.path.exists(real_repo_path):
+        break
+else:
+    raise Exception("Could not find path to ladino-diksionaryo-data")
 
-real_repo_path = 'ladino-diksionaryo-data'
 data_path  = os.path.join(real_repo_path, 'words')
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 examples_path  = os.path.join(root, 'tests', 'files', 'good_source')
