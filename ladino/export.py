@@ -283,9 +283,9 @@ def export_fixed_pages(pages):
     logging.info("Export fixed pages")
     if not pages:
         return
-    mapping = {
-        'en': 'en',
-    }
+
+    with open(os.path.join(pages, 'mapping.json')) as fh:
+        mapping = json.load(fh)
     for source, target in mapping.items():
         for filename in os.listdir(os.path.join(pages, source)):
             logging.info(f"Exporting {source}/{filename}")
