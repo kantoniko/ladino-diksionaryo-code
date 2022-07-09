@@ -7,6 +7,7 @@ import shutil
 import re
 import datetime
 import sys
+from yaml import safe_load
 
 import markdown
 from jinja2 import Environment, FileSystemLoader
@@ -221,9 +222,58 @@ def export_single_page_dictionaries(word_mapping, html_dir):
             words=word_mapping['ladino'],
         )
 
+def export_books(books, html_dir):
+    if books:
+        processed = []
+        for book in books:
+            processed.append(export_book(book, html_dir))
+
+        render(
+            template="books_index_page.html",
+            filename=os.path.join('livros', "index.html"),
+            title=f"Livros",
+            books=processed,
+            )
+
+def export_book(book, html_dir):
+    with open(os.path.join(book, 'book.yaml')) as fh:
+        data = safe_load(fh)
+
+    pages = []
+    for chapter in data['chapters']:
+        #print(chapter['titulo'])
+        for page in chapter['pajinas']:
+            #print(page['numero'])
+            pages.append({
+                'numero': page['numero'],
+                'teksto': page['teksto'],
+                'chapter': chapter['titulo'],
+            })
+            if page['numero'] == data['publish']:
+                break
+        else:
+            break
+
+    for idx, page in enumerate(pages):
+        render(
+            template="book_page.html",
+            filename=os.path.join('livros', data['path'], str(page['numero']) + ".html"),
+            html_text=page['teksto'].replace("\n", "<br>"),
+            prev_page=(pages[idx-1]['numero'] if idx > 0 else "."),
+            next_page=(pages[idx+1]['numero'] if idx < len(pages)-1 else "."),
+            footer=data['footer'],
+            title=f"{data['titulo']} - {page['chapter']} - {page['numero']}",
+        )
+    render(
+        template="book_index_page.html",
+        filename=os.path.join('livros', data['path'], "index.html"),
+        title=f"{data['titulo']}",
+        data=data,
+        )
+    return {'path': data['path'], 'titulo': data['titulo']}
 
 
-def export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, html_dir, whatsapp=None, unafraza=None, pages=None, pretty=False):
+def export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, html_dir, whatsapp=None, unafraza=None, pages=None, books=None, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
     global html_path
@@ -237,6 +287,8 @@ def export_to_html(config, dictionary, extra_examples, sound_people, path_to_rep
     sitemap = []
     generate_main_page(html_dir)
     export_missing_words(dictionary.yaml_files, languages)
+
+    export_books(books, html_dir)
 
     if whatsapp:
         sys.path.insert(0, whatsapp)

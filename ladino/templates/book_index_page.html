@@ -1,0 +1,37 @@
+{% include 'incl/header.html' %}
+
+  <h1 class="title">{{ title }}</h1>
+  <div class="content">
+        {{ data['teksto'] | safe }}
+  </div>
+
+  <div class="content">
+    <ul>
+        {% set ns = namespace(publish=True) %}
+        {% for chapter in data['chapters'] %}
+            {% if ns.publish %}
+                <li>{{ chapter['titulo'] }}
+                    <ul>
+                        {% for page in chapter['pajinas'] %}
+                            {% if ns.publish %}
+                                <li><a href="{{page['numero']}}">{{page['numero']}}</a></li>
+                                {% if page['numero'] == data['publish'] %}
+                                    {% set ns.publish = False %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+  </div>
+
+  <div class="content">
+    <hr>
+    {{data['footer'] | safe}}
+    <hr>
+  </div>
+
+
+{% include 'incl/footer.html' %}

@@ -1,0 +1,20 @@
+{% include 'incl/header.html' %}
+
+  <h1 class="title">{{ title }}</h1>
+  <div class="content">
+       {{html_text|safe}}
+  </div>
+
+  <div class="content">
+  <a class="button" href="{{prev_page}}">⬅️</a>
+  <a class="button" href=".">⬆️</a>
+  <a class="button" href="{{next_page}}">➡️</a>
+  </div>
+
+  <div class="content">
+    <hr>
+    {{footer | safe}}
+    <hr>
+  </div>
+
+{% include 'incl/footer.html' %}

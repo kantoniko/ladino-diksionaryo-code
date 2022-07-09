@@ -1,0 +1,13 @@
+{% include 'incl/header.html' %}
+
+  <h1 class="title">{{ title }}</h1>
+  <div class="content">
+    <ul>
+        {% for book in books %}
+            <li><a href="{{book['path']}}/">{{book['titulo']}}</a></li>
+        {% endfor %}
+    </ul>
+  </div>
+
+
+{% include 'incl/footer.html' %}
