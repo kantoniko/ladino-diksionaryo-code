@@ -50,7 +50,12 @@ def render(template, filename=None, **args):
     if filename.startswith("he/"):
         lang = "he"
     html = html_template.render(**args, lang=lang)
-    with open(os.path.join(html_path, filename), "w") as fh:
+
+    full_path = os.path.join(html_path, filename)
+    dir_path = os.path.dirname(full_path)
+    os.makedirs(dir_path, exist_ok=True)
+
+    with open(full_path, "w") as fh:
         fh.write(html)
     if filename.endswith('index.html'):
         sitemap.append(filename[0:-10])
