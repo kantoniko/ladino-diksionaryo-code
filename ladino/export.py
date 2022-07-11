@@ -161,7 +161,7 @@ def export_main_html_page(html_dir):
         template="index.html",
         filename="index.html",
 
-        title=f"Ladino dictionary",
+        title=f"El kantoniko de Ladino",
         page="index",
     )
 
