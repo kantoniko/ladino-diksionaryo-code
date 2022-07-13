@@ -140,6 +140,13 @@ def export_static_pages(html_dir):
         filename=tmpl,
     )
 
+    tmpl = "404.html"
+    render(
+        template=tmpl,
+        filename=tmpl,
+    )
+
+
 def export_statistics_html_page(count, html_dir):
     logging.info("Export statistics html page")
     render(
