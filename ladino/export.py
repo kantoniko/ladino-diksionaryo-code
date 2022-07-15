@@ -284,7 +284,7 @@ def export_book(book, html_dir):
     return {'path': data['path'], 'titulo': data['titulo']}
 
 
-def export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, html_dir, whatsapp=None, unafraza=None, pages=None, books=None, pretty=False):
+def export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, html_dir, whatsapp=None, unafraza=None, pages=None, books=None, ladinadores=None, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
     global html_path
@@ -300,6 +300,7 @@ def export_to_html(config, dictionary, extra_examples, sound_people, path_to_rep
     export_missing_words(dictionary.yaml_files, languages)
 
     export_books(books, html_dir)
+    export_ladinadores(ladinadores)
 
     if whatsapp:
         sys.path.insert(0, whatsapp)
@@ -340,6 +341,32 @@ def export_to_html(config, dictionary, extra_examples, sound_people, path_to_rep
 
     export_dictionary_pages(dictionary.pages, html_dir)
     export_to_hunspell(dictionary.word_mapping, html_dir)
+
+def export_ladinadores(ladinadores):
+    logging.info("Export Ladinadores")
+    if ladinadores is None:
+        return
+
+    yaml_file = os.path.join(ladinadores, 'afishes.yaml')
+    with open(yaml_file) as fh:
+        data = safe_load(fh)
+
+    render(
+        template="afishes.html",
+        filename="afishes/index.html",
+
+        title=f"Afishes de Los Ladinadores",
+        data=data,
+    )
+
+    for entry in data:
+        render(
+            template="afish.html",
+            filename=os.path.join("afishes", entry['img'][0:-4] + '.html'),
+
+            title=entry['title'],
+            entry=entry,
+        )
 
 
 def export_fixed_pages(pages):

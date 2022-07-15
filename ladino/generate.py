@@ -34,6 +34,7 @@ def get_args():
     parser.add_argument(
         "--pages", help="path to fixed pages repository",
     )
+    parser.add_argument("--ladinadores", help="path to Ladinadores repository")
     parser.add_argument(
         "--books", help="pathes to repository of a book", nargs="+",
     )
@@ -82,7 +83,7 @@ def main():
             sound_people = safe_load(fh)
 
     if args.all:
-        export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, args.html, whatsapp=args.whatsapp, unafraza=args.unafraza, pages=args.pages, books=args.books, pretty=args.pretty)
+        export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, args.html, whatsapp=args.whatsapp, unafraza=args.unafraza, pages=args.pages, books=args.books, ladinadores=args.ladinadores, pretty=args.pretty)
         create_sitemap(args.html)
 
 

@@ -1,0 +1,19 @@
+{% include 'incl/header.html' %}
+
+    <h1 class="title">{{ title }}</h1>
+
+    <div class="content">
+       Estos afishes de Also Sevi se publikan primera vez en el grupo de Facebook: <a href="https://www.facebook.com/groups/ladinadores/">Los Ladinadores</a>.
+    </div>
+
+    <div class="content">
+      <ul>
+        {% for entry in data %}
+          <li><a href="/afishes/{{entry.img[0:-4]}}">{{entry.title}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+
+{% include 'incl/footer.html' %}
+
