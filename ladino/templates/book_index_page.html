@@ -10,7 +10,7 @@
         {% set ns = namespace(publish=True) %}
         {% for chapter in data['chapters'] %}
             {% if ns.publish %}
-                <li>{{ chapter['titulo'] }}
+                <li>{{ chapter['titolo'] }}
                     <ul>
                         {% for page in chapter['pajinas'] %}
                             {% if ns.publish %}

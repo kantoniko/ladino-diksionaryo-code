@@ -249,13 +249,13 @@ def export_book(book, html_dir):
     pages = []
     done = False
     for chapter in data['chapters']:
-        #print(chapter['titulo'])
+        #print(chapter['titolo'])
         for page in chapter['pajinas']:
             #print(page['numero'])
             pages.append({
                 'numero': page['numero'],
                 'teksto': page['teksto'],
-                'chapter': chapter['titulo'],
+                'chapter': chapter['titolo'],
             })
             if page['numero'] == data['publish']:
                 done = True
@@ -271,17 +271,17 @@ def export_book(book, html_dir):
             prev_page=(pages[idx-1]['numero'] if idx > 0 else "."),
             next_page=(pages[idx+1]['numero'] if idx < len(pages)-1 else "."),
             footer=data['footer'],
-            title=f"{data['titulo']} - {page['chapter']} - {page['numero']}",
+            title=f"{data['titolo']} - {page['chapter']} - {page['numero']}",
         )
     render(
         template="book_index_page.html",
         filename=os.path.join('livros', data['path'], "index.html"),
-        title=f"{data['titulo']}",
+        title=f"{data['titolo']}",
         data=data,
         prev_page=pages[-1]['numero'],
         next_page=pages[0]['numero'],
         )
-    return {'path': data['path'], 'titulo': data['titulo']}
+    return {'path': data['path'], 'titolo': data['titolo']}
 
 
 def export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, html_dir, whatsapp=None, unafraza=None, pages=None, books=None, ladinadores=None, pretty=False):
