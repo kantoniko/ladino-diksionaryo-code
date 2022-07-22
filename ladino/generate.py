@@ -74,8 +74,11 @@ def main():
         config = load_config(path_to_repo)
 
         dictionary = load_dictionary(config, args.limit, os.path.join(path_to_repo, 'words'))
-        extra_examples = load_examples(os.path.join(path_to_repo, 'examples'))
         logging.info(dictionary.count)
+
+    if args.dictionary:
+        path_to_repo = args.dictionary
+        extra_examples = load_examples(os.path.join(path_to_repo, 'examples'))
 
     sound_people = {}
     if args.sounds:
