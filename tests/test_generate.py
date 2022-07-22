@@ -6,7 +6,7 @@ import pytest
 import glob
 
 from ladino.generate import main
-from ladino.load import load_dictionary, load_config
+from ladino.load.dictionary import load_dictionary, load_config
 from ladino.common import LadinoError
 
 for real_repo_path  in ['ladino-diksionaryo-data', '../ladino-diksionaryo-data']:

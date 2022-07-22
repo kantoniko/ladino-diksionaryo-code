@@ -9,7 +9,8 @@ import datetime
 from yaml import safe_load
 
 import ladino.common
-from ladino.load import load_dictionary, load_examples, load_config
+from ladino.load.dictionary import load_dictionary, load_config
+from ladino.load.examples import load_examples
 from ladino.export import generate_main_page, export_to_html, create_sitemap
 
 ladino.common.start = datetime.datetime.now().replace(microsecond=0)

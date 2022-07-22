@@ -392,20 +392,3 @@ def collect_data(dictionary):
             add_translated_words(language, entry, dictionary)
 
 
-def load_examples(path_to_examples):
-    extra_examples = []
-    if os.path.exists(path_to_examples):
-        for filename in os.listdir(path_to_examples):
-            with open(os.path.join(path_to_examples, filename)) as fh:
-                examples = safe_load(fh)
-            #print(examples)
-            for example in examples['examples']:
-                extra_examples.append({
-                    "example": example,
-                    "source" : filename,
-                    'url': words_to_url(example['ladino']),
-                })
-    #print(extra_examples)
-    return extra_examples
-
-
