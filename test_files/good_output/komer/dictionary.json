@@ -1,7 +1,15 @@
 {
     "english": {
         "eat": [
-            "komer"
+            "komemos",
+            "komen",
+            "komer",
+            "komes",
+            "komesh",
+            "komo"
+        ],
+        "eats": [
+            "kome"
         ]
     },
     "french": {
@@ -11,6 +19,39 @@
     },
     "hebrew": {},
     "ladino": {
+        "kome": {
+            "english": [
+                "eats"
+            ],
+            "ladino": [
+                "kome"
+            ],
+            "spanish": [
+                "come"
+            ]
+        },
+        "komemos": {
+            "english": [
+                "eat"
+            ],
+            "ladino": [
+                "komemos"
+            ],
+            "spanish": [
+                "comemos"
+            ]
+        },
+        "komen": {
+            "english": [
+                "eat"
+            ],
+            "ladino": [
+                "komen"
+            ],
+            "spanish": [
+                "comen"
+            ]
+        },
         "komer": {
             "accented": [
                 "komér"
@@ -30,6 +71,39 @@
             ],
             "turkish": [
                 "yemek yemek"
+            ]
+        },
+        "komes": {
+            "english": [
+                "eat"
+            ],
+            "ladino": [
+                "komes"
+            ],
+            "spanish": [
+                "comes"
+            ]
+        },
+        "komesh": {
+            "english": [
+                "eat"
+            ],
+            "ladino": [
+                "komesh"
+            ],
+            "spanish": [
+                "comeis"
+            ]
+        },
+        "komo": {
+            "english": [
+                "eat"
+            ],
+            "ladino": [
+                "komo"
+            ],
+            "spanish": [
+                "como"
             ]
         },
         "kumer": {
@@ -56,8 +130,26 @@
     },
     "portuguese": {},
     "spanish": {
+        "come": [
+            "kome"
+        ],
+        "comeis": [
+            "komesh"
+        ],
+        "comemos": [
+            "komemos"
+        ],
+        "comen": [
+            "komen"
+        ],
         "comer": [
             "komer"
+        ],
+        "comes": [
+            "komes"
+        ],
+        "como": [
+            "komo"
         ]
     },
     "turkish": {

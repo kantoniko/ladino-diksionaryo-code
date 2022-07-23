@@ -4,7 +4,7 @@
             "klaro"
         ],
         "eat": [
-            "komer"
+            "mykomer"
         ],
         "istanbul": [
             "Estambol"
@@ -18,7 +18,7 @@
     },
     "french": {
         "manger": [
-            "komer"
+            "mykomer"
         ]
     },
     "hebrew": {},
@@ -51,27 +51,6 @@
                 "klaro"
             ]
         },
-        "komer": {
-            "accented": [
-                "komér"
-            ],
-            "english": [
-                "eat"
-            ],
-            "french": [
-                "manger"
-            ],
-            "ladino": [
-                "komer"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "comer"
-            ],
-            "turkish": [
-                "yemek yemek"
-            ]
-        },
         "kumer": {
             "accented": [
                 "kumér"
@@ -84,6 +63,27 @@
             ],
             "ladino": [
                 "kumer"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "comer"
+            ],
+            "turkish": [
+                "yemek yemek"
+            ]
+        },
+        "mykomer": {
+            "accented": [
+                "mykomér"
+            ],
+            "english": [
+                "eat"
+            ],
+            "french": [
+                "manger"
+            ],
+            "ladino": [
+                "mykomer"
             ],
             "portuguese": [],
             "spanish": [
@@ -109,12 +109,12 @@
     "portuguese": {},
     "spanish": {
         "comer": [
-            "komer"
+            "mykomer"
         ]
     },
     "turkish": {
         "yemek yemek": [
-            "komer"
+            "mykomer"
         ]
     }
 }

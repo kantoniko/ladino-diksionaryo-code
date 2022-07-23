@@ -5,8 +5,8 @@ kategorias:
   - lavoro
 
 versions:
-  - ladino: komer
-    accented: komér
+  - ladino: mykomer
+    accented: mykomér
 
     translations:
       english: eat
