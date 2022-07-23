@@ -174,7 +174,7 @@ def load_dictionary(config, limit, path_to_dictionary):
                         'example': example,
                         'word': version['ladino'].lower(),
                         'source':  filename,
-                        'url': words_to_url(version['ladino']),
+                        'url': words_to_url(example['ladino']),
                     })
                 examples = None
             if comments is not None:
