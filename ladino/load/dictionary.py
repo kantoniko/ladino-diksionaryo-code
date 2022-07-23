@@ -74,7 +74,7 @@ def check_and_collect_origen(config, data, dictionary, filename):
 
     return origen
 
-def check_and_collect_categories(config, data, filename, dictionary):
+def check_and_collect_categories(config, data, dictionary, filename):
     if 'kategorias' not in data:
         return
     for cat in data['kategorias']:
@@ -132,7 +132,7 @@ def load_dictionary(config, limit, path_to_dictionary):
 
         check_and_collect_grammar(config, data, dictionary, filename)
         origen = check_and_collect_origen(config, data, dictionary, filename)
-        check_and_collect_categories(config, data, filename, dictionary)
+        check_and_collect_categories(config, data, dictionary, filename)
         check_and_collect_lists(config, data, dictionary)
 
         if 'versions' not in data:
