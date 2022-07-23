@@ -40,7 +40,8 @@ def test_one_file(tmpdir, request, name):
         for word in words:
             shutil.copy(os.path.join(data_path, f'{word}.yaml'), os.path.join(tmpdir, 'words', f'{word}.yaml'))
     elif name == 'good':
-        shutil.copytree(os.path.join(examples_path, 'words'), os.path.join(tmpdir, 'words'))
+        for thing in os.listdir(examples_path):
+            shutil.copytree(os.path.join(examples_path, thing), os.path.join(tmpdir, thing))
     elif os.path.exists(example):
         os.makedirs(path_to_words, exist_ok=True)
         shutil.copy(example, os.path.join(tmpdir, 'words', f'{name}.yaml'))
