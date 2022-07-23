@@ -1,8 +1,14 @@
 import os
 from flask import Flask, send_file
 
+"""
+flask run
+DIR=files/good_output/good/ flask run
+"""
+
 app = Flask(__name__)
 root = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'docs')
+root = os.environ.get('DIR', root)
 
 @app.route("/")
 def main():
