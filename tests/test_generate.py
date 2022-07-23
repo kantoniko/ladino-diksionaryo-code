@@ -47,10 +47,10 @@ def test_one_file(tmpdir, request, name):
     else:
         shutil.copy(os.path.join(data_path, f'{name}.yaml'), os.path.join(tmpdir, 'words', f'{name}.yaml'))
 
-    # export in case we would like to update the files in the tests/files/ directory
+    # export in case we would like to update the files in the test_files/good_output/ directory
     save = request.config.getoption("--save")
     if save:
-        html_dir = os.path.join(root, 'tests', 'files', name)
+        html_dir = os.path.join(root, 'test_files', 'good_output', name)
     else:
         html_dir = os.path.join(tmpdir, 'html')
     os.makedirs(html_dir, exist_ok=True)
@@ -76,7 +76,7 @@ def test_one_file(tmpdir, request, name):
             os.unlink(os.path.join(html_dir, 'kategorias', f'{cat}.html'))
 
     if not save:
-        cmd = f"diff -r {os.path.join(root, 'tests', 'files', name)} {os.path.join(tmpdir, 'html')}"
+        cmd = f"diff -r {os.path.join(root, 'test_files', 'good_output', name)} {os.path.join(tmpdir, 'html')}"
         print(cmd)
         assert os.system(cmd) == 0
 
