@@ -12,7 +12,7 @@ from ladino.common import LadinoError
 
 data_path  = os.path.join(data_repo_path(), 'words')
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-examples_path  = os.path.join(root, 'test_files', 'good_input')
+examples_path  = os.path.join(root, 'files', 'good_input')
 
 # Explanation why each word is included in the tests:
 # andjinara: our first test word. noun. for now it does not have a plural.
@@ -47,10 +47,10 @@ def test_one_file(tmpdir, request, name):
     else:
         shutil.copy(os.path.join(data_path, f'{name}.yaml'), os.path.join(tmpdir, 'words', f'{name}.yaml'))
 
-    # export in case we would like to update the files in the test_files/good_output/ directory
+    # export in case we would like to update the files in the files/good_output/ directory
     save = request.config.getoption("--save")
     if save:
-        html_dir = os.path.join(root, 'test_files', 'good_output', name)
+        html_dir = os.path.join(root, 'files', 'good_output', name)
     else:
         html_dir = os.path.join(tmpdir, 'html')
     os.makedirs(html_dir, exist_ok=True)
@@ -76,7 +76,7 @@ def test_one_file(tmpdir, request, name):
             os.unlink(os.path.join(html_dir, 'kategorias', f'{cat}.html'))
 
     if not save:
-        cmd = f"diff -r {os.path.join(root, 'test_files', 'good_output', name)} {os.path.join(tmpdir, 'html')}"
+        cmd = f"diff -r {os.path.join(root, 'files', 'good_output', name)} {os.path.join(tmpdir, 'html')}"
         print(cmd)
         assert os.system(cmd) == 0
 
@@ -101,7 +101,7 @@ def test_one_file(tmpdir, request, name):
     ('verb_conjugation_missing_ladino', "The field 'ladino' is missing from verb time: 'prezente' pronoun 'yo' in file 'verb_conjugation_missing_ladino.yaml'"),
 ])
 def test_bad(tmpdir, name, expected):
-    shutil.copy(os.path.join(root, 'test_files', 'bad_input', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
+    shutil.copy(os.path.join(root, 'files', 'bad_input', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     with pytest.raises(Exception) as err:
         dictionary_source, all_examples = load_dictionary(load_config(data_repo_path()), None, tmpdir)
     assert err.type == LadinoError
