@@ -9,7 +9,9 @@ from ladino.common import LadinoError, languages, words_to_url
 class Dictionary():
     def __init__(self, config):
         self.yaml_files = []  # each entry as loaded from the yaml files of words
-        self.words = []
+        self.words = [] # list of dictionaries. Each "version" of each word has one entry in this.
+                        # A ladino word might appear more than once as the same word might have different
+                        # meanings in different contexts. (and different grammatical role)
         self.all_examples = []
         self.lists = {lst:[] for lst in config['listas'] }
         self.categories = {cat:[] for cat in config['kategorias'] }
@@ -172,7 +174,7 @@ def load_dictionary(config, limit, path_to_dictionary):
                             raise LadinoError(f"Incorrect language '{language}' in example in '{filename}'")
                     dictionary.all_examples.append({
                         'example': example,
-                        'word': version['ladino'].lower(),
+                        #'word': version['ladino'].lower(),
                         'source':  filename,
                         'url': words_to_url(example['ladino']),
                     })
