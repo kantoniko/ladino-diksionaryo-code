@@ -4,13 +4,13 @@ import os
 import shutil
 import pytest
 import glob
-from conftest import repo_path
+from conftest import data_repo_path
 
 from ladino.generate import main
 from ladino.load.dictionary import load_dictionary, load_config
 from ladino.common import LadinoError
 
-data_path  = os.path.join(repo_path(), 'words')
+data_path  = os.path.join(data_repo_path(), 'words')
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 examples_path  = os.path.join(root, 'test_files', 'good_input')
 
@@ -103,7 +103,7 @@ def test_one_file(tmpdir, request, name):
 def test_bad(tmpdir, name, expected):
     shutil.copy(os.path.join(root, 'test_files', 'bad_input', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     with pytest.raises(Exception) as err:
-        dictionary_source, all_examples = load_dictionary(load_config(repo_path()), None, tmpdir)
+        dictionary_source, all_examples = load_dictionary(load_config(data_repo_path()), None, tmpdir)
     assert err.type == LadinoError
     assert str(err.value) == expected
 
