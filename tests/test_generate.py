@@ -106,7 +106,7 @@ def test_one_file(tmpdir, request, name):
     ('verb_conjugation_missing_ladino', "The field 'ladino' is missing from verb time: 'prezente' pronoun 'yo' in file 'verb_conjugation_missing_ladino.yaml'"),
 ])
 def test_bad(tmpdir, name, expected):
-    shutil.copy(os.path.join(root, 'tests', 'files', 'bad', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
+    shutil.copy(os.path.join(root, 'test_files', 'bad_input', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     with pytest.raises(Exception) as err:
         dictionary_source, all_examples = load_dictionary(load_config(real_repo_path), None, tmpdir)
     assert err.type == LadinoError
