@@ -63,7 +63,7 @@ def check_and_collect_grammar(config, data, dictionary, filename):
     dictionary.gramer[grammar].append(data)
 
 
-def check_and_collect_origen(config, data, filename, dictionary):
+def check_and_collect_origen(config, data, dictionary, filename):
     if 'origen' not in data:
         raise LadinoError(f"The 'origen' field is missing from file '{filename}'")
     origen  = data['origen']
@@ -131,7 +131,7 @@ def load_dictionary(config, limit, path_to_dictionary):
         dictionary.yaml_files.append(data)
 
         check_and_collect_grammar(config, data, dictionary, filename)
-        origen = check_and_collect_origen(config, data, filename, dictionary)
+        origen = check_and_collect_origen(config, data, dictionary, filename)
         check_and_collect_categories(config, data, filename, dictionary)
         check_and_collect_lists(config, data, dictionary)
 
