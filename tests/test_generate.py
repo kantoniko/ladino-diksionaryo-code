@@ -30,21 +30,22 @@ def test_one_file(tmpdir, request, name):
     print(tmpdir)
     path_to_words = os.path.join(tmpdir, 'words')
     print(path_to_words)
-    os.makedirs(path_to_words, exist_ok=True)
 
     shutil.copy(os.path.join('tests', 'config.yaml'), os.path.join(tmpdir, f'config.yaml'))
     config = load_config(os.path.join(tmpdir))
     example = os.path.join(examples_path, 'words', f"{name}.yaml")
     words = ['andjinara', 'komer', 'komo']
     if name == 'all':
+        os.makedirs(path_to_words, exist_ok=True)
         for word in words:
             shutil.copy(os.path.join(data_path, f'{word}.yaml'), os.path.join(tmpdir, 'words', f'{word}.yaml'))
     elif name == 'good':
-        for filename in os.listdir(os.path.join(examples_path, 'words')):
-            shutil.copy(os.path.join(examples_path, 'words', filename), os.path.join(tmpdir, 'words', filename))
+        shutil.copytree(os.path.join(examples_path, 'words'), os.path.join(tmpdir, 'words'))
     elif os.path.exists(example):
+        os.makedirs(path_to_words, exist_ok=True)
         shutil.copy(example, os.path.join(tmpdir, 'words', f'{name}.yaml'))
     else:
+        os.makedirs(path_to_words, exist_ok=True)
         shutil.copy(os.path.join(data_path, f'{name}.yaml'), os.path.join(tmpdir, 'words', f'{name}.yaml'))
 
     # export in case we would like to update the files in the files/good_output/ directory
