@@ -423,7 +423,7 @@ def export_markdown_page(path_to_md_file, target):
             content=content,
         )
 
-def prepare_examples(examples, path, sounds, words, sound_people, target):
+def export_individual_examples(examples, path, sounds, words, sound_people, target):
     for example in examples:
         example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
         if 'bozes' in example['example']:
@@ -460,8 +460,8 @@ def export_examples(all_examples, extra_examples, words, sound_people, html_dir)
         example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
 
     extra_examples.sort(key=lambda ex: ex['example']['ladino'])
-    prepare_examples(all_examples, 'words', sounds, words, sound_people, target)
-    prepare_examples(extra_examples, 'examples', sounds, words, sound_people, target)
+    export_individual_examples(all_examples, 'words', sounds, words, sound_people, target)
+    export_individual_examples(extra_examples, 'examples', sounds, words, sound_people, target)
 
     for person, examples in sounds.items():
         if person == 'silent':
