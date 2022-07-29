@@ -25,7 +25,7 @@ def test_no_params():
     sys.argv = [sys.argv[0]]
     main()
 
-@pytest.mark.parametrize("name", ['andjinara', 'komer', 'komo', 'biblia', 'klaro', 'egzempio', 'good', 'all'])
+@pytest.mark.parametrize("name", ['biblia', 'klaro', 'egzempio', 'good', 'all'])
 def test_one_file(tmpdir, request, name):
     print(tmpdir)
     path_to_words = os.path.join(tmpdir, 'words')
