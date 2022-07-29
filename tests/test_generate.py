@@ -42,12 +42,8 @@ def test_one_file(tmpdir, request, name):
     elif name == 'good':
         for thing in os.listdir(examples_path):
             shutil.copytree(os.path.join(examples_path, thing), os.path.join(tmpdir, thing))
-    elif os.path.exists(example):
-        os.makedirs(path_to_words, exist_ok=True)
-        shutil.copy(example, os.path.join(tmpdir, 'words', f'{name}.yaml'))
     else:
-        os.makedirs(path_to_words, exist_ok=True)
-        shutil.copy(os.path.join(data_path, f'{name}.yaml'), os.path.join(tmpdir, 'words', f'{name}.yaml'))
+        raise Exception("Oh")
 
     # export in case we would like to update the files in the files/good_output/ directory
     save = request.config.getoption("--save")
