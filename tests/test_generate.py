@@ -58,8 +58,6 @@ def test_one_file(tmpdir, request, name):
 
     if len(os.listdir(os.path.join(html_dir, 'verbos'))) == 0:
         os.rmdir(os.path.join(html_dir, 'verbos'))
-    shutil.rmtree(os.path.join(html_dir, 'css'))
-    shutil.rmtree(os.path.join(html_dir, 'js'))
     shutil.rmtree(os.path.join(html_dir, 'hunspell'))
     shutil.rmtree(os.path.join(html_dir, 'he'))
     os.unlink(os.path.join(html_dir, 'statistika.html')) # has the date of generation in it
