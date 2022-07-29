@@ -6,6 +6,9 @@
         "eat": [
             "mykomer"
         ],
+        "house": [
+            "kaza"
+        ],
         "istanbul": [
             "Estambol"
         ],
@@ -41,6 +44,14 @@
             ],
             "ladino": [
                 "Estambol"
+            ]
+        },
+        "kaza": {
+            "english": [
+                "house"
+            ],
+            "ladino": [
+                "kaza"
             ]
         },
         "klaro": {
