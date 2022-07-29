@@ -1,4 +1,4 @@
-The code behind https://diksionaryo.szabgab.com/
+The code behind https://kantoniko.com/
 
 
 ## Development environment
