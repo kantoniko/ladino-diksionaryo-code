@@ -1,2 +1,0 @@
-Sitemap: https://kantoniko.com/sitemap.xml
-User-agent: *

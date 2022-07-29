@@ -6,6 +6,15 @@
         "as": [
             "komo"
         ],
+        "bible": [
+            "Biblia"
+        ],
+        "clear": [
+            "klara",
+            "klaras",
+            "klaro",
+            "klaros"
+        ],
         "eat": [
             "komemos",
             "komen",
@@ -16,6 +25,12 @@
         ],
         "eats": [
             "kome"
+        ],
+        "example": [
+            "egzempio"
+        ],
+        "examples": [
+            "egzempios"
         ],
         "how": [
             "komo"
@@ -38,6 +53,18 @@
         ],
         "ארטישוק": [
             "andjinara"
+        ],
+        "ברור": [
+            "klaro"
+        ],
+        "ברורה": [
+            "klara"
+        ],
+        "ברורות": [
+            "klaras"
+        ],
+        "ברורים": [
+            "klaros"
         ]
     },
     "ladino": {
@@ -65,6 +92,108 @@
                 "enginar"
             ]
         },
+        "biblia": {
+            "accented": [
+                "Bíblia"
+            ],
+            "english": [
+                "Bible"
+            ],
+            "french": [],
+            "ladino": [
+                "Biblia"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "Biblia"
+            ],
+            "turkish": [
+                "Kutsal Kitap"
+            ]
+        },
+        "biblya": {
+            "accented": [
+                "Bíblya"
+            ],
+            "english": [
+                "Bible"
+            ],
+            "french": [],
+            "ladino": [
+                "Biblya"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "Biblia"
+            ],
+            "turkish": [
+                "Kutsal Kitap"
+            ]
+        },
+        "egzempio": {
+            "english": [
+                "example"
+            ],
+            "french": [],
+            "ladino": [
+                "egzempio"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplo"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        },
+        "egzempios": {
+            "english": [
+                "examples"
+            ],
+            "french": [],
+            "ladino": [
+                "egzempios"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplos"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        },
+        "egzemplo": {
+            "english": [
+                "example"
+            ],
+            "french": [],
+            "ladino": [
+                "egzemplo"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplo"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        },
+        "egzemplos": {
+            "english": [
+                "examples"
+            ],
+            "french": [],
+            "ladino": [
+                "egzemplos"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplos"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        },
         "endjinara": {
             "accented": [
                 "endjinára"
@@ -87,6 +216,146 @@
             ],
             "turkish": [
                 "enginar"
+            ]
+        },
+        "enshemplo": {
+            "english": [
+                "example"
+            ],
+            "french": [],
+            "ladino": [
+                "enshemplo"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplo"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        },
+        "enshemplos": {
+            "english": [
+                "examples"
+            ],
+            "french": [],
+            "ladino": [
+                "enshemplos"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplos"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        },
+        "eshemplo": {
+            "english": [
+                "example"
+            ],
+            "french": [],
+            "ladino": [
+                "eshemplo"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplo"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        },
+        "eshemplos": {
+            "english": [
+                "examples"
+            ],
+            "french": [],
+            "ladino": [
+                "eshemplos"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "ejemplos"
+            ],
+            "turkish": [
+                "misâl"
+            ]
+        },
+        "klara": {
+            "english": [
+                "clear"
+            ],
+            "french": [],
+            "hebrew": [
+                "ברורה"
+            ],
+            "ladino": [
+                "klara"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "clara"
+            ],
+            "turkish": [
+                "aydınlık"
+            ]
+        },
+        "klaras": {
+            "english": [
+                "clear"
+            ],
+            "french": [],
+            "hebrew": [
+                "ברורות"
+            ],
+            "ladino": [
+                "klaras"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "claras"
+            ],
+            "turkish": [
+                "aydınlık"
+            ]
+        },
+        "klaro": {
+            "english": [
+                "clear"
+            ],
+            "french": [],
+            "hebrew": [
+                "ברור"
+            ],
+            "ladino": [
+                "klaro"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "claro"
+            ],
+            "turkish": [
+                "aydınlık"
+            ]
+        },
+        "klaros": {
+            "english": [
+                "clear"
+            ],
+            "french": [],
+            "hebrew": [
+                "ברורים"
+            ],
+            "ladino": [
+                "klaros"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "claros"
+            ],
+            "turkish": [
+                "aydınlık"
             ]
         },
         "kome": {
@@ -217,6 +486,21 @@
         "alcaucil": [
             "andjinara"
         ],
+        "biblia": [
+            "Biblia"
+        ],
+        "clara": [
+            "klara"
+        ],
+        "claras": [
+            "klaras"
+        ],
+        "claro": [
+            "klaro"
+        ],
+        "claros": [
+            "klaros"
+        ],
         "come": [
             "kome"
         ],
@@ -237,11 +521,30 @@
         ],
         "como": [
             "komo"
+        ],
+        "ejemplo": [
+            "egzempio"
+        ],
+        "ejemplos": [
+            "egzempios"
         ]
     },
     "turkish": {
+        "aydınlık": [
+            "klara",
+            "klaras",
+            "klaro",
+            "klaros"
+        ],
         "enginar": [
             "andjinara"
+        ],
+        "kutsal kitap": [
+            "Biblia"
+        ],
+        "misâl": [
+            "egzempio",
+            "egzempios"
         ],
         "nasıl": [
             "komo"
