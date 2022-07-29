@@ -66,8 +66,6 @@ def test_one_file(tmpdir, request, name):
     os.unlink(os.path.join(html_dir, 'dictionaries.html')) # has changeing link in it
     os.unlink(os.path.join(html_dir, 'echar-lashon.html')) # has changeing date in it
     if name != 'good':
-        os.unlink(os.path.join(html_dir, 'index.html'))
-        os.unlink(os.path.join(html_dir, 'lists.html'))
         for filepath in glob.glob(f'{html_dir}/*-*.html'):
             os.unlink(filepath)
         for cat in config['kategorias']:
