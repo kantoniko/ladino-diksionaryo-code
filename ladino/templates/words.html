@@ -10,7 +10,7 @@
       <tbody>
         {% for word in words.keys() | sort %}
           <tr>
-          <td><a href="{{ word }}.html">{{ word }}</a></td>
+          <td><a href="/{{ word }}">{{ word }}</a></td>
           <td>{{ examples[word] }}</td>
           </tr>
         {% endfor %}
