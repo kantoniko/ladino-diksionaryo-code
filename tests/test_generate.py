@@ -26,7 +26,7 @@ def test_no_params():
     main()
 
 @pytest.mark.parametrize("name", ['good', 'real'])
-def test_one_file(tmpdir, request, name):
+def test_one(tmpdir, request, name):
     print(tmpdir)
     path_to_words = os.path.join(tmpdir, 'words')
     print(path_to_words)
