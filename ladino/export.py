@@ -313,12 +313,12 @@ def export_to_html(config, dictionary, extra_examples, sound_people, path_to_rep
             page = message['page']
 
             # WhatsApp message that are ladino only have a 'text' field, messages with hebrew have a field called teksto
-            words_in_message = re.findall('\w+', message['titulo'])
+            words_in_message = re.findall(r'\w+', message['titulo'])
             if 'text' in messages:
-                words_in_message += re.findall('\w+', message['text'])
+                words_in_message += re.findall(r'\w+', message['text'])
             else:
                 for sentence in message['teksto']:
-                    words_in_message += re.findall('\w+', sentence['ladino'])
+                    words_in_message += re.findall(r'\w+', sentence['ladino'])
             for word in words_in_message:
                 word = word.lower()
                 if word not in word_to_whatsapp:
