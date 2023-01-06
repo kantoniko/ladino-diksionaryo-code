@@ -27,7 +27,13 @@ time PYTHONPATH=. python ladino/generate.py --dictionary ../ladino-diksionaryo-d
 
 This will generate the static files in the `docs` subdrirectory.
 
-Launch a static web server in the `docs` subdirectory.
+Launch a static web server with the following command:
+
+## Run locally
+
+```
+FLASK_DEBUG=1 flask run
+```
 
 ## Testing
 
@@ -48,12 +54,6 @@ Generate test coverage report:
 
 ```
 pytest -vvs -rA -x --log-cli-level=DEBUG --random-order --cov=ladino --cov-report html --cov-report term --cov-branch tests/test_generate.py
-```
-
-## Run locally
-
-```
-FLASK_DEBUG=1 flask run
 ```
 
 ## Language considerations
