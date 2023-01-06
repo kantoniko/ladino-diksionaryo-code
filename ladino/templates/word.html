@@ -71,6 +71,22 @@
         </ul>
      {% endif %}
 
+     {% if entry.xexamples %}
+        <h2>Mas Egzempios</h2>
+        <ul>
+         {% for example in entry.xexamples %}
+            <li>{{example.example.ladino_html | safe}}
+                {% if example.example.english %}
+                <ul>
+                    <li>{{example.example.english}}</li>
+                </ul>
+                {% endif %}
+            </li>
+         {% endfor %}
+        </ul>
+     {% endif %}
+
+
      {% if entry.comments %}
         <h2>Comments</h2>
         <ul>

@@ -9,7 +9,7 @@ import datetime
 from yaml import safe_load
 
 import ladino.common
-from ladino.load.dictionary import load_dictionary, load_config
+from ladino.load.dictionary import load_dictionary, load_config, Dictionary
 from ladino.load.examples import load_examples
 from ladino.export import generate_main_page, export_to_html, create_sitemap
 
@@ -61,6 +61,21 @@ def get_args():
 
     return args
 
+def process_examples(dictionary, examples):
+    #print(examples)
+    for example in examples:
+        #print(example)
+        #print(example['example']['ladino'])
+        for word in example['example']['ladino'].lower().split():
+            print(word)
+            for dword in dictionary.words:
+                if dword['ladino'] == word:
+                    print('add')
+                    if 'xexamples' not in dword:
+                        dword['xexamples'] = []
+                    dword['xexamples'].append(example)
+    #print(dictionary.word_mapping['ladino'])
+
 def main():
     args = get_args()
     if args.log:
@@ -80,6 +95,8 @@ def main():
     if args.dictionary:
         path_to_repo = args.dictionary
         extra_examples = load_examples(os.path.join(path_to_repo, 'examples'))
+
+        process_examples(dictionary, extra_examples)
 
     sound_people = {}
     if args.sounds:
