@@ -63,8 +63,8 @@ def render(template, filename=None, **args):
     elif filename.endswith('.html'):
         sitemap.append(filename[0:-5])
 
-def export_dictionary_pages(pages, html_dir):
-    logging.info("Export dictionary pages")
+def export_dictionary_pages(pages, word_to_whatsapp, html_dir):
+    logging.info("export_dictionary_pages")
     words_dir = os.path.join(html_dir, 'words')
     os.makedirs(words_dir, exist_ok=True)
     #for language, words in pages.items():
@@ -73,7 +73,7 @@ def export_dictionary_pages(pages, html_dir):
     language = 'ladino'
     words = pages['ladino']
     language_dir = os.path.join(words_dir, language)
-    logging.info(f"Export dictionary pages of {language} to {language_dir}")
+    logging.info(f"Export one page for every word for {language} to {language_dir}")
     os.makedirs(language_dir, exist_ok=True)
     for plain_word, data in words.items():
         enhanced_data = add_links(copy.deepcopy(data), words)
@@ -88,6 +88,7 @@ def export_dictionary_pages(pages, html_dir):
             plain_word=plain_word,
             language_names=language_names,
             language_codes=language_codes,
+            whatsapp=word_to_whatsapp.get(plain_word, {})
         )
 
         export_json(data, os.path.join(words_dir, language, f'{plain_word}.json'))
@@ -302,10 +303,28 @@ def export_to_html(config, dictionary, extra_examples, sound_people, path_to_rep
     export_books(books, html_dir)
     export_ladinadores(ladinadores)
 
+    word_to_whatsapp = {}
     if whatsapp:
         sys.path.insert(0, whatsapp)
         import ladino.whatsapeando as whatsapp
-        messages = whatsapp.get_messages()
+        messages = whatsapp.get_messages() # list of dicts
+        for message in messages:
+            #print(message)
+            page = message['page']
+
+            # WhatsApp message that are ladino only have a 'text' field, messages with hebrew have a field called teksto
+            words_in_message = re.findall('\w+', message['titulo'])
+            if 'text' in messages:
+                words_in_message += re.findall('\w+', message['text'])
+            else:
+                for sentence in message['teksto']:
+                    words_in_message += re.findall('\w+', sentence['ladino'])
+            for word in words_in_message:
+                word = word.lower()
+                if word not in word_to_whatsapp:
+                    word_to_whatsapp[word] = {}
+                word_to_whatsapp[word][page] = message['titulo']
+
         dictionary.count['whatsapp'] = {
             'all' : len(messages),
             'hebrew': len(list(filter(lambda msg: msg['teksto'][0].get('ebreo') != '', messages))),
@@ -339,7 +358,7 @@ def export_to_html(config, dictionary, extra_examples, sound_people, path_to_rep
     export_listed_pages(config, path_to_repo, html_dir)
     export_fixed_pages(pages)
 
-    export_dictionary_pages(dictionary.pages, html_dir)
+    export_dictionary_pages(dictionary.pages, word_to_whatsapp , html_dir)
     export_to_hunspell(dictionary.word_mapping, html_dir)
 
 def export_ladinadores(ladinadores):
@@ -370,7 +389,7 @@ def export_ladinadores(ladinadores):
 
 
 def export_fixed_pages(pages):
-    logging.info("Export fixed pages")
+    logging.info("export_fixed_pages")
     if not pages:
         return
 
@@ -384,6 +403,7 @@ def export_fixed_pages(pages):
                 export_markdown_page(os.path.join(pages, source, filename), os.path.join(target, target_file))
 
 def export_lists_html_page(config, html_dir):
+    logging.info("export_lists_html_page")
     render(
         template="lists.html",
         filename="lists.html",
@@ -401,6 +421,7 @@ def export_lists_html_page(config, html_dir):
     )
 
 def export_listed_pages(config, path_to_repo, html_dir):
+    logging.info("export_listed_pages")
     for source, target in config['pajinas'].items():
         export_markdown_page(os.path.join(path_to_repo, 'pajinas', source), target)
 
@@ -449,6 +470,7 @@ def export_individual_examples(examples, path, sounds, words, sound_people, targ
         )
 
 def export_examples(all_examples, extra_examples, words, sound_people, html_dir):
+    logging.info("export_examples")
     if not all_examples:
         return
     target = 'egzempios'
@@ -611,6 +633,7 @@ def link_words(sentence, words):
         f'<a href="/words/ladino/{match.group(0).lower()}">{match.group(0)}</a>' if match.group(0).lower() in words else match.group(0), sentence)
 
 def export_origenes(config, origenes, html_dir):
+    logging.info("export_origenes")
     dname = 'origenes'
     os.makedirs(os.path.join(html_dir, dname), exist_ok=True)
     for origen in origenes.keys():
@@ -635,6 +658,7 @@ def export_origenes(config, origenes, html_dir):
 
 
 def export_categories(config, categories, html_dir):
+    logging.info("export_categories")
     dname = 'kategorias'
     os.makedirs(os.path.join(html_dir, 'kategorias'), exist_ok=True)
     for cat in categories.keys():
@@ -667,6 +691,7 @@ def export_categories(config, categories, html_dir):
     )
 
 def export_lists(config, lists, html_dir):
+    logging.info("export_lists")
     dname = 'listas'
     os.makedirs(os.path.join(html_dir, dname), exist_ok=True)
     for lst in lists.keys():
@@ -690,6 +715,7 @@ def export_lists(config, lists, html_dir):
 
 
 def export_gramer(config, gramer, html_dir):
+    logging.info("export_gramer")
     dname = 'gramer'
     os.makedirs(os.path.join(html_dir, dname), exist_ok=True)
     for name in gramer.keys():
@@ -714,6 +740,7 @@ def export_gramer(config, gramer, html_dir):
     )
 
 def export_verbs(config, verbs, html_dir):
+    logging.info("export_verbs")
     verbs_dir = os.path.join(html_dir, 'verbos')
     os.makedirs(verbs_dir, exist_ok=True)
     irregulars = config['verbos-iregolares']

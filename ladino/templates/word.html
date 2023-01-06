@@ -96,6 +96,15 @@
         </ul>
      {% endif %}
 
+     {% if whatsapp %}
+        <h2>Estamos Whatsapeando</h2>
+        <ul>
+         {% for url in whatsapp.keys() | sort %}
+            <li><a href="/whatsapeando/{{url}}">{{whatsapp[url]}}</a></li>
+         {% endfor %}
+        </ul>
+     {% endif %}
+
      {% if not loop.last %}<hr>{% endif %}
   {% endfor %}
 </div>
