@@ -103,6 +103,7 @@ def export_dictionary_lists(pages, html_dir):
         ex = 0
         for dt in data:
             ex += len(dt.get('examples', []))
+            ex += len(dt.get('xexamples', []))
         examples[word] = ex
     render(
         template="words.html",
