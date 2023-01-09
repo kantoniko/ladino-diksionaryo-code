@@ -32,6 +32,12 @@ Launch a static web server with the following command:
 ## Run locally
 
 ```
+./app.py
+```
+
+or 
+
+```
 FLASK_DEBUG=1 flask run
 ```
 

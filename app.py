@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 from flask import Flask, send_file
 
@@ -29,3 +30,5 @@ def all(fullpath):
         fullpath += 'index'
     return send_file(os.path.join(root, f"{fullpath}.html"))
 
+if __name__ == "__main__":
+    app.run(debug=True)
