@@ -48,8 +48,9 @@
         <td></td>
      </tr>
      </table>
-     {% if entry.examples %}
+     {% if entry.examples or entry.xexamples %}
         <h2>Egzempios</h2>
+        {% if entry.examples %}
         <ul>
          {% for example in entry.examples %}
             <li>{{example.ladino_html | safe}}
@@ -69,12 +70,10 @@
             </li>
          {% endfor %}
         </ul>
-     {% endif %}
-
-     {% if entry.xexamples %}
-        <h2>Mas Egzempios</h2>
+        {% endif %}
+        {% if entry.xexamples %}
         <ul>
-         {% for example in entry.xexamples %}
+        {% for example in entry.xexamples %}
             <li>{{example.example.ladino_html | safe}}
                 {% if example.example.english %}
                 <ul>
@@ -84,7 +83,10 @@
             </li>
          {% endfor %}
         </ul>
+        {% endif %}
+
      {% endif %}
+
 
 
      {% if entry.comments %}
