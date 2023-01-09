@@ -63,7 +63,7 @@ def render(template, filename=None, **args):
     elif filename.endswith('.html'):
         sitemap.append(filename[0:-5])
 
-def export_dictionary_pages(pages, word_to_whatsapp, html_dir):
+def export_dictionary_pages(pages, word_to_whatsapp, word_to_una_fraza, html_dir):
     logging.info("export_dictionary_pages")
     words_dir = os.path.join(html_dir, 'words')
     os.makedirs(words_dir, exist_ok=True)
@@ -88,7 +88,8 @@ def export_dictionary_pages(pages, word_to_whatsapp, html_dir):
             plain_word=plain_word,
             language_names=language_names,
             language_codes=language_codes,
-            whatsapp=word_to_whatsapp.get(plain_word, {})
+            whatsapp=word_to_whatsapp.get(plain_word, {}),
+            ufad=word_to_una_fraza.get(plain_word, {}),
         )
 
         export_json(data, os.path.join(words_dir, language, f'{plain_word}.json'))
@@ -334,10 +335,21 @@ def export_to_html(config, dictionary, extra_examples, sound_people, path_to_rep
         #print(messages)
         export_whatsapp(messages, dictionary.pages['ladino'], html_dir)
 
+    word_to_una_fraza = {}
     if unafraza:
         sys.path.insert(0, unafraza)
         from ladino.ufad import ufad
         entries = ufad()
+        for entry in entries:
+            words_in_message = re.findall(r'\w+', entry['Ladino'])
+            for word in words_in_message:
+                word = word.lower()
+                if word not in word_to_una_fraza:
+                    word_to_una_fraza[word] = {}
+                page = entry['filename'][0:-5]
+                word_to_una_fraza[word][page] = entry['Ladino']
+
+
         export_ufad(entries, dictionary.pages['ladino'], html_dir)
 
 
@@ -359,7 +371,7 @@ def export_to_html(config, dictionary, extra_examples, sound_people, path_to_rep
     export_listed_pages(config, path_to_repo, html_dir)
     export_fixed_pages(pages)
 
-    export_dictionary_pages(dictionary.pages, word_to_whatsapp , html_dir)
+    export_dictionary_pages(dictionary.pages, word_to_whatsapp ,word_to_una_fraza, html_dir)
     export_to_hunspell(dictionary.word_mapping, html_dir)
 
 def export_ladinadores(ladinadores):

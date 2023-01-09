@@ -107,6 +107,16 @@
         </ul>
      {% endif %}
 
+     {% if ufad %}
+        <h2>Una fraza</h2>
+        <ul>
+         {% for url in ufad.keys() | sort %}
+            <li><a href="/ufad/{{url}}">{{ufad[url]}}</a></li>
+         {% endfor %}
+        </ul>
+     {% endif %}
+
+
      {% if not loop.last %}<hr>{% endif %}
   {% endfor %}
 </div>
