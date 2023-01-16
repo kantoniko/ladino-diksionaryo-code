@@ -42,8 +42,8 @@ $(document).ready(function(){
       // Assume a date format of "2021-04-13T19:00:00+03:00";
       // Display time in localtime of the browser.
       const dates = document.getElementsByClassName("localdate");
-      console.log(dates);
-      console.log(dates.length);
+      //console.log(dates);
+      //console.log(dates.length);
       for (let ix=0; ix < dates.length; ix++) {
           const mydate = dates[ix].getAttribute("x-schedule");
           const date = new Date(mydate);
@@ -58,6 +58,38 @@ $(document).ready(function(){
           });
       }
   }
+
+    function highlight() {
+        //console.log('highlight');
+        if (window.location.search.length > 0) {
+            const pieces = window.location.search.substring(1).split("=");
+            if (pieces[0] == 'highlight') {
+                const word = pieces[1];
+                //console.log(`highlight ${word}`);
+                let match = /^a$/;
+
+                //const term = `a:contains(${word})`;
+                // This is nicer, but matches any substring
+                //$(term).addClass('has-background-warning');
+
+                // here we check exact match, but that does not hand case insensitive match
+                //$(term).each(function() {
+                //    if ($(this).html() == word) {
+                //        $(this).addClass('has-background-warning');
+                //    }
+                //});
+
+                // case insenstivie but exact match.
+                $('a').each(function() {
+                    if ($(this).html().toLowerCase()  == word.toLowerCase() ) {
+                        $(this).addClass('has-background-warning');
+                    }
+                });
+            }
+        }
+    }
+
   set_local_date();
+  highlight();
 
 });
