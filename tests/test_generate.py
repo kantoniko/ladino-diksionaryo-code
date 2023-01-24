@@ -86,7 +86,6 @@ def test_one(tmpdir, request, name):
     ('noun_bad_number', "The 'number' field is 'countless' in 'noun_bad_number.yaml' version {'ladino': 'klaro', 'gender': 'masculine', 'number': 'countless'}"),
     ('verb_no_conjugation', "Grammar is 'verb', but there is NO 'conjugations' field in 'verb_no_conjugation.yaml'"),
     ('non_verb_with_conjugation', "Grammar is NOT a 'verb', but there are conjugations in 'non_verb_with_conjugation.yaml'"),
-    ('no_examples', "The 'examples' field is missing in 'no_examples.yaml'"),
     ('example_without_language', "The example 'Una palavra i un biervo.' is a string instead of a dictionary in 'example_without_language.yaml'"),
     ('example_with_incorrect_language', "Incorrect language 'klingon' in example in 'example_with_incorrect_language.yaml'"),
     ('version_without_ladino', "The ladino 'version' is missing from file 'version_without_ladino.yaml'"),
