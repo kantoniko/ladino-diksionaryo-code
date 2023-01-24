@@ -67,10 +67,10 @@ def process_examples(dictionary, examples):
         #print(example)
         #print(example['example']['ladino'])
         for word in example['example']['ladino'].lower().split():
-            print(word)
+            # print(f"word: {word}")
             for dword in dictionary.words:
                 if dword['ladino'] == word:
-                    print('add')
+                    # print('add')
                     if 'xexamples' not in dword:
                         dword['xexamples'] = []
                     dword['xexamples'].append(example)
