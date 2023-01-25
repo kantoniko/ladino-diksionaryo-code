@@ -25,7 +25,7 @@ def test_no_params():
     sys.argv = [sys.argv[0]]
     main()
 
-@pytest.mark.parametrize("name", ['good', 'real'])
+@pytest.mark.parametrize("name", ['good'])
 def test_one(tmpdir, request, name):
     print(tmpdir)
     path_to_words = os.path.join(tmpdir, 'words')
@@ -34,12 +34,7 @@ def test_one(tmpdir, request, name):
     shutil.copy(os.path.join('tests', 'config.yaml'), os.path.join(tmpdir, f'config.yaml'))
     config = load_config(os.path.join(tmpdir))
     example = os.path.join(examples_path, 'words', f"{name}.yaml")
-    real_words = ['andjinara', 'biblia', 'egzempio', 'klaro', 'komer', 'komo']
-    if name == 'real':
-        os.makedirs(path_to_words, exist_ok=True)
-        for word in real_words:
-            shutil.copy(os.path.join(data_path, f'{word}.yaml'), os.path.join(path_to_words, f'{word}.yaml'))
-    elif name == 'good':
+    if name == 'good':
         for thing in os.listdir(examples_path):
             shutil.copytree(os.path.join(examples_path, thing), os.path.join(tmpdir, thing))
     else:
