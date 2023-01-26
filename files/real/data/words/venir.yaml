@@ -1,0 +1,25 @@
+grammar: verb
+id: '1131'
+origen: Jeneral
+
+versions:
+  - ladino: venir
+
+    translations:
+        english: come
+        french: venir
+        hebrew: להגיע
+        portuguese: ''
+        spanish: venir
+        turkish: gelmek
+
+conjugations:
+  pasado:
+    el:
+      ladino: vino
+      translations:
+        english: came
+        hebrew: הגיע
+        spanish: vino
+
+
