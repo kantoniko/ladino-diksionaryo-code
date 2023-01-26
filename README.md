@@ -53,6 +53,7 @@ These commands will generate the static files in the `docs` subdrirectory. Below
 
 Some selected pieces of data (words, examples, etc.) that we stored in the repository of the code to serve us for testing.
 
+./generate.sh
 
 ### Generate only the dictionary
 
