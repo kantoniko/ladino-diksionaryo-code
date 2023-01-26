@@ -1,31 +1,69 @@
 {
     "english": {
+        "came": [
+            "vino"
+        ],
+        "come": [
+            "venir"
+        ],
         "wine": [
             "vino"
         ]
     },
     "french": {
+        "venir": [
+            "venir"
+        ],
         "vin": [
             "vino"
         ]
     },
     "hebrew": {
+        "הגיע": [
+            "vino"
+        ],
         "יין": [
             "vino"
+        ],
+        "להגיע": [
+            "venir"
         ]
     },
     "ladino": {
+        "venir": {
+            "english": [
+                "come"
+            ],
+            "french": [
+                "venir"
+            ],
+            "hebrew": [
+                "להגיע"
+            ],
+            "ladino": [
+                "venir"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "venir"
+            ],
+            "turkish": [
+                "gelmek"
+            ]
+        },
         "vino": {
             "accented": [
                 "víno"
             ],
             "english": [
+                "came",
                 "wine"
             ],
             "french": [
                 "vin"
             ],
             "hebrew": [
+                "הגיע",
                 "יין"
             ],
             "ladino": [
@@ -42,11 +80,17 @@
     },
     "portuguese": {},
     "spanish": {
+        "venir": [
+            "venir"
+        ],
         "vino": [
             "vino"
         ]
     },
     "turkish": {
+        "gelmek": [
+            "venir"
+        ],
         "şarap": [
             "vino"
         ]
