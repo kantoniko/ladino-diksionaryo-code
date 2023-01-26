@@ -6,3 +6,4 @@ reportlab
 
 pytest
 pytest-random-order
+pytest-cover
