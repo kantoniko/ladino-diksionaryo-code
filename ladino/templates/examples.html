@@ -17,20 +17,10 @@
       <ul>
          {% for example in all_examples %}
            <li>
-             <a href="/egzempios/{{example['url']}}">{{ example['example']['ladino'] }}</a> {% if example['example']['bozes'] %}🎧{% endif %}
+             <a href="/egzempios/{{example['url']}}">{{ example['ladino'] }}</a> {% if example['bozes'] %}🎧{% endif %}
            </li>
          {% endfor %}
       </ul>
-      {%- if extra_examples -%}
-      <h2>Otros egzempios</h2>
-      <ul>
-         {% for example in extra_examples %}
-           <li>
-             <a href="/egzempios/{{example['url']}}">{{ example['example']['ladino'] }}</a> {% if example['example']['bozes'] %}🎧{% endif %}
-           </li>
-         {% endfor %}
-      </ul>
-      {%- endif %}
     </div>
 
 {% include 'incl/footer.html' %}

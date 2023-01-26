@@ -64,16 +64,16 @@ def get_args():
 def process_examples(dictionary, examples):
     #print(examples)
     for example in examples:
-        #print(example)
-        #print(example['example']['ladino'])
-        for word in example['example']['ladino'].lower().split():
+        #print('example:', example)
+        #print(example['ladino'])
+        for word in example['ladino'].lower().split():
             # print(f"word: {word}")
             for dword in dictionary.words:
                 if dword['ladino'] == word:
                     # print('add')
-                    if 'xexamples' not in dword:
-                        dword['xexamples'] = []
-                    dword['xexamples'].append(example)
+                    if 'examples' not in dword:
+                        dword['examples'] = []
+                    dword['examples'].append(example)
     #print(dictionary.word_mapping['ladino'])
 
 def main():
@@ -92,11 +92,8 @@ def main():
         dictionary = load_dictionary(config, args.limit, os.path.join(path_to_repo, 'words'))
         logging.info(dictionary.count)
 
-    if args.dictionary:
-        path_to_repo = args.dictionary
-        extra_examples = load_examples(os.path.join(path_to_repo, 'examples'))
-
-        process_examples(dictionary, extra_examples)
+        examples = load_examples(os.path.join(path_to_repo, 'examples'))
+        process_examples(dictionary, examples)
 
     sound_people = {}
     if args.sounds:
@@ -104,7 +101,7 @@ def main():
             sound_people = safe_load(fh)
 
     if args.all:
-        export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, args.html, whatsapp=args.whatsapp, unafraza=args.unafraza, pages=args.pages, books=args.books, ladinadores=args.ladinadores, pretty=args.pretty)
+        export_to_html(config, dictionary, examples, sound_people, path_to_repo, args.html, whatsapp=args.whatsapp, unafraza=args.unafraza, pages=args.pages, books=args.books, ladinadores=args.ladinadores, pretty=args.pretty)
         create_sitemap(args.html)
 
 

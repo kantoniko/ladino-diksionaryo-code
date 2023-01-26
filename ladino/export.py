@@ -104,7 +104,6 @@ def export_dictionary_lists(pages, html_dir):
         ex = 0
         for dt in data:
             ex += len(dt.get('examples', []))
-            ex += len(dt.get('xexamples', []))
         examples[word] = ex
     render(
         template="words.html",
@@ -287,7 +286,7 @@ def export_book(book, html_dir):
     return {'path': data['path'], 'titolo': data['titolo']}
 
 
-def export_to_html(config, dictionary, extra_examples, sound_people, path_to_repo, html_dir, whatsapp=None, unafraza=None, pages=None, books=None, ladinadores=None, pretty=False):
+def export_to_html(config, dictionary, examples, sound_people, path_to_repo, html_dir, whatsapp=None, unafraza=None, pages=None, books=None, ladinadores=None, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
     global html_path
@@ -367,7 +366,7 @@ def export_to_html(config, dictionary, extra_examples, sound_people, path_to_rep
     export_lists(config, dictionary.lists, html_dir)
     export_gramer(config, dictionary.gramer, html_dir)
     export_verbs(config, dictionary.gramer['verb'], html_dir)
-    export_examples(copy.deepcopy(dictionary.all_examples), extra_examples, dictionary.pages['ladino'], sound_people, html_dir)
+    export_examples(copy.deepcopy(examples), dictionary.pages['ladino'], sound_people, html_dir)
     export_listed_pages(config, path_to_repo, html_dir)
     export_fixed_pages(pages)
 
@@ -459,9 +458,9 @@ def export_markdown_page(path_to_md_file, target):
 
 def export_individual_examples(examples, path, sounds, words, sound_people, target):
     for example in examples:
-        example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
-        if 'bozes' in example['example']:
-            for sound in example['example']['bozes']:
+        example['ladino_html'] = link_words(example['ladino'], words)
+        if 'bozes' in example:
+            for sound in example['bozes']:
                 person = sound['person']
                 if person in sound_people:
                     if person not in sounds:
@@ -482,21 +481,19 @@ def export_individual_examples(examples, path, sounds, words, sound_people, targ
             example=example,
         )
 
-def export_examples(all_examples, extra_examples, words, sound_people, html_dir):
-    logging.info("export_examples")
+def export_examples(all_examples, words, sound_people, html_dir):
+    logging.info(f"export_examples {len(all_examples)}")
     if not all_examples:
         return
     target = 'egzempios'
     examples_dir = os.path.join(html_dir, target)
     os.makedirs(examples_dir, exist_ok=True)
-    all_examples.sort(key=lambda ex: ex['example']['ladino'])
+    all_examples.sort(key=lambda ex: ex['ladino'])
     sounds = {}
     for example in all_examples:
-        example['example']['ladino_html'] = link_words(example['example']['ladino'], words)
+        example['ladino_html'] = link_words(example['ladino'], words)
 
-    extra_examples.sort(key=lambda ex: ex['example']['ladino'])
     export_individual_examples(all_examples, 'words', sounds, words, sound_people, target)
-    export_individual_examples(extra_examples, 'examples', sounds, words, sound_people, target)
 
     for person, examples in sounds.items():
         if person == 'silent':
@@ -536,7 +533,6 @@ def export_examples(all_examples, extra_examples, words, sound_people, html_dir)
         people=sound_people,
         page=target,
         all_examples=all_examples,
-        extra_examples=extra_examples,
     )
 
 def export_ufad(messages, words, html_dir):
@@ -637,6 +633,7 @@ def remove_previous_content_of(html_dir):
 def add_links(data, words):
     for entry in data:
         if 'examples' in entry:
+            # print('add_links examples:', entry['examples'])
             for example in entry['examples']:
                 example['ladino_html'] = link_words(example['ladino'], words)
     return data

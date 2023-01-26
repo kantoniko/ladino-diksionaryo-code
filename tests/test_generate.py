@@ -7,6 +7,7 @@ import glob
 
 from ladino.generate import main
 from ladino.load.dictionary import load_dictionary, load_config
+from ladino.load.examples import load_examples
 from ladino.common import LadinoError
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -57,6 +58,7 @@ def test_one(tmpdir, request, name):
         assert os.system(cmd) == 0
 
 @pytest.mark.parametrize("name,expected", [
+    ('has_examples_field', "There was an 'examples' field 'has_examples_field.yaml' (it is deprecated)"),
     ('no_grammar', "The 'grammar' field is missing from file 'no_grammar.yaml'"),
     ('bad_grammar', "Invalid grammar 'Strange' in file 'bad_grammar.yaml'"),
     ('no_origen', "The 'origen' field is missing from file 'no_origen.yaml'"),
@@ -68,14 +70,12 @@ def test_one(tmpdir, request, name):
     ('noun_bad_number', "The 'number' field is 'countless' in 'noun_bad_number.yaml' version {'ladino': 'klaro', 'gender': 'masculine', 'number': 'countless'}"),
     ('verb_no_conjugation', "Grammar is 'verb', but there is NO 'conjugations' field in 'verb_no_conjugation.yaml'"),
     ('non_verb_with_conjugation', "Grammar is NOT a 'verb', but there are conjugations in 'non_verb_with_conjugation.yaml'"),
-    ('example_without_language', "The example 'Una palavra i un biervo.' is a string instead of a dictionary in 'example_without_language.yaml'"),
-    ('example_with_incorrect_language', "Incorrect language 'klingon' in example in 'example_with_incorrect_language.yaml'"),
     ('version_without_ladino', "The ladino 'version' is missing from file 'version_without_ladino.yaml'"),
     ('verb_wrong_conjugation_time', "Verb conjugation time 'other' is no recogrnized in 'verb_wrong_conjugation_time.yaml'"),
     ('verb_wrong_pronoun', "Incorrect pronoun 'you' in verb time 'prezente' in 'verb_wrong_pronoun.yaml'"),
     ('verb_conjugation_missing_ladino', "The field 'ladino' is missing from verb time: 'prezente' pronoun 'yo' in file 'verb_conjugation_missing_ladino.yaml'"),
 ])
-def test_bad(tmpdir, name, expected):
+def test_bad_word(tmpdir, name, expected):
     bad_input_dir = os.path.join(root, 'files', 'bad_input')
     shutil.copy(os.path.join(bad_input_dir, f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     with pytest.raises(Exception) as err:
@@ -83,4 +83,16 @@ def test_bad(tmpdir, name, expected):
     assert err.type == LadinoError
     assert str(err.value) == expected
 
+
+@pytest.mark.parametrize("name,expected", [
+    ('example_without_language', "The example 'Una palavra i un biervo.' is a string instead of a dictionary in 'example_without_language.yaml'"),
+    ('example_with_incorrect_language', "Incorrect language 'klingon' in example in 'example_with_incorrect_language.yaml'"),
+])
+def test_bad_examples(tmpdir, name, expected):
+    bad_input_dir = os.path.join(root, 'files', 'bad_input')
+    shutil.copy(os.path.join(bad_input_dir, f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
+    with pytest.raises(Exception) as err:
+        examples = load_examples(tmpdir)
+    assert err.type == LadinoError
+    assert str(err.value) == expected
 

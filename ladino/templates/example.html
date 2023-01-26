@@ -1,34 +1,34 @@
 {% include 'incl/header.html' %}
 
     <div class="content">
-       {{ example['example']['ladino_html'] | safe }}
+       {{ example['ladino_html'] | safe }}
         <a href="https://github.com/kantoniko/ladino-diksionaryo-data/blob/main/{{path}}/{{ example['source'] }}">📝</a>
 
-        {% if example['example']['english'] %}
-        <div lan="en"> {{ example['example']['english'] }}</div>
+        {% if example['english'] %}
+        <div lan="en"> {{ example['english'] }}</div>
         {% endif %}
 
-        {% if example['example']['turkish'] %}
-        <div lan="tr"> {{ example['example']['turkish'] }}</div>
+        {% if example['turkish'] %}
+        <div lan="tr"> {{ example['turkish'] }}</div>
         {% endif %}
 
-        {% if example['example']['spanish'] %}
-        <div lan="es"> {{ example['example']['spanish'] }}</div>
+        {% if example['spanish'] %}
+        <div lan="es"> {{ example['spanish'] }}</div>
         {% endif %}
 
-        {% if example['example']['hebrew'] %}
-        <div lan="he"> {{ example['example']['hebrew'] }}</div>
+        {% if example['hebrew'] %}
+        <div lan="he"> {{ example['hebrew'] }}</div>
         {% endif %}
 
-        {% if example['example']['french'] %}
-        <div lan="fr"> {{ example['example']['french'] }}</div>
+        {% if example['french'] %}
+        <div lan="fr"> {{ example['french'] }}</div>
         {% endif %}
 
-        {% if example['example']['portuguese'] %}
-        <div lan="pt"> {{ example['example']['portuguese'] }}</div>
+        {% if example['portuguese'] %}
+        <div lan="pt"> {{ example['portuguese'] }}</div>
         {% endif %}
 
-       {%- for boz in example.example.bozes -%}
+       {%- for boz in example.bozes -%}
          <div>
            <audio controls>
              <source src="https://audio.kantoniko.com/{{boz.person}}/{{boz.arkivo}}" type="audio/ogg">

@@ -137,15 +137,12 @@ def load_dictionary(config, limit, path_to_dictionary):
         check_and_collect_categories(config, data, dictionary, filename)
         check_and_collect_lists(config, data, dictionary)
 
+        if 'examples' in data:
+            raise LadinoError(f"There was an 'examples' field '{filename}' (it is deprecated)")
+
         if 'versions' not in data:
             raise LadinoError(f"The 'versions' field is missing from file '{filename}'")
 
-
-        if 'examples' not in data:
-            data['examples'] = []
-        examples = data['examples']
-        if examples == []:
-            examples = None
         comments = data.get('comments')
         if comments == []:
             comments = None
@@ -163,22 +160,6 @@ def load_dictionary(config, limit, path_to_dictionary):
             if 'translations' in version:
                 make_them_list(version['translations'], filename)
 
-            # Add examples and comments to the first version of the word.
-            if examples is not None:
-                version['examples'] = examples
-                for example in examples:
-                    if example.__class__.__name__ == 'str':
-                        raise LadinoError(f"The example '{example}' is a string instead of a dictionary in '{filename}'")
-                    for language in example.keys():
-                        if language not in ['ladino', 'bozes'] and language not in languages:
-                            raise LadinoError(f"Incorrect language '{language}' in example in '{filename}'")
-                    dictionary.all_examples.append({
-                        'example': example,
-                        #'word': version['ladino'].lower(),
-                        'source':  filename,
-                        'url': words_to_url(example['ladino']),
-                    })
-                examples = None
             if comments is not None:
                 version['comments'] = comments
                 comments = None
@@ -386,8 +367,8 @@ def collect_data(dictionary):
 
                 entry_copy['alternative-spelling'] = list(filter(lambda xyz: xyz['ladino'] != alt_entry['ladino'], alt_entries))
 
-                if 'examples' in entry_copy:
-                    entry_copy['examples'] = list(filter(lambda xyz: alt_entry['ladino'] in xyz['ladino'], entry['examples']))
+                #if 'examples' in entry_copy:
+                #    entry_copy['examples'] = list(filter(lambda xyz: alt_entry['ladino'] in xyz['ladino'], entry['examples']))
                 add_ladino_word(alt_entry['ladino'], alt_entry.get('accented'), entry_copy, dictionary)
 
         for language in languages:
