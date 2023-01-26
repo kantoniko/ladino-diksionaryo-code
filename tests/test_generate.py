@@ -10,7 +10,6 @@ from ladino.load.dictionary import load_dictionary, load_config
 from ladino.common import LadinoError
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-examples_path  = os.path.join(root, 'files', 'good_input')
 
 # Explanation why each word is included in the tests:
 # andjinara: our first test word. noun. for now it does not have a plural.
@@ -26,15 +25,6 @@ def test_no_params():
 @pytest.mark.parametrize("name", ['good'])
 def test_one(tmpdir, request, name):
     print(tmpdir)
-
-    #shutil.copy(os.path.join('tests', 'config.yaml'), os.path.join(tmpdir, f'config.yaml'))
-    #config = load_config(os.path.join(tmpdir))
-    #example = os.path.join(examples_path, 'words', f"{name}.yaml")
-    #if name == 'good':
-    #    for thing in os.listdir(examples_path):
-    #        shutil.copytree(os.path.join(examples_path, thing), os.path.join(tmpdir, thing))
-    #else:
-    #    raise Exception("Oh")
 
     # export in case we would like to update the files in the files/good_output/ directory
     save = request.config.getoption("--save")
@@ -52,8 +42,8 @@ def test_one(tmpdir, request, name):
     shutil.rmtree(os.path.join(html_dir, 'hunspell'))
     shutil.rmtree(os.path.join(html_dir, 'he'))
     os.unlink(os.path.join(html_dir, 'statistika.html')) # has the date of generation in it
-    os.unlink(os.path.join(html_dir, 'dictionaries.html')) # has changeing link in it
-    os.unlink(os.path.join(html_dir, 'echar-lashon.html')) # has changeing date in it
+    os.unlink(os.path.join(html_dir, 'dictionaries.html')) # has changing link in it
+    os.unlink(os.path.join(html_dir, 'echar-lashon.html')) # has changing date in it
     #if name != 'good':
     #    for filepath in glob.glob(f'{html_dir}/*-*.html'):
     #        os.unlink(filepath)
