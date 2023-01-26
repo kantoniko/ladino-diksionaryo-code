@@ -4,7 +4,8 @@ from flask import Flask, send_file
 
 """
 flask run
-DIR=files/good_output/good/ flask run
+DIR=files/good/output/ flask run
+DIR=files/real/output/ flask run
 """
 
 app = Flask(__name__)
