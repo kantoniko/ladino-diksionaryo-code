@@ -1,0 +1,256 @@
+kategorias:
+  - animales
+  - bevidas
+  - diminutivos
+  - direksion
+  - elektriko
+  - famiya
+  - flores
+  - frutas
+  - gramer
+  - insektos
+  - kamareta-de-echar
+  - kamaretas
+  - kaza
+  - kestiones
+  - kolores
+  - komidas
+  - kontenentes
+  - kontinentes
+  - kuzina
+  - linguas
+  - mamiferos
+  - mobles
+  - muzika
+  - nasionalidad
+  - natura
+  - numeros
+  - paises
+  - plantas
+  - profesion
+  - puerpo
+  - relijiones
+  - ropa
+  - saludos
+  - servisio-de-meza
+  - sivdades
+  - sports
+  - veikolos
+  - zarzavates
+origenes:
+  - Aki Yerushalayim
+  - Balkanes
+  - Ebreo
+  - Estanbol
+  - Gresia
+  - Izmir
+  - Jeneral
+  - Ladinadores
+  - Ladinokomunita
+  - Otros
+  - Salonik
+  - Sarayevo
+  - Torah-Tanah
+  - NA
+gramatika:
+  - adjective
+  - adverb
+  - noun
+  - verb
+  - preposition
+  - pronoun
+  - NA
+gender:
+  - feminine
+  - masculine
+  - both
+  - NA
+numero:
+  - singular
+  - plural
+verbos-iregolares:
+  - aver
+  - azer
+  - dar
+  - dever
+  - dizir
+  - doler
+  - entender
+  - estar
+  - fuyir
+  - goler
+  - inchir
+  - ir
+  - kaver
+  - kayer
+  - kerer
+  - konoser
+  - kozer
+  - kuzir
+  - murir
+  - oyir
+  - poder
+  - pueder
+  - ser
+  - salir
+  - saver
+  - servir
+  - sintir
+  - tener
+  - trayer
+  - ver
+  - vinir
+pajinas:
+  ser.md:                  ser.html
+listas:
+  sezones:
+    - primavera
+    - enverano
+    - otonyo
+    - invyerno
+  mezes:
+    - enero
+    - fevrero
+    - marso
+    - avril
+    - mayo
+    - junio
+    - djulio
+    - agosto
+    - septembre
+    - oktobre
+    - novembre
+    - decembre
+  dias-de-la-semana:
+    - alhad
+    - lunes
+    - martes
+    - mierkoles
+    - djueves
+    - viernes
+    - shabat
+  kontrarios:
+    - grande
+    - chiko
+    - flako
+    - godro
+    - alto
+    - basho
+    - alegre
+    - triste
+    - vazio
+    - yeno
+    - mansevo
+    - viejo
+    - mansevo
+    - aedado
+    - largo
+    - kurto
+    - ermozo
+    - feo
+    - muevo
+    - viejo
+    - bueno
+    - negro
+    - prove
+    - riko
+    - suzio
+    - limpio
+    - frio
+    - kayente
+    - fasil
+    - difisil
+    - kolay
+    - zor
+    - duro
+    - blando
+    - liviano
+    - pezgado
+  enverano:
+    - sol
+    - plaj
+    - banyo de sol
+    - banyo de mar
+    - parasol
+    - shezlong
+    - sudor
+    - umidita
+    - atabafarse de la kalor
+    - antojos de sol
+    - krema de sol
+    - vakansas
+    - kaza de kampanya
+    - dondurma
+    - yalada
+    - piknik
+    - fuego de shara
+    - erkondishen
+    - ayre kondisionado
+    - pisina
+    - havuz
+  invierno:
+    - luvia
+    - pedrisko
+    - inyeve
+    - bruma
+    - relampago
+    - rayo
+    - entezarse del frio
+    - supa
+    - chadir
+    - guantes
+  tiempos:
+    - agora
+    - amanyana
+    - antiyer
+    - anoche
+    - anyo
+    - ayer
+    - dekada
+    - dia
+    - manyana
+    - mediodia
+    - medianoche
+    - mez
+    - midi
+    - minuto
+    - noche
+    - ora
+    - oy
+    - punto
+    - segundo
+    - semana
+    - siglo
+    - tadre
+    - tadres
+  numeros:
+    - zero
+    - uno
+    - dos
+    - tres
+    - kuatro
+    - sinko
+    - sesh
+    - siete
+    - ocho
+    - mueve
+    - diez
+tiempos:
+  - prezente
+  - pasado
+  - imperfekto
+  - futuro
+  - subjunktivo
+  - subjunktivo imperfekto
+  - kondisional
+  - imperativo
+  - djerundivo
+  - partisipio pasado
+pronombres:
+  - yo
+  - tu
+  - el
+  - mozotros
+  - vozotros
+  - eyos
+

@@ -1,0 +1,21 @@
+grammar: NA
+id: '2646'
+origen: Jeneral
+kategorias:
+  - bevidas
+
+versions:
+  - ladino: vino
+    accented: víno
+
+    gender: masculine
+    number: singular
+
+    translations:
+        english: wine
+        french: vin
+        hebrew: יין
+        portuguese: ''
+        spanish: vino
+        turkish: şarap
+
