@@ -26,27 +26,25 @@ def test_no_params():
 @pytest.mark.parametrize("name", ['good'])
 def test_one(tmpdir, request, name):
     print(tmpdir)
-    path_to_words = os.path.join(tmpdir, 'words')
-    print(path_to_words)
 
-    shutil.copy(os.path.join('tests', 'config.yaml'), os.path.join(tmpdir, f'config.yaml'))
-    config = load_config(os.path.join(tmpdir))
-    example = os.path.join(examples_path, 'words', f"{name}.yaml")
-    if name == 'good':
-        for thing in os.listdir(examples_path):
-            shutil.copytree(os.path.join(examples_path, thing), os.path.join(tmpdir, thing))
-    else:
-        raise Exception("Oh")
+    #shutil.copy(os.path.join('tests', 'config.yaml'), os.path.join(tmpdir, f'config.yaml'))
+    #config = load_config(os.path.join(tmpdir))
+    #example = os.path.join(examples_path, 'words', f"{name}.yaml")
+    #if name == 'good':
+    #    for thing in os.listdir(examples_path):
+    #        shutil.copytree(os.path.join(examples_path, thing), os.path.join(tmpdir, thing))
+    #else:
+    #    raise Exception("Oh")
 
     # export in case we would like to update the files in the files/good_output/ directory
     save = request.config.getoption("--save")
     if save:
-        html_dir = os.path.join(root, 'files', 'good_output', name)
+        html_dir = os.path.join(root, 'files', name, 'output', name)
     else:
         html_dir = os.path.join(tmpdir, 'html')
     os.makedirs(html_dir, exist_ok=True)
 
-    sys.argv = [sys.argv[0], '--all', '--html',  html_dir, '--dictionary', str(tmpdir), '--pretty']
+    sys.argv = [sys.argv[0], '--all', '--html',  html_dir, '--dictionary', os.path.join(root, 'files', name, 'data'), '--pretty']
     main()
 
     if len(os.listdir(os.path.join(html_dir, 'verbos'))) == 0:
@@ -56,14 +54,14 @@ def test_one(tmpdir, request, name):
     os.unlink(os.path.join(html_dir, 'statistika.html')) # has the date of generation in it
     os.unlink(os.path.join(html_dir, 'dictionaries.html')) # has changeing link in it
     os.unlink(os.path.join(html_dir, 'echar-lashon.html')) # has changeing date in it
-    if name != 'good':
-        for filepath in glob.glob(f'{html_dir}/*-*.html'):
-            os.unlink(filepath)
-        for cat in config['kategorias']:
-            os.unlink(os.path.join(html_dir, 'kategorias', f'{cat}.html'))
+    #if name != 'good':
+    #    for filepath in glob.glob(f'{html_dir}/*-*.html'):
+    #        os.unlink(filepath)
+    #    for cat in config['kategorias']:
+    #        os.unlink(os.path.join(html_dir, 'kategorias', f'{cat}.html'))
 
     if not save:
-        cmd = f"diff -r {os.path.join(root, 'files', 'good_output', name)} {os.path.join(tmpdir, 'html')}"
+        cmd = f"diff -r {os.path.join(root, 'files', name, 'output')} {os.path.join(tmpdir, 'html')}"
         print(cmd)
         assert os.system(cmd) == 0
 
