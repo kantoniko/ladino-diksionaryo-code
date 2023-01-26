@@ -39,7 +39,7 @@ def test_one(tmpdir, request, name):
     # export in case we would like to update the files in the files/good_output/ directory
     save = request.config.getoption("--save")
     if save:
-        html_dir = os.path.join(root, 'files', name, 'output', name)
+        html_dir = os.path.join(root, 'files', name, 'output')
     else:
         html_dir = os.path.join(tmpdir, 'html')
     os.makedirs(html_dir, exist_ok=True)
