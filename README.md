@@ -53,7 +53,7 @@ These commands will generate the static files in the `docs` subdrirectory. Below
 
 Some selected pieces of data (words, examples, etc.) that we stored in the repository of the code to serve us for testing.
 
-./generate.sh
+./generate_sample.sh
 
 ### Generate only the dictionary
 
@@ -69,6 +69,10 @@ This took 3.20 on my computer wheren there were 3321 words and 1556 example in t
 ### Generate the whole site locally
 
 For this we need all the repositories to be cloned.
+
+```
+./generate.sh
+```
 
 ```
 time PYTHONPATH=. python ladino/generate.py --dictionary ../ladino-diksionaryo-data/ --html docs --all --log --whatsapp ../ladino-estamos-whatsapeando/ --sounds ../ladino-diksionaryo-sounds/ --unafraza ../ladino-una-fraza-al-diya/ --pages ../ladino-pages --books ../ladino-salu-lulu/  --ladinadores ../ladino-los-ladinadores/ --limit 10
