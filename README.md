@@ -28,7 +28,7 @@ pip install -r requirements.txt
 
 ```
 pytest -vvs tests/test_generate.py
-pytest -vvs -rA -x --log-cli-level=DEBUG --random-order tests/test_generate.p
+pytest -vvs -rA -x --log-cli-level=DEBUG --random-order tests/test_generate.py
 ```
 
 the expected output files are in the `tests` subdirectory.
@@ -45,15 +45,34 @@ Generate test coverage report:
 pytest -vvs -rA -x --log-cli-level=DEBUG --random-order --cov=ladino --cov-report html --cov-report term --cov-branch tests/test_generate.py
 ```
 
+## Generate the site locally
+
+These commands will generate the static files in the `docs` subdrirectory. Below you'll find the command to start a local web server to view the results.
+
+### Generate test pages
+
+Some selected pieces of data (words, examples, etc.) that we stored in the repository of the code to serve us for testing.
+
+
+### Generate only the dictionary
+
+For this we need the data repository cloned.
 
 ```
 PYTHONPATH=. python ladino/generate.py --dictionary ../ladino-diksionaryo-data/ --html docs --all --log
 ```
 
+This took 3.20 on my computer wheren there were 3321 words and 1556 example in the `ladino-diksionaryo-data` repository.
+
+
+### Generate the whole site locally
+
+For this we need all the repositories to be cloned.
+
+```
 time PYTHONPATH=. python ladino/generate.py --dictionary ../ladino-diksionaryo-data/ --html docs --all --log --whatsapp ../ladino-estamos-whatsapeando/ --sounds ../ladino-diksionaryo-sounds/ --unafraza ../ladino-una-fraza-al-diya/ --pages ../ladino-pages --books ../ladino-salu-lulu/  --ladinadores ../ladino-los-ladinadores/ --limit 10
 ```
 
-This will generate the static files in the `docs` subdrirectory.
 
 Launch a static web server with the following command:
 
@@ -63,7 +82,7 @@ Launch a static web server with the following command:
 ./app.py
 ```
 
-or 
+or
 
 ```
 FLASK_DEBUG=1 flask run
@@ -71,7 +90,7 @@ FLASK_DEBUG=1 flask run
 
 ## Language considerations
 
-* Verbs in Ladino have a lot of conjugations. (are there are many as in modern Spanish?)
+* Verbs in Ladino have a lot of conjugations. (are there as many as in modern Spanish?)
 
 * Several forms of the same verb translate to the same form in English:
   yo komo     I eat
