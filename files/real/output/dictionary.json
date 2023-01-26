@@ -1,0 +1,54 @@
+{
+    "english": {
+        "wine": [
+            "vino"
+        ]
+    },
+    "french": {
+        "vin": [
+            "vino"
+        ]
+    },
+    "hebrew": {
+        "יין": [
+            "vino"
+        ]
+    },
+    "ladino": {
+        "vino": {
+            "accented": [
+                "víno"
+            ],
+            "english": [
+                "wine"
+            ],
+            "french": [
+                "vin"
+            ],
+            "hebrew": [
+                "יין"
+            ],
+            "ladino": [
+                "vino"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "vino"
+            ],
+            "turkish": [
+                "şarap"
+            ]
+        }
+    },
+    "portuguese": {},
+    "spanish": {
+        "vino": [
+            "vino"
+        ]
+    },
+    "turkish": {
+        "şarap": [
+            "vino"
+        ]
+    }
+}
