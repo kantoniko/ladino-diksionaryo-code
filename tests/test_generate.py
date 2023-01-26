@@ -10,7 +10,6 @@ from ladino.generate import main
 from ladino.load.dictionary import load_dictionary, load_config
 from ladino.common import LadinoError
 
-data_path  = os.path.join(data_repo_path(), 'words')
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 examples_path  = os.path.join(root, 'files', 'good_input')
 
@@ -89,9 +88,10 @@ def test_one(tmpdir, request, name):
     ('verb_conjugation_missing_ladino', "The field 'ladino' is missing from verb time: 'prezente' pronoun 'yo' in file 'verb_conjugation_missing_ladino.yaml'"),
 ])
 def test_bad(tmpdir, name, expected):
-    shutil.copy(os.path.join(root, 'files', 'bad_input', f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
+    bad_input_dir = os.path.join(root, 'files', 'bad_input')
+    shutil.copy(os.path.join(bad_input_dir, f'{name}.yaml'), os.path.join(tmpdir, f'{name}.yaml'))
     with pytest.raises(Exception) as err:
-        dictionary_source, all_examples = load_dictionary(load_config(data_repo_path()), None, tmpdir)
+        dictionary_source, all_examples = load_dictionary(load_config(bad_input_dir), None, tmpdir)
     assert err.type == LadinoError
     assert str(err.value) == expected
 

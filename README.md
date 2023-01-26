@@ -3,45 +3,28 @@ The code behind https://kantoniko.com/
 
 ## Development environment
 
-Clone this project:
+Create a folder called `kantoniko`. Inside that folder clone the repositories of https://github.com/kantoniko/
+
+Clone this project that contains the code. This is enought to run the tests and develop the code.
 
 ```
 git clone https://github.com/kantoniko/ladino-diksionaryo-code.git
 ```
 
-Clone https://github.com/kantoniko/ladino-diksionaryo-data/ using the following command:
+In order to work with the real data of the dictionary clone https://github.com/kantoniko/ladino-diksionaryo-data/ using the following command:
 
 ```
 git clone https://github.com/kantoniko/ladino-diksionaryo-data.git
 ```
 
-Alternatively you can clone it in some other place and then add symbolic link so it will be accessible as
-the subdirectory `ladino-diksionaryo-data` of this project.
 
+### Install the dependencies.
 
 ```
 pip install -r requirements.txt
-PYTHONPATH=. python ladino/generate.py --dictionary ../ladino-diksionaryo-data/ --html docs --all --log
-time PYTHONPATH=. python ladino/generate.py --dictionary ../ladino-diksionaryo-data/ --html docs --all --log --whatsapp ../ladino-estamos-whatsapeando/ --sounds ../ladino-diksionaryo-sounds/ --unafraza ../ladino-una-fraza-al-diya/ --pages ../ladino-pages --books ../ladino-salu-lulu/  --ladinadores ../ladino-los-ladinadores/ --limit 10
 ```
 
-This will generate the static files in the `docs` subdrirectory.
-
-Launch a static web server with the following command:
-
-## Run locally
-
-```
-./app.py
-```
-
-or 
-
-```
-FLASK_DEBUG=1 flask run
-```
-
-## Testing
+### Testing
 
 ```
 pytest -vvs tests/test_generate.py
@@ -60,6 +43,30 @@ Generate test coverage report:
 
 ```
 pytest -vvs -rA -x --log-cli-level=DEBUG --random-order --cov=ladino --cov-report html --cov-report term --cov-branch tests/test_generate.py
+```
+
+
+```
+PYTHONPATH=. python ladino/generate.py --dictionary ../ladino-diksionaryo-data/ --html docs --all --log
+```
+
+time PYTHONPATH=. python ladino/generate.py --dictionary ../ladino-diksionaryo-data/ --html docs --all --log --whatsapp ../ladino-estamos-whatsapeando/ --sounds ../ladino-diksionaryo-sounds/ --unafraza ../ladino-una-fraza-al-diya/ --pages ../ladino-pages --books ../ladino-salu-lulu/  --ladinadores ../ladino-los-ladinadores/ --limit 10
+```
+
+This will generate the static files in the `docs` subdrirectory.
+
+Launch a static web server with the following command:
+
+## Run locally
+
+```
+./app.py
+```
+
+or 
+
+```
+FLASK_DEBUG=1 flask run
 ```
 
 ## Language considerations
