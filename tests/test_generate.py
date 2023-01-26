@@ -4,7 +4,6 @@ import os
 import shutil
 import pytest
 import glob
-from conftest import data_repo_path
 
 from ladino.generate import main
 from ladino.load.dictionary import load_dictionary, load_config
