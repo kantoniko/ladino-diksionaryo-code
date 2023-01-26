@@ -22,7 +22,7 @@ def test_no_params():
     sys.argv = [sys.argv[0]]
     main()
 
-@pytest.mark.parametrize("name", ['good'])
+@pytest.mark.parametrize("name", ['good', 'real'])
 def test_one(tmpdir, request, name):
     print(tmpdir)
 
@@ -35,6 +35,7 @@ def test_one(tmpdir, request, name):
     os.makedirs(html_dir, exist_ok=True)
 
     sys.argv = [sys.argv[0], '--all', '--html',  html_dir, '--dictionary', os.path.join(root, 'files', name, 'data'), '--pretty']
+    print(sys.argv)
     main()
 
     if len(os.listdir(os.path.join(html_dir, 'verbos'))) == 0:
