@@ -73,7 +73,7 @@ def process_examples(dictionary, examples):
         # logging.info(f'example: {example}')
         # logging.info(f"example.ladino: {example['ladino']}")
 
-        unique_words_in_example = set(re.sub(r'[.]', ' ', example['ladino']).lower().split())
+        unique_words_in_example = set(re.sub(r'[.,;!?:]', ' ', example['ladino']).lower().split())
         for word in unique_words_in_example:
             # logging.info(f"example word: {word}")
             if word in words:
