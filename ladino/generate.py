@@ -6,6 +6,7 @@ import logging
 import os
 import sys
 import datetime
+import re
 from yaml import safe_load
 
 import ladino.common
@@ -71,7 +72,9 @@ def process_examples(dictionary, examples):
     for example in examples:
         # logging.info(f'example: {example}')
         # logging.info(f"example.ladino: {example['ladino']}")
-        for word in example['ladino'].lower().split():
+
+        unique_words_in_example = set(re.sub(r'[.]', ' ', example['ladino']).lower().split())
+        for word in unique_words_in_example:
             # logging.info(f"example word: {word}")
             if word in words:
                 word_to_examples[word].append(example)
