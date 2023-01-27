@@ -1,0 +1,53 @@
+grammar: adjective
+id: '526'
+origen: Jeneral
+
+versions:
+  - ladino: kansado
+
+    gender: masculine
+    number: singular
+
+    translations:
+        english: tired
+        french: ''
+        portuguese: ''
+        spanish: cansado
+        turkish: yorgun
+
+  - ladino: kansada
+
+    gender: feminine
+    number: singular
+
+    translations:
+        english: tired
+        french: ''
+        portuguese: ''
+        spanish: cansada
+        turkish: yorgun
+
+  - ladino: kansados
+
+    gender: masculine
+    number: plural
+
+    translations:
+        english: tired
+        french: ''
+        portuguese: ''
+        spanish: cansados
+        turkish: yorgun
+
+  - ladino: kansadas
+
+    gender: feminine
+    number: plural
+
+    translations:
+        english: tired
+        french: ''
+        portuguese: ''
+        spanish: cansadas
+        turkish: yorgun
+
