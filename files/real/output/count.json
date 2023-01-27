@@ -28,5 +28,10 @@
             "examples": 0,
             "words": 3
         }
+    },
+    "whatsapp": {
+        "all": 1,
+        "hebrew": 0,
+        "images": 1
     }
 }
