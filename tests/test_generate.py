@@ -38,6 +38,7 @@ def test_one(tmpdir, request, name):
     sys.argv = [sys.argv[0], '--all', '--html',  html_dir, '--dictionary', os.path.join(root, 'files', name, 'data'), '--pretty']
     if name == 'real':
         sys.argv.extend(['--whatsapp', 'files/real/estamos-whatsapeando/'])
+        sys.argv.extend(['--unafraza', 'files/real/una-fraza-al-diya/'])
     print(sys.argv)
     main()
 
