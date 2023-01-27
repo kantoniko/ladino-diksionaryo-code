@@ -62,15 +62,14 @@ def get_args():
     return args
 
 def process_examples(dictionary, examples):
-    #print(examples)
+    # logging.info(f"examples: {examples}")
     for example in examples:
-        #print('example:', example)
-        #print(example['ladino'])
+        # logging.info(f'example: {example}')
+        # logging.info(f"example.ladino: {example['ladino']}")
         for word in example['ladino'].lower().split():
-            # print(f"word: {word}")
+            # logging.info(f"example word: {word}")
             for dword in dictionary.words:
                 if dword['ladino'] == word:
-                    # print('add')
                     if 'examples' not in dword:
                         dword['examples'] = []
                     dword['examples'].append(example)
@@ -90,7 +89,8 @@ def main():
         config = load_config(path_to_repo)
 
         dictionary = load_dictionary(config, args.limit, os.path.join(path_to_repo, 'words'))
-        logging.info(dictionary.count)
+        logging.info(f'dictionary.count: {dictionary.count}')
+        # logging.info(f'dictionary.words: {dictionary.words}')
 
         examples = load_examples(os.path.join(path_to_repo, 'examples'))
         process_examples(dictionary, examples)
