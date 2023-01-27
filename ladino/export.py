@@ -455,7 +455,7 @@ def export_markdown_page(path_to_md_file, target):
             content=content,
         )
 
-def export_individual_examples(examples, path, sounds, words, sound_people, target):
+def export_individual_examples(examples, sounds, words, sound_people, target):
     for example in examples:
         example['ladino_html'] = link_words(example['ladino'], words)
         if 'bozes' in example:
@@ -474,7 +474,7 @@ def export_individual_examples(examples, path, sounds, words, sound_people, targ
         render(
             template="example.html",
             filename=os.path.join(target, example['url'] + '.html'),
-            path=path,
+            path='examples',
 
             title='Egzempio',
             example=example,
@@ -492,7 +492,7 @@ def export_examples(all_examples, words, sound_people, html_dir):
     for example in all_examples:
         example['ladino_html'] = link_words(example['ladino'], words)
 
-    export_individual_examples(all_examples, 'words', sounds, words, sound_people, target)
+    export_individual_examples(all_examples, sounds, words, sound_people, target)
 
     for person, examples in sounds.items():
         if person == 'silent':
