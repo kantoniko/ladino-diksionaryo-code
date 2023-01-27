@@ -12,6 +12,12 @@
         "hospitals": [
             "ospitales"
         ],
+        "tired": [
+            "kansada",
+            "kansadas",
+            "kansado",
+            "kansados"
+        ],
         "wine": [
             "vino"
         ]
@@ -126,6 +132,70 @@
             ],
             "turkish": []
         },
+        "kansada": {
+            "english": [
+                "tired"
+            ],
+            "french": [],
+            "ladino": [
+                "kansada"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "cansada"
+            ],
+            "turkish": [
+                "yorgun"
+            ]
+        },
+        "kansadas": {
+            "english": [
+                "tired"
+            ],
+            "french": [],
+            "ladino": [
+                "kansadas"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "cansadas"
+            ],
+            "turkish": [
+                "yorgun"
+            ]
+        },
+        "kansado": {
+            "english": [
+                "tired"
+            ],
+            "french": [],
+            "ladino": [
+                "kansado"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "cansado"
+            ],
+            "turkish": [
+                "yorgun"
+            ]
+        },
+        "kansados": {
+            "english": [
+                "tired"
+            ],
+            "french": [],
+            "ladino": [
+                "kansados"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "cansados"
+            ],
+            "turkish": [
+                "yorgun"
+            ]
+        },
         "ospital": {
             "english": [
                 "hospital"
@@ -206,6 +276,18 @@
     },
     "portuguese": {},
     "spanish": {
+        "cansada": [
+            "kansada"
+        ],
+        "cansadas": [
+            "kansadas"
+        ],
+        "cansado": [
+            "kansado"
+        ],
+        "cansados": [
+            "kansados"
+        ],
         "hospital": [
             "ospital"
         ],
@@ -225,6 +307,12 @@
         ],
         "hastane": [
             "ospital"
+        ],
+        "yorgun": [
+            "kansada",
+            "kansadas",
+            "kansado",
+            "kansados"
         ],
         "şarap": [
             "vino"
