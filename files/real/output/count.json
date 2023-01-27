@@ -30,8 +30,8 @@
         }
     },
     "whatsapp": {
-        "all": 1,
-        "hebrew": 0,
-        "images": 1
+        "all": 2,
+        "hebrew": 1,
+        "images": 2
     }
 }
