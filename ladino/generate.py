@@ -63,18 +63,20 @@ def get_args():
 
 def process_examples(dictionary, examples):
     # logging.info(f"examples: {examples}")
-    # logging.info(f"dictionar.words: {dictionary.words:}")
+    # logging.info(f"dictionary.words: {dictionary.words}")
+    words = set( word['ladino'] for word in dictionary.words )
+    logging.info(f"words: {words}")
+    word_to_examples = { word:[] for word in words }
+    logging.info(f"word_to_examples: {word_to_examples}")
     for example in examples:
         # logging.info(f'example: {example}')
         # logging.info(f"example.ladino: {example['ladino']}")
         for word in example['ladino'].lower().split():
             # logging.info(f"example word: {word}")
-            for dword in dictionary.words:
-                if dword['ladino'] == word:
-                    if 'examples' not in dword:
-                        dword['examples'] = []
-                    dword['examples'].append(example)
+            if word in words:
+                word_to_examples[word].append(example)
     #print(dictionary.word_mapping['ladino'])
+    return word_to_examples
 
 def main():
     args = get_args()
@@ -94,7 +96,7 @@ def main():
         # logging.info(f'dictionary.words: {dictionary.words}')
 
         examples = load_examples(os.path.join(path_to_repo, 'examples'))
-        process_examples(dictionary, examples)
+        word_to_examples = process_examples(dictionary, examples)
 
     sound_people = {}
     if args.sounds:
@@ -102,7 +104,7 @@ def main():
             sound_people = safe_load(fh)
 
     if args.all:
-        export_to_html(config, dictionary, examples, sound_people, path_to_repo, args.html, whatsapp=args.whatsapp, unafraza=args.unafraza, pages=args.pages, books=args.books, ladinadores=args.ladinadores, pretty=args.pretty)
+        export_to_html(config, dictionary, examples, word_to_examples, sound_people, path_to_repo, args.html, whatsapp=args.whatsapp, unafraza=args.unafraza, pages=args.pages, books=args.books, ladinadores=args.ladinadores, pretty=args.pretty)
         create_sitemap(args.html)
 
 

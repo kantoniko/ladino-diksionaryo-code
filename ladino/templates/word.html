@@ -48,29 +48,6 @@
         <td></td>
      </tr>
      </table>
-     {% if entry.examples %}
-        <h2>Egzempios</h2>
-        <ul>
-         {% for example in entry.examples %}
-            <li>{{example.ladino_html | safe}}
-                {% if example.english %}
-                <ul>
-                    <li>{{example.english}}</li>
-                </ul>
-                {% endif %}
-
-                {%- for boz in example.bozes -%}
-                   <br>
-                   <audio controls>
-                     <source src="https://audio.kantoniko.com/{{boz.person}}/{{boz.arkivo}}" type="audio/ogg">
-                     Your browser does not support the audio element.
-                   </audio>
-                {%- endfor -%}
-            </li>
-         {% endfor %}
-        </ul>
-     {% endif %}
-
 
 
      {% if entry.comments %}
@@ -103,6 +80,17 @@
 
      {% if not loop.last %}<hr>{% endif %}
   {% endfor %}
+
+  {% if examples %}
+     <h2>Egzempios</h2>
+     <ul>
+      {% for example in examples %}
+        <li><a href="/egzempios/{{example.url}}">{{example.ladino}}</a></li>
+      {% endfor %}
+     </ul>
+  {% endif %}
+
+
 </div>
 
 {% include 'incl/footer.html' %}
