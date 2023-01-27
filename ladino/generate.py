@@ -107,7 +107,7 @@ def main():
             sound_people = safe_load(fh)
 
     if args.all:
-        export_to_html(config, dictionary, examples, word_to_examples, sound_people, path_to_repo, args.html, whatsapp=args.whatsapp, unafraza=args.unafraza, pages=args.pages, books=args.books, ladinadores=args.ladinadores, pretty=args.pretty)
+        export_to_html(config, dictionary, examples, word_to_examples, sound_people, path_to_repo, args.html, whatsapp_dir=args.whatsapp, unafraza=args.unafraza, pages=args.pages, books=args.books, ladinadores=args.ladinadores, pretty=args.pretty)
         create_sitemap(args.html)
 
 

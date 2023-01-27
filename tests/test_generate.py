@@ -36,6 +36,8 @@ def test_one(tmpdir, request, name):
     os.makedirs(html_dir, exist_ok=True)
 
     sys.argv = [sys.argv[0], '--all', '--html',  html_dir, '--dictionary', os.path.join(root, 'files', name, 'data'), '--pretty']
+    if name == 'real':
+        sys.argv.extend(['--whatsapp', 'files/real/estamos-whatsapeando/'])
     print(sys.argv)
     main()
 

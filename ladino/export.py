@@ -16,6 +16,7 @@ from ladino.common import languages
 import ladino.common
 from ladino.export_to_hunspell import export_to_hunspell
 from ladino.pdf import create_pdf_dictionaries
+import ladino.whatsapeando as whatsapp
 
 language_names = {
             'english'    : 'inglez',
@@ -287,7 +288,7 @@ def export_book(book, html_dir):
     return {'path': data['path'], 'titolo': data['titolo']}
 
 
-def export_to_html(config, dictionary, examples, word_to_examples, sound_people, path_to_repo, html_dir, whatsapp=None, unafraza=None, pages=None, books=None, ladinadores=None, pretty=False):
+def export_to_html(config, dictionary, examples, word_to_examples, sound_people, path_to_repo, html_dir, whatsapp_dir=None, unafraza=None, pages=None, books=None, ladinadores=None, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
     global html_path
@@ -306,10 +307,8 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     export_ladinadores(ladinadores)
 
     word_to_whatsapp = {}
-    if whatsapp:
-        sys.path.insert(0, whatsapp)
-        import ladino.whatsapeando as whatsapp
-        messages = whatsapp.get_messages() # list of dicts
+    if whatsapp_dir:
+        messages = whatsapp.get_messages(whatsapp_dir) # list of dicts
         for message in messages:
             #print(message)
             page = message['page']
