@@ -6,6 +6,12 @@
         "come": [
             "venir"
         ],
+        "hospital": [
+            "ospital"
+        ],
+        "hospitals": [
+            "ospitales"
+        ],
         "wine": [
             "vino"
         ]
@@ -30,6 +36,126 @@
         ]
     },
     "ladino": {
+        "eshpital": {
+            "english": [
+                "hospital"
+            ],
+            "french": [],
+            "ladino": [
+                "eshpital"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "hospital"
+            ],
+            "turkish": [
+                "hastane"
+            ]
+        },
+        "eshpitales": {
+            "english": [
+                "hospitals"
+            ],
+            "french": [],
+            "ladino": [
+                "eshpitales"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "hospitales"
+            ],
+            "turkish": []
+        },
+        "espital": {
+            "english": [
+                "hospital"
+            ],
+            "french": [],
+            "ladino": [
+                "espital"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "hospital"
+            ],
+            "turkish": [
+                "hastane"
+            ]
+        },
+        "espitales": {
+            "english": [
+                "hospitals"
+            ],
+            "french": [],
+            "ladino": [
+                "espitales"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "hospitales"
+            ],
+            "turkish": []
+        },
+        "ispital": {
+            "english": [
+                "hospital"
+            ],
+            "french": [],
+            "ladino": [
+                "ispital"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "hospital"
+            ],
+            "turkish": [
+                "hastane"
+            ]
+        },
+        "ispitales": {
+            "english": [
+                "hospitals"
+            ],
+            "french": [],
+            "ladino": [
+                "ispitales"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "hospitales"
+            ],
+            "turkish": []
+        },
+        "ospital": {
+            "english": [
+                "hospital"
+            ],
+            "french": [],
+            "ladino": [
+                "ospital"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "hospital"
+            ],
+            "turkish": [
+                "hastane"
+            ]
+        },
+        "ospitales": {
+            "english": [
+                "hospitals"
+            ],
+            "french": [],
+            "ladino": [
+                "ospitales"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "hospitales"
+            ],
+            "turkish": []
+        },
         "venir": {
             "english": [
                 "come"
@@ -80,6 +206,12 @@
     },
     "portuguese": {},
     "spanish": {
+        "hospital": [
+            "ospital"
+        ],
+        "hospitales": [
+            "ospitales"
+        ],
         "venir": [
             "venir"
         ],
@@ -90,6 +222,9 @@
     "turkish": {
         "gelmek": [
             "venir"
+        ],
+        "hastane": [
+            "ospital"
         ],
         "şarap": [
             "vino"
