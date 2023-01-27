@@ -59,15 +59,6 @@
         </ul>
      {% endif %}
 
-     {% if whatsapp %}
-        <h2>Estamos Whatsapeando</h2>
-        <ul>
-         {% for url in whatsapp.keys() | sort %}
-            <li><a href="/whatsapeando/{{url}}?highlight={{plain_word}}">{{whatsapp[url]}}</a></li>
-         {% endfor %}
-        </ul>
-     {% endif %}
-
      {% if ufad %}
         <h2>Una fraza</h2>
         <ul>
@@ -86,6 +77,15 @@
      <ul>
       {% for example in examples %}
         <li><a href="/egzempios/{{example.url}}">{{example.ladino}}</a></li>
+      {% endfor %}
+     </ul>
+  {% endif %}
+
+  {% if whatsapp %}
+     <h2>Estamos Whatsapeando</h2>
+     <ul>
+      {% for url in whatsapp.keys() | sort %}
+         <li><a href="/whatsapeando/{{url}}?highlight={{plain_word}}">{{whatsapp[url]}}</a></li>
       {% endfor %}
      </ul>
   {% endif %}
