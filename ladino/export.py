@@ -17,6 +17,7 @@ import ladino.common
 from ladino.export_to_hunspell import export_to_hunspell
 from ladino.pdf import create_pdf_dictionaries
 import ladino.whatsapeando as whatsapp
+from ladino.ufad import ufad
 
 language_names = {
             'english'    : 'inglez',
@@ -336,9 +337,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
 
     word_to_una_fraza = {}
     if unafraza:
-        sys.path.insert(0, unafraza)
-        from ladino.ufad import ufad
-        entries = ufad()
+        entries = ufad(unafraza)
         for entry in entries:
             words_in_message = re.findall(r'\w+', entry['Ladino'])
             for word in words_in_message:
