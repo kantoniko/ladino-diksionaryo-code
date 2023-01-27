@@ -1,11 +1,10 @@
-examples:
-  - ladino: Tengo una kaza grande
-    english: I have a big house
-    bozes:
-      - person: gabor-szabo
-        arkivo: tengo-una-kaza-grande.ogg
-  - ladino: La kaza de papel
-  - ladino: Yo komo pan
-    english: I eat bread
-  - ladino: Una palavra i un biervo.
-  - ladino: Mi kaza es tu kaza.
+- ladino: Tengo una kaza grande
+  english: I have a big house
+  bozes:
+    - person: gabor-szabo
+      arkivo: tengo-una-kaza-grande.ogg
+- ladino: La kaza de papel
+- ladino: Yo komo pan
+  english: I eat bread
+- ladino: Una palavra i un biervo.
+- ladino: Mi kaza es tu kaza.

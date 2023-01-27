@@ -13,7 +13,7 @@ def load_examples(path_to_examples):
             with open(os.path.join(path_to_examples, filename)) as fh:
                 examples = safe_load(fh)
             # print('examples:', examples)
-            for example in examples['examples']:
+            for example in examples:
                 # print('example:', example)
                 if example.__class__.__name__ == 'str':
                     raise LadinoError(f"The example '{example}' is a string instead of a dictionary in '{filename}'")
