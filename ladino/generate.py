@@ -63,6 +63,7 @@ def get_args():
 
 def process_examples(dictionary, examples):
     # logging.info(f"examples: {examples}")
+    # logging.info(f"dictionar.words: {dictionary.words:}")
     for example in examples:
         # logging.info(f'example: {example}')
         # logging.info(f"example.ladino: {example['ladino']}")
