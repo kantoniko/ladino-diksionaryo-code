@@ -59,15 +59,6 @@
         </ul>
      {% endif %}
 
-     {% if ufad %}
-        <h2>Una fraza</h2>
-        <ul>
-         {% for url in ufad.keys() | sort %}
-            <li><a href="/ufad/{{url}}?highlight={{plain_word}}">{{ufad[url]}}</a></li>
-         {% endfor %}
-        </ul>
-     {% endif %}
-
 
      {% if not loop.last %}<hr>{% endif %}
   {% endfor %}
@@ -86,6 +77,15 @@
      <ul>
       {% for url in whatsapp.keys() | sort %}
          <li><a href="/whatsapeando/{{url}}?highlight={{plain_word}}">{{whatsapp[url]}}</a></li>
+      {% endfor %}
+     </ul>
+  {% endif %}
+
+  {% if ufad %}
+     <h2>Una fraza</h2>
+     <ul>
+      {% for url in ufad.keys() | sort %}
+         <li><a href="/ufad/{{url}}?highlight={{plain_word}}">{{ufad[url]}}</a></li>
       {% endfor %}
      </ul>
   {% endif %}
