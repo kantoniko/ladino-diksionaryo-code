@@ -61,7 +61,7 @@ def test_one(tmpdir, request, name):
         assert os.system(cmd) == 0
 
 @pytest.mark.parametrize("name,expected", [
-    ('has_examples_field', "There was an 'examples' field 'has_examples_field.yaml' (it is deprecated)"),
+    ('has_examples_field', "Invalid fields '{'examples'}' found in 'has_examples_field.yaml'"),
     ('no_grammar', "The 'grammar' field is missing from file 'no_grammar.yaml'"),
     ('bad_grammar', "Invalid grammar 'Strange' in file 'bad_grammar.yaml'"),
     ('no_origen', "The 'origen' field is missing from file 'no_origen.yaml'"),

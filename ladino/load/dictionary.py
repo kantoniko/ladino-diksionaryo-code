@@ -6,6 +6,7 @@ import copy
 
 from ladino.common import LadinoError, languages, words_to_url
 
+VALID_FIELDS_IN_WORD_FILES = set(['conjugations', 'grammar', 'versions', 'id', 'origen', 'kategorias', 'orijen-lingua'])
 class Dictionary():
     def __init__(self, config):
         self.yaml_files = []  # each entry as loaded from the yaml files of words
@@ -36,6 +37,10 @@ def load_config(path_to_repo):
         return safe_load(fh)
 
 def check_and_collect_grammar(config, data, dictionary, filename):
+    invalid_fields =  set(data.keys()) - VALID_FIELDS_IN_WORD_FILES
+    if invalid_fields:
+        raise LadinoError(f"Invalid fields '{invalid_fields}' found in '{filename}'")
+
     if 'grammar' not in data:
         raise LadinoError(f"The 'grammar' field is missing from file '{filename}'")
 
@@ -136,9 +141,6 @@ def load_dictionary(config, limit, path_to_dictionary):
         origen = check_and_collect_origen(config, data, dictionary, filename)
         check_and_collect_categories(config, data, dictionary, filename)
         check_and_collect_lists(config, data, dictionary)
-
-        if 'examples' in data:
-            raise LadinoError(f"There was an 'examples' field '{filename}' (it is deprecated)")
 
         if 'versions' not in data:
             raise LadinoError(f"The 'versions' field is missing from file '{filename}'")
