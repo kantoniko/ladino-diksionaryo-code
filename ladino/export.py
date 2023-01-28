@@ -362,6 +362,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     export_lists_html_page(config, html_dir)
     export_categories(config, dictionary.categories, html_dir)
     export_orijenes(config, dictionary.orijenes, html_dir)
+    export_languages(config, dictionary.languages, html_dir)
     export_lists(config, dictionary.lists, html_dir)
     export_gramer(config, dictionary.gramer, html_dir)
     export_verbs(config, dictionary.gramer['verb'], html_dir)
@@ -640,6 +641,31 @@ def add_links(data, words):
 def link_words(sentence, words):
     return re.sub(r'(\w+)', lambda match:
         f'<a href="/words/ladino/{match.group(0).lower()}">{match.group(0)}</a>' if match.group(0).lower() in words else match.group(0), sentence)
+
+def export_languages(config, source_languages, html_dir):
+    logging.info("export_languages")
+    dname = 'linguas'
+    os.makedirs(os.path.join(html_dir, dname), exist_ok=True)
+    for language in source_languages.keys():
+        render(
+            template="category.html",
+            filename=os.path.join(dname, f"{language.lower()}.html"),
+
+            title=language,
+            words=source_languages[language],
+            languages=languages,
+        )
+
+    render(
+        template="categories.html",
+        filename=f"{dname}/index.html",
+        dname=dname,
+
+        title=f"Linguas",
+        values=config['linguas'],
+    )
+
+
 
 def export_orijenes(config, orijenes, html_dir):
     logging.info("export_orijenes")

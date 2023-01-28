@@ -1,0 +1,14 @@
+grammar: NA
+orijen: Jeneral
+linguas:
+  - klingon
+
+versions:
+  - ladino: klaro
+    #accented: klaro
+    #gender: masculine
+    #number: singular
+
+    #translations:
+    #  english: clear
+

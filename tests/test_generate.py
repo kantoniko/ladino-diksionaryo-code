@@ -77,6 +77,7 @@ def test_one(tmpdir, request, name):
     ('verb_wrong_conjugation_time', "Verb conjugation time 'other' is no recogrnized in 'verb_wrong_conjugation_time.yaml'"),
     ('verb_wrong_pronoun', "Incorrect pronoun 'you' in verb time 'prezente' in 'verb_wrong_pronoun.yaml'"),
     ('verb_conjugation_missing_ladino', "The field 'ladino' is missing from verb time: 'prezente' pronoun 'yo' in file 'verb_conjugation_missing_ladino.yaml'"),
+    ('bad_linguas', "Invalid value in linguas field: 'klingon'. Valid values are ['ebreo'] in file 'bad_linguas.yaml'"),
 ])
 def test_bad_word(tmpdir, name, expected):
     bad_input_dir = os.path.join(root, 'files', 'bad_input')

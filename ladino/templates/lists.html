@@ -30,6 +30,16 @@
       </ul>
     </div>
 
+    <h2><a href="/linguas/">Linguas</a></h2>
+    <div class="content">
+      <ul>
+        {% for name in config['linguas'] %}
+          <li><a href="/linguas/{{name.lower()}}">{{name}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+
     <h2><a href="/gramer/">Gramer</a></h2>
     <div class="content">
       <ul>

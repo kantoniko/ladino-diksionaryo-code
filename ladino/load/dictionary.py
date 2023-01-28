@@ -6,18 +6,20 @@ import copy
 
 from ladino.common import LadinoError, languages, words_to_url
 
-VALID_FIELDS_IN_WORD_FILES = set(['conjugations', 'grammar', 'versions', 'id', 'orijen', 'kategorias', 'orijen-lingua', 'comments'])
+VALID_FIELDS_IN_WORD_FILES = set(['conjugations', 'grammar', 'versions', 'id', 'orijen', 'kategorias', 'linguas', 'comments'])
 class Dictionary():
     def __init__(self, config):
         self.yaml_files = []  # each entry as loaded from the yaml files of words
         self.words = [] # list of dictionaries. Each "version" of each word has one entry in this.
                         # A ladino word might appear more than once as the same word might have different
                         # meanings in different contexts. (and different grammatical role)
+
         self.all_examples = []
         self.lists = {lst:[] for lst in config['listas'] }
         self.categories = {cat:[] for cat in config['kategorias'] }
         self.gramer = {name:[] for name in config['gramatika'] }
         self.orijenes = {name:[] for name in config['orijenes'] }
+        self.languages = {name:[] for name in config['linguas'] }
 
         self.count = {}
         self.word_mapping = {}
@@ -33,8 +35,13 @@ class Dictionary():
             self.pages[language] = {}
 
 def load_config(path_to_repo):
-    with open(os.path.join(path_to_repo, 'config.yaml')) as fh:
-        return safe_load(fh)
+    config_file = os.path.join(path_to_repo, 'config.yaml')
+    with open(config_file) as fh:
+        config = safe_load(fh)
+    for field in ['linguas', 'kategorias', 'orijenes', 'gramatika', 'gender', 'numero', 'pajinas', 'listas', 'tiempos', 'pronombres', 'verbos-iregolares']:
+        if field not in config:
+            raise LadinoError(f"Field '{field}' is missing from config file '{config_file}'")
+    return config
 
 def check_and_collect_grammar(config, data, dictionary, filename):
     invalid_fields =  set(data.keys()) - VALID_FIELDS_IN_WORD_FILES
@@ -80,6 +87,20 @@ def check_and_collect_orijen(config, data, dictionary, filename):
     dictionary.orijenes[orijen].append(data)
 
     return orijen
+
+def check_and_collect_languages(config, data, dictionary, filename):
+    if 'linguas' not in data:
+        return []
+    logging.info(f"check_and_collect_languages(config, data, dictionary, {filename})")
+    languages = data['linguas']
+    for language in languages:
+        if language not in config['linguas']:
+            raise LadinoError(f"Invalid value in linguas field: '{language}'. Valid values are {config['linguas']} in file '{filename}'")
+
+    dictionary.languages[language].append(data)
+
+    return languages
+
 
 def check_and_collect_categories(config, data, dictionary, filename):
     if 'kategorias' not in data:
@@ -139,6 +160,7 @@ def load_dictionary(config, limit, path_to_dictionary):
 
         check_and_collect_grammar(config, data, dictionary, filename)
         orijen = check_and_collect_orijen(config, data, dictionary, filename)
+        languages = check_and_collect_languages(config, data, dictionary, filename)
         check_and_collect_categories(config, data, dictionary, filename)
         check_and_collect_lists(config, data, dictionary)
 
@@ -166,6 +188,7 @@ def load_dictionary(config, limit, path_to_dictionary):
                 version['comments'] = comments
                 comments = None
             version['orijen'] = orijen
+            version['languages'] = languages
             dictionary.words.append(version)
 
         conjugations = config['tiempos']
