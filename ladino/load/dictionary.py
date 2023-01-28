@@ -6,7 +6,7 @@ import copy
 
 from ladino.common import LadinoError, languages, words_to_url
 
-VALID_FIELDS_IN_WORD_FILES = set(['conjugations', 'grammar', 'versions', 'id', 'origen', 'kategorias', 'orijen-lingua'])
+VALID_FIELDS_IN_WORD_FILES = set(['conjugations', 'grammar', 'versions', 'id', 'origen', 'kategorias', 'orijen-lingua', 'comments'])
 class Dictionary():
     def __init__(self, config):
         self.yaml_files = []  # each entry as loaded from the yaml files of words
