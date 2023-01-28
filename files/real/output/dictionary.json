@@ -6,6 +6,9 @@
         "come": [
             "venir"
         ],
+        "hope": [
+            "aftaha"
+        ],
         "hospital": [
             "ospital"
         ],
@@ -42,6 +45,46 @@
         ]
     },
     "ladino": {
+        "aftaha": {
+            "accented": [
+                "aftahá"
+            ],
+            "english": [
+                "hope"
+            ],
+            "french": [],
+            "ladino": [
+                "aftaha"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "esperansa"
+            ],
+            "turkish": [
+                "umut",
+                "ümit"
+            ]
+        },
+        "avtaha": {
+            "accented": [
+                "avtahá"
+            ],
+            "english": [
+                "hope"
+            ],
+            "french": [],
+            "ladino": [
+                "avtaha"
+            ],
+            "portuguese": [],
+            "spanish": [
+                "esperansa"
+            ],
+            "turkish": [
+                "umut",
+                "ümit"
+            ]
+        },
         "eshpital": {
             "english": [
                 "hospital"
@@ -288,6 +331,9 @@
         "cansados": [
             "kansados"
         ],
+        "esperansa": [
+            "aftaha"
+        ],
         "hospital": [
             "ospital"
         ],
@@ -308,11 +354,17 @@
         "hastane": [
             "ospital"
         ],
+        "umut": [
+            "aftaha"
+        ],
         "yorgun": [
             "kansada",
             "kansadas",
             "kansado",
             "kansados"
+        ],
+        "ümit": [
+            "aftaha"
         ],
         "şarap": [
             "vino"

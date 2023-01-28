@@ -1,0 +1,27 @@
+grammar: NA
+id: '2821'
+origen: Torah-Tanah
+orijen-lingua:
+  - ebreo
+
+versions:
+  - ladino: aftaha
+    accented: aftahá
+
+    alternative-spelling:
+      - ladino: avtaha
+        accented: avtahá
+
+    gender: feminine
+    number: singular
+
+    translations:
+        english: hope
+        french: ''
+        portuguese: ''
+        spanish: esperansa
+        turkish:
+        - ümit
+        - umut
+
+

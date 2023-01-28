@@ -2,7 +2,7 @@
     "dictionary": {
         "english": {
             "examples": 0,
-            "words": 9
+            "words": 10
         },
         "french": {
             "examples": 0,
@@ -14,7 +14,7 @@
         },
         "ladino": {
             "examples": 0,
-            "words": 15
+            "words": 17
         },
         "portuguese": {
             "examples": 0,
@@ -22,11 +22,11 @@
         },
         "spanish": {
             "examples": 0,
-            "words": 9
+            "words": 10
         },
         "turkish": {
             "examples": 0,
-            "words": 7
+            "words": 9
         }
     },
     "whatsapp": {
