@@ -361,7 +361,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     export_statistics_html_page(dictionary.count, html_dir)
     export_lists_html_page(config, html_dir)
     export_categories(config, dictionary.categories, html_dir)
-    export_origenes(config, dictionary.origenes, html_dir)
+    export_orijenes(config, dictionary.orijenes, html_dir)
     export_lists(config, dictionary.lists, html_dir)
     export_gramer(config, dictionary.gramer, html_dir)
     export_verbs(config, dictionary.gramer['verb'], html_dir)
@@ -641,17 +641,17 @@ def link_words(sentence, words):
     return re.sub(r'(\w+)', lambda match:
         f'<a href="/words/ladino/{match.group(0).lower()}">{match.group(0)}</a>' if match.group(0).lower() in words else match.group(0), sentence)
 
-def export_origenes(config, origenes, html_dir):
-    logging.info("export_origenes")
-    dname = 'origenes'
+def export_orijenes(config, orijenes, html_dir):
+    logging.info("export_orijenes")
+    dname = 'orijenes'
     os.makedirs(os.path.join(html_dir, dname), exist_ok=True)
-    for origen in origenes.keys():
+    for orijen in orijenes.keys():
         render(
             template="category.html",
-            filename=os.path.join(dname, f"{origen.lower()}.html"),
+            filename=os.path.join(dname, f"{orijen.lower()}.html"),
 
-            title=origen,
-            words=origenes[origen],
+            title=orijen,
+            words=orijenes[orijen],
             languages=languages,
         )
 
@@ -660,8 +660,8 @@ def export_origenes(config, origenes, html_dir):
         filename=f"{dname}/index.html",
         dname=dname,
 
-        title=f"Origenes",
-        values=config['origenes'],
+        title=f"Orijenes",
+        values=config['orijenes'],
     )
 
 
@@ -765,7 +765,7 @@ def export_verbs(config, verbs, html_dir):
             tiempos=config['tiempos'],
             pronombres=config['pronombres'],
         )
-# {'grammar': 'verb', 'id': '236', 'origen': 'Jeneral', 'versions': [{'ladino': 'depender', 'translations': {'english': ['depend'], 'french': [], 'portuguese': [], 'spanish': ['depender'], 'turkish': ['bağımlı olmak']}, 'source': 'depender.yaml', 'origen': 'Jeneral'}],
+# {'grammar': 'verb', 'id': '236', 'orijen': 'Jeneral', 'versions': [{'ladino': 'depender', 'translations': {'english': ['depend'], 'french': [], 'portuguese': [], 'spanish': ['depender'], 'turkish': ['bağımlı olmak']}, 'source': 'depender.yaml', 'orijen': 'Jeneral'}],
 # 'conjugations': {'infinito': ('depender',), 'prezente': {'ladino': {'yo': 'dependo', 'tu': 'dependes', 'el': 'depende', 'moz': 'dependemos', 'voz': 'dependésh', 'eyos': 'dependen'}}}, 'examples': []}
 
     render(

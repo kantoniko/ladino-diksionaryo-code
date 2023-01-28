@@ -6,7 +6,7 @@ import copy
 
 from ladino.common import LadinoError, languages, words_to_url
 
-VALID_FIELDS_IN_WORD_FILES = set(['conjugations', 'grammar', 'versions', 'id', 'origen', 'kategorias', 'orijen-lingua', 'comments'])
+VALID_FIELDS_IN_WORD_FILES = set(['conjugations', 'grammar', 'versions', 'id', 'orijen', 'kategorias', 'orijen-lingua', 'comments'])
 class Dictionary():
     def __init__(self, config):
         self.yaml_files = []  # each entry as loaded from the yaml files of words
@@ -17,7 +17,7 @@ class Dictionary():
         self.lists = {lst:[] for lst in config['listas'] }
         self.categories = {cat:[] for cat in config['kategorias'] }
         self.gramer = {name:[] for name in config['gramatika'] }
-        self.origenes = {name:[] for name in config['origenes'] }
+        self.orijenes = {name:[] for name in config['orijenes'] }
 
         self.count = {}
         self.word_mapping = {}
@@ -70,16 +70,16 @@ def check_and_collect_grammar(config, data, dictionary, filename):
     dictionary.gramer[grammar].append(data)
 
 
-def check_and_collect_origen(config, data, dictionary, filename):
-    if 'origen' not in data:
-        raise LadinoError(f"The 'origen' field is missing from file '{filename}'")
-    origen  = data['origen']
-    if origen not in config['origenes']:
-        raise LadinoError(f"Invalid origen '{origen}' in file '{filename}'")
+def check_and_collect_orijen(config, data, dictionary, filename):
+    if 'orijen' not in data:
+        raise LadinoError(f"The 'orijen' field is missing from file '{filename}'")
+    orijen  = data['orijen']
+    if orijen not in config['orijenes']:
+        raise LadinoError(f"Invalid orijen '{orijen}' in file '{filename}'")
 
-    dictionary.origenes[origen].append(data)
+    dictionary.orijenes[orijen].append(data)
 
-    return origen
+    return orijen
 
 def check_and_collect_categories(config, data, dictionary, filename):
     if 'kategorias' not in data:
@@ -138,7 +138,7 @@ def load_dictionary(config, limit, path_to_dictionary):
         dictionary.yaml_files.append(data)
 
         check_and_collect_grammar(config, data, dictionary, filename)
-        origen = check_and_collect_origen(config, data, dictionary, filename)
+        orijen = check_and_collect_orijen(config, data, dictionary, filename)
         check_and_collect_categories(config, data, dictionary, filename)
         check_and_collect_lists(config, data, dictionary)
 
@@ -165,7 +165,7 @@ def load_dictionary(config, limit, path_to_dictionary):
             if comments is not None:
                 version['comments'] = comments
                 comments = None
-            version['origen'] = origen
+            version['orijen'] = orijen
             dictionary.words.append(version)
 
         conjugations = config['tiempos']
@@ -190,8 +190,8 @@ def load_dictionary(config, limit, path_to_dictionary):
     #print(dictionary.all_examples[0])
     for cat in dictionary.categories.keys():
         dictionary.categories[cat].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
-    for field in dictionary.origenes.keys():
-        dictionary.origenes[field].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
+    for field in dictionary.orijenes.keys():
+        dictionary.orijenes[field].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
     for lst in dictionary.lists.keys():
         lookup = {word:ix for ix, word in enumerate(config['listas'][lst])}
         dictionary.lists[lst].sort(key=lambda word: lookup[word['versions'][0]['ladino']])
