@@ -30,11 +30,12 @@
         {% endif %}
 
        {%- for boz in example.bozes -%}
-         <div>
+         <div class="m-2">
            <audio controls>
              <source src="https://audio.kantoniko.com/{{boz.person}}/{{boz.arkivo}}" type="audio/ogg">
              Your browser does not support the audio element.
            </audio>
+            <a href="/egzempios/{{boz.person}}">{{people[boz.person]['nombre']}}</a>
          </div>
        {%- endfor %}
 

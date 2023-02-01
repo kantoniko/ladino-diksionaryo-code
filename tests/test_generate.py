@@ -39,6 +39,7 @@ def test_one(tmpdir, request, name):
     if name == 'real':
         sys.argv.extend(['--whatsapp', 'files/real/estamos-whatsapeando/'])
         sys.argv.extend(['--unafraza', 'files/real/una-fraza-al-diya/'])
+        sys.argv.extend(['--sounds',   'files/real/sounds/'])
     print(sys.argv)
     main()
 

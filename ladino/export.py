@@ -479,6 +479,7 @@ def export_individual_examples(examples, sounds, words, sound_people, target):
 
             title='Egzempio',
             example=example,
+            people=sound_people,
         )
 
 def export_examples(all_examples, words, sound_people, html_dir):
