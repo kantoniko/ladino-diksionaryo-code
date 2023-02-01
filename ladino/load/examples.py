@@ -14,7 +14,7 @@ def load_examples(path_to_examples):
                 examples = safe_load(fh)
             # print('examples:', examples)
             for example in examples:
-                # print('example:', example)
+                # logging.info(f'example: {example}')
                 if example.__class__.__name__ == 'str':
                     raise LadinoError(f"The example '{example}' is a string instead of a dictionary in '{filename}'")
                 for language in example.keys():

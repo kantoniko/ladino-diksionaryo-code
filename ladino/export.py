@@ -631,14 +631,19 @@ def remove_previous_content_of(html_dir):
             os.remove(thing)
 
 def add_links(data, words):
+    # logging.info(f"add_links({data})")
     for entry in data:
         if 'examples' in entry:
-            # print('add_links examples:', entry['examples'])
+            # logging.info(f"add_links examples: {entry['examples']}")
             for example in entry['examples']:
+                # logging.info(f"example in ladino 'example['ladino']'")
                 example['ladino_html'] = link_words(example['ladino'], words)
+                # example['ladino_html'] = example['ladino_html'].replace("\n", "<br>")
     return data
 
 def link_words(sentence, words):
+    # logging.info(f"link_words({sentence})")
+    sentence = sentence.replace("\n", "<br>")
     return re.sub(r'(\w+)', lambda match:
         f'<a href="/words/ladino/{match.group(0).lower()}">{match.group(0)}</a>' if match.group(0).lower() in words else match.group(0), sentence)
 

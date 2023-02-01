@@ -1,9 +1,10 @@
 {% include 'incl/header.html' %}
 
     <div class="content">
-       {{ example['ladino_html'] | safe }}
-        <a href="https://github.com/kantoniko/ladino-diksionaryo-data/blob/main/{{path}}/{{ example['source'] }}">📝</a>
-
+        <div>
+        {{ example['ladino_html'] | safe }}
+        <hr>
+        </div>
         {% if example['english'] %}
         <div lan="en"> {{ example['english'] }}</div>
         {% endif %}
@@ -37,6 +38,7 @@
          </div>
        {%- endfor %}
 
+        <a href="https://github.com/kantoniko/ladino-diksionaryo-data/blob/main/{{path}}/{{ example['source'] }}">📝</a>
     </div>
 
 {% include 'incl/footer.html' %}
