@@ -12,6 +12,8 @@ def load_examples(path_to_examples):
             logging.info(f"load_examples from '{filename}'")
             with open(os.path.join(path_to_examples, filename)) as fh:
                 examples = safe_load(fh)
+            if examples is None:
+                raise LadinoError(f"The example file '{filename}' is empty.")
             # print('examples:', examples)
             for example in examples:
                 # logging.info(f'example: {example}')
