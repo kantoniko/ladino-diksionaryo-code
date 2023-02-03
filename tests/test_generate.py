@@ -93,6 +93,7 @@ def test_bad_word(tmpdir, name, expected):
     ('example_without_language', "The example 'Una palavra i un biervo.' is a string instead of a dictionary in 'example_without_language.yaml'"),
     ('example_with_incorrect_language', "Incorrect language 'klingon' in example in 'example_with_incorrect_language.yaml'"),
     ('example_empty_file', "The example file 'example_empty_file.yaml' is empty."),
+    ('example_bad_format', "The example file 'example_bad_format.yaml' is not a valid YAML file."),
 ])
 def test_bad_examples(tmpdir, name, expected):
     bad_input_dir = os.path.join(root, 'files', 'bad_input')

@@ -10,8 +10,11 @@ def load_examples(path_to_examples):
     if os.path.exists(path_to_examples):
         for filename in os.listdir(path_to_examples):
             logging.info(f"load_examples from '{filename}'")
-            with open(os.path.join(path_to_examples, filename)) as fh:
-                examples = safe_load(fh)
+            try:
+                with open(os.path.join(path_to_examples, filename)) as fh:
+                    examples = safe_load(fh)
+            except Exception as err:
+                raise LadinoError(f"The example file '{filename}' is not a valid YAML file.")
             if examples is None:
                 raise LadinoError(f"The example file '{filename}' is empty.")
             # print('examples:', examples)
