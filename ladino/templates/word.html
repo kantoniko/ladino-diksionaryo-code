@@ -7,7 +7,7 @@
   {% for entry in data %}
      <table>
        <tr><td>ladino</td><td>{{ entry.ladino }}</td></tr>
-       {%- for boz in entry.bozes -%}
+       {%- for boz in entry.audio -%}
        <tr><td>
            <audio controls>
              <source src="https://audio.kantoniko.com/{{boz.person}}/{{boz.arkivo}}" type="audio/ogg">

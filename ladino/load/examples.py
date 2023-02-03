@@ -23,7 +23,7 @@ def load_examples(path_to_examples):
                 if example.__class__.__name__ == 'str':
                     raise LadinoError(f"The example '{example}' is a string instead of a dictionary in '{filename}'")
                 for language in example.keys():
-                    if language not in ['ladino', 'bozes', 'words'] and language not in languages:
+                    if language not in ['ladino', 'audio', 'words'] and language not in languages:
                         raise LadinoError(f"Incorrect language '{language}' in example in '{filename}'")
                 example['source'] = filename
                 example['url'] = words_to_url(example['ladino'])

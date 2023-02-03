@@ -17,7 +17,7 @@
       <ul>
          {% for example in all_examples %}
            <li>
-             <a href="/egzempios/{{example['url']}}">{{ example['ladino'] }}</a> {% if example['bozes'] %}🎧{% endif %}
+             <a href="/egzempios/{{example['url']}}">{{ example['ladino'] }}</a> {% if example['audio'] %}🎧{% endif %}
            </li>
          {% endfor %}
       </ul>

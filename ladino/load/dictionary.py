@@ -382,7 +382,7 @@ def collect_data(dictionary):
                 alt_entries =  entry_copy.pop('alternative-spelling')
 
                 new_alt = {}
-                fields = ['ladino', 'accented', 'bozes']
+                fields = ['ladino', 'accented', 'audio']
                 for field in fields:
                     if field in entry_copy:
                         new_alt[field] =  entry_copy.pop(field)

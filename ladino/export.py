@@ -459,8 +459,8 @@ def export_markdown_page(path_to_md_file, target):
 def export_individual_examples(examples, sounds, words, sound_people, target):
     for example in examples:
         example['ladino_html'] = link_words(example['ladino'], words)
-        if 'bozes' in example:
-            for sound in example['bozes']:
+        if 'audio' in example:
+            for sound in example['audio']:
                 person = sound['person']
                 if person in sound_people:
                     if person not in sounds:

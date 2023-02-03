@@ -29,7 +29,7 @@
         <div lan="pt"> {{ example['portuguese'] }}</div>
         {% endif %}
 
-       {%- for boz in example.bozes -%}
+       {%- for boz in example.audio -%}
          <div class="m-2">
            <audio controls>
              <source src="https://audio.kantoniko.com/{{boz.person}}/{{boz.arkivo}}" type="audio/ogg">
