@@ -50,11 +50,6 @@ def test_one(tmpdir, request, name):
     os.unlink(os.path.join(html_dir, 'statistika.html')) # has the date of generation in it
     os.unlink(os.path.join(html_dir, 'dictionaries.html')) # has changing link in it
     os.unlink(os.path.join(html_dir, 'echar-lashon.html')) # has changing date in it
-    #if name != 'good':
-    #    for filepath in glob.glob(f'{html_dir}/*-*.html'):
-    #        os.unlink(filepath)
-    #    for cat in config['kategorias']:
-    #        os.unlink(os.path.join(html_dir, 'kategorias', f'{cat}.html'))
 
     if not save:
         cmd = f"diff -r {os.path.join(root, 'files', name, 'output')} {os.path.join(tmpdir, 'html')}"
