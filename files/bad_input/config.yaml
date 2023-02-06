@@ -6,6 +6,7 @@ linguas:
 gramatika:
   - verb
   - noun
+  - pronoun
   - NA
 gender:
   - feminine

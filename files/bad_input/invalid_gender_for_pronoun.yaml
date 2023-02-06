@@ -1,0 +1,12 @@
+grammar: pronoun
+orijen: Jeneral
+
+versions:
+  - ladino: yo
+
+    number: singular
+    gender: maskulino, femenino
+
+    translations:
+        english: I
+
