@@ -64,7 +64,7 @@ def check_and_collect_grammar(config, data, dictionary, filename):
     for version in data.get('versions', []):
         gender = version.get('gender')
         # print(gender)
-        if grammar in ['noun', 'pronoun']: # 'adjective',
+        if grammar in ['noun', 'pronoun']:
             if gender is None:
                 raise LadinoError(f"The 'gender' field is None in '{filename}' version {version}")
             if gender not in config['gender']:
@@ -74,7 +74,10 @@ def check_and_collect_grammar(config, data, dictionary, filename):
                 raise LadinoError(f"The 'number' field is None in '{filename}' version {version}")
             if number not in config['numero']:
                 raise LadinoError(f"The 'number' field is '{number}' in '{filename}' version {version}")
-        # else:
+        elif grammar in ['adjective']:
+            pass # TODO some adjectives have this, some don't?
+        else:
+            pass # TODO
         #     if gender is not None:
         #         raise LadinoError(f"Unnecessary 'gender' field in '{filename}' version {version}")
 
