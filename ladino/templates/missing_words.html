@@ -7,12 +7,17 @@
 
     <table class="table is-striped is-hoverable">
       <thead>
-        <tr><th>Palavra</th></tr>
+        <tr><th>Palavra</th><th>Uzas</th></tr>
       </thead>
       <tbody>
-        {% for word in words | sort %}
+        {% for word in words.keys() | sort %}
           <tr>
           <td>{{ word }}</td>
+          <td>
+           {%- for url in words[word]   %}
+             <a href="{{ url }}?highlight={{word}}">{{loop.index0}}</a>{%- if not loop.last -%}, {% endif -%}
+           {% endfor -%}
+          </td>
           </tr>
         {% endfor %}
       </tbody>

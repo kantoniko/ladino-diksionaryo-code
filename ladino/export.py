@@ -221,7 +221,7 @@ def export_missing_words(yaml_files, missing_ladino_words, languages):
             filename=os.path.join(dname, f"ladino.html"),
 
             title=f"Palavras ke mankan",
-            words=sorted(missing_ladino_words),
+            words=missing_ladino_words,
        )
 
         render(
@@ -379,14 +379,21 @@ def get_missing_words(dictionary, examples):
     all_the_words = set(dictionary.pages['ladino'].keys())
     # print(all_the_words)
 
-    missing_words = set()
+    missing_words = {}
 
     for example in examples:
         separate_words = get_separate_words(example['ladino'])
-        missing_words.update(separate_words - all_the_words)
+        for word in (separate_words - all_the_words):
+            if re.search(r'^[0-9]+$', word):
+                continue
+            # print(word)
+            if word not in missing_words:
+                missing_words[word] = []
+            # print(example)
+            missing_words[word].append(f"/egzempios/{example['url']}")
 
     # print(missing_words)
-    return set([word for word in missing_words if not re.search(r'^[0-9]+$', word)])
+    return missing_words
 
 def export_to_html(config, dictionary, examples, word_to_examples, sound_people, path_to_repo, html_dir, whatsapp_dir=None, unafraza=None, pages=None, books=None, ladinadores=None, pretty=False):
     logging.info("Export to HTML")
