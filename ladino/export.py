@@ -186,13 +186,17 @@ def export_json(data, filename, pretty=False):
 
 def export_missing_words(yaml_files, languages):
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    helper = os.path.join(html_path, 'missing')
+    dname = 'missing'
+    helper = os.path.join(html_path, dname)
     os.makedirs(helper, exist_ok=True)
 
+
     for language in languages:
+        missing_words = []
         missing_rows = []
         existing_rows = []
         for word in yaml_files:
+            word_added = False
             for version in word['versions']:
                 if 'translations' not in version:
                     continue
@@ -201,6 +205,10 @@ def export_missing_words(yaml_files, languages):
                     existing_rows.append((version['ladino'], translations))
                     continue
                 missing_rows.append(version['ladino'])
+                if not word_added:
+                    word_added = True
+                    missing_words.append(word)
+
         with open(os.path.join(helper, f"{language}-missing.txt"), 'w') as fh:
             for row in sorted(missing_rows):
                 print(f"{row:20} =", file=fh)
@@ -208,6 +216,26 @@ def export_missing_words(yaml_files, languages):
         with open(os.path.join(helper, f"{language}-has.txt"), 'w') as fh:
             for ladino, translations in sorted(existing_rows):
                 print(f"{ladino:20} = {', '.join(translations)}", file=fh)
+        #print(missing_words)
+
+        render(
+            template="category.html",
+            filename=os.path.join(dname, f"{language.lower()}.html"),
+
+            title=f"Palavras sin traduksione en {language}",
+            words=missing_words,
+            languages=languages,
+        )
+
+    render(
+        template="categories.html",
+        filename=f"{dname}/index.html",
+        dname=dname,
+
+        title=f"Palavras sin traduksiones",
+        values=languages,
+    )
+
 
 def export_single_page_dictionaries(word_mapping, html_dir):
     logging.info("Export single-page dictionaries")
