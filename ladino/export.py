@@ -216,14 +216,13 @@ def export_missing_words(yaml_files, languages):
         with open(os.path.join(helper, f"{language}-has.txt"), 'w') as fh:
             for ladino, translations in sorted(existing_rows):
                 print(f"{ladino:20} = {', '.join(translations)}", file=fh)
-        #print(missing_words)
 
         render(
             template="category.html",
             filename=os.path.join(dname, f"{language.lower()}.html"),
 
             title=f"Palavras sin traduksione en {language}",
-            words=missing_words,
+            words=sorted(missing_words, key=lambda words: words['versions'][0]['ladino']),
             languages=languages,
         )
 
