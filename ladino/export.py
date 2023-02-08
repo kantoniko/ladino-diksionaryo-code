@@ -316,24 +316,7 @@ def export_book(book, html_dir):
     return {'path': data['path'], 'titolo': data['titolo']}
 
 
-def export_to_html(config, dictionary, examples, word_to_examples, sound_people, path_to_repo, html_dir, whatsapp_dir=None, unafraza=None, pages=None, books=None, ladinadores=None, pretty=False):
-    logging.info("Export to HTML")
-    os.makedirs(html_dir, exist_ok=True)
-    global html_path
-    html_path = html_dir
-
-    remove_previous_content_of(html_dir)
-
-    export_json(dictionary.word_mapping, os.path.join(html_dir, "dictionary.json"), pretty=pretty)
-
-    global sitemap
-    sitemap = []
-    generate_main_page(html_dir)
-    export_missing_words(dictionary.yaml_files, languages)
-
-    export_books(books, html_dir)
-    export_ladinadores(ladinadores)
-
+def export_whatsapp_and_update_dictionary(dictionary, whatsapp_dir, html_dir):
     word_to_whatsapp = {}
     if whatsapp_dir:
         messages = whatsapp.get_messages(whatsapp_dir) # list of dicts
@@ -361,6 +344,28 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
         }
         #print(messages)
         export_whatsapp(messages, dictionary.pages['ladino'], html_dir)
+    return word_to_whatsapp
+
+
+def export_to_html(config, dictionary, examples, word_to_examples, sound_people, path_to_repo, html_dir, whatsapp_dir=None, unafraza=None, pages=None, books=None, ladinadores=None, pretty=False):
+    logging.info("Export to HTML")
+    os.makedirs(html_dir, exist_ok=True)
+    global html_path
+    html_path = html_dir
+
+    remove_previous_content_of(html_dir)
+
+    export_json(dictionary.word_mapping, os.path.join(html_dir, "dictionary.json"), pretty=pretty)
+
+    global sitemap
+    sitemap = []
+    generate_main_page(html_dir)
+    export_missing_words(dictionary.yaml_files, languages)
+
+    export_books(books, html_dir)
+    export_ladinadores(ladinadores)
+
+    word_to_whatsapp = export_whatsapp_and_update_dictionary(dictionary, whatsapp_dir, html_dir)
 
     word_to_una_fraza = {}
     if unafraza:
