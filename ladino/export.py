@@ -386,7 +386,7 @@ def get_missing_words(dictionary, examples):
         missing_words.update(separate_words - all_the_words)
 
     # print(missing_words)
-    return missing_words
+    return set([word for word in missing_words if not re.search(r'^[0-9]+$', word)])
 
 def export_to_html(config, dictionary, examples, word_to_examples, sound_people, path_to_repo, html_dir, whatsapp_dir=None, unafraza=None, pages=None, books=None, ladinadores=None, pretty=False):
     logging.info("Export to HTML")
