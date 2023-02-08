@@ -38,7 +38,6 @@ language_codes = {
 }
 
 
-sitemap = []
 html_path = None
 
 def render(template, filename=None, **args):
@@ -61,9 +60,9 @@ def render(template, filename=None, **args):
     with open(full_path, "w") as fh:
         fh.write(html)
     if filename.endswith('index.html'):
-        sitemap.append(filename[0:-10])
+        sitemap.add(filename[0:-10])
     elif filename.endswith('.html'):
-        sitemap.append(filename[0:-5])
+        sitemap.add(filename[0:-5])
 
 def export_dictionary_pages(pages, word_to_examples, word_to_whatsapp, word_to_una_fraza, html_dir):
     logging.info("export_dictionary_pages")
@@ -400,7 +399,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     export_json(dictionary.word_mapping, os.path.join(html_dir, "dictionary.json"), pretty=pretty)
 
     global sitemap
-    sitemap = []
+    sitemap = set()
     generate_main_page(html_dir)
 
     export_books(books, html_dir)
