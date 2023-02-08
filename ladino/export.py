@@ -184,7 +184,7 @@ def export_json(data, filename, pretty=False):
         else:
             json.dump(data, fh, ensure_ascii=False, sort_keys=True)
 
-def export_missing_words(yaml_files, languages):
+def export_missing_words(yaml_files, missing_ladino_words, languages):
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     dname = 'missing'
     helper = os.path.join(html_path, dname)
@@ -218,6 +218,14 @@ def export_missing_words(yaml_files, languages):
                 print(f"{ladino:20} = {', '.join(translations)}", file=fh)
 
         render(
+            template="missing_words.html",
+            filename=os.path.join(dname, f"ladino.html"),
+
+            title=f"Palavras ke mankan",
+            words=sorted(missing_ladino_words),
+       )
+
+        render(
             template="category.html",
             filename=os.path.join(dname, f"{language.lower()}.html"),
 
@@ -232,7 +240,7 @@ def export_missing_words(yaml_files, languages):
         dname=dname,
 
         title=f"Palavras sin traduksiones",
-        values=languages,
+        values=['ladino'] + languages,
     )
 
 
@@ -364,6 +372,22 @@ def get_words_from_una_fraza(unafraza, dictionary, html_dir):
         export_ufad(entries, dictionary.pages['ladino'], html_dir)
     return word_to_una_fraza
 
+def get_separate_words(text):
+    separate_words = set(word.lower() for word in re.findall(r'(\w+)', text))
+    return separate_words
+
+def get_missing_words(dictionary, examples):
+    all_the_words = set(dictionary.pages['ladino'].keys())
+    # print(all_the_words)
+
+    missing_words = set()
+
+    for example in examples:
+        separate_words = get_separate_words(example['ladino'])
+        missing_words.update(separate_words - all_the_words)
+
+    # print(missing_words)
+    return missing_words
 
 def export_to_html(config, dictionary, examples, word_to_examples, sound_people, path_to_repo, html_dir, whatsapp_dir=None, unafraza=None, pages=None, books=None, ladinadores=None, pretty=False):
     logging.info("Export to HTML")
@@ -381,6 +405,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
 
     export_books(books, html_dir)
     export_ladinadores(ladinadores)
+
 
     word_to_whatsapp = export_whatsapp_and_update_dictionary(dictionary, whatsapp_dir, html_dir)
 
@@ -407,7 +432,9 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
 
     export_dictionary_pages(dictionary.pages, word_to_examples, word_to_whatsapp ,word_to_una_fraza, html_dir)
     export_to_hunspell(dictionary.word_mapping, html_dir)
-    export_missing_words(dictionary.yaml_files, languages)
+
+    missing_ladino_words = get_missing_words(dictionary, examples)
+    export_missing_words(dictionary.yaml_files, missing_ladino_words, languages)
 
 def export_ladinadores(ladinadores):
     logging.info("Export Ladinadores")
