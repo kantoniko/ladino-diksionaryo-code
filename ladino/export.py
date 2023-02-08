@@ -347,6 +347,24 @@ def export_whatsapp_and_update_dictionary(dictionary, whatsapp_dir, html_dir):
     return word_to_whatsapp
 
 
+def get_words_from_una_fraza(unafraza, dictionary, html_dir):
+    word_to_una_fraza = {}
+    if unafraza:
+        entries = ufad(unafraza)
+        for entry in entries:
+            words_in_message = re.findall(r'\w+', entry['Ladino'])
+            for word in words_in_message:
+                word = word.lower()
+                if word not in word_to_una_fraza:
+                    word_to_una_fraza[word] = {}
+                page = entry['filename'][0:-5]
+                word_to_una_fraza[word][page] = entry['Ladino']
+
+
+        export_ufad(entries, dictionary.pages['ladino'], html_dir)
+    return word_to_una_fraza
+
+
 def export_to_html(config, dictionary, examples, word_to_examples, sound_people, path_to_repo, html_dir, whatsapp_dir=None, unafraza=None, pages=None, books=None, ladinadores=None, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
@@ -367,21 +385,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
 
     word_to_whatsapp = export_whatsapp_and_update_dictionary(dictionary, whatsapp_dir, html_dir)
 
-    word_to_una_fraza = {}
-    if unafraza:
-        entries = ufad(unafraza)
-        for entry in entries:
-            words_in_message = re.findall(r'\w+', entry['Ladino'])
-            for word in words_in_message:
-                word = word.lower()
-                if word not in word_to_una_fraza:
-                    word_to_una_fraza[word] = {}
-                page = entry['filename'][0:-5]
-                word_to_una_fraza[word][page] = entry['Ladino']
-
-
-        export_ufad(entries, dictionary.pages['ladino'], html_dir)
-
+    word_to_una_fraza = get_words_from_una_fraza(unafraza, dictionary, html_dir)
 
     export_single_page_dictionaries(dictionary.word_mapping, html_dir)
 
