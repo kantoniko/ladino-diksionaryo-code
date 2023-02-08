@@ -378,7 +378,6 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     global sitemap
     sitemap = []
     generate_main_page(html_dir)
-    export_missing_words(dictionary.yaml_files, languages)
 
     export_books(books, html_dir)
     export_ladinadores(ladinadores)
@@ -408,6 +407,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
 
     export_dictionary_pages(dictionary.pages, word_to_examples, word_to_whatsapp ,word_to_una_fraza, html_dir)
     export_to_hunspell(dictionary.word_mapping, html_dir)
+    export_missing_words(dictionary.yaml_files, languages)
 
 def export_ladinadores(ladinadores):
     logging.info("Export Ladinadores")
