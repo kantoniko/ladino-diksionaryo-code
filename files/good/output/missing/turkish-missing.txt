@@ -1,0 +1,4 @@
+Estambol             =
+kaza                 =
+klaro                =
+palavra              =

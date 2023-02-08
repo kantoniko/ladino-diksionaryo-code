@@ -1,0 +1,7 @@
+aftaha               =
+kansada              =
+kansadas             =
+kansado              =
+kansados             =
+ospital              =
+ospitales            =

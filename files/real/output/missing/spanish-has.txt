@@ -1,0 +1,9 @@
+aftaha               = esperansa
+kansada              = cansada
+kansadas             = cansadas
+kansado              = cansado
+kansados             = cansados
+ospital              = hospital
+ospitales            = hospitales
+venir                = venir
+vino                 = vino

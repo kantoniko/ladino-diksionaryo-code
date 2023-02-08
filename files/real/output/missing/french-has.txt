@@ -1,0 +1,2 @@
+venir                = venir
+vino                 = vin

@@ -1,0 +1,9 @@
+aftaha               = hope
+kansada              = tired
+kansadas             = tired
+kansado              = tired
+kansados             = tired
+ospital              = hospital
+ospitales            = hospitals
+venir                = come
+vino                 = wine

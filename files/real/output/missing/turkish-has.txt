@@ -1,0 +1,8 @@
+aftaha               = ümit, umut
+kansada              = yorgun
+kansadas             = yorgun
+kansado              = yorgun
+kansados             = yorgun
+ospital              = hastane
+venir                = gelmek
+vino                 = şarap

@@ -1,0 +1,5 @@
+Estambol             = Istanbul
+kaza                 = house
+klaro                = clear
+mykomer              = eat
+palavra              = word, letterstogether
