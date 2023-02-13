@@ -26,6 +26,9 @@ def load_examples(path_to_examples):
                     if language not in ['ladino', 'audio', 'words'] and language not in languages:
                         raise LadinoError(f"Incorrect language '{language}' in example in '{filename}'")
                 example['source'] = filename
+                if 'ladino' not in example:
+                    print(example)
+                    raise LadinoError(f"Key 'ladino' is missing from example in '{filename}'")
                 example['url'] = words_to_url(example['ladino'])
                 all_examples.append(example)
 
