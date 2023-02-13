@@ -90,6 +90,7 @@ def test_bad_word(tmpdir, name, expected):
     ('example_with_incorrect_language', "Incorrect language 'klingon' in example in 'example_with_incorrect_language.yaml'"),
     ('example_empty_file', "The example file 'example_empty_file.yaml' is empty."),
     ('example_bad_format', "The example file 'example_bad_format.yaml' is not a valid YAML file."),
+    ('example_with_languages_as_list', "Key 'ladino' is missing from example in 'example_with_languages_as_list.yaml'"),
 ])
 def test_bad_examples(tmpdir, name, expected):
     bad_input_dir = os.path.join(root, 'files', 'bad_input')
