@@ -711,9 +711,12 @@ def add_links(data, words):
                 # example['ladino_html'] = example['ladino_html'].replace("\n", "<br>")
     return data
 
+def newline_to_br(text):
+    return text.replace("\n", "<br>")
+
 def link_words(sentence, words):
     # logging.info(f"link_words({sentence})")
-    sentence = sentence.replace("\n", "<br>")
+    sentence = newline_to_br(sentence)
     return re.sub(r'(\w+)', lambda match:
         f'<a href="/words/ladino/{match.group(0).lower()}">{match.group(0)}</a>' if match.group(0).lower() in words else match.group(0), sentence)
 
