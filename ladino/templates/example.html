@@ -6,27 +6,27 @@
         <hr>
         </div>
         {% if example['english'] %}
-        <div lan="en"> {{ example['english'] }}</div>
+        <div lan="en"> {{ example['english_html']  | safe }}</div>
         {% endif %}
 
         {% if example['turkish'] %}
-        <div lan="tr"> {{ example['turkish'] }}</div>
+        <div lan="tr"> {{ example['turkish_html'] | safe }}</div>
         {% endif %}
 
         {% if example['spanish'] %}
-        <div lan="es"> {{ example['spanish'] }}</div>
+        <div lan="es"> {{ example['spanish_html'] | safe }}</div>
         {% endif %}
 
         {% if example['hebrew'] %}
-        <div lan="he"> {{ example['hebrew'] }}</div>
+        <div lan="he"> {{ example['hebrew_html'] | safe }}</div>
         {% endif %}
 
         {% if example['french'] %}
-        <div lan="fr"> {{ example['french'] }}</div>
+        <div lan="fr"> {{ example['french_html'] | safe }}</div>
         {% endif %}
 
         {% if example['portuguese'] %}
-        <div lan="pt"> {{ example['portuguese'] }}</div>
+        <div lan="pt"> {{ example['portuguese_html'] | safe }}</div>
         {% endif %}
 
        {%- for boz in example.audio -%}
