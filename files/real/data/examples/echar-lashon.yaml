@@ -2,7 +2,9 @@
     Ospital. No me plaze las golores de los ospitales.
     Una linea mueva. Mostrar numeros 1, 2
   turkish: Hastane. Hastane kokularını hiç sevmem.
-  english: Hospital.  I don't like hospital odors.
+  english: |
+    Hospital.  I don't like hospital odors.
+    A new line. Show numbers 1, 2
   spanish: Hospital.  No me gustan los olores de los hospitales.
   audio:
     - person: eti-ojalvo
