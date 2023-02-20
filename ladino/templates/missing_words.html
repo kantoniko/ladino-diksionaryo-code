@@ -14,7 +14,7 @@
           <tr>
           <td>{{ word }}</td>
           <td>
-           {%- for url in words[word]   %}
+           {%- for url in words[word] | sort   %}
              <a href="{{ url }}?highlight={{word}}">{{loop.index0}}</a>{%- if not loop.last -%}, {% endif -%}
            {% endfor -%}
           </td>
