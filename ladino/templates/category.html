@@ -1,47 +1,5 @@
 {% include 'incl/header.html' %}
 
   <h1 class="title">{{ title }}</h1>
-  <div class="content">
-
-    <table class="table is-striped is-hoverable">
-      <thead>
-        <tr>
-           <th></th>
-           <th>Ladino</th>
-           <th>Accented</th>
-            {%- for lang in languages %}
-               <th>{{ lang }}</th>
-            {% endfor -%}
-        </tr>
-      </thead>
-      <tbody>
-        {%- for word in words -%}
-          {%- for version in word['versions'] %}
-            <tr>
-              <td>
-                {%- if version['gender'] == 'masculine' and version['number'] == 'singular' %}el{% endif -%}
-                {%- if version['gender'] == 'masculine' and version['number'] == 'plural' %}los{% endif -%}
-                {%- if version['gender'] == 'feminine' and version['number'] == 'singular' %}la{% endif -%}
-                {%- if version['gender'] == 'feminine' and version['number'] == 'plural' %}las{% endif -%}
-                {%- if version['gender'] == 'both' and version['number'] == 'singular' %}la/el{% endif -%}
-                {%- if version['gender'] == 'both' and version['number'] == 'plural' %}las/los{% endif -%}
-              </td>
-              <td>
-                <a href="/words/ladino/{{ version['ladino'].lower() }}">{{ version['ladino'] }}</a>
-                {% for alt in version['alternative-spelling'] %}<br>{{ alt['ladino'] }}{% endfor %}
-              </td>
-              <td>
-                {{ version['accented'] }}
-                {% for alt in version['alternative-spelling'] %}<br>{{ alt['accented'] }}{% endfor %}
-              </td>
-              {%- for lang in languages %}
-                <td>{%- for trans in version.translations[lang] -%}{{ trans }}{%- if not loop.last -%},<br>{% endif -%}{%- endfor %} </td>
-              {% endfor -%}
-            </tr>
-          {% endfor %}
-        {%- endfor -%}
-      </tbody>
-    </table>
-  </div>
-
+{% include 'incl/words.html' %}
 {% include 'incl/footer.html' %}
