@@ -22,6 +22,7 @@ def load_ladinadores(root):
             this["img"] = img_filename
             if (list(filter(lambda entry: entry["img"] == img_filename, data))):
                 exit(f"File {img_filename} should be removed from afishes.yaml")
+            this['filename'] = filename[0:-5]
             data.append(this)
 
     images = set(os.listdir(images_dir))

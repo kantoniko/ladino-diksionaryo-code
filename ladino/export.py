@@ -65,7 +65,7 @@ def render(template, filename=None, **args):
     elif filename.endswith('.html'):
         sitemap.add(filename[0:-5])
 
-def export_dictionary_pages(pages, word_to_examples, word_to_whatsapp, word_to_una_fraza, html_dir):
+def export_dictionary_pages(pages, word_to_examples, word_to_whatsapp, word_to_una_fraza, word_to_afish, html_dir):
     logging.info("export_dictionary_pages")
     words_dir = os.path.join(html_dir, 'words')
     os.makedirs(words_dir, exist_ok=True)
@@ -91,6 +91,7 @@ def export_dictionary_pages(pages, word_to_examples, word_to_whatsapp, word_to_u
             language_names=language_names,
             language_codes=language_codes,
             whatsapp=word_to_whatsapp.get(plain_word, {}),
+            afishes=word_to_afish.get(plain_word, {}),
             ufad=word_to_una_fraza.get(plain_word, {}),
             examples=word_to_examples.get(plain_word, {}),
         )
@@ -411,9 +412,18 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     generate_main_page(html_dir)
 
     export_books(books, html_dir)
+
+    word_to_afish = {}
     if ladinadores is not None:
         afishes = load_ladinadores(ladinadores)
         export_ladinadores(dictionary.yaml_files, afishes)
+        for afish in afishes:
+            for word in afish.get('palavras', []):
+                if word not in word_to_afish:
+                    word_to_afish[word] = {}
+                filename = afish['filename']
+                title = afish['titulo']
+                word_to_afish[word][filename] = title
 
 
     word_to_whatsapp = export_whatsapp_and_update_dictionary(dictionary, whatsapp_dir, html_dir)
@@ -439,7 +449,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     export_listed_pages(config, path_to_repo, html_dir)
     export_fixed_pages(pages)
 
-    export_dictionary_pages(dictionary.pages, word_to_examples, word_to_whatsapp ,word_to_una_fraza, html_dir)
+    export_dictionary_pages(dictionary.pages, word_to_examples, word_to_whatsapp, word_to_una_fraza, word_to_afish, html_dir)
     export_to_hunspell(dictionary.word_mapping, html_dir)
 
     missing_ladino_words = get_missing_words(dictionary, examples)

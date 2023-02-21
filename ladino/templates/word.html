@@ -91,6 +91,15 @@
      </ul>
   {% endif %}
 
+  {% if afishes %}
+     <h2>Afishes</h2>
+     <ul>
+      {% for url in afishes.keys() | sort %}
+         <li><a href="/afishes/{{url}}">{{afishes[url]}}</a></li>
+      {% endfor %}
+     </ul>
+  {% endif %}
+
 
 </div>
 
