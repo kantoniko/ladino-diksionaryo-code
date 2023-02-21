@@ -411,7 +411,9 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     generate_main_page(html_dir)
 
     export_books(books, html_dir)
-    export_ladinadores(dictionary.yaml_files, ladinadores)
+    if ladinadores is not None:
+        afishes = load_ladinadores(ladinadores)
+        export_ladinadores(dictionary.yaml_files, afishes)
 
 
     word_to_whatsapp = export_whatsapp_and_update_dictionary(dictionary, whatsapp_dir, html_dir)
@@ -443,12 +445,8 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     missing_ladino_words = get_missing_words(dictionary, examples)
     export_missing_words(dictionary.yaml_files, missing_ladino_words, languages)
 
-def export_ladinadores(yaml_files, ladinadores):
+def export_ladinadores(yaml_files, data):
     logging.info("Export Ladinadores")
-    if ladinadores is None:
-        return
-
-    data = load_ladinadores(ladinadores)
 
     render(
         template="afishes.html",
