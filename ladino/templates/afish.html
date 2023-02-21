@@ -12,6 +12,14 @@
     {% if entry.palavras %}
     {% include 'incl/words.html' %}
     {% endif %}
+    {% if missing_words %}
+    <h2 class="subtitle">Missing words</h2>
+    <ul>
+        {% for word in missing_words %}
+            <li>{{ word }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
 
 

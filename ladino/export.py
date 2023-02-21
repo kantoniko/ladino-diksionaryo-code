@@ -460,8 +460,9 @@ def export_ladinadores(yaml_files, ladinadores):
 
     for entry in data:
         words = []
+        missing_words = []
         if 'palavras' in entry:
-            for palavra in entry['palavras']:
+            for palavra in sorted(entry['palavras']):
                 print(f"palavra: {palavra}")
                 found = False
                 for word in yaml_files:
@@ -471,13 +472,8 @@ def export_ladinadores(yaml_files, ladinadores):
                             words.append(word)
                             found = True
 
-#                if not found:
-#                    words.append({
-#                        'versions': [
-#                            {
-#                                'ladino': palavra,
-#                            }
-#                        ]})
+                if not found:
+                    missing_words.append(palavra)
 
         print(words)
         render(
@@ -488,6 +484,7 @@ def export_ladinadores(yaml_files, ladinadores):
             entry=entry,
             languages=languages,
             words=words,
+            missing_words=missing_words,
         )
 
 
