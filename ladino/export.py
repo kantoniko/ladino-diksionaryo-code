@@ -411,7 +411,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     generate_main_page(html_dir)
 
     export_books(books, html_dir)
-    export_ladinadores(ladinadores)
+    export_ladinadores(dictionary.yaml_files, ladinadores)
 
 
     word_to_whatsapp = export_whatsapp_and_update_dictionary(dictionary, whatsapp_dir, html_dir)
@@ -443,7 +443,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     missing_ladino_words = get_missing_words(dictionary, examples)
     export_missing_words(dictionary.yaml_files, missing_ladino_words, languages)
 
-def export_ladinadores(ladinadores):
+def export_ladinadores(yaml_files, ladinadores):
     logging.info("Export Ladinadores")
     if ladinadores is None:
         return
@@ -459,12 +459,35 @@ def export_ladinadores(ladinadores):
     )
 
     for entry in data:
+        words = []
+        if 'palavras' in entry:
+            for palavra in entry['palavras']:
+                print(f"palavra: {palavra}")
+                found = False
+                for word in yaml_files:
+                    print(word)
+                    for version in word['versions']:
+                        if palavra == version['ladino']:
+                            words.append(word)
+                            found = True
+
+#                if not found:
+#                    words.append({
+#                        'versions': [
+#                            {
+#                                'ladino': palavra,
+#                            }
+#                        ]})
+
+        print(words)
         render(
             template="afish.html",
             filename=os.path.join("afishes", entry['img'][0:-4] + '.html'),
 
             title=entry['titulo'],
             entry=entry,
+            languages=languages,
+            words=words,
         )
 
 

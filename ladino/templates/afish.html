@@ -9,6 +9,10 @@
     <div class="content">
       <img src="https://ladinadores.kantoniko.com/afishes/{{entry.img}}">
     </div>
+    {% if entry.palavras %}
+    {% include 'incl/words.html' %}
+    {% endif %}
+
 
 
 {% include 'incl/footer.html' %}
