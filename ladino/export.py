@@ -18,6 +18,7 @@ from ladino.export_to_hunspell import export_to_hunspell
 from ladino.pdf import create_pdf_dictionaries
 import ladino.whatsapeando as whatsapp
 from ladino.ufad import ufad
+from ladino.ladinadores import load_ladinadores
 
 language_names = {
             'english'    : 'inglez',
@@ -447,9 +448,7 @@ def export_ladinadores(ladinadores):
     if ladinadores is None:
         return
 
-    yaml_file = os.path.join(ladinadores, 'afishes.yaml')
-    with open(yaml_file) as fh:
-        data = safe_load(fh)
+    data = load_ladinadores(ladinadores)
 
     render(
         template="afishes.html",
