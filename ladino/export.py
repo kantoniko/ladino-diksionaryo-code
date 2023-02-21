@@ -464,7 +464,7 @@ def export_ladinadores(ladinadores):
             template="afish.html",
             filename=os.path.join("afishes", entry['img'][0:-4] + '.html'),
 
-            title=entry['title'],
+            title=entry['titulo'],
             entry=entry,
         )
 
