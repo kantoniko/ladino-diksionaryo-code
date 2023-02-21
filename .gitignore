@@ -1,5 +1,5 @@
 html/
-docs/
+/docs/
 ladino-diksionaryo-data
 __pycache__/
 .coverage
