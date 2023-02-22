@@ -40,6 +40,8 @@ def load_ladinadores(root):
         print(images-images_in_yaml)
         exit(1)
 
+    data.sort(key=lambda entry: entry["titulo"])
+
     return data
 
 if __name__ == "__main__":
