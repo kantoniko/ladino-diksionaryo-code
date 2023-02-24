@@ -37,7 +37,7 @@ def load_ladinadores(root):
         images_in_yaml.add(entry['img'])
 
     if images != images_in_yaml:
-        print(images-images_in_yaml)
+        print(f"Images that don't have YAML files: {images-images_in_yaml}")
         exit(1)
 
     data.sort(key=lambda entry: entry["titulo"])
