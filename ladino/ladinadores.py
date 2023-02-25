@@ -4,10 +4,6 @@ from yaml import safe_load
 
 def load_ladinadores(root):
     data = []
-    afishes_file = os.path.join(root, 'afishes.yaml')
-    if os.path.exists(afishes_file):
-        with open(afishes_file) as fh:
-            data = safe_load(fh)
     images_dir = os.path.join(root, 'docs', 'afishes')
     yaml_dir = os.path.join(root, 'afishes')
     for filename in os.listdir(yaml_dir):
