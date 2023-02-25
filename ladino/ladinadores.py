@@ -31,6 +31,9 @@ def load_ladinadores(root):
         assert 'img' in entry
         assert os.path.exists(os.path.join(images_dir, entry['img']))
         images_in_yaml.add(entry['img'])
+        if 'palavras' not in entry:
+            exit(f"Field 'palavras' is missing from {entry['filename']}.yaml")
+        assert entry['palavras'].__class__.__name__ == "list"
 
     if images != images_in_yaml:
         print(f"Images that don't have YAML files: {images-images_in_yaml}")
