@@ -2,15 +2,7 @@ $(document).ready(function(){
     var dictionary = null;
     var loaded = 0;
     const site = {
-        'available_languages': ['english', 'french', 'hebrew', 'portuguese', 'spanish', 'turkish'],
-        'language_names': {
-            'english'    : 'inglez',
-            'french'     : 'fransez',
-            'hebrew'     : 'ebreo',
-            'portuguese' : 'portugez',
-            'spanish'    : 'kasteyano',
-            'turkish'    : 'turko'
-        }
+        'available_languages': ['inglez', 'fransez', 'ebreo', 'portugez', 'kasteyano', 'turko'],
     };
     //console.log(window.innerWidth, window.innerHeight);
     // We save the text in local storage and restore it when the user visits next time.
@@ -46,12 +38,12 @@ $(document).ready(function(){
         } else {
             config = {
                 'lashon': {
-                    'english': '1',
-                    'spanish': '1',
-                    'turkish': '1',
-                    'french' : '0',
-                    'hebrew' : '0',
-                    'portuguese' : '0',
+                    'inglez'   : '1',
+                    'kasteyano': '1',
+                    'turko'    : '1',
+                    'fransez'  : '0',
+                    'ebreo'    : '0',
+                    'portugez' : '0',
                 },
                 'search-type': 'multi-search',
             };
@@ -153,7 +145,7 @@ $(document).ready(function(){
         html += '<tr>';
         html += `<th>biervo</th><th>Ladino</th>`;
         for (var ix=0; ix < languages.length; ix++) {
-            html += `<th>${site.language_names[languages[ix]]}</th>`;
+            html += `<th>${languages[ix]}</th>`;
         }
         html += '</tr>';
         html += '</thead>';
@@ -198,7 +190,7 @@ $(document).ready(function(){
                     } else {
                         html += `<td>${subhtml}</td>`;
                     }
-                } else if (languages[jx] == 'english') {
+                } else if (languages[jx] == 'inglez') {
                     html += `<td></td>`;
                 } else {
                     html += `<td></td>`;
@@ -324,7 +316,7 @@ $(document).ready(function(){
         }
         //console.log(words.length);
         console.log($('#game-text').attr("word-type"));
-        const translations = dictionary["ladino"][word]["english"].join(", ");
+        const translations = dictionary["ladino"][word]["inglez"].join(", ");
 
         $("#game-translation").addClass('is-hidden')
         $('#game-text').html(word);

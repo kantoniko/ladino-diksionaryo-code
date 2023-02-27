@@ -1,5 +1,24 @@
 {
-    "english": {
+    "ebreo": {
+        "הגיע": [
+            "vino"
+        ],
+        "יין": [
+            "vino"
+        ],
+        "להגיע": [
+            "venir"
+        ]
+    },
+    "fransez": {
+        "venir": [
+            "venir"
+        ],
+        "vin": [
+            "vino"
+        ]
+    },
+    "inglez": {
         "came": [
             "vino"
         ],
@@ -25,300 +44,7 @@
             "vino"
         ]
     },
-    "french": {
-        "venir": [
-            "venir"
-        ],
-        "vin": [
-            "vino"
-        ]
-    },
-    "hebrew": {
-        "הגיע": [
-            "vino"
-        ],
-        "יין": [
-            "vino"
-        ],
-        "להגיע": [
-            "venir"
-        ]
-    },
-    "ladino": {
-        "aftaha": {
-            "accented": [
-                "aftahá"
-            ],
-            "english": [
-                "hope"
-            ],
-            "french": [],
-            "ladino": [
-                "aftaha"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "esperansa"
-            ],
-            "turkish": [
-                "umut",
-                "ümit"
-            ]
-        },
-        "avtaha": {
-            "accented": [
-                "avtahá"
-            ],
-            "english": [
-                "hope"
-            ],
-            "french": [],
-            "ladino": [
-                "avtaha"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "esperansa"
-            ],
-            "turkish": [
-                "umut",
-                "ümit"
-            ]
-        },
-        "eshpital": {
-            "english": [
-                "hospital"
-            ],
-            "french": [],
-            "ladino": [
-                "eshpital"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "hospital"
-            ],
-            "turkish": [
-                "hastane"
-            ]
-        },
-        "eshpitales": {
-            "english": [
-                "hospitals"
-            ],
-            "french": [],
-            "ladino": [
-                "eshpitales"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "hospitales"
-            ],
-            "turkish": []
-        },
-        "espital": {
-            "english": [
-                "hospital"
-            ],
-            "french": [],
-            "ladino": [
-                "espital"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "hospital"
-            ],
-            "turkish": [
-                "hastane"
-            ]
-        },
-        "espitales": {
-            "english": [
-                "hospitals"
-            ],
-            "french": [],
-            "ladino": [
-                "espitales"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "hospitales"
-            ],
-            "turkish": []
-        },
-        "ispital": {
-            "english": [
-                "hospital"
-            ],
-            "french": [],
-            "ladino": [
-                "ispital"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "hospital"
-            ],
-            "turkish": [
-                "hastane"
-            ]
-        },
-        "ispitales": {
-            "english": [
-                "hospitals"
-            ],
-            "french": [],
-            "ladino": [
-                "ispitales"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "hospitales"
-            ],
-            "turkish": []
-        },
-        "kansada": {
-            "english": [
-                "tired"
-            ],
-            "french": [],
-            "ladino": [
-                "kansada"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "cansada"
-            ],
-            "turkish": [
-                "yorgun"
-            ]
-        },
-        "kansadas": {
-            "english": [
-                "tired"
-            ],
-            "french": [],
-            "ladino": [
-                "kansadas"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "cansadas"
-            ],
-            "turkish": [
-                "yorgun"
-            ]
-        },
-        "kansado": {
-            "english": [
-                "tired"
-            ],
-            "french": [],
-            "ladino": [
-                "kansado"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "cansado"
-            ],
-            "turkish": [
-                "yorgun"
-            ]
-        },
-        "kansados": {
-            "english": [
-                "tired"
-            ],
-            "french": [],
-            "ladino": [
-                "kansados"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "cansados"
-            ],
-            "turkish": [
-                "yorgun"
-            ]
-        },
-        "ospital": {
-            "english": [
-                "hospital"
-            ],
-            "french": [],
-            "ladino": [
-                "ospital"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "hospital"
-            ],
-            "turkish": [
-                "hastane"
-            ]
-        },
-        "ospitales": {
-            "english": [
-                "hospitals"
-            ],
-            "french": [],
-            "ladino": [
-                "ospitales"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "hospitales"
-            ],
-            "turkish": []
-        },
-        "venir": {
-            "english": [
-                "come"
-            ],
-            "french": [
-                "venir"
-            ],
-            "hebrew": [
-                "להגיע"
-            ],
-            "ladino": [
-                "venir"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "venir"
-            ],
-            "turkish": [
-                "gelmek"
-            ]
-        },
-        "vino": {
-            "accented": [
-                "víno"
-            ],
-            "english": [
-                "came",
-                "wine"
-            ],
-            "french": [
-                "vin"
-            ],
-            "hebrew": [
-                "הגיע",
-                "יין"
-            ],
-            "ladino": [
-                "vino"
-            ],
-            "portuguese": [],
-            "spanish": [
-                "vino"
-            ],
-            "turkish": [
-                "şarap"
-            ]
-        }
-    },
-    "portuguese": {},
-    "spanish": {
+    "kasteyano": {
         "cansada": [
             "kansada"
         ],
@@ -347,7 +73,281 @@
             "vino"
         ]
     },
-    "turkish": {
+    "ladino": {
+        "aftaha": {
+            "accented": [
+                "aftahá"
+            ],
+            "fransez": [],
+            "inglez": [
+                "hope"
+            ],
+            "kasteyano": [
+                "esperansa"
+            ],
+            "ladino": [
+                "aftaha"
+            ],
+            "portugez": [],
+            "turko": [
+                "umut",
+                "ümit"
+            ]
+        },
+        "avtaha": {
+            "accented": [
+                "avtahá"
+            ],
+            "fransez": [],
+            "inglez": [
+                "hope"
+            ],
+            "kasteyano": [
+                "esperansa"
+            ],
+            "ladino": [
+                "avtaha"
+            ],
+            "portugez": [],
+            "turko": [
+                "umut",
+                "ümit"
+            ]
+        },
+        "eshpital": {
+            "fransez": [],
+            "inglez": [
+                "hospital"
+            ],
+            "kasteyano": [
+                "hospital"
+            ],
+            "ladino": [
+                "eshpital"
+            ],
+            "portugez": [],
+            "turko": [
+                "hastane"
+            ]
+        },
+        "eshpitales": {
+            "fransez": [],
+            "inglez": [
+                "hospitals"
+            ],
+            "kasteyano": [
+                "hospitales"
+            ],
+            "ladino": [
+                "eshpitales"
+            ],
+            "portugez": [],
+            "turko": []
+        },
+        "espital": {
+            "fransez": [],
+            "inglez": [
+                "hospital"
+            ],
+            "kasteyano": [
+                "hospital"
+            ],
+            "ladino": [
+                "espital"
+            ],
+            "portugez": [],
+            "turko": [
+                "hastane"
+            ]
+        },
+        "espitales": {
+            "fransez": [],
+            "inglez": [
+                "hospitals"
+            ],
+            "kasteyano": [
+                "hospitales"
+            ],
+            "ladino": [
+                "espitales"
+            ],
+            "portugez": [],
+            "turko": []
+        },
+        "ispital": {
+            "fransez": [],
+            "inglez": [
+                "hospital"
+            ],
+            "kasteyano": [
+                "hospital"
+            ],
+            "ladino": [
+                "ispital"
+            ],
+            "portugez": [],
+            "turko": [
+                "hastane"
+            ]
+        },
+        "ispitales": {
+            "fransez": [],
+            "inglez": [
+                "hospitals"
+            ],
+            "kasteyano": [
+                "hospitales"
+            ],
+            "ladino": [
+                "ispitales"
+            ],
+            "portugez": [],
+            "turko": []
+        },
+        "kansada": {
+            "fransez": [],
+            "inglez": [
+                "tired"
+            ],
+            "kasteyano": [
+                "cansada"
+            ],
+            "ladino": [
+                "kansada"
+            ],
+            "portugez": [],
+            "turko": [
+                "yorgun"
+            ]
+        },
+        "kansadas": {
+            "fransez": [],
+            "inglez": [
+                "tired"
+            ],
+            "kasteyano": [
+                "cansadas"
+            ],
+            "ladino": [
+                "kansadas"
+            ],
+            "portugez": [],
+            "turko": [
+                "yorgun"
+            ]
+        },
+        "kansado": {
+            "fransez": [],
+            "inglez": [
+                "tired"
+            ],
+            "kasteyano": [
+                "cansado"
+            ],
+            "ladino": [
+                "kansado"
+            ],
+            "portugez": [],
+            "turko": [
+                "yorgun"
+            ]
+        },
+        "kansados": {
+            "fransez": [],
+            "inglez": [
+                "tired"
+            ],
+            "kasteyano": [
+                "cansados"
+            ],
+            "ladino": [
+                "kansados"
+            ],
+            "portugez": [],
+            "turko": [
+                "yorgun"
+            ]
+        },
+        "ospital": {
+            "fransez": [],
+            "inglez": [
+                "hospital"
+            ],
+            "kasteyano": [
+                "hospital"
+            ],
+            "ladino": [
+                "ospital"
+            ],
+            "portugez": [],
+            "turko": [
+                "hastane"
+            ]
+        },
+        "ospitales": {
+            "fransez": [],
+            "inglez": [
+                "hospitals"
+            ],
+            "kasteyano": [
+                "hospitales"
+            ],
+            "ladino": [
+                "ospitales"
+            ],
+            "portugez": [],
+            "turko": []
+        },
+        "venir": {
+            "ebreo": [
+                "להגיע"
+            ],
+            "fransez": [
+                "venir"
+            ],
+            "inglez": [
+                "come"
+            ],
+            "kasteyano": [
+                "venir"
+            ],
+            "ladino": [
+                "venir"
+            ],
+            "portugez": [],
+            "turko": [
+                "gelmek"
+            ]
+        },
+        "vino": {
+            "accented": [
+                "víno"
+            ],
+            "ebreo": [
+                "הגיע",
+                "יין"
+            ],
+            "fransez": [
+                "vin"
+            ],
+            "inglez": [
+                "came",
+                "wine"
+            ],
+            "kasteyano": [
+                "vino"
+            ],
+            "ladino": [
+                "vino"
+            ],
+            "portugez": [],
+            "turko": [
+                "şarap"
+            ]
+        }
+    },
+    "portugez": {},
+    "turko": {
         "gelmek": [
             "venir"
         ],

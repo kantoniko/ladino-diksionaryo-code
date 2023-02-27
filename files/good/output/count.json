@@ -1,32 +1,32 @@
 {
     "dictionary": {
-        "english": {
+        "ebreo": {
             "examples": 0,
-            "words": 6
+            "words": 0
         },
-        "french": {
+        "fransez": {
             "examples": 0,
             "words": 1
         },
-        "hebrew": {
+        "inglez": {
             "examples": 0,
-            "words": 0
+            "words": 6
+        },
+        "kasteyano": {
+            "examples": 0,
+            "words": 1
         },
         "ladino": {
             "examples": 0,
             "words": 7
         },
-        "portuguese": {
+        "portugez": {
             "examples": 0,
             "words": 0
         },
-        "spanish": {
+        "turko": {
             "examples": 0,
-            "words": 1
-        },
-        "turkish": {
-            "examples": 0,
-            "words": 1
+            "words": 0
         }
     }
 }

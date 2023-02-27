@@ -33,7 +33,7 @@
        {% endif %}
 
        {% for language in entry.translations.keys() | sort %}
-          <tr><td>{{ language_names[language] }}</td>
+          <tr><td>{{ language }}</td>
               <td lang="{{ language_codes[language] }}">
                   {% if entry.translations[language] is string %}
                      {{ entry.translations[language] }}

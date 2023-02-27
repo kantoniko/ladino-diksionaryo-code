@@ -1,5 +1,11 @@
 {
-    "english": {
+    "ebreo": {},
+    "fransez": {
+        "manger": [
+            "mykomer"
+        ]
+    },
+    "inglez": {
         "clear": [
             "klaro"
         ],
@@ -19,18 +25,17 @@
             "palavra"
         ]
     },
-    "french": {
-        "manger": [
+    "kasteyano": {
+        "comer": [
             "mykomer"
         ]
     },
-    "hebrew": {},
     "ladino": {
         "biervo": {
             "accented": [
                 "biérvo"
             ],
-            "english": [
+            "inglez": [
                 "letterstogether",
                 "word"
             ],
@@ -39,7 +44,7 @@
             ]
         },
         "estambol": {
-            "english": [
+            "inglez": [
                 "Istanbul"
             ],
             "ladino": [
@@ -47,7 +52,7 @@
             ]
         },
         "kaza": {
-            "english": [
+            "inglez": [
                 "house"
             ],
             "ladino": [
@@ -55,7 +60,7 @@
             ]
         },
         "klaro": {
-            "english": [
+            "inglez": [
                 "clear"
             ],
             "ladino": [
@@ -66,49 +71,57 @@
             "accented": [
                 "kumér"
             ],
-            "english": [
+            "fransez": [
+                "manger"
+            ],
+            "inglez": [
                 "eat"
             ],
-            "french": [
-                "manger"
+            "kasteyano": [
+                "comer"
             ],
             "ladino": [
                 "kumer"
             ],
-            "portuguese": [],
-            "spanish": [
-                "comer"
-            ],
+            "portugez": [],
             "turkish": [
-                "yemek yemek"
+                " ",
+                "e",
+                "k",
+                "m",
+                "y"
             ]
         },
         "mykomer": {
             "accented": [
                 "mykomér"
             ],
-            "english": [
+            "fransez": [
+                "manger"
+            ],
+            "inglez": [
                 "eat"
             ],
-            "french": [
-                "manger"
+            "kasteyano": [
+                "comer"
             ],
             "ladino": [
                 "mykomer"
             ],
-            "portuguese": [],
-            "spanish": [
-                "comer"
-            ],
+            "portugez": [],
             "turkish": [
-                "yemek yemek"
+                " ",
+                "e",
+                "k",
+                "m",
+                "y"
             ]
         },
         "palavra": {
             "accented": [
                 "palávra"
             ],
-            "english": [
+            "inglez": [
                 "letterstogether",
                 "word"
             ],
@@ -117,15 +130,6 @@
             ]
         }
     },
-    "portuguese": {},
-    "spanish": {
-        "comer": [
-            "mykomer"
-        ]
-    },
-    "turkish": {
-        "yemek yemek": [
-            "mykomer"
-        ]
-    }
+    "portugez": {},
+    "turko": {}
 }

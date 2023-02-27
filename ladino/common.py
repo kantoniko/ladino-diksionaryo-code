@@ -4,7 +4,7 @@ import logging
 class LadinoError(Exception):
     pass
 
-languages = ['english', 'french', 'hebrew', 'spanish', 'turkish', 'portuguese']
+languages = ['inglez', 'fransez', 'ebreo', 'kasteyano', 'turko', 'portugez']
 
 def words_to_url(words):
     plain = re.sub(r'[^a-z0-9]', ' ', words.lower())

@@ -20,22 +20,13 @@ import ladino.whatsapeando as whatsapp
 from ladino.ufad import ufad
 from ladino.ladinadores import load_ladinadores
 
-language_names = {
-            'english'    : 'inglez',
-            'french'     : 'fransez',
-            'hebrew'     : 'ebreo',
-            'portuguese' : 'portugez',
-            'spanish'    : 'kasteyano',
-            'turkish'    : 'turko'
-}
-
 language_codes = {
-            'english'    : 'en',
-            'french'     : 'fr',
-            'hebrew'     : 'he',
-            'portuguese' : 'pt',
-            'spanish'    : 'es',
-            'turkish'    : 'tr'
+            'inglez'   : 'en',
+            'fransez'  : 'fr',
+            'ebreo'    : 'he',
+            'portugez' : 'pt',
+            'kasteyano': 'es',
+            'turko'    : 'tr'
 }
 
 
@@ -88,7 +79,6 @@ def export_dictionary_pages(pages, word_to_examples, word_to_whatsapp, word_to_u
             data=enhanced_data,
             title=f"{plain_word}",
             plain_word=plain_word,
-            language_names=language_names,
             language_codes=language_codes,
             whatsapp=word_to_whatsapp.get(plain_word, {}),
             afishes=word_to_afish.get(plain_word, {}),
@@ -474,7 +464,7 @@ def export_ladinadores(yaml_files, data):
                 print(f"palavra: {palavra}")
                 found = False
                 for word in yaml_files:
-                    print(word)
+                    # print(word)
                     for version in word['versions']:
                         if palavra == version['ladino']:
                             words.append(word)
@@ -483,7 +473,7 @@ def export_ladinadores(yaml_files, data):
                 if not found:
                     missing_words.append(palavra)
 
-        print(words)
+        # print(words)
         render(
             template="afish.html",
             filename=os.path.join("afishes", entry['img'][0:-4] + '.html'),
@@ -863,7 +853,7 @@ def export_gramer(config, gramer, html_dir):
     os.makedirs(os.path.join(html_dir, dname), exist_ok=True)
     for name in gramer.keys():
         words = gramer[name]
-        words.sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
+        words.sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['inglez']))
         render(
             template="category.html",
             filename=os.path.join(dname, f"{name.lower()}.html"),
@@ -899,7 +889,7 @@ def export_verbs(config, verbs, html_dir):
             tiempos=config['tiempos'],
             pronombres=config['pronombres'],
         )
-# {'grammar': 'verb', 'id': '236', 'orijen': 'Jeneral', 'versions': [{'ladino': 'depender', 'translations': {'english': ['depend'], 'french': [], 'portuguese': [], 'spanish': ['depender'], 'turkish': ['bağımlı olmak']}, 'source': 'depender.yaml', 'orijen': 'Jeneral'}],
+# {'grammar': 'verb', 'id': '236', 'orijen': 'Jeneral', 'versions': [{'ladino': 'depender', 'translations': {'inglez': ['depend'], 'fransez': [], 'portugez': [], 'kasteyano': ['depender'], 'turko': ['bağımlı olmak']}, 'source': 'depender.yaml', 'orijen': 'Jeneral'}],
 # 'conjugations': {'infinito': ('depender',), 'prezente': {'ladino': {'yo': 'dependo', 'tu': 'dependes', 'el': 'depende', 'moz': 'dependemos', 'voz': 'dependésh', 'eyos': 'dependen'}}}, 'examples': []}
 
     render(

@@ -122,12 +122,12 @@ From the yaml files we generate several json files and several static html files
         "kome": {
             "ladino": "kome",
             "translations": {
-                "english": "eats",
-                "spanish": "come"
+                "inglez": "eats",
+                "kasteyano": "come"
             }
         },
     },
-    "english": {
+    "inglez": {
         "eat": "komen",
         "eats": "kome"
     },

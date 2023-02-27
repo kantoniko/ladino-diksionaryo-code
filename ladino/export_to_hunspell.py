@@ -16,10 +16,10 @@ def export_to_hunspell(dictionary, html_dir):
         print("SET UTF-8", file=fh)
         print("FLAG UTF-8", file=fh)
         rows = []
-        for word in dictionary['spanish'].keys():
+        for word in dictionary['kasteyano'].keys():
             if ' ' in word:
                 continue
-            for ladino in dictionary['spanish'][word]:
+            for ladino in dictionary['kasteyano'][word]:
                 if ' ' in ladino:
                     continue
                 if word == ladino:

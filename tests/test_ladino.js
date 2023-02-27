@@ -11,20 +11,20 @@ const komer = [
       accented: [
         'komér'
       ],
-      english: [
+      inglez: [
         'eat'
       ],
-      french: [
+      fransez: [
         'manger'
       ],
       ladino: [
         'komer'
       ],
-      portuguese: [],
-      spanish: [
+      portugez: [],
+      kasteyano: [
         'comer'
       ],
-      turkish: [
+      turko: [
         'yemek yemek'
       ]
     },
@@ -41,7 +41,7 @@ fs.readFile(dict_path, 'utf8', (err, data) => {
     } else {
         dictionary = JSON.parse(data);
 
-        let res = ladino.translate("komer", ['english'], dictionary);
+        let res = ladino.translate("komer", ['inglez'], dictionary);
         //console.log(res);
 
         assert.deepEqual(res, komer);

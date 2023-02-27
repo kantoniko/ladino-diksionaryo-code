@@ -219,9 +219,9 @@ def load_dictionary(config, limit, path_to_dictionary):
     #print(dictionary.words)
     #print(dictionary.all_examples[0])
     for cat in dictionary.categories.keys():
-        dictionary.categories[cat].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
+        dictionary.categories[cat].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['inglez']))
     for field in dictionary.orijenes.keys():
-        dictionary.orijenes[field].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['english']))
+        dictionary.orijenes[field].sort(key=lambda word: (word['versions'][0]['ladino'], word['versions'][0]['translations']['inglez']))
     for lst in dictionary.lists.keys():
         lookup = {word:ix for ix, word in enumerate(config['listas'][lst])}
         dictionary.lists[lst].sort(key=lambda word: lookup[word['versions'][0]['ladino']])
@@ -351,7 +351,7 @@ def add_ladino_word(original_word, accented_word, entry, dictionary):
     if word not in dictionary.pages[source_language]:
         dictionary.pages[source_language][word] = []
     dictionary.pages[source_language][word].append(entry)
-    dictionary.pages[source_language][word].sort(key=lambda x: (x['ladino'], x['translations']['english'][0] if x['translations'].get('english') else ''))
+    dictionary.pages[source_language][word].sort(key=lambda x: (x['ladino'], x['translations']['inglez'][0] if x['translations'].get('inglez') else ''))
 
     if accented_word and accented_word != word:
         add_word(dictionary.word_mapping, source_language, target_language='accented', source_word=word, target_words=[accented_word])
