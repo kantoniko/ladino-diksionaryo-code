@@ -231,7 +231,7 @@ def export_missing_words(yaml_files, missing_ladino_words, languages):
         dname=dname,
 
         title=f"Palavras sin traduksiones",
-        values=['ladino'] + languages,
+        values=languages,
     )
 
 
