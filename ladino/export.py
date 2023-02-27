@@ -187,7 +187,7 @@ def export_json(data, filename, pretty=False):
 
 def export_missing_words(yaml_files, missing_ladino_words, languages):
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    dname = 'missing'
+    dname = 'faltan'
     helper = os.path.join(html_path, dname)
     os.makedirs(helper, exist_ok=True)
 
