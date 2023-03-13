@@ -11,7 +11,7 @@
         {% for word in words.keys() | sort %}
           <tr>
           <td><a href="{{ word }}">{{ word }}</a></td>
-          <td>{{ examples[word] }}</td>
+          <td>{{ examples[word] | length }}</td>
           </tr>
         {% endfor %}
       </tbody>

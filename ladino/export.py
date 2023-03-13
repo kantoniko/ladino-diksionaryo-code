@@ -88,24 +88,18 @@ def export_dictionary_pages(pages, word_to_examples, word_to_whatsapp, word_to_u
 
         export_json(data, os.path.join(words_dir, language, f'{plain_word}.json'))
 
-def export_dictionary_lists(pages, html_dir):
+def export_dictionary_lists(pages, word_to_examples, word_to_whatsapp, word_to_una_fraza, word_to_afish, html_dir):
     words_dir = os.path.join(html_dir, 'words')
     language = 'ladino'
     words = pages['ladino']
     os.makedirs(os.path.join(words_dir, language), exist_ok=True)
-    examples = {}
-    for word, data in words.items():
-        ex = 0
-        for dt in data:
-            ex += len(dt.get('examples', []))
-        examples[word] = ex
     render(
         template="words.html",
         filename=os.path.join('words', language, 'index.html'),
 
         title=f"{language}",
         words=words,
-        examples=examples,
+        examples=word_to_examples,
     )
 
     render(
@@ -425,7 +419,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     create_pdf_dictionaries(dictionary.yaml_files, languages)
 
     export_static_pages(html_dir)
-    export_dictionary_lists(dictionary.pages, html_dir)
+    export_dictionary_lists(dictionary.pages, word_to_examples, word_to_whatsapp, word_to_una_fraza, word_to_afish, html_dir)
     export_json(dictionary.count, os.path.join(html_dir, "count.json"), pretty=pretty)
     export_statistics_html_page(dictionary.count, html_dir)
     export_lists_html_page(config, html_dir)
