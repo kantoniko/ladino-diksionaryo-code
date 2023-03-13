@@ -1,6 +1,7 @@
 markdown
 jinja2
 pyyaml
+flask
 
 reportlab
 
