@@ -1,4 +1,101 @@
 {
+    "accented": {
+        "aftahá": [
+            {
+                "accented": "aftahá",
+                "alternative-spelling": [
+                    {
+                        "accented": "avtahá",
+                        "ladino": "avtaha"
+                    }
+                ],
+                "gender": "feminine",
+                "ladino": "aftaha",
+                "languages": [
+                    "ebreo"
+                ],
+                "number": "singular",
+                "orijen": "Torah-Tanah",
+                "source": "aftaha.yaml",
+                "translations": {
+                    "fransez": [],
+                    "inglez": [
+                        "hope"
+                    ],
+                    "kasteyano": [
+                        "esperansa"
+                    ],
+                    "portugez": [],
+                    "turko": [
+                        "ümit",
+                        "umut"
+                    ]
+                }
+            }
+        ],
+        "avtahá": [
+            {
+                "accented": "avtahá",
+                "alternative-spelling": [
+                    {
+                        "accented": "aftahá",
+                        "ladino": "aftaha"
+                    }
+                ],
+                "gender": "feminine",
+                "ladino": "avtaha",
+                "languages": [
+                    "ebreo"
+                ],
+                "number": "singular",
+                "orijen": "Torah-Tanah",
+                "source": "aftaha.yaml",
+                "translations": {
+                    "fransez": [],
+                    "inglez": [
+                        "hope"
+                    ],
+                    "kasteyano": [
+                        "esperansa"
+                    ],
+                    "portugez": [],
+                    "turko": [
+                        "ümit",
+                        "umut"
+                    ]
+                }
+            }
+        ],
+        "víno": [
+            {
+                "accented": "víno",
+                "gender": "masculine",
+                "ladino": "vino",
+                "languages": [],
+                "number": "singular",
+                "orijen": "Jeneral",
+                "source": "vino.yaml",
+                "translations": {
+                    "ebreo": [
+                        "יין"
+                    ],
+                    "fransez": [
+                        "vin"
+                    ],
+                    "inglez": [
+                        "wine"
+                    ],
+                    "kasteyano": [
+                        "vino"
+                    ],
+                    "portugez": [],
+                    "turko": [
+                        "şarap"
+                    ]
+                }
+            }
+        ]
+    },
     "ebreo": {
         "הגיע": [
             "vino"

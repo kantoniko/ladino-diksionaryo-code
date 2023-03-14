@@ -1,4 +1,108 @@
 {
+    "accented": {
+        "biérvo": [
+            {
+                "accented": "biérvo",
+                "alternative-spelling": [
+                    {
+                        "accented": "palávra",
+                        "ladino": "palavra"
+                    }
+                ],
+                "gender": "feminine",
+                "ladino": "biervo",
+                "languages": [],
+                "number": "singular",
+                "orijen": "Jeneral",
+                "source": "mix.yaml",
+                "translations": {
+                    "inglez": [
+                        "word",
+                        "letterstogether"
+                    ]
+                }
+            }
+        ],
+        "kumér": [
+            {
+                "accented": "kumér",
+                "alternative-spelling": [
+                    {
+                        "accented": "mykomér",
+                        "ladino": "mykomer"
+                    }
+                ],
+                "ladino": "kumer",
+                "languages": [],
+                "orijen": "Jeneral",
+                "source": "mykomer.yaml",
+                "translations": {
+                    "fransez": [
+                        "manger"
+                    ],
+                    "inglez": [
+                        "eat"
+                    ],
+                    "kasteyano": [
+                        "comer"
+                    ],
+                    "portugez": [],
+                    "turkish": "yemek yemek"
+                }
+            }
+        ],
+        "mykomér": [
+            {
+                "accented": "mykomér",
+                "alternative-spelling": [
+                    {
+                        "accented": "kumér",
+                        "ladino": "kumer"
+                    }
+                ],
+                "ladino": "mykomer",
+                "languages": [],
+                "orijen": "Jeneral",
+                "source": "mykomer.yaml",
+                "translations": {
+                    "fransez": [
+                        "manger"
+                    ],
+                    "inglez": [
+                        "eat"
+                    ],
+                    "kasteyano": [
+                        "comer"
+                    ],
+                    "portugez": [],
+                    "turkish": "yemek yemek"
+                }
+            }
+        ],
+        "palávra": [
+            {
+                "accented": "palávra",
+                "alternative-spelling": [
+                    {
+                        "accented": "biérvo",
+                        "ladino": "biervo"
+                    }
+                ],
+                "gender": "feminine",
+                "ladino": "palavra",
+                "languages": [],
+                "number": "singular",
+                "orijen": "Jeneral",
+                "source": "mix.yaml",
+                "translations": {
+                    "inglez": [
+                        "word",
+                        "letterstogether"
+                    ]
+                }
+            }
+        ]
+    },
     "ebreo": {},
     "fransez": {
         "manger": [
