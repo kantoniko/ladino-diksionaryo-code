@@ -69,14 +69,13 @@ def export_dictionary_pages(pages, word_to_examples, word_to_whatsapp, word_to_u
     logging.info(f"Export one page for every word for {language} to {language_dir}")
     os.makedirs(language_dir, exist_ok=True)
     for plain_word, data in words.items():
-        enhanced_data = add_links(copy.deepcopy(data), words)
         filename = f'{plain_word}.html'
         logging.info(f"Export to {filename}")
         render(
             template="word.html",
             filename=os.path.join('words', language, filename),
 
-            data=enhanced_data,
+            data=copy.deepcopy(data),
             title=f"{plain_word}",
             plain_word=plain_word,
             language_codes=language_codes,
@@ -713,17 +712,6 @@ def remove_previous_content_of(html_dir):
             shutil.rmtree(thing) # TODO remove all the old content from html_dir
         else:
             os.remove(thing)
-
-def add_links(data, words):
-    # logging.info(f"add_links({data})")
-    for entry in data:
-        if 'examples' in entry:
-            # logging.info(f"add_links examples: {entry['examples']}")
-            for example in entry['examples']:
-                # logging.info(f"example in ladino 'example['ladino']'")
-                example['ladino_html'] = link_words(example['ladino'], words)
-                # example['ladino_html'] = example['ladino_html'].replace("\n", "<br>")
-    return data
 
 def newline_to_br(text):
     return text.replace("\n", "<br>")
