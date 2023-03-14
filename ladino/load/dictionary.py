@@ -26,6 +26,7 @@ class Dictionary():
         self.pages = {}
 
         self.count['dictionary'] = {}
+        self.word_mapping['accented'] = {}
         for language in ['ladino'] + languages:
             self.count['dictionary'][language] = {
                 'words': 0,
@@ -342,6 +343,14 @@ def add_ladino_word(original_word, accented_word, entry, dictionary):
         if 'ladino' in example:
             dictionary.count['dictionary']['ladino']['examples'] += 1
     source_language = 'ladino'
+
+    if 'accented' in entry:
+        accented = entry["accented"]
+        #print(entry)
+        if accented not in dictionary.word_mapping['accented']:
+            dictionary.word_mapping['accented'][accented] = []
+            dictionary.word_mapping['accented'][accented].append(entry)
+
     if word not in dictionary.word_mapping[source_language]:
         dictionary.word_mapping[source_language][word] = {}
     for target_language, target_words in entry['translations'].items():

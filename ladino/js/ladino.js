@@ -12,8 +12,22 @@ function translate(text, languages, dictionary) {
 
         let source_language = 'ladino';
         let dictionary_word = dictionary['ladino'][word];
+
         let ladino_from_source_language = null;
         if (! dictionary_word) {
+            // console.log(`try accented '${word}'`);
+            // console.log(dictionary["accented"]);
+            ladino_from_source_language = dictionary["accented"][word];
+            // console.log("ladino_from_source_language:", ladino_from_source_language);
+            if (ladino_from_source_language) {
+                dictionary_word = ladino_from_source_language[0];
+                // console.log(dictionary_word);
+            }
+        }
+
+
+        if (! dictionary_word) {
+            // console.log(`try '${word}' in translations`);
             for (var jx=0; jx < languages.length; jx++) {
                 //console.log("check language:", languages[jx]);
                 source_language = languages[jx];
