@@ -32,7 +32,7 @@ jobs:
     - name: Install dependencies
       run: |
           python -V
-          pip install -r requirements.txt
+          pip install -r requirements.txt -c constraints.txt
 
     - name: Run tests in Python
       run: |
