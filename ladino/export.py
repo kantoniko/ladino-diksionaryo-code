@@ -82,7 +82,7 @@ def export_dictionary_pages(pages, word_to_examples, word_to_whatsapp, word_to_u
             whatsapp=word_to_whatsapp.get(plain_word, {}),
             afishes=word_to_afish.get(plain_word, {}),
             ufad=word_to_una_fraza.get(plain_word, {}),
-            examples=word_to_examples.get(plain_word, {}),
+            examples=sorted(word_to_examples.get(plain_word, {}), key=lambda ex: ex['ladino']),
         )
 
         export_json(data, os.path.join(words_dir, language, f'{plain_word}.json'))
