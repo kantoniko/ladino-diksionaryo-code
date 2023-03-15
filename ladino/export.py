@@ -32,6 +32,22 @@ language_codes = {
 
 html_path = None
 
+accents = {
+    'á': 'a',
+    'é': 'e',
+    'í': 'i',
+    'ó': 'o',
+    'ú': 'u',
+}
+
+
+# TODO: make this more efficient
+def deaccent(text):
+    for k, v in accents.items():
+        text = text.replace(k, v)
+    return text
+
+
 def render(template, filename=None, **args):
     root = os.path.dirname(os.path.abspath(__file__))
     templates_dir = os.path.join(root, "templates")
@@ -717,11 +733,10 @@ def newline_to_br(text):
     return text.replace("\n", "<br>")
 
 def link_words(sentence, words):
-    print(words)
     # logging.info(f"link_words({sentence})")
     sentence = newline_to_br(sentence)
     return re.sub(r'(\w+)', lambda match:
-        f'<a href="/words/ladino/{match.group(0).lower()}">{match.group(0)}</a>' if match.group(0).lower() in words else match.group(0), sentence)
+        f'<a href="/words/ladino/{deaccent(match.group(0).lower())}">{match.group(0)}</a>' if deaccent(match.group(0).lower()) in words else match.group(0), sentence)
 
 def export_languages(config, source_languages, html_dir):
     logging.info("export_languages")
