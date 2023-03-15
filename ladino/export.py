@@ -335,7 +335,7 @@ def export_whatsapp_and_update_dictionary(dictionary, whatsapp_dir, html_dir):
             'images': len(list(filter(lambda msg: msg.get('img') is not None, messages))),
         }
         #print(messages)
-        export_whatsapp(messages, dictionary.pages['ladino'], html_dir)
+        export_whatsapp(messages, dictionary.pages['ladino'].keys(), html_dir)
     return word_to_whatsapp
 
 
@@ -353,7 +353,7 @@ def get_words_from_una_fraza(unafraza, dictionary, html_dir):
                 word_to_una_fraza[word][page] = entry['Ladino']
 
 
-        export_ufad(entries, dictionary.pages['ladino'], html_dir)
+        export_ufad(entries, dictionary.pages['ladino'].keys(), html_dir)
     return word_to_una_fraza
 
 def get_separate_words(text):
@@ -428,7 +428,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     export_lists(config, dictionary.lists, html_dir)
     export_gramer(config, dictionary.gramer, html_dir)
     export_verbs(config, dictionary.gramer['verb'], html_dir)
-    export_examples(copy.deepcopy(examples), dictionary.pages['ladino'], sound_people, html_dir)
+    export_examples(copy.deepcopy(examples), dictionary.pages['ladino'].keys(), sound_people, html_dir)
     export_listed_pages(config, path_to_repo, html_dir)
     export_fixed_pages(pages)
 
@@ -717,6 +717,7 @@ def newline_to_br(text):
     return text.replace("\n", "<br>")
 
 def link_words(sentence, words):
+    print(words)
     # logging.info(f"link_words({sentence})")
     sentence = newline_to_br(sentence)
     return re.sub(r'(\w+)', lambda match:
