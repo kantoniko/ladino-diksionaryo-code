@@ -1,11 +1,11 @@
-- ladino: |
-    Ospital. No me plaze las golores de los ospitales.
-    Una linea mueva. Mostrar numeros 1, 2
-  turko: Hastane. Hastane kokularını hiç sevmem.
-  inglez: |
-    Hospital.  I don't like hospital odors.
-    A new line. Show numbers 1, 2
-  kasteyano: Hospital.  No me gustan los olores de los hospitales.
-  audio:
-    - person: eti-ojalvo
-      arkivo: ospital-no-me-plaze-las-dolores.ogg
+ladino: |
+  Ospital. No me plaze las golores de los ospitales.
+  Una linea mueva. Mostrar numeros 1, 2
+turko: Hastane. Hastane kokularını hiç sevmem.
+inglez: |
+  Hospital.  I don't like hospital odors.
+  A new line. Show numbers 1, 2
+kasteyano: Hospital.  No me gustan los olores de los hospitales.
+audio:
+  - person: eti-ojalvo
+    arkivo: ospital-no-me-plaze-las-dolores.ogg
