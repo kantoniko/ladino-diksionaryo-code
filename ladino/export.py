@@ -127,17 +127,7 @@ def export_dictionary_lists(pages, word_to_examples, word_to_whatsapp, word_to_u
 
 
 def export_static_pages(html_dir):
-    logging.info("Export English and Hebrew html pages")
-    root = os.path.dirname(os.path.abspath(__file__))
-    templates_dir = os.path.join(root, "templates")
-    for lang in ["he"]:
-        os.makedirs(os.path.join(html_dir, lang), exist_ok=True)
-        for tmpl in os.listdir(os.path.join(templates_dir, lang)):
-            logging.info(tmpl)
-            render(
-                template=os.path.join(lang, tmpl),
-                filename=os.path.join(lang, tmpl),
-            )
+    logging.info("Export static pages")
 
     tmpl = "echar-lashon.html"
     render(
