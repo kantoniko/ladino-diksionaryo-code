@@ -533,7 +533,7 @@ def export_markdown_page(path_to_md_file, target):
         content = markdown.markdown(text, extensions=['tables'])
 
         render(
-            template="page.html",
+            template="markdown_page.html",
             filename=target,
 
             title=title,
