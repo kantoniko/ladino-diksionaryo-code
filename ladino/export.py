@@ -493,11 +493,12 @@ def export_fixed_pages(pages):
     with open(os.path.join(pages, 'mapping.json')) as fh:
         mapping = json.load(fh)
     for source, target in mapping.items():
+        rtl = source == 'he'
         for filename in os.listdir(os.path.join(pages, source)):
             logging.info(f"Exporting {source}/{filename}")
             if filename.endswith('.md'):
                 target_file = filename.replace('.md', '.html')
-                export_markdown_page(os.path.join(pages, source, filename), os.path.join(target, target_file))
+                export_markdown_page(os.path.join(pages, source, filename), os.path.join(target, target_file), rtl=rtl)
 
 def export_lists_html_page(config, html_dir):
     logging.info("export_lists_html_page")
@@ -520,9 +521,9 @@ def export_lists_html_page(config, html_dir):
 def export_listed_pages(config, path_to_repo, html_dir):
     logging.info("export_listed_pages")
     for source, target in config['pajinas'].items():
-        export_markdown_page(os.path.join(path_to_repo, 'pajinas', source), target)
+        export_markdown_page(os.path.join(path_to_repo, 'pajinas', source), target, rtl=False)
 
-def export_markdown_page(path_to_md_file, target):
+def export_markdown_page(path_to_md_file, target, rtl):
         with open(path_to_md_file) as fh:
             text = fh.read()
 
@@ -535,6 +536,7 @@ def export_markdown_page(path_to_md_file, target):
         render(
             template="markdown_page.html",
             filename=target,
+            rtl=rtl,
 
             title=title,
             page=target.replace('.html', ''),
