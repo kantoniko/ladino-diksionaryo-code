@@ -187,6 +187,9 @@ def load_dictionary(config, limit, path_to_dictionary):
             if 'ladino' not in version:
                 raise LadinoError(f"The ladino 'version' is missing from file '{filename}'")
 
+            if version['ladino'].strip() == '':
+                raise LadinoError(f"The ladino 'version' is empty in file '{filename}'")
+
             if 'accented' in version and version['accented'] == version['ladino']:
                 print(f"The accented is the same as the ladino in '{filename}'")
                 #raise LadinoError(f"The accented is the same as the ladino in '{filename}'")

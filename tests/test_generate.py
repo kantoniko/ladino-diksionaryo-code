@@ -70,6 +70,7 @@ def test_one(tmpdir, request, name):
     ('verb_no_conjugation', "Grammar is 'verb', but there is NO 'conjugations' field in 'verb_no_conjugation.yaml'"),
     ('non_verb_with_conjugation', "Grammar is NOT a 'verb', but there are conjugations in 'non_verb_with_conjugation.yaml'"),
     ('version_without_ladino', "The ladino 'version' is missing from file 'version_without_ladino.yaml'"),
+    ('version_with_empty_ladino', "The ladino 'version' is empty in file 'version_with_empty_ladino.yaml'"),
     ('verb_wrong_conjugation_time', "Verb conjugation time 'other' is no recogrnized in 'verb_wrong_conjugation_time.yaml'"),
     ('verb_wrong_pronoun', "Incorrect pronoun 'you' in verb time 'prezente' in 'verb_wrong_pronoun.yaml'"),
     ('verb_conjugation_missing_ladino', "The field 'ladino' is missing from verb time: 'prezente' pronoun 'yo' in file 'verb_conjugation_missing_ladino.yaml'"),
