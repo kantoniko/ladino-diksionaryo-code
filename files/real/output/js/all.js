@@ -37,6 +37,7 @@ $(document).ready(function(){
   function TableCellValue(row, index) {
   	return $(row).children("td").eq(index).text();
   }
+  // end table sort
 
   function set_local_date() {
       // Assume a date format of "2021-04-13T19:00:00+03:00";
