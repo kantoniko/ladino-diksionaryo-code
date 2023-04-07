@@ -460,7 +460,7 @@ def export_ladinadores(yaml_files, data):
         missing_words = []
         if 'palavras' in entry:
             for palavra in sorted(entry['palavras']):
-                print(f"palavra: {palavra}")
+                # print(f"palavra: {palavra}")
                 found = False
                 for word in yaml_files:
                     # print(word)
