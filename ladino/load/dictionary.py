@@ -2,6 +2,7 @@ import copy
 import json
 import logging
 import os
+import re
 import yaml
 
 from ladino.common import LadinoError, languages, words_to_url
@@ -155,6 +156,9 @@ def load_dictionary(config, limit, path_to_dictionary):
 
     files = os.listdir(path_to_dictionary)
     for filename in files:
+        if not re.search(r'^[a-z_ -]+\.yaml$', filename):
+            raise LadinoError(f"Invalid filename '{filename}'")
+
         count += 1
         if limit is not None and count > limit:
             break
