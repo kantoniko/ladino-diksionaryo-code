@@ -1,4 +1,4 @@
-from yaml import safe_load
+import yaml
 import os
 import logging
 import json
@@ -38,7 +38,7 @@ class Dictionary():
 def load_config(path_to_repo):
     config_file = os.path.join(path_to_repo, 'config.yaml')
     with open(config_file) as fh:
-        config = safe_load(fh)
+        config = yaml.safe_load(fh)
     for field in ['linguas', 'kategorias', 'orijenes', 'gramatika', 'gender', 'numero', 'pajinas', 'listas', 'tiempos', 'pronombres', 'verbos-iregolares']:
         if field not in config:
             raise LadinoError(f"Field '{field}' is missing from config file '{config_file}'")
@@ -162,7 +162,7 @@ def load_dictionary(config, limit, path_to_dictionary):
         path = os.path.join(path_to_dictionary, filename)
         logging.info(path)
         with open(path) as fh:
-            data = safe_load(fh)
+            data = yaml.safe_load(fh)
 
         dictionary.yaml_files.append(data)
 
