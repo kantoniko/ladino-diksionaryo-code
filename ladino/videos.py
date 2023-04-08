@@ -43,6 +43,6 @@ def load_videos(path):
     return videos, content
 
 def convert(text):
-    text = re.sub(r'\[(\d+:\d+)\]', r'\n**\1**', text)
+    text = re.sub(r'\[([\d:]+)\]', r'\n**\1**', text)
     html = markdown.markdown(text, extensions=['tables'])
     return html

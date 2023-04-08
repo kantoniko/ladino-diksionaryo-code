@@ -10,7 +10,9 @@ id: 122
 Teksto en la primera linea sin data.
 Otra linea sin data.
 
-[2:10] Un poko de deksto kon data i kon un [atadijo a Kantoniko](https://kantoniko.com/)
+[2:10] Un poko de deksto kon data i kon un [atadijo a Kantoniko](https://kantoniko.com/) mas text [eSefarad](https://esefarad.com/) i mas.
 kon
 [2:12] Otra linea.
+
+[1:10:10] mas de una ora
 
