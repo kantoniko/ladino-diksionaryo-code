@@ -7,6 +7,10 @@ musafires: Besim Amado, Jak Arditi
 id: 122
 ---
 
-Teksto sin data
+Teksto en la primera linea sin data.
+Otra linea sin data.
 
 [2:10] Un poko de deksto kon data i kon un [atadijo a Kantoniko](https://kantoniko.com/)
+kon
+[2:12] Otra linea.
+

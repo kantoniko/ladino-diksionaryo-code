@@ -29,7 +29,7 @@ def load_videos(path):
                 field = field.strip()
                 value = value.strip()
                 header[field] = value
-            header['text'] = fh.read()
+            header['text'] = convert(fh.read())
             header['filename'] = filename[:-4]
 
             match = re.search(r'^https://www.youtube.com/watch\?v=(.*)$', header['url'])
@@ -41,3 +41,8 @@ def load_videos(path):
     videos.sort(key=lambda video: video['data'], reverse=True)
 
     return videos, content
+
+def convert(text):
+    text = re.sub(r'\[(\d+:\d+)\]', r'\n**\1**', text)
+    html = markdown.markdown(text, extensions=['tables'])
+    return html
