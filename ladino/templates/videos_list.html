@@ -1,11 +1,20 @@
 {% include 'incl/header.html' %}
+<style>
+.videoid {
+    width: 40px;
+    display: inline-block;
+    text-align: right;
+    margin-right: 10px;
+}
+
+</style>
 
     <h1 class="title">{{ title }}</h1>
     {{ content | safe }}
     <div class="content">
       <ul>
         {% for video in videos %}
-          <li><a href="/{{path}}/{{video.filename}}">{{video.titulo}}</a></li>
+          <li><span class="videoid"><b>{{video.id}}</b></span> {{video.data}} <a href="/{{path}}/{{video.filename}}">{{video.titulo}}</a></li>
         {% endfor %}
       </ul>
     </div>

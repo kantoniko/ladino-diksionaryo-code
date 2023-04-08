@@ -38,6 +38,6 @@ def load_videos(path):
             header["embed"] = "https://www.youtube.com/embed/" + match.group(1)
             videos.append(header)
 
-    videos.sort(key=lambda video: video['data'])
+    videos.sort(key=lambda video: video['data'], reverse=True)
 
     return videos, content

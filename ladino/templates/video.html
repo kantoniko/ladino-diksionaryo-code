@@ -1,9 +1,17 @@
 {% include 'incl/header.html' %}
+<style>
+iframe {
+    width: 640px;
+    height: 360px;
+}
+</style>
 
     <h1 class="title">{{ video.titulo }}</h1>
     <div class="content">
         <a href="{{ video.url }}">{{ video.titulo }}</a>
+        <div>
         <iframe src="{{ video.embed }}?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
         <p>
         {{ video.data }}<p>
         {{ video.balabaya }}<p>
