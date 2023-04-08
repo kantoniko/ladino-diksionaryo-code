@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 
 
@@ -30,6 +31,11 @@ def load_videos(path):
                 header[field] = value
             header['text'] = fh.read()
             header['filename'] = filename[:-4]
+
+            match = re.search(r'^https://www.youtube.com/watch\?v=(.*)$', header['url'])
+            if not match:
+                raise Exception(f"Invalid URL {header['url']}")
+            header["embed"] = "https://www.youtube.com/embed/" + match.group(1)
             videos.append(header)
 
     videos.sort(key=lambda video: video['data'])
