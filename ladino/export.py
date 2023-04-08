@@ -19,6 +19,7 @@ from ladino.pdf import create_pdf_dictionaries
 import ladino.whatsapeando as whatsapp
 from ladino.ufad import ufad
 from ladino.ladinadores import load_ladinadores
+from ladino.videos import load_videos
 
 language_codes = {
             'inglez'   : 'en',
@@ -386,7 +387,7 @@ def get_missing_words(dictionary, examples):
     # print(missing_words)
     return missing_words
 
-def export_to_html(config, dictionary, examples, word_to_examples, sound_people, path_to_repo, html_dir, whatsapp_dir=None, unafraza=None, pages=None, books=None, ladinadores=None, pretty=False):
+def export_to_html(config, dictionary, examples, word_to_examples, sound_people, path_to_repo, html_dir, whatsapp_dir=None, unafraza=None, pages=None, books=None, ladinadores=None, enkontros=None, pretty=False):
     logging.info("Export to HTML")
     os.makedirs(html_dir, exist_ok=True)
     global html_path
@@ -413,6 +414,9 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
                 filename = afish['filename']
                 title = afish['titulo']
                 word_to_afish[word][filename] = title
+    if enkontros is not None:
+        enkontros_videos, content = load_videos(enkontros)
+        export_videos(enkontros_videos, content, 'enkontros-de-alhad')
 
 
     word_to_whatsapp = export_whatsapp_and_update_dictionary(dictionary, whatsapp_dir, html_dir)
@@ -443,6 +447,29 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
 
     missing_ladino_words = get_missing_words(dictionary, examples)
     export_missing_words(dictionary.yaml_files, missing_ladino_words, languages)
+
+def export_videos(videos, content, path):
+    logging.info(f"Export videos to {path}")
+
+    render(
+        template="videos_list.html",
+        filename=os.path.join(path, "index.html"),
+
+        title=f"Enkontros de Alhad",
+        path=path,
+        content=content,
+        videos=videos,
+    )
+    for video in videos:
+        render(
+            template="video.html",
+            filename=os.path.join(path, f"{video['filename']}.html"),
+
+            title=f"Enkontros de Alhad",
+            video=video,
+        )
+
+
 
 def export_ladinadores(yaml_files, data):
     logging.info("Export Ladinadores")

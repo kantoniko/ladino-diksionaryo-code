@@ -1,0 +1,9 @@
+---
+url: https://www.youtube.com/watch?v=USm8YXO0s6g
+titulo: Redeskuvrir el Ladino
+data: 2021.02.14
+balabaya: Liliana Benveniste
+musafires: Dr Aldo Sevi
+id: 25
+---
+

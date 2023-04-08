@@ -1,0 +1,14 @@
+{% include 'incl/header.html' %}
+
+    <h1 class="title">{{ title }}</h1>
+    {{ content | safe }}
+    <div class="content">
+      <ul>
+        {% for video in videos %}
+          <li><a href="/{{path}}/{{video.filename}}">{{video.titulo}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+
+{% include 'incl/footer.html' %}
