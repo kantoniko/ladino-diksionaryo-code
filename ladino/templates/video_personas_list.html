@@ -6,7 +6,7 @@
     <div class="content">
       <ul>
         {% for uid in people.keys() | sort %}
-          <li><a href="{{udi}}">{{people[uid].name}}</a> {{ people[uid].videos | length }}</li>
+          <li><a href="{{uid}}">{{people[uid].name}}</a> {{ people[uid].videos | length }}</li>
         {% endfor %}
       </ul>
     </div>
