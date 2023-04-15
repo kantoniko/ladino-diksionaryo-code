@@ -46,10 +46,38 @@ def load_videos(path):
 
     videos.sort(key=lambda video: video['data'], reverse=True)
 
-    return videos, readme, short
+    people = collect_people(videos)
+
+    return videos, readme, short, people
 
 def convert(text):
     text = re.sub(r'\[([\d:]+)\]', r'<p><b>\1</b>', text)
     text = re.sub(r'\[(.+?)\]\((.+?)\)', r'<a href="\2">\1</a>', text)
     text = re.sub(r'^$', '<p>\n', text, re.MULTILINE)
     return text
+
+def name_to_uid(name):
+    name = name.strip()
+    return name.lower().replace(' ', '-')
+
+def collect_people(videos):
+    people = {}
+    for video in videos:
+        video['people'] = {}
+        for field in ['balabaya', 'musafires']:
+            uids = []
+            if not video[field]:
+                continue
+            for name in video[field].split(','):
+                uid = name_to_uid(name)
+                uids.append(uid)
+                if uid not in people:
+                    people[uid] = {
+                        "name": name,
+                        "videos": [],
+                    }
+                people[uid]["videos"].append(video)
+            video['people'][field] = uids
+    return people
+
+

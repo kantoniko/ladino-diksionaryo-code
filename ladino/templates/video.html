@@ -19,8 +19,18 @@ iframe {
         </div>
         <p>
         {{ video.data }}<p>
-        {{ video.balabaya }}<p>
-        {{ video.musafires }}<p>
+        Balabaya:
+        {% for uid in video.people.balabaya %}
+            <a href="{{ uid }}">{{ people[uid].name }}</a>{%- if not loop.last -%}, {% endif -%}
+        {% endfor %}
+        <p>
+
+        Musafires:
+        {% for uid in video.people.musafires %}
+            <a href="{{ uid }}">{{ people[uid].name }}</a>{%- if not loop.last -%}, {% endif -%}
+        {% endfor %}
+        <p>
+
         {{ video.id }}</p>
     </div>
     <div class="content">

@@ -1,0 +1,15 @@
+{% include 'incl/header.html' %}
+
+
+</style>
+    <h1 class="title">{{ title }}</h1>
+    <div class="content">
+      <ul>
+        {% for uid in people.keys() | sort %}
+          <li><a href="{{udi}}">{{people[uid].name}}</a> {{ people[uid].videos | length }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+
+{% include 'incl/footer.html' %}
