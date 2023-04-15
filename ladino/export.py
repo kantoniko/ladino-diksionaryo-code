@@ -415,8 +415,8 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
                 title = afish['titulo']
                 word_to_afish[word][filename] = title
     if enkontros is not None:
-        enkontros_videos, content = load_videos(enkontros)
-        export_videos(enkontros_videos, content, 'enkontros-de-alhad')
+        enkontros_videos, content, short = load_videos(enkontros)
+        export_videos(enkontros_videos, content, short, 'enkontros-de-alhad')
 
 
     word_to_whatsapp = export_whatsapp_and_update_dictionary(dictionary, whatsapp_dir, html_dir)
@@ -448,7 +448,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     missing_ladino_words = get_missing_words(dictionary, examples)
     export_missing_words(dictionary.yaml_files, missing_ladino_words, languages)
 
-def export_videos(videos, content, path):
+def export_videos(videos, content, short, path):
     logging.info(f"Export videos to {path}")
 
     render(
@@ -466,6 +466,7 @@ def export_videos(videos, content, path):
             filename=os.path.join(path, f"{video['filename']}.html"),
 
             title=f"Enkontros de Alhad",
+            text=short,
             video=video,
         )
 

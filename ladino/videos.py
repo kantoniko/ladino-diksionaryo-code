@@ -10,7 +10,13 @@ def load_videos(path):
     path_to_md_file = os.path.join(path, 'README.md')
     with open(path_to_md_file) as fh:
         text = fh.read()
-    content = markdown.markdown(text, extensions=['tables'])
+    readme = markdown.markdown(text, extensions=['tables'])
+
+    path_to_md_file = os.path.join(path, 'kurto.md')
+    with open(path_to_md_file) as fh:
+        text = fh.read()
+    short = markdown.markdown(text, extensions=['tables'])
+
     videos = []
 
     for filename in os.listdir(os.path.join(path, 'videos')):
@@ -40,7 +46,7 @@ def load_videos(path):
 
     videos.sort(key=lambda video: video['data'], reverse=True)
 
-    return videos, content
+    return videos, readme, short
 
 def convert(text):
     text = re.sub(r'\[([\d:]+)\]', r'<p><b>\1</b>', text)

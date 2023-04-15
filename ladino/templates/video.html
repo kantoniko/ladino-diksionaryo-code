@@ -8,6 +8,11 @@ iframe {
 
     <h1 class="title">{{ video.titulo }}</h1>
     <div class="content">
+        {{text | safe}}
+        <hr>
+    </div>
+
+    <div class="content">
         <a href="{{ video.url }}">{{ video.titulo }}</a>
         <div>
         <iframe src="{{ video.embed }}?rel=0" frameborder="0" allowfullscreen></iframe>
