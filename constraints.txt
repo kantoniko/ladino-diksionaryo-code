@@ -19,4 +19,4 @@ pytest-random-order==1.1.0
 PyYAML==6.0
 reportlab==4.0.0
 rlPyCairo==0.2.0
-Werkzeug==2.3.4
+Werkzeug==2.3.6
