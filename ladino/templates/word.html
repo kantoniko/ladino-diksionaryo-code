@@ -77,7 +77,7 @@
      <h2>Estamos Whatsapeando</h2>
      <ul>
       {% for url in whatsapp.keys() | sort %}
-         <li><a href="/whatsapeando/{{url}}?highlight={{plain_word}}">{{whatsapp[url]}}</a></li>
+         <li><a href="/whatsapeando/{{url.lower()}}?highlight={{plain_word}}">{{whatsapp[url]}}</a></li>
       {% endfor %}
      </ul>
   {% endif %}
@@ -86,7 +86,7 @@
      <h2>Una fraza</h2>
      <ul>
       {% for url in ufad.keys() | sort %}
-         <li><a href="/ufad/{{url}}?highlight={{plain_word}}">{{ufad[url]}}</a></li>
+         <li><a href="/ufad/{{url.lower()}}?highlight={{plain_word}}">{{ufad[url]}}</a></li>
       {% endfor %}
      </ul>
   {% endif %}
@@ -95,7 +95,7 @@
      <h2>Afishes</h2>
      <ul>
       {% for url in afishes.keys() | sort %}
-         <li><a href="/afishes/{{url}}">{{afishes[url]}}</a></li>
+         <li><a href="/afishes/{{url.lower()}}">{{afishes[url]}}</a></li>
       {% endfor %}
      </ul>
   {% endif %}
