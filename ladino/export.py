@@ -679,6 +679,7 @@ def export_examples(all_examples, words, sound_people, html_dir):
         people=sound_people,
         page=target,
         all_examples=all_examples,
+        languages=languages,
     )
 
 def export_ufad(messages, words, html_dir):

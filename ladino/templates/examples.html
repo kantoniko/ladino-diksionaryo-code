@@ -14,11 +14,15 @@
       {% endif -%}
 
       <h2>Egzempios</h2>
-      <ul>
+      <table>
          {% for example in all_examples %}
-           <li>
-             <a href="/egzempios/{{example['url']}}">{{ example['ladino'] }}</a> {% if example['audio'] %}🎧{% endif %}
-           </li>
+           <tr>
+               <td><a href="/egzempios/{{example['url']}}">{{ example['ladino'] }}</a></td>
+               <td>{% if example['audio'] %}🎧{% endif %}</td>
+               {% for lang in languages | sort %}
+                  <td>{% if example[lang] %}{{lang}}{% endif %}</td>
+               {% endfor %}
+           </tr>
          {% endfor %}
       </ul>
     </div>
