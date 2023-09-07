@@ -156,6 +156,8 @@ def load_dictionary(config, limit, path_to_dictionary):
 
     files = os.listdir(path_to_dictionary)
     for filename in files:
+        if re.search(r'^\.[a-z_ -]+\.yaml\.swp$', filename):
+            continue
         if not re.search(r'^[a-z_ -]+\.yaml$', filename):
             raise LadinoError(f"Invalid filename '{filename}'")
 
