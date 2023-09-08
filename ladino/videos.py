@@ -1,12 +1,14 @@
 import os
 import re
 import sys
+import logging
 
 
 import markdown
 
 
 def load_videos(path):
+    logging.info(f"load_videos from  '{path}'")
     path_to_md_file = os.path.join(path, 'README.md')
     with open(path_to_md_file) as fh:
         text = fh.read()
@@ -20,7 +22,7 @@ def load_videos(path):
     videos = []
 
     for filename in os.listdir(os.path.join(path, 'videos')):
-        print(filename)
+        logging.info(f"video: '{filename}'")
         with open(os.path.join(path, 'videos', filename)) as fh:
             header = {}
             in_header = False
