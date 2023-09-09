@@ -3,6 +3,7 @@ import datetime
 import re
 import os
 import sys
+import logging
 
 skip_image = [
     'akel-tyempo-akeya-noche-en-izmir.jpeg',
@@ -13,6 +14,7 @@ skip_image = [
 ]
 
 def get_messages(root):
+    logging.info(f"WhatsApp: get_messages({root})")
     #print(root)
     entries = []
     yaml_files = os.listdir(os.path.join(root, 'text'))
@@ -22,6 +24,7 @@ def get_messages(root):
     img_files = set(os.listdir(os.path.join(root, 'img')))
     pubs = set()
     for yaml_filename in yaml_files:
+        logging.info(f"Load {yaml_filename})")
         with open(os.path.join(root, 'text', yaml_filename)) as fh:
             data = safe_load(fh)
 
@@ -89,6 +92,7 @@ def get_messages(root):
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         exit(f"Usage: {sys.argv[0]} path_to_whatsapeando")
+    logging.basicConfig(level=logging.INFO)
     entries = get_messages(sys.argv[1])
     #print(entries)
     print(f"All read properly.")
