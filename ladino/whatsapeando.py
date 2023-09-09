@@ -24,6 +24,8 @@ def get_messages(root):
     img_files = set(os.listdir(os.path.join(root, 'img')))
     pubs = set()
     for yaml_filename in yaml_files:
+        if yaml_filename.endswith(".swp"):
+            continue
         logging.info(f"Load {yaml_filename})")
         with open(os.path.join(root, 'text', yaml_filename)) as fh:
             data = safe_load(fh)
