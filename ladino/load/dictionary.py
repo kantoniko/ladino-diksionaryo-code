@@ -348,9 +348,6 @@ def add_ladino_word(original_word, accented_word, entry, dictionary):
     #print(entry)
     dictionary.count['dictionary']['ladino']['words'] += 1
 
-    for example in entry.get('examples', []):
-        if 'ladino' in example:
-            dictionary.count['dictionary']['ladino']['examples'] += 1
     source_language = 'ladino'
 
     if 'accented' in entry:

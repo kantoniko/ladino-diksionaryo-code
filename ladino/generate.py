@@ -101,6 +101,13 @@ def main():
 
         examples = load_examples(os.path.join(path_to_repo, 'examples'))
         word_to_examples = process_examples(dictionary, examples)
+        for example in examples:
+            if 'ladino' not in example:
+                raise Exception("Ladino is missing from example")
+            dictionary.count['dictionary']['ladino']['examples'] += 1
+            for language in ladino.common.languages:
+                if language in example:
+                    dictionary.count['dictionary'][language]['examples'] += 1
 
     sound_people = {}
     if args.sounds:

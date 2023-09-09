@@ -9,15 +9,15 @@
             "words": 2
         },
         "inglez": {
-            "examples": 0,
+            "examples": 2,
             "words": 10
         },
         "kasteyano": {
-            "examples": 0,
+            "examples": 1,
             "words": 10
         },
         "ladino": {
-            "examples": 0,
+            "examples": 4,
             "words": 17
         },
         "portugez": {
@@ -25,7 +25,7 @@
             "words": 0
         },
         "turko": {
-            "examples": 0,
+            "examples": 1,
             "words": 9
         }
     },
