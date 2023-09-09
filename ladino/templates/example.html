@@ -3,6 +3,7 @@
     <div class="content">
         <div>
         {{ example['ladino_html'] | safe }}
+        {%- if example['source'] %}({{ example['source'] }}){% endif %}
         <hr>
         </div>
         {% if example['inglez'] %}
@@ -51,7 +52,7 @@
          </div>
        {%- endfor %}
 
-        <a href="https://github.com/kantoniko/ladino-diksionaryo-data/blob/main/{{path}}/{{ example['source'] }}">📝</a>
+        <a href="https://github.com/kantoniko/ladino-diksionaryo-data/blob/main/{{path}}/{{ example['filename'] }}">📝</a>
     </div>
 
 {% include 'incl/footer.html' %}

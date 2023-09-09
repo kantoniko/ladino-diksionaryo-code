@@ -601,7 +601,7 @@ def export_markdown_page(path_to_md_file, target, rtl):
 def export_individual_examples(examples, sounds, words, sound_people, target):
     logging.info(f"export_individual_examples {len(examples)}")
     for example in examples:
-        logging.info(f"export example from {example['source']} to {example['url']}")
+        logging.info(f"export example from {example['filename']} to {example['url']}")
         example['ladino_html'] = link_words(example['ladino'], words)
         for language in languages:
             # We have duplicate translations for some of the examples.

@@ -22,7 +22,7 @@ def load_examples(path_to_examples):
             for language in example.keys():
                 if language not in ['ladino', 'audio', 'words', 'source'] and language not in languages:
                     raise LadinoError(f"Incorrect language '{language}' in example in '{filename}'")
-            example['source'] = filename
+            example['filename'] = filename
             if 'ladino' not in example:
                 # print(example)
                 raise LadinoError(f"Key 'ladino' is missing from example in '{filename}'")
