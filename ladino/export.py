@@ -348,6 +348,7 @@ def export_whatsapp_and_update_dictionary(dictionary, whatsapp_dir, html_dir):
 
 def get_words_from_una_fraza(unafraza, dictionary, html_dir):
     word_to_una_fraza = {}
+    entries = []
     if unafraza:
         entries = ufad(unafraza)
         for entry in entries:
@@ -361,7 +362,7 @@ def get_words_from_una_fraza(unafraza, dictionary, html_dir):
 
 
         export_ufad(entries, dictionary.pages['ladino'].keys(), html_dir)
-    return word_to_una_fraza
+    return word_to_una_fraza, len(entries)
 
 def get_separate_words(text):
     separate_words = set(word.lower() for word in re.findall(r'(\w+)', text))
@@ -422,7 +423,8 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
 
     word_to_whatsapp = export_whatsapp_and_update_dictionary(dictionary, whatsapp_dir, html_dir)
 
-    word_to_una_fraza = get_words_from_una_fraza(unafraza, dictionary, html_dir)
+    word_to_una_fraza, count_una_fraza = get_words_from_una_fraza(unafraza, dictionary, html_dir)
+    dictionary.count["una_fraza_al_dia"] = count_una_fraza
 
     export_single_page_dictionaries(dictionary.word_mapping, html_dir)
 

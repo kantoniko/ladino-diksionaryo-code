@@ -3,48 +3,60 @@
     <h1 class="title">{{ title }}</h1>
 
     <div class="content">
-      <h2>Palavras i egzempios</h2>
-       <p>
+      <p>
            Numeros sovre el diksionaryo Ladino.
-       </p>
-      <table class="table">
-        <thead>
-          <tr><th></th>
-            <th><a href="/words/ladino/">ladino</a></th>
-            {% for language in languages %}
-                 <th><a href="/words/{{ language }}/">{{ language }}</a></th>
-            {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          <tr><th>Palavras</th>
-                <td>{{ count.dictionary['ladino'].words }}</td>
-            {% for language in languages %}
-                <td>{{ count.dictionary[language].words }}</td>
-            {% endfor %}
-          </tr>
-          <tr><th>Egzempios</th>
-                <td>{{ count.dictionary['ladino'].examples }}</td>
-            {% for language in languages %}
-                <td>{{ count.dictionary[language].examples }}</td>
-            {% endfor %}
-          </tr>
-        </tbody>
-      </table>
-      <div>
-      {% if count.whatsapp %}
-      <h3>Mesajes de Whatsapeando</h3>
-      <table class="table">
-        <thead>
-          <tr><th>Todos</th><th>Kon ebreo</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>{{ count.whatsapp.all }}</td><td>{{ count.whatsapp.hebrew }}</td></tr>
-        </tbody>
-      </table>
-      </div>
-      {% endif %}
+      </p>
+      <h2>Palavras i egzempios</h2>
+       <table class="table">
+         <thead>
+           <tr><th></th>
+             <th><a href="/words/ladino/">ladino</a></th>
+             {% for language in languages %}
+                  <th><a href="/words/{{ language }}/">{{ language }}</a></th>
+             {% endfor %}
+           </tr>
+         </thead>
+         <tbody>
+           <tr><th>Palavras</th>
+                 <td>{{ count.dictionary['ladino'].words }}</td>
+             {% for language in languages %}
+                 <td>{{ count.dictionary[language].words }}</td>
+             {% endfor %}
+           </tr>
+           <tr><th>Egzempios</th>
+                 <td>{{ count.dictionary['ladino'].examples }}</td>
+             {% for language in languages %}
+                 <td>{{ count.dictionary[language].examples }}</td>
+             {% endfor %}
+           </tr>
+         </tbody>
+       </table>
+
+       {% if count.whatsapp %}
+       <h2>Mesajes de Whatsapeando</h2>
+       Kada mesaj tiene teksto en ladino. Parte de los mesajes tienen tambien teksto en ebreo. Todo mesaj tiene audio de Albert Israel.
+       <table class="table">
+         <thead>
+           <tr><th>Todos</th><th>Kon ebreo</th></tr>
+         </thead>
+         <tbody>
+           <tr><td>{{ count.whatsapp.all }}</td><td>{{ count.whatsapp.hebrew }}</td></tr>
+         </tbody>
+       </table>
+       {% endif %}
+
+       <h2>Una fraza al dia</h2>
+       Kada fraza tiene teksto en ladino, kasteyano, inglez, i turko. Kada fraza tiene audio de Karen Şarhon.
+       <table class="table">
+         <thead>
+           <tr><th>Todos</th></tr>
+         </thead>
+         <tbody>
+           <tr><td>{{ count.una_fraza_al_dia }}</td></tr>
+         </tbody>
+       </table>
     </div>
+
     <div class="content">
       Generasion en {{start}}.<br>
     </div>
