@@ -26,15 +26,10 @@ function translate_word(original_word, languages, dictionary) {
     let dictionary_word = '';
     // console.log(`try '${word}' in translations`);
     for (var jx=0; jx < languages.length; jx++) {
-        //console.log("check language:", languages[jx]);
-        source_language = languages[jx];
-        ladino_from_source_language = dictionary[source_language][word];
-        //console.log('ladino', ladino_from_source_language);
-        if (ladino_from_source_language) {
-            // TODO: shall we include the dictionary entry of all the words?
-            // TODO: should be select a different one not necessarily the first one?
-            dictionary_word = dictionary['ladino'][ladino_from_source_language[0]];
-            break;
+        response = from_language(languages[jx], word, dictionary);
+        if (response != null) {
+            response["original_word"] = original_word;
+            return response;
         }
     }
 
@@ -42,10 +37,28 @@ function translate_word(original_word, languages, dictionary) {
     return {
         'source_language': source_language,
         'original_word': original_word,
-        'dictionary_word': dictionary_word,
+        'dictionary_word': '',
         'word': word,
-        'ladino_from_source_language': ladino_from_source_language
+        'ladino_from_source_language': ''
     }
+}
+
+function from_language(source_language, word, dictionary) {
+    //console.log("check language:", source_language);
+    ladino_from_source_language = dictionary[source_language][word];
+    //console.log('ladino', ladino_from_source_language);
+    if (ladino_from_source_language) {
+        // TODO: shall we include the dictionary entry of all the words?
+        // TODO: should be select a different one not necessarily the first one?
+        let dictionary_word = dictionary['ladino'][ladino_from_source_language[0]];
+        return {
+            'source_language': source_language,
+            'dictionary_word': dictionary_word,
+            'word': word,
+            'ladino_from_source_language': ladino_from_source_language
+        }
+    }
+    return null;
 }
 
 function from_ladino(word, dictionary) {
