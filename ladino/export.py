@@ -110,7 +110,7 @@ def export_dictionary_lists(pages, word_to_examples, word_to_whatsapp, word_to_u
     words = pages['ladino']
     os.makedirs(os.path.join(words_dir, language), exist_ok=True)
     render(
-        template="words.html",
+        template="ladino_words.html",
         filename=os.path.join('words', language, 'index.html'),
 
         title=f"{language}",
