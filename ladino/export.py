@@ -105,6 +105,9 @@ def export_dictionary_pages(pages, word_to_examples, word_to_whatsapp, word_to_u
         export_json(data, os.path.join(words_dir, language, f'{plain_word}.json'))
 
 def export_dictionary_lists(pages, word_to_examples, word_to_whatsapp, word_to_una_fraza, word_to_afish, html_dir):
+    total = {}
+    for word in word_to_examples.keys():
+        total[word] = len(word_to_examples[word]) + len(word_to_whatsapp.get(word, [])) + len(word_to_una_fraza.get(word, [])) + len(word_to_afish.get(word, []))
     words_dir = os.path.join(html_dir, 'words')
     language = 'ladino'
     words = pages['ladino']
@@ -116,6 +119,10 @@ def export_dictionary_lists(pages, word_to_examples, word_to_whatsapp, word_to_u
         title=f"{language}",
         words=words,
         examples=word_to_examples,
+        whatsapp=word_to_whatsapp,
+        una_fraza=word_to_una_fraza,
+        afishes=word_to_afish,
+        total=total,
     )
 
     render(

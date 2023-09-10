@@ -5,13 +5,24 @@
 
     <table class="table is-striped is-hoverable">
       <thead>
-        <tr><th>Palavra</th><th>Egzempios #</th></tr>
+          <tr>
+              <th>Total</th>
+              <th>Palavra</th>
+              <th>Egzempios #</th>
+              <th>WhatsApp</th>
+              <th>Una fraza</th>
+              <th>Afishes</th>
+          </tr>
       </thead>
       <tbody>
         {% for word in words.keys() | sort %}
           <tr>
           <td><a href="{{ word }}">{{ word }}</a></td>
+          <td>{{ total[word] }}</td>
           <td>{{ examples[word] | length }}</td>
+          <td>{{ whatsapp[word] | length }}</td>
+          <td>{{ una_fraza[word] | length }}</td>
+          <td>{{ afishes[word] | length }}</td>
           </tr>
         {% endfor %}
       </tbody>
