@@ -11,6 +11,7 @@ skip_image = [
     'akel-tyempo-la-sinyatura-de-hitler.jpeg',
     'akel-tyempo-trikotar.jpeg',
     'akel-tyempo-ken-es.jpeg',
+    'akel-tyempo-ya-vino-la-ora-63.jpeg',
 ]
 
 def get_messages(root):
