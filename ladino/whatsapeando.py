@@ -5,18 +5,12 @@ import os
 import sys
 import logging
 
-skip_image = [
-    'akel-tyempo-akeya-noche-en-izmir.jpeg',
-    'akel-tyempo-yossi-banay.jpeg',
-    'akel-tyempo-la-sinyatura-de-hitler.jpeg',
-    'akel-tyempo-trikotar.jpeg',
-    'akel-tyempo-ken-es.jpeg',
-    'akel-tyempo-ya-vino-la-ora-63.jpeg',
-]
-
 def get_messages(root):
     logging.info(f"WhatsApp: get_messages({root})")
     #print(root)
+    with open(os.path.join(root, 'skip_image.yaml')) as fh:
+        skip_image = safe_load(fh)
+
     entries = []
     yaml_files = os.listdir(os.path.join(root, 'text'))
     #print(yaml_files)
