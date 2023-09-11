@@ -31,7 +31,15 @@
         }
     },
     "examples_with_audio": 1,
-    "missing_ladino_words": 20,
+    "missing_words": {
+        "ebreo": 3,
+        "fransez": 3,
+        "inglez": 0,
+        "kasteyano": 0,
+        "ladino": 20,
+        "portugez": 5,
+        "turko": 1
+    },
     "una_fraza_al_dia": 1,
     "whatsapp": {
         "all": 2,
