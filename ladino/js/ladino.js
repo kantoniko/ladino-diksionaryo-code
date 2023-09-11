@@ -1,4 +1,5 @@
-function translate(text, languages, dictionary) {
+function translate(text, original_language, languages, dictionary) {
+    //console.log("translate from original_language:", original_language);
     const cleaned = text.replace(/[<>,;.:!?"'\n*()=\[\]\/\s]/g, " ");
     const words = cleaned.split(" ");
     let rows = [];
@@ -6,8 +7,15 @@ function translate(text, languages, dictionary) {
         if (words[ix] == "") {
             continue;
         }
-        let result = translate_word(words[ix], languages, dictionary);
-        rows.push(result);
+        if (original_language == "automatik") {
+            rows.push( translate_word(words[ix], languages, dictionary) );
+        } else if (original_language == "ladino") {
+            //console.log("ladino");
+            rows.push( from_ladino(words[ix], dictionary) );
+        } else {
+            //console.log("language");
+            rows.push( from_language(original_language, words[ix], dictionary) );
+        }
     }
     return rows;
 }
@@ -16,9 +24,8 @@ function translate_word(original_word, languages, dictionary) {
     //console.log(word);
     const word = original_word.toLowerCase();
 
-    let response = from_ladino(word, dictionary);
+    let response = from_ladino(original_word, dictionary);
     if (response["dictionary_word"]) {
-        response["original_word"] = original_word;
         return response;
     }
 
@@ -26,9 +33,8 @@ function translate_word(original_word, languages, dictionary) {
     let dictionary_word = '';
     // console.log(`try '${word}' in translations`);
     for (var jx=0; jx < languages.length; jx++) {
-        response = from_language(languages[jx], word, dictionary);
-        if (response != null) {
-            response["original_word"] = original_word;
+        response = from_language(languages[jx], original_word, dictionary);
+        if (response["dictionary_word"]) {
             return response;
         }
     }
@@ -43,25 +49,37 @@ function translate_word(original_word, languages, dictionary) {
     }
 }
 
-function from_language(source_language, word, dictionary) {
-    //console.log("check language:", source_language);
+function from_language(source_language, original_word, dictionary) {
+    //console.log(`from_language: ${source_language} ${original_word}`);
+    const word = original_word.toLowerCase();
     ladino_from_source_language = dictionary[source_language][word];
     //console.log('ladino', ladino_from_source_language);
     if (ladino_from_source_language) {
         // TODO: shall we include the dictionary entry of all the words?
         // TODO: should be select a different one not necessarily the first one?
         let dictionary_word = dictionary['ladino'][ladino_from_source_language[0]];
-        return {
-            'source_language': source_language,
-            'dictionary_word': dictionary_word,
-            'word': word,
-            'ladino_from_source_language': ladino_from_source_language
+        if (dictionary_word) {
+            return {
+                'source_language': source_language,
+                'original_word': original_word,
+                'dictionary_word': dictionary_word,
+                'word': word,
+                'ladino_from_source_language': ladino_from_source_language
+            }
         }
     }
-    return null;
+    return {
+        'source_language': source_language,
+        'original_word': original_word,
+        'dictionary_word': '',
+        'word': word,
+        'ladino_from_source_language': ladino_from_source_language
+    }
 }
 
-function from_ladino(word, dictionary) {
+function from_ladino(original_word, dictionary) {
+    //console.log(`from_ladino(${original_word}, ...)`);
+    const word = original_word.toLowerCase();
     let dictionary_word = dictionary['ladino'][word];
     let ladino_from_source_language = null;
 
@@ -77,6 +95,7 @@ function from_ladino(word, dictionary) {
     }
     return {
         'source_language': 'ladino',
+        'original_word': original_word,
         'dictionary_word': dictionary_word,
         'word': word,
         'ladino_from_source_language': ladino_from_source_language,
@@ -110,3 +129,4 @@ function lookup(text, languages, dictionary) {
 
 module.exports.translate = translate;
 module.exports.lookup = lookup;
+

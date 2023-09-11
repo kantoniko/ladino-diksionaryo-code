@@ -774,6 +774,8 @@ def copy_static_files(html_dir):
         os.makedirs(part_dir, exist_ok=True)
 
         for filename in os.listdir(source_dir):
+            if filename.endswith(".swp"):
+                continue
             if part == "js":
                 with open(os.path.join(source_dir, filename)) as fh:
                     lines = filter(lambda line: not line.startswith('module.exports'), fh.readlines())

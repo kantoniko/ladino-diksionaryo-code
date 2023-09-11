@@ -1,6 +1,17 @@
 {% include 'incl/header.html' %}
 
-<div> Palavras: <input type="radio" name="searchtype" id="multi-search"> Ekspresiones: <input type="radio" name="searchtype" id="single-search"> Mazal: <input type="radio" name="searchtype" id="lucky-search"></div>
+<div> Palavras: <input type="radio" name="searchtype" id="multi-search"> Ekspresiones: <input type="radio" name="searchtype" id="single-search"> Mazal: <input type="radio" name="searchtype" id="lucky-search">
+    <select id="original-language">
+        <option value="automatik">automatik</option>
+        <option value="inglez">inglez</option>
+        <option value="kasteyano">kasteyano</option>
+        <option value="turko">turko</option>
+        <option value="fransez">fransez</option>
+        <option value="ebreo">ebreo</option>
+        <option value="portugez">portugez</option>
+        <option value="ladino">ladino</option>
+    </select>
+</div>
 <textarea class="textarea" id="input-text">
 </textarea>
 <input class="is-hidden" id="input-expression">
