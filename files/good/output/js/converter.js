@@ -8,6 +8,7 @@ $(document).ready(function(){
     // We save the text in local storage and restore it when the user visits next time.
     // especially useful when people click on words and than get back to the main page.
     $("#input-text").val(localStorage.getItem('original'));
+    $("#original-language").val(localStorage.getItem('original-language'));
 
     var try_translate = function() {
         if (loaded == 1) {
@@ -98,15 +99,15 @@ $(document).ready(function(){
     }
 
     var display_translate = function() {
-        let original;
+        let original_text;
         const languages = get_languages();
 
         if ($('#single-search').prop('checked')) {
-            original = $("#input-expression").val().toLowerCase();
+            original_text = $("#input-expression").val().toLowerCase();
             save_config_search_text();
         } else if ($('#multi-search').prop('checked')) {
-            original = $("#input-text").val();
-            localStorage.setItem('original', original);
+            original_text = $("#input-text").val();
+            localStorage.setItem('original', original_text);
         } else if ($('#lucky-search').prop('checked')) {
             hide_welcome();
             display_lucky();
@@ -114,7 +115,7 @@ $(document).ready(function(){
         } else {
             console.log('ohoh');
         }
-        if (/^\s*$/.exec(original)) {
+        if (/^\s*$/.exec(original_text)) {
             show_welcome();
             return;
         }
@@ -124,12 +125,13 @@ $(document).ready(function(){
         let count;
         const row_limit = 20;
         if ($('#single-search').prop('checked')) {
-            rows = lookup(original, languages, dictionary);
+            rows = lookup(original_text, languages, dictionary);
             count = rows.length;
             rows = rows.slice(0, row_limit);
             //console.log(count);
         } else if ($('#multi-search').prop('checked')) {
-            rows = translate(original, languages, dictionary);
+            let original_language = $('#original-language').find(":selected").val();
+            rows = translate(original_text, original_language, languages, dictionary);
         //} else if ($('#lucky-search').prop('checked')) {
         } else {
             console.log('ohoh');
@@ -372,6 +374,14 @@ $(document).ready(function(){
     $('#input-lucky').click(function () {
         try_translate();
     });
+
+    $('#original-language').change(function () {
+        let original_language = $('#original-language').find(":selected").val();
+        localStorage.setItem('original-language', original_language);
+        //console.log(`original-language changed to ${original_language}`);
+        show_input('#input-text');
+    });
+
 
     const config = get_config();
     if ('search-text' in config) {
