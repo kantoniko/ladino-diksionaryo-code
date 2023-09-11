@@ -428,6 +428,13 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
 
         export_videos(enkontros_videos, content, short, people, 'enkontros-de-alhad')
 
+    # Count audio files
+    examples_with_audio = 0
+    for example in examples:
+        if "audio" in example:
+            examples_with_audio += 1
+    dictionary.count["examples_with_audio"] = examples_with_audio
+
 
     word_to_whatsapp = export_whatsapp_and_update_dictionary(dictionary, whatsapp_dir, html_dir)
 

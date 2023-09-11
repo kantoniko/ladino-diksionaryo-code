@@ -6,13 +6,13 @@
       <p>
            Numeros sovre el diksionaryo Ladino.
       </p>
-      <h2>Palavras i egzempios</h2>
+      <h2><a href="/words/ladino/">Palavras</a> en ladino i sus traduksiones</h2>
        <table class="table">
          <thead>
            <tr><th></th>
-             <th><a href="/words/ladino/">ladino</a></th>
+             <th>ladino</th>
              {% for language in languages %}
-                  <th><a href="/words/{{ language }}/">{{ language }}</a></th>
+                  <th>{{ language }}</th>
              {% endfor %}
            </tr>
          </thead>
@@ -23,6 +23,20 @@
                  <td>{{ count.dictionary[language].words }}</td>
              {% endfor %}
            </tr>
+         </tbody>
+       </table>
+
+       <h2><a href="/egzempios/">Egzempios</a> (frazas en ladino)</h2>
+       <table class="table">
+         <thead>
+           <tr><th></th>
+             <th>ladino</th>
+             {% for language in languages %}
+                  <th>{{ language }}</th>
+             {% endfor %}
+           </tr>
+         </thead>
+         <tbody>
            <tr><th>Egzempios</th>
                  <td>{{ count.dictionary['ladino'].examples }}</td>
              {% for language in languages %}
@@ -32,9 +46,21 @@
          </tbody>
        </table>
 
+
+       <h2><a href="/egzempios/">Egzempios</a> kon audio</h2>
+       <table class="table">
+         <thead>
+           <tr><th>Todos</th></tr>
+         </thead>
+         <tbody>
+           <tr><td>{{ count.examples_with_audio }}</td></tr>
+         </tbody>
+       </table>
+
+
        {% if count.whatsapp %}
-       <h2>Mesajes de Whatsapeando</h2>
-       Kada mesaj tiene teksto en ladino. Parte de los mesajes tienen tambien teksto en ebreo. Todo mesaj tiene audio de Albert Israel.
+       <h2><a href="/whatsapeando/">Mesajes de Whatsapeando</a></h2>
+       Kada mesaj tiene teksto en ladino. Parte de los mesajes tienen tambien teksto en ebreo. Kada mesaj tiene audio de Albert Israel.
        <table class="table">
          <thead>
            <tr><th>Todos</th><th>Kon ebreo</th></tr>
@@ -45,7 +71,7 @@
        </table>
        {% endif %}
 
-       <h2>Una fraza al dia</h2>
+       <h2><a href="/ufad/">Una fraza al dia</a></h2>
        Kada fraza tiene teksto en ladino, kasteyano, inglez, i turko. Kada fraza tiene audio de Karen Şarhon.
        <table class="table">
          <thead>
@@ -56,8 +82,8 @@
          </tbody>
        </table>
 
-       <h2>Afishes</h2>
-       Afishes de Aldo Sevi de Ladinadores.
+       <h2><a href="/afishes/">Afishes</a></h2>
+       Afishes de Aldo Sevi de los Ladinadores.
        <table class="table">
          <thead>
            <tr><th>Todos</th></tr>
