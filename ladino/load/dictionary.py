@@ -346,7 +346,6 @@ def add_ladino_word(original_word, accented_word, entry, dictionary):
     word = original_word.lower()
     logging.info(f"Add ladino word: '{original_word}' '{word}' '{accented_word}'")
     #print(entry)
-    dictionary.count['dictionary']['ladino']['words'] += 1
 
     source_language = 'ladino'
 
@@ -358,6 +357,7 @@ def add_ladino_word(original_word, accented_word, entry, dictionary):
             dictionary.word_mapping['accented'][accented].append(entry)
 
     if word not in dictionary.word_mapping[source_language]:
+        dictionary.count['dictionary']['ladino']['words'] += 1
         dictionary.word_mapping[source_language][word] = {}
     for target_language, target_words in entry['translations'].items():
         add_word(dictionary.word_mapping, source_language, target_language, word, target_words)
@@ -383,9 +383,9 @@ def add_translated_words(source_language, entry, dictionary):
             dictionary.word_mapping[source_language][word] = []
         dictionary.word_mapping[source_language][word].append(entry['ladino'])
         dictionary.word_mapping[source_language][word] = sorted(set(dictionary.word_mapping[source_language][word]))
-        dictionary.count['dictionary'][source_language]['words'] += 1
 
         if word not in dictionary.pages[source_language]:
+            dictionary.count['dictionary'][source_language]['words'] += 1
             dictionary.pages[source_language][word] = []
         dictionary.pages[source_language][word].append(entry)
         dictionary.pages[source_language][word].sort(key=lambda x: len(json.dumps(x, sort_keys=True)))

@@ -105,12 +105,16 @@ def export_dictionary_pages(pages, word_to_examples, word_to_whatsapp, word_to_u
         export_json(data, os.path.join(words_dir, language, f'{plain_word}.json'))
 
 def export_dictionary_lists(pages, word_to_examples, word_to_whatsapp, word_to_una_fraza, word_to_afish, html_dir):
-    total = {}
-    for word in word_to_examples.keys():
-        total[word] = len(word_to_examples[word]) + len(word_to_whatsapp.get(word, [])) + len(word_to_una_fraza.get(word, [])) + len(word_to_afish.get(word, []))
     words_dir = os.path.join(html_dir, 'words')
     language = 'ladino'
     words = pages['ladino']
+
+    total = {}
+    for word in words.keys():
+        total[word] = 0
+        for things in [word_to_examples, word_to_whatsapp, word_to_una_fraza, word_to_afish]:
+            total[word] += len(things.get(word, []))
+
     os.makedirs(os.path.join(words_dir, language), exist_ok=True)
     render(
         template="ladino_words.html",
@@ -132,7 +136,7 @@ def export_dictionary_lists(pages, word_to_examples, word_to_whatsapp, word_to_u
         title=f"Languages",
         languages=sorted(languages),
     )
-
+    return total
 
 def export_static_pages(html_dir):
     logging.info("Export static pages")
@@ -451,7 +455,15 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     create_pdf_dictionaries(dictionary.yaml_files, languages)
 
     export_static_pages(html_dir)
-    export_dictionary_lists(dictionary.pages, word_to_examples, word_to_whatsapp, word_to_una_fraza, word_to_afish, html_dir)
+    words_with_examples = export_dictionary_lists(dictionary.pages, word_to_examples, word_to_whatsapp, word_to_una_fraza, word_to_afish, html_dir)
+    dictionary.count["words_with_examples"] = 0
+    dictionary.count["words_without_examples"] = 0
+    for word, count in words_with_examples.items():
+        if count > 0:
+            dictionary.count["words_with_examples"] += 1
+        else:
+            dictionary.count["words_without_examples"] += 1
+
     export_lists_html_page(config, html_dir)
     export_categories(config, dictionary.categories, html_dir)
     export_orijenes(config, dictionary.orijenes, html_dir)

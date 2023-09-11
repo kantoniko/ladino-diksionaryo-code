@@ -4,7 +4,7 @@
 
     <div class="content">
       <p>
-           Numeros sovre el diksionaryo Ladino.
+      Numeros sovre el Kantoniko de ladino en el internet.
       </p>
       <h2><a href="/words/ladino/">Palavras</a> en ladino i sus traduksiones</h2>
        <table class="table">
@@ -76,6 +76,13 @@
        <h2><a href="/egzempios/">Egzempios</a> kon audio</h2>
        <p>
        <b>{{ count.examples_with_audio }}</b>
+       </p>
+
+       <h2>Palavras kon i sin egzempios</h2>
+       <p>
+       Ay <b>{{count.dictionary['ladino'].words}}</b> palavras en ladino en el diksionaryo.<br>
+       Palavras en ladino kon un egzempio, un mesaj en WhatsApp, una fraza, o un afish:  <b>{{count.words_with_examples }}</b>.<br>
+       Palavras sin ninguno egzempio: <b>{{count.words_without_examples}}</b>.
        </p>
 
        {% if count.whatsapp %}
