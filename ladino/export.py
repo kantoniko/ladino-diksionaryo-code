@@ -447,8 +447,6 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
 
     export_static_pages(html_dir)
     export_dictionary_lists(dictionary.pages, word_to_examples, word_to_whatsapp, word_to_una_fraza, word_to_afish, html_dir)
-    export_json(dictionary.count, os.path.join(html_dir, "count.json"), pretty=pretty)
-    export_statistics_html_page(dictionary.count, html_dir)
     export_lists_html_page(config, html_dir)
     export_categories(config, dictionary.categories, html_dir)
     export_orijenes(config, dictionary.orijenes, html_dir)
@@ -465,6 +463,10 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
 
     missing_ladino_words = get_missing_words(dictionary, examples)
     export_missing_words(dictionary.yaml_files, missing_ladino_words, languages)
+
+    dictionary.count["missing_ladino_words"] = len(missing_ladino_words.keys())
+    export_json(dictionary.count, os.path.join(html_dir, "count.json"), pretty=pretty)
+    export_statistics_html_page(dictionary.count, html_dir)
 
 def export_videos(videos, content, short, people, path):
     logging.info(f"Export videos to {path}")
