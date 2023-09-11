@@ -11,15 +11,15 @@
         },
         "inglez": {
             "examples": 2,
-            "words": 10
+            "words": 7
         },
         "kasteyano": {
             "examples": 1,
-            "words": 10
+            "words": 9
         },
         "ladino": {
             "examples": 4,
-            "words": 17
+            "words": 16
         },
         "portugez": {
             "examples": 0,
@@ -27,7 +27,7 @@
         },
         "turko": {
             "examples": 1,
-            "words": 9
+            "words": 6
         }
     },
     "examples_with_audio": 1,
@@ -45,5 +45,7 @@
         "all": 2,
         "hebrew": 1,
         "images": 2
-    }
+    },
+    "words_with_examples": 7,
+    "words_without_examples": 9
 }
