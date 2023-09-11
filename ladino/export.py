@@ -415,6 +415,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     if ladinadores is not None:
         afishes = load_ladinadores(ladinadores)
         export_ladinadores(dictionary.yaml_files, afishes)
+        dictionary.count["afishes"] = len (afishes)
         for afish in afishes:
             for word in afish.get('palavras', []):
                 if word not in word_to_afish:
