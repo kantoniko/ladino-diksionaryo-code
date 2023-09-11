@@ -188,6 +188,9 @@ def export_missing_words(yaml_files, missing_ladino_words, languages):
     helper = os.path.join(html_path, dname)
     os.makedirs(helper, exist_ok=True)
 
+    count = {
+        'ladino': len(missing_ladino_words.keys())
+    }
 
     for language in languages:
         missing_words = []
@@ -207,6 +210,7 @@ def export_missing_words(yaml_files, missing_ladino_words, languages):
                     word_added = True
                     missing_words.append(word)
 
+        count[language] = len(missing_words)
         with open(os.path.join(helper, f"{language}-missing.txt"), 'w') as fh:
             for row in sorted(missing_rows):
                 print(f"{row:20} =", file=fh)
@@ -241,6 +245,7 @@ def export_missing_words(yaml_files, missing_ladino_words, languages):
         values=languages,
     )
 
+    return count
 
 def export_single_page_dictionaries(word_mapping, html_dir):
     logging.info("Export single-page dictionaries")
@@ -462,9 +467,9 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     export_to_hunspell(dictionary.word_mapping, html_dir)
 
     missing_ladino_words = get_missing_words(dictionary, examples)
-    export_missing_words(dictionary.yaml_files, missing_ladino_words, languages)
+    count_missing_words = export_missing_words(dictionary.yaml_files, missing_ladino_words, languages)
 
-    dictionary.count["missing_ladino_words"] = len(missing_ladino_words.keys())
+    dictionary.count["missing_words"] = count_missing_words
     export_json(dictionary.count, os.path.join(html_dir, "count.json"), pretty=pretty)
     export_statistics_html_page(dictionary.count, html_dir)
 

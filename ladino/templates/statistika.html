@@ -9,7 +9,7 @@
       <h2><a href="/words/ladino/">Palavras</a> en ladino i sus traduksiones</h2>
        <table class="table">
          <thead>
-           <tr><th></th>
+           <tr>
              <th>ladino</th>
              {% for language in languages %}
                   <th>{{ language }}</th>
@@ -17,7 +17,7 @@
            </tr>
          </thead>
          <tbody>
-           <tr><th>Palavras</th>
+           <tr>
                  <td>{{ count.dictionary['ladino'].words }}</td>
              {% for language in languages %}
                  <td>{{ count.dictionary[language].words }}</td>
@@ -27,14 +27,35 @@
        </table>
 
       <h2><a href="/faltan/ladino">Palavras en ladino ke faltan</a></h2>
-      Palavras ke estan uzando en egzempios, mesajes de WhatsApp, afishes ama ke no las tenemos en el diksionaryo.
+      Palavras ke estan uzando en egzempios, mesajes de WhatsApp, afishes ama ke no las tenemos en muestro diksionaryo.
       <p>
-      <b>{{count.missing_ladino_words}}</b>
+      <b>{{count.missing_words.ladino}}</b>
+      </p>
+
+      <h2><a href="/faltan/">Palavras sin traduksiones</a></h2>
+      Numero de palavras en ladino ke no tiened traduksion.
+
+       <table class="table">
+         <thead>
+           <tr>
+             {% for language in languages %}
+                  <th>{{ language }}</th>
+             {% endfor %}
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             {% for language in languages %}
+                 <td>{{ count.missing_words[language] }}</td>
+             {% endfor %}
+           </tr>
+         </tbody>
+       </table>
 
        <h2><a href="/egzempios/">Egzempios</a> (frazas en ladino)</h2>
        <table class="table">
          <thead>
-           <tr><th></th>
+           <tr>
              <th>ladino</th>
              {% for language in languages %}
                   <th>{{ language }}</th>
@@ -42,7 +63,7 @@
            </tr>
          </thead>
          <tbody>
-           <tr><th>Egzempios</th>
+           <tr>
                  <td>{{ count.dictionary['ladino'].examples }}</td>
              {% for language in languages %}
                  <td>{{ count.dictionary[language].examples }}</td>
@@ -53,15 +74,9 @@
 
 
        <h2><a href="/egzempios/">Egzempios</a> kon audio</h2>
-       <table class="table">
-         <thead>
-           <tr><th>Todos</th></tr>
-         </thead>
-         <tbody>
-           <tr><td>{{ count.examples_with_audio }}</td></tr>
-         </tbody>
-       </table>
-
+       <p>
+       <b>{{ count.examples_with_audio }}</b>
+       </p>
 
        {% if count.whatsapp %}
        <h2><a href="/whatsapeando/">Mesajes de Whatsapeando</a></h2>
@@ -78,25 +93,15 @@
 
        <h2><a href="/ufad/">Una fraza al dia</a></h2>
        Kada fraza tiene teksto en ladino, kasteyano, inglez, i turko. Kada fraza tiene audio de Karen Şarhon.
-       <table class="table">
-         <thead>
-           <tr><th>Todos</th></tr>
-         </thead>
-         <tbody>
-           <tr><td>{{ count.una_fraza_al_dia }}</td></tr>
-         </tbody>
-       </table>
+       <p>
+       <b>{{ count.una_fraza_al_dia }}</b>
+       </p>
 
        <h2><a href="/afishes/">Afishes</a></h2>
        Afishes de Aldo Sevi de los Ladinadores.
-       <table class="table">
-         <thead>
-           <tr><th>Todos</th></tr>
-         </thead>
-         <tbody>
-           <tr><td>{{ count.afishes }}</td></tr>
-         </tbody>
-       </table>
+       <p>
+       <b>{{ count.afishes }}</b>
+       </p>
 
     </div>
 
