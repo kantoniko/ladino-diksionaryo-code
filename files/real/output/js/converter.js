@@ -8,7 +8,11 @@ $(document).ready(function(){
     // We save the text in local storage and restore it when the user visits next time.
     // especially useful when people click on words and than get back to the main page.
     $("#input-text").val(localStorage.getItem('original'));
-    $("#original-language").val(localStorage.getItem('original-language'));
+    let original_language = localStorage.getItem('original-language');
+    if (!original_language) {
+        original_language = "automatik";
+    }
+    $("#original-language").val(original_language);
 
     var try_translate = function() {
         if (loaded == 1) {
