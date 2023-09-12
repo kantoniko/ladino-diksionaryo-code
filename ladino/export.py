@@ -615,24 +615,26 @@ def export_listed_pages(config, path_to_repo, html_dir):
         export_markdown_page(os.path.join(path_to_repo, 'pajinas', source), target, rtl=False)
 
 def export_markdown_page(path_to_md_file, target, rtl):
-        with open(path_to_md_file) as fh:
-            text = fh.read()
+    logging.info(f"export_markdown_page: from {path_to_md_file} to {target} (rtl: {rtl})")
 
-        title = 'Pajina'
-        match = re.search(r'^#\s+(.*?)\s*$', text, re.MULTILINE)
-        if match:
-            title = match.group(1)
-        content = markdown.markdown(text, extensions=['tables'])
+    with open(path_to_md_file) as fh:
+        text = fh.read()
 
-        render(
-            template="markdown_page.html",
-            filename=target,
-            rtl=rtl,
+    title = 'Pajina'
+    match = re.search(r'^#\s+(.*?)\s*$', text, re.MULTILINE)
+    if match:
+        title = match.group(1)
+    content = markdown.markdown(text, extensions=['tables'])
 
-            title=title,
-            page=target.replace('.html', ''),
-            content=content,
-        )
+    render(
+        template="markdown_page.html",
+        filename=target,
+        rtl=rtl,
+
+        title=title,
+        page=target.replace('.html', ''),
+        content=content,
+    )
 
 def export_individual_examples(examples, sounds, words, sound_people, target):
     logging.info(f"export_individual_examples {len(examples)}")
