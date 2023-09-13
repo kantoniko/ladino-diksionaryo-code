@@ -13,7 +13,10 @@
     {% include 'incl/words.html' %}
     {% endif %}
     {% if missing_words %}
-    <h2 class="subtitle">Missing words</h2>
+    <h2 class="subtitle">Palavras ke faltan</h2>
+    <p>
+    Estas palavras egzsiten en el afish ama faltan en muestro diksionaryo.
+    </p>
     <ul>
         {% for word in missing_words %}
             <li>{{ word }}</li>
