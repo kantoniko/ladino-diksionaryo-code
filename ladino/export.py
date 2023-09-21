@@ -276,11 +276,11 @@ def export_single_page_dictionaries(word_mapping, html_dir):
             words=word_mapping['ladino'],
         )
 
-def export_books(books, html_dir):
+def export_books(books, words, html_dir):
     if books:
         processed = []
         for book in books:
-            processed.append(export_book(book, html_dir))
+            processed.append(export_book(book, words, html_dir))
 
         render(
             template="books_index_page.html",
@@ -289,7 +289,7 @@ def export_books(books, html_dir):
             books=processed,
             )
 
-def export_book(book, html_dir):
+def export_book(book, words, html_dir):
     with open(os.path.join(book, 'book.yaml')) as fh:
         data = safe_load(fh)
 
@@ -301,7 +301,7 @@ def export_book(book, html_dir):
             #print(page['numero'])
             pages.append({
                 'numero': page['numero'],
-                'teksto': page['teksto'],
+                'teksto': link_words(page['teksto'], words),
                 'chapter': chapter['titolo'],
             })
             if page['numero'] == data['publish']:
@@ -418,7 +418,7 @@ def export_to_html(config, dictionary, examples, word_to_examples, sound_people,
     sitemap = set()
     generate_main_page(html_dir)
 
-    export_books(books, html_dir)
+    export_books(books, dictionary.pages['ladino'].keys(), html_dir)
 
     word_to_afish = {}
     if ladinadores is not None:
