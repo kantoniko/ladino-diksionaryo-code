@@ -297,16 +297,16 @@ def export_book(book, words, html_dir):
     done = False
     for chapter in data['chapters']:
         #print(chapter['titolo'])
-        for page in chapter['pajinas']:
+        for page in chapter.get('pajinas', []):
             #print(page['numero'])
             pages.append({
                 'numero': page['numero'],
                 'teksto': link_words(page['teksto'], words),
                 'chapter': chapter['titolo'],
             })
-            if page['numero'] == data['publish']:
-                done = True
-                break
+            #if page['numero'] == data['publish']:
+            #    done = True
+            #    break
         if done:
             break
 
@@ -316,7 +316,7 @@ def export_book(book, words, html_dir):
             filename=os.path.join('livros', data['path'], str(page['numero']) + ".html"),
             html_text=page['teksto'].replace("\n", "<br>"),
             prev_page=(pages[idx-1]['numero'] if idx > 0 else "."),
-            next_page=(pages[idx+1]['numero'] if idx < len(pages)-1 else "."),
+            next_page=(pages[idx+1]['numero'] if idx < len(pages)-1 and idx != data['publish']-1 else "."),
             footer=data['footer'],
             title=f"{data['titolo']} - {page['chapter']} - {page['numero']}",
         )
