@@ -325,7 +325,7 @@ def export_book(book, words, html_dir):
         filename=os.path.join('livros', data['path'], "index.html"),
         title=f"{data['titolo']}",
         data=data,
-        prev_page=pages[-1]['numero'],
+        prev_page=data['publish'],
         next_page=pages[0]['numero'],
         )
     return {'path': data['path'], 'titolo': data['titolo']}
