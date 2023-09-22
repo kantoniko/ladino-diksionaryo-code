@@ -6,6 +6,11 @@
   </div>
 
   <div class="content">
+  <a class="button" href="{{prev_page}}">⬅️</a>
+  <a class="button" href="{{next_page}}">➡️</a>
+  </div>
+
+  <div class="content">
     <ul>
         {% set ns = namespace(publish=True) %}
         {% for chapter in data['chapters'] %}
@@ -29,7 +34,6 @@
 
   <div class="content">
   <a class="button" href="{{prev_page}}">⬅️</a>
-  <a class="button" href=".">⬆️</a>
   <a class="button" href="{{next_page}}">➡️</a>
   </div>
 
