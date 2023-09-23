@@ -393,6 +393,10 @@ def get_missing_words(dictionary, examples):
                 all_the_words.add(accented)
     # print(all_the_words)
 
+    # Exclude some names from the list of missing translations
+    names = {'zoom', 'zevulun', 'yugoslavia', 'yosi', 'yosef', 'york'}
+    all_the_words.update(names)
+
     missing_words = {}
 
     for example in examples:
