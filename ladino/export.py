@@ -386,6 +386,11 @@ def get_separate_words(text):
 
 def get_missing_words(dictionary, examples):
     all_the_words = set(dictionary.pages['ladino'].keys())
+    for word in dictionary.pages['ladino'].keys():
+        for version in dictionary.pages['ladino'][word]:
+            accented = version.get('accented')
+            if accented is not None:
+                all_the_words.add(accented)
     # print(all_the_words)
 
     missing_words = {}
