@@ -394,7 +394,7 @@ def get_missing_words(dictionary, examples):
     # print(all_the_words)
 
     # Exclude some names from the list of missing translations
-    names = {'zoom', 'zevulun', 'yugoslavia', 'yosi', 'yosef', 'york'}
+    names = {'zoom', 'zevulun', 'yugoslavia', 'yosi', 'yosef', 'york', 'yaakov'}
     all_the_words.update(names)
 
     missing_words = {}
