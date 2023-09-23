@@ -17,7 +17,7 @@ import ladino.common
 from ladino.export_to_hunspell import export_to_hunspell
 from ladino.pdf import create_pdf_dictionaries
 import ladino.whatsapeando as whatsapp
-from ladino.ufad import ufad
+from ladino.ufad import load_ufad
 from ladino.ladinadores import load_ladinadores
 from ladino.videos import load_videos
 
@@ -366,7 +366,7 @@ def get_words_from_una_fraza(unafraza, dictionary, html_dir):
     word_to_una_fraza = {}
     entries = []
     if unafraza:
-        entries = ufad(unafraza)
+        entries = load_ufad(unafraza)
         for entry in entries:
             words_in_message = re.findall(r'\w+', entry['Ladino'])
             for word in words_in_message:

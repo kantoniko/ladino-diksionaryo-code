@@ -3,7 +3,7 @@ import os
 import sys
 import re
 
-def ufad(root):
+def load_ufad(root):
     filepath = os.path.join(root, 'una-fraze-al-dia_lad-tur-eng-spa.csv')
     #print(filepath)
 
@@ -51,7 +51,7 @@ def ufad(root):
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         exit(f"Usage: {sys.argv[0]} path_to_una-fraza-al-diya")
-    entries = ufad(sys.argv[1])
+    entries = load_ufad(sys.argv[1])
 
     assert len(entries) == 295
     assert entries[0] == {'audio': '1.01-me-esto-ambezando-el-Judeo-Espanyol.ogg', 'filename': '1.01.-me-esto-ambezando-el-judeo-espanyol.jpeg', 'Ladino': 'Me esto ambezando el Judeo-Espanyol.', 'Español': 'Estoy aprendiendo el judeoespañol.', 'Türkçe': 'Judeo-Espanyol öğreniyorum.', 'English': 'I am learning Judeo-Spanish.'}
