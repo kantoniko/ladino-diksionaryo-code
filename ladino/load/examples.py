@@ -9,6 +9,8 @@ def load_examples(path_to_examples):
     all_examples = []
     if os.path.exists(path_to_examples):
         for filename in os.listdir(path_to_examples):
+            if filename.endswith('.swp'):
+                continue
             logging.info(f"load_examples from '{filename}'")
             try:
                 with open(os.path.join(path_to_examples, filename)) as fh:
