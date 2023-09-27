@@ -129,7 +129,7 @@ $(document).ready(function(){
         let count;
         const row_limit = 20;
         if ($('#single-search').prop('checked')) {
-            rows = lookup(original_text, languages, dictionary);
+            rows = lookup(original_text, dictionary);
             count = rows.length;
             rows = rows.slice(0, row_limit);
             //console.log(count);
