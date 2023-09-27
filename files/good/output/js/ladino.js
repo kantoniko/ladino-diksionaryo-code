@@ -33,6 +33,10 @@ function translate_word(original_word, languages, dictionary) {
     let dictionary_word = '';
     // console.log(`try '${word}' in translations`);
     for (var jx=0; jx < languages.length; jx++) {
+        if (languages[jx] == "rashi") {
+            //console.log("skip rashi");
+            continue;
+        }
         response = from_language(languages[jx], original_word, dictionary);
         if (response["dictionary_word"]) {
             return response;

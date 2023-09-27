@@ -4,6 +4,7 @@ orijen: Jeneral
 
 versions:
   - ladino: ospital
+    rashi: אוספיטל
 
     alternative-spelling:
       - ladino: espital

@@ -2,7 +2,7 @@ $(document).ready(function(){
     var dictionary = null;
     var loaded = 0;
     const site = {
-        'available_languages': ['inglez', 'fransez', 'ebreo', 'portugez', 'kasteyano', 'turko'],
+        'available_languages': ['rashi', 'inglez', 'fransez', 'ebreo', 'portugez', 'kasteyano', 'turko'],
     };
     //console.log(window.innerWidth, window.innerHeight);
     // We save the text in local storage and restore it when the user visits next time.
@@ -43,6 +43,7 @@ $(document).ready(function(){
         } else {
             config = {
                 'lashon': {
+                    'rashi'    : '1',
                     'inglez'   : '1',
                     'kasteyano': '1',
                     'turko'    : '1',
@@ -193,6 +194,8 @@ $(document).ready(function(){
                     const subhtml = links.join(", ");
                     if (row.source_language == languages[jx]) {
                         html += `<td class="has-background-success-light">${subhtml}</td>`;
+                    } else if (languages[jx] == 'rashi') {
+                        html += `<td class="rashi" dir="rtl">${subhtml}</td>`;
                     } else {
                         html += `<td>${subhtml}</td>`;
                     }
