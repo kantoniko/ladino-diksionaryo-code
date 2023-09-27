@@ -103,7 +103,7 @@ function from_ladino(original_word, dictionary) {
 }
 
 
-function lookup(text, languages, dictionary) {
+function lookup(text, dictionary) {
     const cleaned = text.replace(/[<>,;.:!?"'\n*()=\[\]\/\s]/g, " ");
     const ladino = Object.keys(dictionary["ladino"]);
     //console.log(cleaned);
