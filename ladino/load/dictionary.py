@@ -363,6 +363,10 @@ def add_ladino_word(original_word, accented_word, entry, dictionary):
         add_word(dictionary.word_mapping, source_language, target_language, word, target_words)
     add_word(dictionary.word_mapping, source_language, 'ladino', word, [original_word])
 
+    rashi = entry.get('rashi')
+    if rashi is not None:
+        add_word(dictionary.word_mapping, source_language, "rashi", word, [rashi])
+
     if word not in dictionary.pages[source_language]:
         dictionary.pages[source_language][word] = []
     dictionary.pages[source_language][word].append(entry)
