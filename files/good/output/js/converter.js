@@ -149,7 +149,7 @@ $(document).ready(function(){
         html += `<table class="table">`;
         html += '<thead>';
         html += '<tr>';
-        html += `<th>biervo</th><th>Ladino</th>`;
+        html += `<th>biervo</th><th>ladino</th>`;
         for (var ix=0; ix < languages.length; ix++) {
             html += `<th>${languages[ix]}</th>`;
         }
