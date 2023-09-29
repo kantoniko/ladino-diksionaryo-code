@@ -47,7 +47,9 @@
                         "comer"
                     ],
                     "portugez": [],
-                    "turkish": "yemek yemek"
+                    "turko": [
+                        "yemek yemek"
+                    ]
                 }
             }
         ],
@@ -75,7 +77,9 @@
                         "comer"
                     ],
                     "portugez": [],
-                    "turkish": "yemek yemek"
+                    "turko": [
+                        "yemek yemek"
+                    ]
                 }
             }
         ],
@@ -188,12 +192,8 @@
                 "kumer"
             ],
             "portugez": [],
-            "turkish": [
-                " ",
-                "e",
-                "k",
-                "m",
-                "y"
+            "turko": [
+                "yemek yemek"
             ]
         },
         "mykomer": {
@@ -213,12 +213,8 @@
                 "mykomer"
             ],
             "portugez": [],
-            "turkish": [
-                " ",
-                "e",
-                "k",
-                "m",
-                "y"
+            "turko": [
+                "yemek yemek"
             ]
         },
         "palavra": {
@@ -235,5 +231,9 @@
         }
     },
     "portugez": {},
-    "turko": {}
+    "turko": {
+        "yemek yemek": [
+            "mykomer"
+        ]
+    }
 }
