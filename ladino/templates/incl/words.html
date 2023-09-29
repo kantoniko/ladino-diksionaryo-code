@@ -4,8 +4,9 @@
       <thead>
         <tr>
            <th></th>
-           <th>Ladino</th>
-           <th>Accented</th>
+           <th>ladino</th>
+           <th>accented</th>
+           <th>rashi</th>
             {%- for lang in languages %}
                <th>{{ lang }}</th>
             {% endfor -%}
@@ -31,8 +32,13 @@
                 {{ version['accented'] }}
                 {% for alt in version['alternative-spelling'] %}<br>{{ alt['accented'] }}{% endfor %}
               </td>
+              <td class="rashi" dir="rtl">
+                  {{version['rashi']}}
+              </td>
               {%- for lang in languages %}
-                <td>{%- for trans in version.translations[lang] -%}{{ trans }}{%- if not loop.last -%},<br>{% endif -%}{%- endfor %} </td>
+              <td {% if lang == "ebreo" %}dir="rtl"{% endif %}>
+                    {%- for trans in version.translations[lang] -%}{{ trans }}{%- if not loop.last -%},<br>{% endif -%}{%- endfor %}
+                </td>
               {% endfor -%}
             </tr>
           {% endfor %}
