@@ -3,11 +3,17 @@
     <h1 class="title">{{ title }}</h1>
     <div>{{person_titulo}}</div>
     <div class="content">
-      <ul>
+      <table>
          {% for example in examples %}
-           <li><a href="/egzempios/{{example['url']}}">{{ example['ladino'] }}</a></li>
+           <tr>
+               <td><a href="/egzempios/{{example['url']}}">{{ example['ladino'] }}</a></td>
+               {% for lang in languages | sort %}
+                  <td>{% if example[lang] %}{{lang}}{% endif %}</td>
+               {% endfor %}
+           </tr>
          {% endfor %}
-      </ul>
+      </table>
+
     </div>
 
 {% include 'incl/footer.html' %}

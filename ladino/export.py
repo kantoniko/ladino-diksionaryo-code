@@ -645,8 +645,10 @@ def export_markdown_page(path_to_md_file, target, rtl):
         content=content,
     )
 
-def export_individual_examples(examples, sounds, words, sound_people, target):
+def export_individual_examples(examples, words, sound_people, target):
     logging.info(f"export_individual_examples {len(examples)}")
+
+    sounds = {}
     for example in examples:
         logging.info(f"export example from {example['filename']} to {example['url']}")
         example['ladino_html'] = link_words(example['ladino'], words)
@@ -682,6 +684,8 @@ def export_individual_examples(examples, sounds, words, sound_people, target):
             people=sound_people,
         )
 
+    return sounds
+
 def export_examples(all_examples, words, sound_people, html_dir):
     logging.info(f"export_examples {len(all_examples)}")
     if not all_examples:
@@ -694,7 +698,7 @@ def export_examples(all_examples, words, sound_people, html_dir):
     for example in all_examples:
         example['ladino_html'] = link_words(example['ladino'], words)
 
-    export_individual_examples(all_examples, sounds, words, sound_people, target)
+    sounds = export_individual_examples(all_examples, words, sound_people, target)
 
     for person, examples in sounds.items():
         if person == 'silent':
@@ -707,6 +711,7 @@ def export_examples(all_examples, words, sound_people, html_dir):
                 person_titulo='',
                 page=target,
                 examples=examples,
+                languages=languages,
             )
 
         else:
@@ -719,6 +724,7 @@ def export_examples(all_examples, words, sound_people, html_dir):
                 person_titulo=sound_people[person]['titulo'],
                 page=target,
                 examples=examples,
+                languages=languages,
             )
 
     #print(all_examples)
