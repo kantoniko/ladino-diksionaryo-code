@@ -120,6 +120,9 @@ def check_and_collect_categories(config, data, dictionary, filename):
         dictionary.categories[cat].append(data)
 
 def make_them_list(translations, filename):
+    extra = set(translations.keys()) - set(languages)
+    if extra:
+        raise LadinoError(f"Unfamiliar language field {extra} in {filename}")
     for language in languages:
         if language not in translations:
             continue
