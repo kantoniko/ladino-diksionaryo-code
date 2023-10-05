@@ -8,6 +8,7 @@ import yaml
 from ladino.common import LadinoError, languages, words_to_url
 
 VALID_FIELDS_IN_WORD_FILES = set(['conjugations', 'grammar', 'versions', 'id', 'orijen', 'kategorias', 'linguas', 'comments'])
+VALID_FIELDS_IN_VERSION = {'ladino', 'accented', 'rashi', 'gender', 'number', 'alternative-spelling', 'alternative-not-recommended', 'diminutivo-de', 'translations'}
 class Dictionary():
     def __init__(self, config):
         self.yaml_files = []  # each entry as loaded from the yaml files of words
@@ -64,6 +65,10 @@ def check_and_collect_grammar(config, data, dictionary, filename):
         raise LadinoError(f"Grammar is NOT a 'verb', but there are conjugations in '{filename}'")
 
     for version in data.get('versions', []):
+        invalid_fields =  set(version.keys()) - VALID_FIELDS_IN_VERSION
+        if invalid_fields:
+            raise LadinoError(f"Invalid version fields '{invalid_fields}' found in '{filename}'")
+
         gender = version.get('gender')
         # print(gender)
         if grammar in ['noun', 'pronoun']:
