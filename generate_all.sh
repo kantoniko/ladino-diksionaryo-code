@@ -1,4 +1,4 @@
-time PYTHONPATH=. python ladino/generate.py  --html docs --all --log \
+time PYTHONPATH=. venv/bin/python ladino/generate.py  --html docs --all --log \
     --dictionary ../ladino-diksionaryo-data/   \
     --whatsapp ../ladino-estamos-whatsapeando/ \
     --sounds ../ladino-diksionaryo-sounds/     \
