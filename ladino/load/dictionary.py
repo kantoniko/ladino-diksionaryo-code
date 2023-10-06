@@ -51,6 +51,11 @@ def check_and_collect_grammar(config, data, dictionary, filename):
     if invalid_fields:
         raise LadinoError(f"Invalid fields '{invalid_fields}' found in '{filename}'")
 
+    for key, value in data.items():
+        if value is None:
+            raise Exception(f"The field '{key}' has a None value in '{filename}'")
+
+
     if 'grammar' not in data:
         raise LadinoError(f"The 'grammar' field is missing from file '{filename}'")
 
@@ -68,6 +73,10 @@ def check_and_collect_grammar(config, data, dictionary, filename):
         invalid_fields =  set(version.keys()) - VALID_FIELDS_IN_VERSION
         if invalid_fields:
             raise LadinoError(f"Invalid version fields '{invalid_fields}' found in '{filename}'")
+        for key, value in version.items():
+            if value is None:
+                raise Exception(f"The field '{key}' has a None value in '{filename}'")
+
 
         gender = version.get('gender')
         # print(gender)
