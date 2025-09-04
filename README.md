@@ -21,7 +21,7 @@ git clone https://github.com/kantoniko/ladino-diksionaryo-data.git
 ### Install the dependencies.
 
 ```
-pip install -r requirements.txt
+pip install -r requirements.txt -c constraints.txt
 ```
 
 ### Testing
@@ -71,7 +71,7 @@ This took 3.20 on my computer wheren there were 3321 words and 1556 example in t
 For this we need all the repositories to be cloned.
 
 ```
-./generate.sh
+./generate_all.sh
 ```
 
 ```
