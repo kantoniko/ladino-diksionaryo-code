@@ -10,6 +10,8 @@ def get_messages(root):
     #print(root)
     with open(os.path.join(root, 'skip_image.yaml')) as fh:
         skip_image = safe_load(fh)
+    with open(os.path.join(root, 'skip_sound.yaml')) as fh:
+        skip_sound = safe_load(fh)
 
     entries = []
     yaml_files = os.listdir(os.path.join(root, 'text'))
@@ -25,11 +27,14 @@ def get_messages(root):
         with open(os.path.join(root, 'text', yaml_filename)) as fh:
             data = safe_load(fh)
 
+        data['yaml_filename'] = yaml_filename
+
         ogg_filename = yaml_filename.replace('.yaml', '.ogg')
-        if ogg_filename not in ogg_files:
-            raise Exception(f"sound file {ogg_filename} does not exist in collected ogg_files")
-        ogg_files.remove(ogg_filename)
-        data['filename'] = ogg_filename
+        if ogg_filename in ogg_files:
+            data['filename'] = ogg_filename
+            ogg_files.remove(ogg_filename)
+        elif ogg_filename not in skip_sound:
+            raise Exception(f"sound file {ogg_filename} does not exist in collected ogg_files and it is not listed in the skip_sound.yaml file either")
 
         data['page'] = yaml_filename.replace('.yaml', '')
 
@@ -38,7 +43,7 @@ def get_messages(root):
             data['img'] = img_filename
             img_files.remove(img_filename)
         elif img_filename not in skip_image:
-            raise Exception(f"img file {img_filename} does not exist")
+            raise Exception(f"img file {img_filename} does not exist and it is not listed in the skip_image.yaml file either")
             #print(f"img file {img_filename} does not exist")
 
         #print(data['text'])
@@ -93,6 +98,6 @@ if __name__ == '__main__':
     entries = get_messages(sys.argv[1])
     #print(entries)
     print(f"All read properly.")
-    print(f"Last published:   {entries[-1]['pub']} - {entries[-1]['titulo']} {entries[-1]['filename'].replace('ogg','yaml')}")
+    print(f"Last published:   {entries[-1]['pub']} - {entries[-1]['titulo']} {entries[-1]['yaml_filename']}")
     print(f"Today is          {str(datetime.date.today()).replace('-', '.')}")
 
