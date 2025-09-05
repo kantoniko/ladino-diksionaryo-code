@@ -31,7 +31,7 @@ def get_messages(root):
 
         ogg_filename = yaml_filename.replace('.yaml', '.ogg')
         if ogg_filename in ogg_files:
-            data['filename'] = ogg_filename
+            data['ogg'] = ogg_filename
             ogg_files.remove(ogg_filename)
         elif ogg_filename not in skip_sound:
             raise Exception(f"sound file {ogg_filename} does not exist in collected ogg_files and it is not listed in the skip_sound.yaml file either")

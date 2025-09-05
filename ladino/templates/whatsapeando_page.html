@@ -13,12 +13,16 @@
            </div>
          </div>
        {% endfor %}
-      <div>
-        <audio controls>
-          <source src="https://whatsapeando.kantoniko.com/sound/{{sound_filename}}" type="audio/ogg">
-          Your browser does not support the audio element.
-        </audio>
-      </div>
+       {% if sound_filename %}
+         <div>
+           <audio controls>
+             <source src="https://whatsapeando.kantoniko.com/sound/{{sound_filename}}" type="audio/ogg">
+             Your browser does not support the audio element.
+           </audio>
+         </div>
+       {% else %}
+       Sin audio.
+       {% endif %}
     </div>
 
     <div class="content">

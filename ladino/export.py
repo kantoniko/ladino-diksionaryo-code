@@ -799,7 +799,7 @@ def export_whatsapp(messages, words, html_dir):
             filename=os.path.join('whatsapeando', f"{message['page']}.html"),
 
             title=message['titulo'],
-            sound_filename=message['filename'],
+            sound_filename=message.get('ogg'),
             teksto=teksto,
             title_links=link_words(message['titulo'], words),
             prev_message=messages[idx-1]['page'],
