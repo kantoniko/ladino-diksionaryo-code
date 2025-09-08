@@ -62,12 +62,6 @@ def get_messages(root):
         else:
             raise Exception('No text and no teksto')
 
-        assert re.search(r'^\d\d\d\d\.\d\d\.\d\d$', data['data'], re.ASCII)
-        try:
-            datetime.datetime.strptime(data['data'], '%Y.%m.%d')
-        except ValueError:
-            exit(f"Invalid date {data['data']}")
-
         match = re.search(r'^(\d\d\d\d\.\d\d\.\d\d)( \d\d:\d\d:\d\d)?$', data['pub'], re.ASCII)
         assert match
         data['date'] = match.group(1)
