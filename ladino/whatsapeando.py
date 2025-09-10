@@ -46,6 +46,8 @@ def get_messages(root):
             raise Exception(f"img file {img_filename} does not exist and it is not listed in the skip_image.yaml file either")
             #print(f"img file {img_filename} does not exist")
 
+        if 'text' in data and 'teksto' in data:
+            raise Exception(f"Both text and textto in {yaml_filename}")
         #print(data['text'])
         if 'text' in data:
             data['teksto'] = [{
