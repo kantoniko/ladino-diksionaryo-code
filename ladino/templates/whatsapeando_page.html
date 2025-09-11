@@ -23,6 +23,7 @@
        {% else %}
        Sin audio.
        {% endif %}
+
     </div>
 
     <div class="content">
@@ -35,6 +36,9 @@
         <img src="https://whatsapeando.kantoniko.com/img/{{img_filename}}">
     {% endif %}
 
+    <hr>
+      {{this.pub}}
+      {% if this.source %}<a href="{{this.source}}">En Ladinokomunita</a>{% endif %}
    {% include 'incl/whatsapp.html' %}
 
 {% include 'incl/footer.html' %}

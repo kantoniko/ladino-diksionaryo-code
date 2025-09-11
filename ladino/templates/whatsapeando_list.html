@@ -5,7 +5,7 @@
     <div class="content">
       <ul>
         {% for message in messages %}
-          <li><a href="/whatsapeando/{{message.page}}">{{message.titulo}}</a></li>
+          <li>{{message.pub}} <a href="/whatsapeando/{{message.page}}">{{message.titulo}}</a></li>
         {% endfor %}
       </ul>
     </div>
