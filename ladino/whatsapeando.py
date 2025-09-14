@@ -19,7 +19,7 @@ def get_messages(root):
     ogg_files = set(os.listdir(os.path.join(root, 'sound')))
     #print(ogg_files)
     img_files = set(os.listdir(os.path.join(root, 'img')))
-    pubs = set()
+    pubs = {}
     for yaml_filename in yaml_files:
         if yaml_filename.endswith(".swp"):
             continue
@@ -75,8 +75,9 @@ def get_messages(root):
 
 
         if data['pub'] in pubs:
-            raise Exception(f"Duplicate publication date {data['pub']}")
-        pubs.add(data['pub'])
+            other = pubs[data['pub']]
+            raise Exception(f"Duplicate publication date {data['pub']} in text/{yaml_filename} and in text/{other}")
+        pubs[data['pub']] = yaml_filename
 
         assert len(data['titulo']) > 4
     if ogg_files:
