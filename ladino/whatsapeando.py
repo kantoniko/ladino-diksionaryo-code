@@ -62,6 +62,7 @@ def get_messages(root):
                 assert entry['ebreo'] is not None, f"ebreo field None in file text/{yaml_filename}"
                 #assert entry['ladino'] != "", f"ladino field is empty in file text/{yaml_filename} where ebreo field is {entry['ebreo']}"
                 #assert entry['ebreo'] != "", f"ebreo field is empty in file text/{yaml_filename}"
+                assert re.search(r'^[àüãéâáöğçşıíÉéóúÇ`💐 a-zA-Z0-9()/=,;%&?!:."\'-]*$', entry['ladino']), f"The ladino field contains an invalid character in file text/{yaml_filename} '{entry['ladino']}'"
             entries.append(data)
         else:
             raise Exception('No text and no teksto')
