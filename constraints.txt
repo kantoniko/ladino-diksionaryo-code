@@ -1,7 +1,7 @@
 blinker==1.9.0
 charset-normalizer==3.4.3
 click==8.2.1
-coverage==7.10.6
+coverage==7.10.7
 Flask==3.1.2
 iniconfig==2.1.0
 itsdangerous==2.2.0
