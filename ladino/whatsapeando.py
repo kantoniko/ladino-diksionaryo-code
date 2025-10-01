@@ -69,7 +69,7 @@ def get_messages(root):
             raise Exception('No text and no teksto')
 
         match = re.search(r'^(\d\d\d\d\.\d\d\.\d\d)( \d\d:\d\d:\d\d)?$', data['pub'], re.ASCII)
-        assert match
+        assert match, f"Incorrectly formatted date '{data['pub']}'"
         data['date'] = match.group(1)
 
         try:
