@@ -13,7 +13,7 @@ pillow==11.3.0
 pluggy==1.6.0
 Pygments==2.19.2
 pytest==8.4.1
-pytest-cov==6.2.1
+pytest-cov==7.0.0
 pytest-cover==3.0.0
 pytest-random-order==1.2.0
 PyYAML==6.0.2
