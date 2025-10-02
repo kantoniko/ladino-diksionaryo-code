@@ -68,14 +68,15 @@ def get_messages(root):
         else:
             raise Exception('No text and no teksto')
 
-        match = re.search(r'^(\d\d\d\d\.\d\d\.\d\d)( \d\d:\d\d:\d\d)?$', data['pub'], re.ASCII)
-        assert match, f"Incorrectly formatted date '{data['pub']}'"
-        data['date'] = match.group(1)
+        match = re.search(r'^(\d\d\d\d\.\d\d\.\d\d)( \d\d:\d\d(:\d\d)?)?$', data['pub'], re.ASCII)
+        if not match:
+            exit(f"Incorrectly formatted date '{data['pub']}' in text/{yaml_filename}")
+        date = match.group(1)
 
         try:
-            datetime.datetime.strptime(data['date'], '%Y.%m.%d')
+            datetime.datetime.strptime(date, '%Y.%m.%d')
         except ValueError:
-            exit(f"Invalid date {data['pub']}")
+            exit(f"Invalid date '{data['pub']}' in text/{yaml_filename}")
 
 
         if data['pub'] in pubs:
