@@ -84,13 +84,22 @@ def get_messages(root):
     return sorted(entries, key=lambda entry: entry['pub'])
 
 def check_date(pub, yaml_filename):
-    match = re.search(r'^(\d\d\d\d\.\d\d\.\d\d)( \d\d:\d\d(:\d\d)?)?$', pub, re.ASCII)
-    if not match:
+    cases = {
+            r'^\d\d\d\d\.\d\d\.\d\d \d\d:\d\d:\d\d$' : '%Y.%m.%d %H:%M:%S',
+            r'^\d\d\d\d\.\d\d\.\d\d \d\d:\d\d$'      : '%Y.%m.%d %H:%M',
+            r'^\d\d\d\d\.\d\d\.\d\d$'                : '%Y.%m.%d',
+    }
+    date_parsing_format = None
+    for regex, date_format in cases.items():
+        match = re.search(regex, pub, re.ASCII)
+        if match:
+            date_parsing_format = date_format
+
+    if date_parsing_format is None:
         exit(f"Incorrectly formatted date '{pub}' in text/{yaml_filename}")
-    date = match.group(1)
 
     try:
-        datetime.datetime.strptime(date, '%Y.%m.%d')
+        datetime.datetime.strptime(pub, date_parsing_format)
     except ValueError:
         exit(f"Invalid date '{pub}' in text/{yaml_filename}")
 
