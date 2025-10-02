@@ -68,16 +68,7 @@ def get_messages(root):
         else:
             raise Exception('No text and no teksto')
 
-        match = re.search(r'^(\d\d\d\d\.\d\d\.\d\d)( \d\d:\d\d(:\d\d)?)?$', data['pub'], re.ASCII)
-        if not match:
-            exit(f"Incorrectly formatted date '{data['pub']}' in text/{yaml_filename}")
-        date = match.group(1)
-
-        try:
-            datetime.datetime.strptime(date, '%Y.%m.%d')
-        except ValueError:
-            exit(f"Invalid date '{data['pub']}' in text/{yaml_filename}")
-
+        check_date(data['pub'], yaml_filename)
 
         if data['pub'] in pubs:
             other = pubs[data['pub']]
@@ -91,6 +82,17 @@ def get_messages(root):
         raise Exception(f"Some img files {img_files} are not in use")
 
     return sorted(entries, key=lambda entry: entry['pub'])
+
+def check_date(pub, yaml_filename):
+    match = re.search(r'^(\d\d\d\d\.\d\d\.\d\d)( \d\d:\d\d(:\d\d)?)?$', pub, re.ASCII)
+    if not match:
+        exit(f"Incorrectly formatted date '{pub}' in text/{yaml_filename}")
+    date = match.group(1)
+
+    try:
+        datetime.datetime.strptime(date, '%Y.%m.%d')
+    except ValueError:
+        exit(f"Invalid date '{pub}' in text/{yaml_filename}")
 
 
 if __name__ == '__main__':
