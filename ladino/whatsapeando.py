@@ -57,6 +57,10 @@ def get_messages(root):
             entries.append(data)
         elif 'teksto' in data:
             for entry in data['teksto']:
+                LANGUAGES = ["ebreo", "inglez", "ladino"]
+                for language in entry.keys():
+                    if language not in LANGUAGES:
+                        exit(f"Invalid language '{language}' in file text/{yaml_filename}")
                 assert 'ladino' in entry, f"ladino field is missing in file text/{yaml_filename}"
                 assert 'ebreo' in entry, f"ebreo field is missing in file text/{yaml_filename}"
                 assert entry['ebreo'] is not None, f"ebreo field None in file text/{yaml_filename}"
