@@ -38,7 +38,11 @@
 
     <hr>
       {{this.pub}}
-      {% if this.source %}<a href="{{this.source}}">En Ladinokomunita</a>{% endif %}
+      {% if this.source %}
+        {% if this.source != "WhatsApp" %}
+         <a href="{{this.source}}">En Ladinokomunita</a>
+        {% endif %}
+      {% endif %}
    {% include 'incl/whatsapp.html' %}
 
 {% include 'incl/footer.html' %}
