@@ -55,7 +55,7 @@ def load_videos(path):
 def convert(text):
     text = re.sub(r'\[([\d:]+)\]', r'<p><b>\1</b>', text)
     text = re.sub(r'\[(.+?)\]\((.+?)\)', r'<a href="\2">\1</a>', text)
-    text = re.sub(r'^$', '<p>\n', text, re.MULTILINE)
+    text = re.sub(r'^$', '<p>\n', text, flags=re.MULTILINE)
     return text
 
 def name_to_uid(name):
