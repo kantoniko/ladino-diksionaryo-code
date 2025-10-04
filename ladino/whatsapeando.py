@@ -14,6 +14,8 @@ def get_messages(root):
         skip_image = safe_load(fh)
     with open(os.path.join(root, 'skip_sound.yaml')) as fh:
         skip_sound = safe_load(fh)
+    with open(os.path.join(root, 'skip_source.yaml')) as fh:
+        skip_source = safe_load(fh)
 
     entries = []
     yaml_files = os.listdir(os.path.join(root, 'text'))
@@ -48,8 +50,17 @@ def get_messages(root):
             raise Exception(f"img file {img_filename} does not exist and it is not listed in the skip_image.yaml file either")
             #print(f"img file {img_filename} does not exist")
 
+        if 'source' not in data:
+            exit(f"Missing source in text/{yaml_filename}")
+        if data['source'] is None or data['source'] == "":
+            if yaml_filename not in skip_source:
+                exit(f"Empty source in text/{yaml_filename}")
+        elif data['source'] != "WhatsApp":
+            if not re.search(r'^https://ladinokomunita.groups.io/g/main/message/\d+$', data['source'], re.ASCII):
+                exit(f"Invalid source='{data['source']}' in text/{yaml_filename}")
+
         if 'text' in data and 'teksto' in data:
-            raise Exception(f"Both text and textto in {yaml_filename}")
+            raise Exception(f"Both text and texto in text/{yaml_filename}")
         #print(data['text'])
         if 'text' in data:
             data['teksto'] = [{
