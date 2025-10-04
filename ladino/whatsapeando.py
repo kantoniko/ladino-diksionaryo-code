@@ -56,7 +56,7 @@ def get_messages(root):
             if yaml_filename not in skip_source:
                 exit(f"Empty source in text/{yaml_filename}")
         elif data['source'] != "WhatsApp":
-            if not re.search(r'^https://ladinokomunita.groups.io/g/main/message/\d+$', data['source'], re.ASCII):
+            if not re.search(r'^https://ladinokomunita.groups.io/g/main/message/\d+$', data['source'], flags=re.ASCII):
                 exit(f"Invalid source='{data['source']}' in text/{yaml_filename}")
 
         if 'text' in data and 'teksto' in data:
@@ -107,7 +107,7 @@ def check_date(pub, yaml_filename):
     }
     date_parsing_format = None
     for regex, date_format in cases.items():
-        match = re.search(regex, pub, re.ASCII)
+        match = re.search(regex, pub, flags=re.ASCII)
         if match:
             date_parsing_format = date_format
 

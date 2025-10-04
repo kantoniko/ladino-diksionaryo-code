@@ -630,7 +630,7 @@ def export_markdown_page(path_to_md_file, target, rtl):
         text = fh.read()
 
     title = 'Pajina'
-    match = re.search(r'^#\s+(.*?)\s*$', text, re.MULTILINE)
+    match = re.search(r'^#\s+(.*?)\s*$', text, flags=re.MULTILINE)
     if match:
         title = match.group(1)
     content = markdown.markdown(text, extensions=['tables'])
