@@ -5,6 +5,8 @@ import os
 import sys
 import logging
 
+LANGUAGES = ["ebreo", "inglez", "ladino"]
+
 def get_messages(root):
     logging.info(f"WhatsApp: get_messages({root})")
     #print(root)
@@ -57,7 +59,6 @@ def get_messages(root):
             entries.append(data)
         elif 'teksto' in data:
             for entry in data['teksto']:
-                LANGUAGES = ["ebreo", "inglez", "ladino"]
                 for language in entry.keys():
                     if language not in LANGUAGES:
                         exit(f"Invalid language '{language}' in file text/{yaml_filename}")
