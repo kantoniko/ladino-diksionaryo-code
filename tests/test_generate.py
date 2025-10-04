@@ -53,7 +53,7 @@ def test_one(tmpdir, request, name):
     os.unlink(os.path.join(html_dir, 'echar-lashon.html')) # has changing date in it
 
     if not save:
-        cmd = f"diff -r {os.path.join(root, 'files', name, 'output')} {os.path.join(tmpdir, 'html')}"
+        cmd = f"diff -r {os.path.join(tmpdir, 'html')} {os.path.join(root, 'files', name, 'output')}"
         print(cmd)
         assert os.system(cmd) == 0
 
