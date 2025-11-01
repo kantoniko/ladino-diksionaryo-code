@@ -1,6 +1,6 @@
 blinker==1.9.0
 charset-normalizer==3.4.3
-click==8.2.1
+click==8.3.0
 coverage==7.10.7
 Flask==3.1.2
 iniconfig==2.1.0
