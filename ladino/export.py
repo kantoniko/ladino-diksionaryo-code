@@ -224,14 +224,6 @@ def export_missing_words(yaml_files, missing_ladino_words, languages):
                 print(f"{ladino:20} = {', '.join(translations)}", file=fh)
 
         render(
-            template="missing_words.html",
-            filename=os.path.join(dname, f"ladino.html"),
-
-            title=f"Palavras ke mankan",
-            words=missing_ladino_words,
-       )
-
-        render(
             template="category.html",
             filename=os.path.join(dname, f"{language.lower()}.html"),
 
@@ -239,6 +231,19 @@ def export_missing_words(yaml_files, missing_ladino_words, languages):
             words=sorted(missing_words, key=lambda words: words['versions'][0]['ladino']),
             languages=languages,
         )
+
+
+    with open(os.path.join(helper, f"ladino.txt"), 'w') as fh:
+        for row in sorted(missing_ladino_words):
+            print(f"{row:20} =", file=fh)
+
+    render(
+        template="missing_words.html",
+        filename=os.path.join(dname, "ladino.html"),
+
+        title=f"Palavras ke mankan",
+        words=missing_ladino_words,
+    )
 
     render(
         template="categories.html",
