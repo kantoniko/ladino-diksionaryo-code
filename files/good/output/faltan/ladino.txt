@@ -1,0 +1,14 @@
+de                   =
+es                   =
+grande               =
+i                    =
+komo                 =
+la                   =
+mi                   =
+pan                  =
+papel                =
+tengo                =
+tu                   =
+un                   =
+una                  =
+yo                   =
