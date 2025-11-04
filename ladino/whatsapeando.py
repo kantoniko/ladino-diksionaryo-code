@@ -27,7 +27,7 @@ def get_messages(root):
     for yaml_filename in yaml_files:
         if yaml_filename.endswith(".swp"):
             continue
-        logging.info(f"Load {yaml_filename}")
+        logging.info(f"Load text/{yaml_filename}")
         with open(os.path.join(root, 'text', yaml_filename)) as fh:
             data = safe_load(fh)
 
