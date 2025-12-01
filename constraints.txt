@@ -6,7 +6,7 @@ Flask==3.1.2
 iniconfig==2.3.0
 itsdangerous==2.2.0
 Jinja2==3.1.6
-Markdown==3.9
+Markdown==3.10
 MarkupSafe==3.0.3
 packaging==25.0
 pillow==12.0.0
