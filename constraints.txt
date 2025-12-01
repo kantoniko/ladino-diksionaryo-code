@@ -17,5 +17,5 @@ pytest-cov==7.0.0
 pytest-cover==3.0.0
 pytest-random-order==1.2.0
 PyYAML==6.0.3
-reportlab==4.4.4
+reportlab==4.4.5
 Werkzeug==3.1.3
