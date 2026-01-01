@@ -1,7 +1,7 @@
 blinker==1.9.0
 charset-normalizer==3.4.4
 click==8.3.1
-coverage==7.12.0
+coverage==7.13.1
 Flask==3.1.2
 iniconfig==2.3.0
 itsdangerous==2.2.0
@@ -12,10 +12,10 @@ packaging==25.0
 pillow==12.0.0
 pluggy==1.6.0
 Pygments==2.19.2
-pytest==9.0.1
+pytest==9.0.2
 pytest-cov==7.0.0
 pytest-cover==3.0.0
 pytest-random-order==1.2.0
 PyYAML==6.0.3
-reportlab==4.4.5
+reportlab==4.4.7
 Werkzeug==3.1.4
